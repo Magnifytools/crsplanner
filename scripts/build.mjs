@@ -125,7 +125,7 @@ function cwTable() {
 function home() {
   const body = `
 <section class="intro">
-  <h1>CRS Calculator for Express Entry (2026)</h1>
+  <h1>CRS Score Calculator for Express Entry (2026)</h1>
   <p class="lede">Work out your Comprehensive Ranking System score, see where every point comes from, and compare it with the cut-offs of the last 12 months of Express Entry draws, category by category.</p>
   <p class="meta"><span>Rules checked ${longDate(SITE.checked)}</span><span>Source: <a href="${crs.source}" rel="noopener">IRCC CRS criteria</a>, modified ${longDate(crs.sourceModified)}</span><span>Draw data to ${longDate(latestDate)}</span></p>
 </section>
@@ -246,7 +246,7 @@ ${langTable()}
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' }, dateModified: SITE.checked,
     description: 'Comprehensive Ranking System score calculator for Express Entry with a full breakdown and a comparison with recent draws.',
   }];
-  return page({ path: '/', title: 'CRS Calculator 2026: Express Entry Score with Full Breakdown', description: 'Free CRS calculator for Express Entry. See every point of your score, what would raise it, and how it compares with each draw category in the last 12 months.', body, scripts, jsonld });
+  return page({ path: '/', title: 'CRS Calculator 2026: Check Your Express Entry CRS Score', description: 'Free CRS calculator for Express Entry. See every point of your score, what would raise it, and how it compares with each draw category in the last 12 months.', body, scripts, jsonld });
 }
 
 // ---------- CLB converter ----------
@@ -313,7 +313,7 @@ function drawsPage() {
   const thisYear = draws.rounds.filter((r) => r.date.startsWith(year));
   const body = `
 <section class="intro">
-  <h1>Express Entry Draws: Every Round Since 2015</h1>
+  <h1>Express Entry Draws: Latest Draw and Every Round Since 2015</h1>
   <p class="lede">All ${fmt(draws.rounds.length)} rounds of invitations with their cut-off scores and invitations, filterable by program and category, plus the current score distribution of the pool.</p>
   <p class="meta"><span>Updated daily from IRCC data</span><span>Latest round: #${esc(L.n)} on ${longDate(L.date)}</span><span>Source: <a href="${draws.page}" rel="noopener">IRCC rounds of invitations</a></span></p>
 </section>
@@ -324,7 +324,8 @@ function drawsPage() {
   <div class="card"><div class="k">Invitations</div><div class="v">${fmt(L.size)}</div></div>
   <div class="card"><div class="k">Lowest score invited</div><div class="v">${fmt(L.crs)}</div></div>
 </div>
-<p class="small">${fmt(thisYear.length)} rounds so far in ${year}, with ${fmt(thisYear.reduce((s, r) => s + (r.size || 0), 0))} invitations in total.</p>
+<h2>Latest Express Entry draw</h2>
+<p>${(() => { const same = thisYear.filter((r) => r.category === L.category); const ord = same.length - same.findIndex((r) => r.n === L.n); const sfx = (n) => (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] || 'th'); return `Round #${esc(L.n)} on ${longDate(L.date)} was the ${ord}${sfx(ord)} ${esc(catLabel[L.category] || L.name)} round of ${year}. IRCC invited ${fmt(L.size)} candidates, and the lowest score invited was ${fmt(L.crs)}.${L.tieBreak ? ` Tie-breaking rule: ${esc(L.tieBreak)}.` : ''}`; })()} ${fmt(thisYear.length)} rounds so far in ${year}, with ${fmt(thisYear.reduce((s, r) => s + (r.size || 0), 0))} invitations in total.${L.category === 'pnp' ? ' Provincial Nominee Program cut-offs include the 600 points of the nomination.' : ''}</p>
 
 <h2>Draws by category</h2>
 <p>What each category requires and which occupations it covers: <a href="/express-entry-categories/">Express Entry categories</a>.</p>
@@ -357,7 +358,7 @@ function drawsPage() {
     temporalCoverage: `2015-01-31/${latestDate}`, spatialCoverage: 'Canada',
     creator: { '@type': 'Organization', name: SITE.name, url: SITE.url },
   }];
-  return page({ path: '/express-entry-draws/', title: `Express Entry Draws ${year}: All Rounds and Cut-off Scores`, description: `Every Express Entry draw since 2015 (${draws.rounds.length} rounds), filterable by CEC, PNP, French and other categories, with cut-off trends and the current CRS distribution.`, body, scripts, jsonld, crumbs: [['Home', '/'], ['Express Entry draws', '/express-entry-draws/']] });
+  return page({ path: '/express-entry-draws/', title: `Express Entry Draws ${year}: Latest Draw, Cut-offs and History`, description: `Latest Express Entry draw: #${L.n} on ${longDate(L.date)}, ${fmt(L.size)} invitations, cut-off ${L.crs}. Every draw since 2015 (${draws.rounds.length} rounds), filterable by CEC, PNP, French and other categories, with cut-off trends and the current CRS distribution.`, body, scripts, jsonld, crumbs: [['Home', '/'], ['Express Entry draws', '/express-entry-draws/']] });
 }
 
 // ---------- CLB / NCLC level pages ----------
@@ -633,11 +634,11 @@ ${retired.length ? `<h2>Categories no longer on the list</h2><p>${retired.map((c
 
 // ---------- Score chart pages, one per test ----------
 const CHART_PAGES = {
-  celpip: { slug: 'celpip-score-chart', short: 'CELPIP', title: 'CELPIP Score Chart: CELPIP to CLB for Express Entry (2026)', h1: 'CELPIP Score Chart for Express Entry', extra: 'For CLB 4 to 10, each CELPIP-General level is the same number as the CLB level: a 9 in an ability is CLB 9. Levels 11 and 12 count as CLB 10. CELPIP-General LS, the speaking and listening version, is not accepted for Express Entry.' },
-  ielts: { slug: 'ielts-score-chart', short: 'IELTS', title: 'IELTS Score Chart for Canada PR: IELTS to CLB (2026)', h1: 'IELTS Score Chart for Canada PR (Express Entry)', extra: 'Only IELTS General Training is accepted for Express Entry; IELTS Academic is not, and neither are IELTS One Skill Retake results. Listening asks for more than the other abilities from CLB 8 up: CLB 9 is 8.0 in listening but 7.0 in speaking, reading and writing.' },
-  tef: { slug: 'tef-canada-score-chart', short: 'TEF Canada', title: 'TEF Canada Score Chart: TEF to NCLC for Express Entry (2026)', h1: 'TEF Canada Score Chart for Express Entry', extra: 'Each ability has its own scale: speaking and writing are scored out of 450, listening out of 360 and reading out of 300. NCLC is the French name for the CLB levels; NCLC 7 is CLB 7.' },
-  tcf: { slug: 'tcf-canada-score-chart', short: 'TCF Canada', title: 'TCF Canada Score Chart: TCF to NCLC for Express Entry (2026)', h1: 'TCF Canada Score Chart for Express Entry', extra: 'Speaking and writing are scored out of 20; listening and reading out of 699. NCLC is the French name for the CLB levels; NCLC 7 is CLB 7.' },
-  pte: { slug: 'pte-core-score-chart', short: 'PTE Core', title: 'PTE Core Score Chart: PTE Core to CLB for Express Entry (2026)', h1: 'PTE Core Score Chart for Express Entry', extra: 'Only PTE Core is accepted for Express Entry; PTE Academic results are not. Each ability has its own thresholds, so the same score can give different CLB levels in speaking and in listening.' },
+  celpip: { slug: 'celpip-score-chart', short: 'CELPIP', title: 'CELPIP Score Chart and CLB Calculator for Express Entry (2026)', h1: 'CELPIP Score Chart for Express Entry', extra: 'For CLB 4 to 10, each CELPIP-General level is the same number as the CLB level: a 9 in an ability is CLB 9. Levels 11 and 12 count as CLB 10. CELPIP-General LS, the speaking and listening version, is not accepted for Express Entry.' },
+  ielts: { slug: 'ielts-score-chart', short: 'IELTS', title: 'IELTS to CLB Chart and Calculator for Canada PR (2026)', h1: 'IELTS to CLB: Score Chart for Canada PR (Express Entry)', extra: 'Only IELTS General Training is accepted for Express Entry; IELTS Academic is not, and neither are IELTS One Skill Retake results. Listening asks for more than the other abilities from CLB 8 up: CLB 9 is 8.0 in listening but 7.0 in speaking, reading and writing.' },
+  tef: { slug: 'tef-canada-score-chart', short: 'TEF Canada', title: 'TEF Canada Score Chart: TEF to CLB and NCLC Calculator (2026)', h1: 'TEF Canada Score Chart for Express Entry', extra: 'Each ability has its own scale: speaking and writing are scored out of 450, listening out of 360 and reading out of 300. NCLC is the French name for the CLB levels; NCLC 7 is CLB 7.' },
+  tcf: { slug: 'tcf-canada-score-chart', short: 'TCF Canada', title: 'TCF Canada Score Chart: TCF to CLB and NCLC Calculator (2026)', h1: 'TCF Canada Score Chart for Express Entry', extra: 'Speaking and writing are scored out of 20; listening and reading out of 699. NCLC is the French name for the CLB levels; NCLC 7 is CLB 7.' },
+  pte: { slug: 'pte-core-score-chart', short: 'PTE Core', title: 'PTE Core Score Chart and PTE to CLB Calculator (2026)', h1: 'PTE Core Score Chart for Express Entry', extra: 'Only PTE Core is accepted for Express Entry; PTE Academic results are not. Each ability has its own thresholds, so the same score can give different CLB levels in speaking and in listening.' },
 };
 function scoreChartPage(id) {
   const t = lang.tests[id];
