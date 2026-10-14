@@ -1,0 +1,407 @@
+{
+ "source": "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program/invitations-to-apply",
+ "archive": "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program/archives#Invitations_to_apply",
+ "pageUpdated": "2026-10-08",
+ "draws": [
+  {
+   "date": "2026-10-08",
+   "type": "Care: Childcare",
+   "factors": "Early childhood educators only",
+   "minScore": 99,
+   "invitations": 86,
+   "invitationsText": "86"
+  },
+  {
+   "date": "2026-10-08",
+   "type": "Care: Health",
+   "factors": "All priority health care occupations",
+   "minScore": 76,
+   "invitations": 82,
+   "invitationsText": "82"
+  },
+  {
+   "date": "2026-10-08",
+   "type": "Care: Veterinary Care",
+   "factors": "All priority veterinary care occupations",
+   "minScore": 86,
+   "invitations": null,
+   "invitationsText": "<5",
+   "note": "Animal health technologists and veterinary technicians (NOC 32104) with valid professional designation"
+  },
+  {
+   "date": "2026-10-08",
+   "type": "Build: Construction Trades",
+   "factors": "All priority construction occupations",
+   "minScore": 94,
+   "invitations": 115,
+   "invitationsText": "115"
+  },
+  {
+   "date": "2026-09-24",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Minimum wage of $52/hour and $105,000/year, and NOC 0, 1, 2, or 3",
+   "minScore": null,
+   "invitations": 426,
+   "invitationsText": "426"
+  },
+  {
+   "date": "2026-09-24",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Points",
+   "minScore": 131,
+   "invitations": 288,
+   "invitationsText": "288"
+  },
+  {
+   "date": "2026-09-17",
+   "type": "Temporary Rural/Remote Health Support Initiative",
+   "factors": "Points",
+   "minScore": 60,
+   "invitations": 33,
+   "invitationsText": "33"
+  },
+  {
+   "date": "2026-09-10",
+   "type": "Care: Childcare",
+   "factors": "Early childhood educators only",
+   "minScore": 99,
+   "invitations": 182,
+   "invitationsText": "182"
+  },
+  {
+   "date": "2026-09-10",
+   "type": "Care: Health",
+   "factors": "All priority health care occupations",
+   "minScore": 76,
+   "invitations": 143,
+   "invitationsText": "143"
+  },
+  {
+   "date": "2026-09-10",
+   "type": "Care: Veterinary Care",
+   "factors": "All priority veterinary care occupations",
+   "minScore": 90,
+   "invitations": null,
+   "invitationsText": "<5",
+   "note": "Animal health technologists and veterinary technicians (NOC 32104) with valid professional designation"
+  },
+  {
+   "date": "2026-09-10",
+   "type": "Build: Construction Trades",
+   "factors": "All priority construction occupations",
+   "minScore": 94,
+   "invitations": 104,
+   "invitationsText": "104"
+  },
+  {
+   "date": "2026-08-20",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Minimum wage of $55/hour and $110,000/year, and NOC 0, 1, 2, or 3",
+   "minScore": null,
+   "invitations": 337,
+   "invitationsText": "337"
+  },
+  {
+   "date": "2026-08-20",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Points",
+   "minScore": 132,
+   "invitations": 265,
+   "invitationsText": "265"
+  },
+  {
+   "date": "2026-08-06",
+   "type": "Care: Childcare",
+   "factors": "Early childhood educators only",
+   "minScore": 102,
+   "invitations": 183,
+   "invitationsText": "183"
+  },
+  {
+   "date": "2026-08-06",
+   "type": "Care: Health",
+   "factors": "All priority health care occupations",
+   "minScore": 84,
+   "invitations": 124,
+   "invitationsText": "124"
+  },
+  {
+   "date": "2026-08-06",
+   "type": "Care: Education",
+   "factors": "All priority education occupations",
+   "minScore": 68,
+   "invitations": null,
+   "invitationsText": "<5"
+  },
+  {
+   "date": "2026-08-06",
+   "type": "Care: Veterinary Care",
+   "factors": "All priority veterinary care occupations",
+   "minScore": 72,
+   "invitations": 6,
+   "invitationsText": "6",
+   "note": "Animal health technologists and veterinary technicians (NOC 32104) with valid professional designation"
+  },
+  {
+   "date": "2026-08-06",
+   "type": "Build: Construction Trades",
+   "factors": "All priority construction occupations",
+   "minScore": 88,
+   "invitations": 187,
+   "invitationsText": "187"
+  },
+  {
+   "date": "2026-07-23",
+   "type": "Temporary Rural/Remote Health Support Initiative",
+   "factors": "Points",
+   "minScore": 50,
+   "invitations": 60,
+   "invitationsText": "60"
+  },
+  {
+   "date": "2026-07-16",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Minimum wage of $58/hour and $115,000/year, and NOC 0, 1, 2, or 3",
+   "minScore": null,
+   "invitations": 223,
+   "invitationsText": "223"
+  },
+  {
+   "date": "2026-07-16",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Points",
+   "minScore": 132,
+   "invitations": 346,
+   "invitationsText": "346"
+  },
+  {
+   "date": "2026-07-09",
+   "type": "Care: Childcare",
+   "factors": "Early childhood educators only",
+   "minScore": 108,
+   "invitations": 91,
+   "invitationsText": "91"
+  },
+  {
+   "date": "2026-07-09",
+   "type": "Care: Health",
+   "factors": "All priority health care occupations",
+   "minScore": 96,
+   "invitations": 116,
+   "invitationsText": "116"
+  },
+  {
+   "date": "2026-07-09",
+   "type": "Care: Veterinary Care",
+   "factors": "All priority veterinary care occupations",
+   "minScore": 88,
+   "invitations": null,
+   "invitationsText": "<5",
+   "note": "Animal health technologists and veterinary technicians (NOC 32104) with valid professional designation"
+  },
+  {
+   "date": "2026-07-09",
+   "type": "Build: Construction Trades",
+   "factors": "All priority construction occupations",
+   "minScore": 97,
+   "invitations": 136,
+   "invitationsText": "136"
+  },
+  {
+   "date": "2026-06-18",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Minimum wage of $62/hour and $125,000/year, and NOC 0, 1, 2, or 3",
+   "minScore": null,
+   "invitations": 130,
+   "invitationsText": "130"
+  },
+  {
+   "date": "2026-06-18",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Points",
+   "minScore": 136,
+   "invitations": 149,
+   "invitationsText": "149"
+  },
+  {
+   "date": "2026-06-02",
+   "type": "Care: Childcare",
+   "factors": "Early childhood educators",
+   "minScore": 111,
+   "invitations": 91,
+   "invitationsText": "91"
+  },
+  {
+   "date": "2026-06-02",
+   "type": "Care: Health",
+   "factors": "All priority health care occupations",
+   "minScore": 100,
+   "invitations": 117,
+   "invitationsText": "117"
+  },
+  {
+   "date": "2026-06-02",
+   "type": "Care: Veterinary Care",
+   "factors": "All priority veterinary care occupations",
+   "minScore": 92,
+   "invitations": 6,
+   "invitationsText": "6",
+   "note": "Animal health technologists and veterinary technicians (NOC 32104) with valid professional designation"
+  },
+  {
+   "date": "2026-06-02",
+   "type": "Build: Construction Trades",
+   "factors": "All priority construction occupations",
+   "minScore": 101,
+   "invitations": 128,
+   "invitationsText": "128"
+  },
+  {
+   "date": "2026-05-14",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Minimum wage of $59/hour and $120,000/year, and NOC 0, 1, 2, or 3",
+   "minScore": null,
+   "invitations": 225,
+   "invitationsText": "225"
+  },
+  {
+   "date": "2026-05-14",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Points",
+   "minScore": 135,
+   "invitations": 212,
+   "invitationsText": "212"
+  },
+  {
+   "date": "2026-05-06",
+   "type": "Care: Childcare",
+   "factors": "Early childhood educators only (NOC 42202)",
+   "minScore": 115,
+   "invitations": 86,
+   "invitationsText": "86"
+  },
+  {
+   "date": "2026-05-06",
+   "type": "Care: Health",
+   "factors": "All priority health care occupations",
+   "minScore": 108,
+   "invitations": 117,
+   "invitationsText": "117"
+  },
+  {
+   "date": "2026-05-06",
+   "type": "Care: Veterinary Care",
+   "factors": "All priority veterinary care occupations",
+   "minScore": 100,
+   "invitations": 9,
+   "invitationsText": "9",
+   "note": "Animal health technologists and veterinary technicians (NOC 32104) with valid professional designation"
+  },
+  {
+   "date": "2026-05-06",
+   "type": "Build: Construction Trades",
+   "factors": "All priority construction occupations (including workers who have apprenticeships registered with SkilledTradesBC)",
+   "minScore": 108,
+   "invitations": 121,
+   "invitationsText": "121"
+  },
+  {
+   "date": "2026-04-22",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Minimum wage of $62/hour and $125,000/year, and NOC TEER 0, 1, 2 or 3",
+   "minScore": null,
+   "invitations": 252,
+   "invitationsText": "252"
+  },
+  {
+   "date": "2026-04-22",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Points",
+   "minScore": 138,
+   "invitations": 232,
+   "invitationsText": "232"
+  },
+  {
+   "date": "2026-02-11",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Minimum wage of $62/hour and $125,000/year, and NOC TEER 0, 1, 2 or 3",
+   "minScore": null,
+   "invitations": 195,
+   "invitationsText": "195"
+  },
+  {
+   "date": "2026-02-11",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Points",
+   "minScore": 135,
+   "invitations": 265,
+   "invitationsText": "265"
+  },
+  {
+   "date": "2026-02-04",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Minimum wage of $70/hour and $145,000/year, and NOC TEER 0, 1, 2 or 3",
+   "minScore": null,
+   "invitations": 206,
+   "invitationsText": "206"
+  },
+  {
+   "date": "2026-02-04",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Points",
+   "minScore": 138,
+   "invitations": 223,
+   "invitationsText": "223"
+  }
+ ],
+ "pool": {
+  "asOf": "2026-10-06",
+  "ranges": [
+   {
+    "range": "150+",
+    "count": 9
+   },
+   {
+    "range": "140–149",
+    "count": 23
+   },
+   {
+    "range": "130–139",
+    "count": 171
+   },
+   {
+    "range": "120–129",
+    "count": 854
+   },
+   {
+    "range": "110–119",
+    "count": 1189
+   },
+   {
+    "range": "100–109",
+    "count": 1426
+   },
+   {
+    "range": "90–99",
+    "count": 1444
+   },
+   {
+    "range": "80–89",
+    "count": 1281
+   },
+   {
+    "range": "70–79",
+    "count": 718
+   },
+   {
+    "range": "60–69",
+    "count": 364
+   },
+   {
+    "range": "0–59",
+    "count": 216
+   }
+  ],
+  "total": 7695
+ }
+}

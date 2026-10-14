@@ -27,6 +27,8 @@ const fsw = read('data/rules/fsw.json');
 const cec = read('data/rules/cec.json');
 const sv = read('data/rules/super-visa.json');
 const pgp = read('data/rules/pgp-income.json');
+const bcsirs = read('data/rules/bc-sirs.json');
+const bcDraws = read('data/provinces/bcpnp-draws.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -1588,6 +1590,112 @@ function pgpIncomePage() {
   return page({ path: '/parents-grandparents-sponsorship-income/', title: 'Parents and Grandparents Sponsorship Income Requirement 2026', description: `Income needed to sponsor parents or grandparents: the IRCC table for ${r.years.join(', ')} by family size, with a year-by-year calculator and who counts in your family.`, body, crumbs: [['Home', '/'], ['Parents and grandparents sponsorship income', '/parents-grandparents-sponsorship-income/']] });
 }
 
+// ---------- British Columbia (BC PNP) ----------
+function bcCalcPage() {
+  const r = bcsirs;
+  const opt = (arr) => arr.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('');
+  const t2 = (arr) => arr.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('');
+  const d = bcDraws.draws;
+  const lastDate = d[0].date;
+  const latest = d.filter((x) => x.date === lastDate && x.minScore !== null);
+  const wageRows = [[70, 55], [60, 45], [50, 35], [40, 25], [30, 15], [20, 5], [16, 1]].map(([w, p]) => `<tr><td>$${w}.00${w === 70 ? ' or more' : ` to $${w}.99`}</td><td class="n">${p}</td></tr>`).join('') + '<tr><td>Less than $16.00</td><td class="n">0</td></tr>';
+  const body = `
+<section class="intro">
+  <h1>BC PNP Points Calculator: Skills Immigration Registration Score</h1>
+  <p class="lede">Work out your BC Provincial Nominee Program Skills Immigration registration score out of ${r.max}, with every factor from the official program guide, and compare it with the minimum scores of the latest invitations.</p>
+  <p class="meta"><span>Program guide effective ${longDate(r.guideEffective)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">BC PNP Skills Immigration Program Guide (PDF)</a></span></p>
+</section>
+<div class="tool">
+<form id="bc-form" novalidate>
+  <fieldset><legend>Directly related work experience</legend>
+    <div class="field"><label for="experience">Experience in the occupation of your B.C. job offer, last 10 years</label><select id="experience" name="experience">${opt(r.experience.options)}</select><span class="hint">Part-time counts at 50% of the time worked.</span></div>
+    <div class="field check"><input type="checkbox" id="expCanada" name="expCanada"><label for="expCanada">At least 1 year of that experience in Canada, while authorized to work (+${r.experience.canada})</label></div>
+    <div class="field check"><input type="checkbox" id="expBC" name="expBC"><label for="expBC">Currently working full time in B.C. for the employer and in the occupation of your registration (+${r.experience.currentBC})</label></div>
+  </fieldset>
+  <fieldset><legend>Education</legend>
+    <div class="field"><label for="education">Highest completed education</label><select id="education" name="education">${opt(r.education.options)}</select></div>
+    <div class="field"><label for="eduPlace">Where you completed that highest level</label><select id="eduPlace" name="eduPlace"><option value="none">Outside Canada</option><option value="bc">At a post-secondary institution in B.C. (+${r.education.bc})</option><option value="canada">At a post-secondary institution in Canada, outside B.C. (+${r.education.canada})</option></select></div>
+    <div class="field check"><input type="checkbox" id="designation" name="designation"><label for="designation">Eligible B.C. professional designation for the job offered, such as a trade certificate or a listed health or early childhood designation (+${r.education.designation})</label></div>
+  </fieldset>
+  <fieldset><legend>Language</legend>
+    <div class="field"><label for="language">Lowest CLB level of your four abilities</label><select id="language" name="language">${opt(r.language.options)}</select><span class="hint">Convert your results with the <a href="/clb-converter/">CLB converter</a>.</span></div>
+    <div class="field check"><input type="checkbox" id="both" name="both"><label for="both">Valid English and French tests, both at CLB 4 or higher in all four abilities (+${r.language.both})</label></div>
+  </fieldset>
+  <fieldset><legend>B.C. job offer</legend>
+    <div class="field"><label for="hourly">Hourly wage (CAD)</label><input type="number" id="hourly" name="hourly" min="0" step="0.01" inputmode="decimal"><span class="hint">Base pay only: no bonuses, tips, overtime or allowances.</span></div>
+    <div class="row"><div class="field"><label for="annual">Or annual salary (CAD)</label><input type="number" id="annual" name="annual" min="0" step="100" inputmode="numeric"></div>
+    <div class="field"><label for="hours">Hours per week</label><input type="number" id="hours" name="hours" min="30" max="40" value="40" inputmode="numeric"><span class="hint">Between 30 and 40 for the calculation.</span></div></div>
+    <p class="small" id="wage-note"></p>
+    <div class="field"><label for="area">Main work location</label><select id="area" name="area">${opt(r.area.options)}</select></div>
+    <div class="field check"><input type="checkbox" id="regional" name="regional"><label for="regional">Regional experience or regional alumni outside Metro Vancouver (+${r.area.regional}, only with a job in Area 2 or 3)</label></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Your BC PNP score">
+  <div class="total"><span><span class="score" id="total" aria-live="polite">0</span> <span class="of">/ ${r.max}</span></span><span class="small">Registration score</span></div>
+  <div class="table-scroll"><table><tbody id="breakdown"></tbody></table></div>
+  <p class="small">Latest invitations (${longDate(lastDate)}): ${latest.map((x) => `${esc(x.type)} ${x.minScore}`).join('; ')}. Most rounds target occupations, so the score alone does not decide; see the <a href="/bc-pnp-draws/">BC PNP draws</a>.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>How the score works</h2>
+<p>B.C. scores Skills Immigration registrations on human capital (up to 120 points) and economic factors (up to 80). If invited, everything you declared is checked against your application.</p>
+<h3>Directly related work experience (maximum ${r.experience.max})</h3><div class="table-scroll"><table><tbody>${t2(r.experience.options)}<tr><td>At least 1 year of directly related experience in Canada</td><td class="n">+${r.experience.canada}</td></tr><tr><td>Currently working full time in B.C. for the employer, in the occupation registered</td><td class="n">+${r.experience.currentBC}</td></tr></tbody></table></div>
+<h3>Education (maximum ${r.education.max})</h3><div class="table-scroll"><table><tbody>${t2(r.education.options)}<tr><td>Highest level completed in B.C.</td><td class="n">+${r.education.bc}</td></tr><tr><td>Highest level completed in Canada, outside B.C.</td><td class="n">+${r.education.canada}</td></tr><tr><td>Eligible professional designation in B.C.</td><td class="n">+${r.education.designation}</td></tr></tbody></table></div>
+<h3>Language (maximum ${r.language.max})</h3><p>Based on the lowest CLB of the four abilities.</p><div class="table-scroll"><table><tbody>${t2(r.language.options)}<tr><td>Both English and French at CLB 4 or higher</td><td class="n">+${r.language.both}</td></tr></tbody></table></div>
+<h3>Hourly wage (maximum ${r.wage.max})</h3><p>One point for each dollar of hourly wage above $15: $16.00 gives 1 point and $70.00 or more gives the maximum of 55. If your offer is annual, B.C. divides it by 52 weeks and by your weekly hours, counting no fewer than 30 and no more than 40 hours.</p><div class="table-scroll"><table><tbody>${wageRows}</tbody></table></div>
+<h3>Area of employment (maximum ${r.area.max})</h3><div class="table-scroll"><table><tbody>${t2(r.area.options)}<tr><td>Regional experience or regional alumni (Area 2 or 3 only)</td><td class="n">+${r.area.regional}</td></tr></tbody></table></div>
+<p>A nomination through the BC PNP's Express Entry option adds 600 CRS points; see the <a href="/">CRS calculator</a>.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">BC PNP Skills Immigration Program Guide</a>, Part 8, effective ${longDate(r.guideEffective)}</li></ul>
+</article>`;
+  const scripts = `${jsonScript('bc-rules', r)}<script type="module" src="/js/bcpnp.js"></script>`;
+  return page({ path: '/bc-pnp-points-calculator/', title: 'BC PNP Points Calculator 2026: Skills Immigration Score (SIRS)', description: `Calculate your BC PNP Skills Immigration registration score out of ${r.max}: experience, education, language, wage and area, from the official guide.`, body, scripts, crumbs: [['Home', '/'], ['BC PNP points calculator', '/bc-pnp-points-calculator/']] });
+}
+
+function bcDrawsPage() {
+  const b = bcDraws;
+  const d = b.draws;
+  const dates = [...new Set(d.map((x) => x.date))];
+  const last = dates[0];
+  const y = last.slice(0, 4);
+  const types = [...new Set(d.map((x) => x.type))];
+  const stat = types.map((t) => { const r = d.filter((x) => x.type === t); const sc = r.map((x) => x.minScore).filter((x) => x !== null); return `<tr><td>${esc(t)}</td><td class="n">${new Set(r.map((x) => x.date)).size}</td><td class="n">${sc.length ? `${Math.min(...sc)}–${Math.max(...sc)}` : '–'}</td><td>${r[0].date}${r[0].minScore !== null ? `, ${r[0].minScore}` : ''}</td></tr>`; }).join('');
+  const rows = d.map((x) => `<tr><td>${x.date}</td><td>${esc(x.type)}</td><td>${esc(x.factors)}${x.note ? `<div class="small">${esc(x.note)}</div>` : ''}</td><td class="n">${x.minScore ?? 'N/A'}</td><td class="n">${esc(x.invitationsText)}</td></tr>`).join('');
+  const lastRows = d.filter((x) => x.date === last);
+  const max = Math.max(...b.pool.ranges.map((r) => r.count));
+  const W = 760, rowH = 28, H = b.pool.ranges.length * rowH + 10;
+  const bars = b.pool.ranges.map((r, i) => `<text x="0" y="${i * rowH + 18}">${r.range}</text><rect class="bar-r" x="80" y="${i * rowH + 6}" height="16" width="${((r.count / max) * 560).toFixed(1)}" rx="3"/><text x="${(86 + (r.count / max) * 560).toFixed(1)}" y="${i * rowH + 18}">${fmt(r.count)}</text>`).join('');
+  const health = d.filter((x) => x.type === 'Care: Health' && x.minScore).map((x) => ({ date: x.date, crs: x.minScore }));
+  const body = `
+<section class="intro">
+  <h1>BC PNP Draws ${y}: Skills Immigration Invitations and Scores</h1>
+  <p class="lede">Every BC Provincial Nominee Program Skills Immigration invitation of ${y} on WelcomeBC, by type, with minimum scores and invitations, plus the scores of the ${fmt(b.pool.total)} registrations in the pool.</p>
+  <p class="meta"><span>WelcomeBC page updated ${longDate(b.pageUpdated)}</span><span>Updated automatically</span><span>Source: <a href="${b.source}" rel="noopener">BC PNP invitations to apply</a></span></p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">Latest invitations</div><div class="v" style="font-size:1.2rem">${longDate(last)}</div><div class="small">${lastRows.length} selection${lastRows.length > 1 ? 's' : ''}</div></div>
+  <div class="card"><div class="k">Invitation dates in ${y}</div><div class="v">${dates.filter((x) => x.startsWith(y)).length}</div></div>
+  <div class="card"><div class="k">Registrations in the pool</div><div class="v">${fmt(b.pool.total)}</div><div class="small">on ${longDate(b.pool.asOf)}</div></div>
+</div>
+<h2>Latest invitations</h2>
+<div class="table-scroll"><table><thead><tr><th>Type</th><th>Selection</th><th class="n">Minimum score</th><th class="n">Invitations</th></tr></thead><tbody>${lastRows.map((x) => `<tr><td>${esc(x.type)}</td><td>${esc(x.factors)}${x.note ? `<div class="small">${esc(x.note)}</div>` : ''}</td><td class="n">${x.minScore ?? 'N/A'}</td><td class="n">${esc(x.invitationsText)}</td></tr>`).join('')}</tbody></table></div>
+<h2>By type, ${y}</h2>
+<div class="table-scroll"><table><thead><tr><th>Type</th><th class="n">Dates</th><th class="n">Minimum scores</th><th>Latest</th></tr></thead><tbody>${stat}</tbody></table></div>
+${health.length >= 2 ? `<h2>Care: Health, minimum score</h2>${catChart(health)}` : ''}
+<h2>Registration pool by score</h2>
+<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="BC PNP registrations by score range">${bars}</svg>
+<h2>All ${y} invitations</h2>
+<div class="table-scroll"><table><thead><tr><th>Date</th><th>Type</th><th>Selection</th><th class="n">Minimum score</th><th class="n">Invitations</th></tr></thead><tbody>${rows}</tbody></table></div>
+<article class="prose">
+<h2>How to read it</h2>
+<p>Scores are BC PNP registration points out of 200, not CRS points; estimate yours with the <a href="/bc-pnp-points-calculator/">BC PNP points calculator</a>. Most rounds only consider registrations in priority occupations (child care, health, veterinary care, construction), so a minimum score applies only within that group. High economic impact rounds invite either by wage or by score. "&lt;5" is how B.C. reports fewer than 5 invitations. Earlier years are on WelcomeBC's <a href="${b.archive}" rel="noopener">archives page</a>.</p>
+<p>BC nominees through Express Entry get 600 CRS points; federal rounds for nominees are on the <a href="/express-entry-draws/pnp/">PNP draws</a> page.</p>
+<h2>Sources</h2>
+<ul><li><a href="${b.source}" rel="noopener">BC PNP invitations to apply</a>, WelcomeBC, updated ${longDate(b.pageUpdated)}</li></ul>
+</article>`;
+  return page({ path: '/bc-pnp-draws/', title: `BC PNP Draws ${y}: Latest Skills Immigration Invitations`, description: `Latest BC PNP draw: ${longDate(last)}. All ${y} Skills Immigration invitations by type with minimum scores, and the ${fmt(b.pool.total)} registrations in the pool by score.`, body, crumbs: [['Home', '/'], ['BC PNP draws', '/bc-pnp-draws/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -1630,7 +1738,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage], ['super-visa-income-requirement', superVisaPage], ['parents-grandparents-sponsorship-income', pgpIncomePage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage], ['super-visa-income-requirement', superVisaPage], ['parents-grandparents-sponsorship-income', pgpIncomePage], ['bc-pnp-points-calculator', bcCalcPage], ['bc-pnp-draws', bcDrawsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }
