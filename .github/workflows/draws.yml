@@ -19,6 +19,9 @@ jobs:
       - name: Manitoba (MPNP) draws
         run: node scripts/mpnp.mjs --fetch
         continue-on-error: true
+      - name: Alberta (AAIP) draws
+        run: node scripts/aaip.mjs --fetch
+        continue-on-error: true
       - run: npm test
       - name: Commit if the data changed
         run: |

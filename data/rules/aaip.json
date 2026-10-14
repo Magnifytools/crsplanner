@@ -1,0 +1,26 @@
+{
+ "id": "aaip-worker-eoi",
+ "source": "https://www.alberta.ca/system/files/im-worker-stream-expression-of-interest-points-grid.pdf",
+ "page": "https://www.alberta.ca/aaip-processing-information",
+ "gridDate": "2026-09-28",
+ "checked": "2026-10-14",
+ "extraWatch": [{ "url": "https://www.alberta.ca/system/files/im-worker-stream-expression-of-interest-points-grid.pdf", "sha256": "4fd2a710795d83849b798b7bfbf474a353621e38da1f2dafe636ba01a6ffb4c3", "what": "AAIP Worker EOI points grid PDF" }],
+ "max": 100,
+ "minimumLanguage": "CLB 4 (English) or NCLC 4 (French) in all four abilities to submit a Worker EOI",
+ "factors": [
+  { "id": "education", "group": "Human capital: education", "label": "Highest level of education completed", "options": [["Doctorate degree", 12], ["Master's degree", 10], ["Bachelor's degree", 7], ["Trades certificate or diploma", 7], ["Diploma or certificate", 4], ["Secondary school or lower", 0]] },
+  { "id": "eduLocation", "group": "Human capital: education", "label": "Where your highest education was completed in Canada", "options": [["Completed in Alberta", 10], ["Completed in another province or territory", 6], ["Not completed in Canada", 0]] },
+  { "id": "english", "group": "Human capital: language", "label": "English: lowest CLB of the four abilities", "options": [["CLB 6 or higher", 10], ["CLB 5", 8], ["CLB 4", 5], ["CLB 3 or lower, or no test", 0]] },
+  { "id": "french", "group": "Human capital: language", "label": "French: lowest NCLC of the four abilities", "options": [["NCLC 6 or higher", 8], ["NCLC 5", 5], ["NCLC 4", 3], ["NCLC 3 or lower, or no test", 0]] },
+  { "id": "workTotal", "group": "Human capital: work experience", "label": "Total work experience, in Canada and abroad", "options": [["12 months or more", 11], ["6 to 11 months", 7], ["Less than 6 months", 3]] },
+  { "id": "workCanada", "group": "Human capital: work experience", "label": "Work experience in Canada", "options": [["6 months or more in Alberta", 10], ["6 months or more in another province or territory", 6], ["Neither", 0]] },
+  { "id": "age", "group": "Human capital: age and family", "label": "Age", "options": [["18 to 20", 3], ["21 to 34", 5], ["35 to 49", 4], ["50 or older", 3]] },
+  { "id": "family", "group": "Human capital: age and family", "label": "Parent, child or sibling in Alberta who is a citizen or permanent resident over 18", "options": [["Yes", 8], ["No", 0]] },
+  { "id": "offer", "group": "Economic factors", "label": "Job offer for permanent full-time employment in Alberta", "options": [["Yes", 10], ["No", 0]] },
+  { "id": "offerSpecial", "group": "Economic factors", "label": "Job offer in a select rural community or sector", "options": [["Rural Renewal Stream endorsement letter from a designated community", 6], ["Tourism and hospitality job offer from a member of a required sector association", 6], ["Law enforcement job offer from a member of the Alberta Association of Chiefs of Police", 6], ["None of these", 0]] },
+  { "id": "location", "group": "Economic factors", "label": "Location of the Alberta job offer", "options": [["Rural Renewal Stream designated community", 5], ["Other Alberta community outside the Calgary and Edmonton metropolitan areas", 5], ["Calgary or Edmonton metropolitan area", 0], ["No job offer", 0]] },
+  { "id": "regulated", "group": "Economic factors", "label": "Job offer in a regulated occupation, with Alberta certification or licence", "options": [["Yes", 10], ["No", 0]] }
+ ],
+ "bilingual": { "points": 3, "rule": "CLB or NCLC 4 or higher in both English and French" },
+ "languageRule": "Points come from the lowest of the four abilities on the test; Alberta scores English and French and gives the higher of the two, plus 3 bilingual points if both are at level 4 or higher."
+}

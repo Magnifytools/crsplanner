@@ -1,0 +1,688 @@
+{
+ "source": "https://www.alberta.ca/aaip-processing-information",
+ "pageUpdated": "2026-10-07",
+ "draws": [
+  {
+   "date": "2026-10-07",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Aviation)",
+   "stream": "aee",
+   "minScore": 56,
+   "invitations": 22,
+   "invitationsText": "22"
+  },
+  {
+   "date": "2026-10-02",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 54,
+   "invitations": 123,
+   "invitationsText": "123"
+  },
+  {
+   "date": "2026-09-29",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (General)",
+   "stream": "aee",
+   "minScore": 64,
+   "invitations": 200,
+   "invitationsText": "200"
+  },
+  {
+   "date": "2026-09-24",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 51,
+   "invitations": 131,
+   "invitationsText": "131"
+  },
+  {
+   "date": "2026-09-23",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 58,
+   "invitations": 113,
+   "invitationsText": "113"
+  },
+  {
+   "date": "2026-09-22",
+   "focus": "Alberta Express Entry Stream – Accelerated Tech Pathway",
+   "stream": "aee",
+   "minScore": 59,
+   "invitations": 100,
+   "invitationsText": "100"
+  },
+  {
+   "date": "2026-09-21",
+   "focus": "Alberta Express Entry Stream – Law Enforcement Pathway",
+   "stream": "aee",
+   "minScore": 49,
+   "invitations": null,
+   "invitationsText": "Less than 10"
+  },
+  {
+   "date": "2026-09-18",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Health Care)",
+   "stream": "aee",
+   "minScore": 62,
+   "invitations": 100,
+   "invitationsText": "100"
+  },
+  {
+   "date": "2026-09-15",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Agriculture)",
+   "stream": "aee",
+   "minScore": 60,
+   "invitations": 18,
+   "invitationsText": "18"
+  },
+  {
+   "date": "2026-09-10",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Manufacturing)",
+   "stream": "aee",
+   "minScore": 60,
+   "invitations": 48,
+   "invitationsText": "48"
+  },
+  {
+   "date": "2026-09-09",
+   "focus": "Dedicated Health Care Pathway – Express Entry",
+   "stream": "dhcp",
+   "minScore": 60,
+   "invitations": 51,
+   "invitationsText": "51"
+  },
+  {
+   "date": "2026-09-03",
+   "focus": "Alberta Express Entry Stream – Accelerated Tech Pathway",
+   "stream": "aee",
+   "minScore": 60,
+   "invitations": 96,
+   "invitationsText": "96"
+  },
+  {
+   "date": "2026-09-01",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 56,
+   "invitations": 575,
+   "invitationsText": "575"
+  },
+  {
+   "date": "2026-08-19",
+   "focus": "Dedicated Health Care Pathway – non-Express Entry",
+   "stream": "dhcp",
+   "minScore": 60,
+   "invitations": 24,
+   "invitationsText": "24"
+  },
+  {
+   "date": "2026-08-14",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 58,
+   "invitations": 743,
+   "invitationsText": "743"
+  },
+  {
+   "date": "2026-08-12",
+   "focus": "Dedicated Health Care Pathway – Express Entry",
+   "stream": "dhcp",
+   "minScore": 60,
+   "invitations": 57,
+   "invitationsText": "57"
+  },
+  {
+   "date": "2026-08-11",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 51,
+   "invitations": 127,
+   "invitationsText": "127"
+  },
+  {
+   "date": "2026-08-07",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Agriculture)",
+   "stream": "aee",
+   "minScore": 55,
+   "invitations": 38,
+   "invitationsText": "38"
+  },
+  {
+   "date": "2026-08-06",
+   "focus": "Alberta Express Entry Stream – Accelerated Tech Pathway",
+   "stream": "aee",
+   "minScore": 60,
+   "invitations": 95,
+   "invitationsText": "95"
+  },
+  {
+   "date": "2026-08-04",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Health Care)",
+   "stream": "aee",
+   "minScore": 66,
+   "invitations": 50,
+   "invitationsText": "50"
+  },
+  {
+   "date": "2026-07-21",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Construction)",
+   "stream": "aee",
+   "minScore": 65,
+   "invitations": 53,
+   "invitationsText": "53"
+  },
+  {
+   "date": "2026-07-16",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Agriculture)",
+   "stream": "aee",
+   "minScore": 56,
+   "invitations": 29,
+   "invitationsText": "29"
+  },
+  {
+   "date": "2026-07-15",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 53,
+   "invitations": 833,
+   "invitationsText": "833"
+  },
+  {
+   "date": "2026-07-14",
+   "focus": "Dedicated Health Care Pathway – non-Express Entry",
+   "stream": "dhcp",
+   "minScore": 52,
+   "invitations": 51,
+   "invitationsText": "51"
+  },
+  {
+   "date": "2026-07-10",
+   "focus": "Alberta Express Entry Stream – Law Enforcement Pathway",
+   "stream": "aee",
+   "minScore": 52,
+   "invitations": null,
+   "invitationsText": "Less than 10"
+  },
+  {
+   "date": "2026-07-08",
+   "focus": "Alberta Express Entry Stream – Accelerated Tech Pathway",
+   "stream": "aee",
+   "minScore": 55,
+   "invitations": 149,
+   "invitationsText": "149"
+  },
+  {
+   "date": "2026-07-07",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 55,
+   "invitations": 42,
+   "invitationsText": "42"
+  },
+  {
+   "date": "2026-07-03",
+   "focus": "Dedicated Health Care Pathway – Express Entry",
+   "stream": "dhcp",
+   "minScore": 55,
+   "invitations": 92,
+   "invitationsText": "92"
+  },
+  {
+   "date": "2026-06-29",
+   "focus": "Dedicated Health Care Pathway – non-Express Entry",
+   "stream": "dhcp",
+   "minScore": 63,
+   "invitations": 75,
+   "invitationsText": "75"
+  },
+  {
+   "date": "2026-06-24",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Aviation and skilled trade)",
+   "stream": "aee",
+   "minScore": 47,
+   "invitations": 35,
+   "invitationsText": "35"
+  },
+  {
+   "date": "2026-06-22",
+   "focus": "Dedicated Health Care Pathway – Express Entry",
+   "stream": "dhcp",
+   "minScore": 64,
+   "invitations": 46,
+   "invitationsText": "46"
+  },
+  {
+   "date": "2026-06-19",
+   "focus": "Alberta Express Entry Stream – Accelerated Tech Pathway",
+   "stream": "aee",
+   "minScore": 59,
+   "invitations": 100,
+   "invitationsText": "100"
+  },
+  {
+   "date": "2026-06-18",
+   "focus": "Tourism and Hospitality Stream",
+   "stream": "ths",
+   "minScore": 71,
+   "invitations": 61,
+   "invitationsText": "61"
+  },
+  {
+   "date": "2026-06-17",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 58,
+   "invitations": 720,
+   "invitationsText": "720"
+  },
+  {
+   "date": "2026-06-15",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Manufacturing)",
+   "stream": "aee",
+   "minScore": 50,
+   "invitations": 56,
+   "invitationsText": "56"
+  },
+  {
+   "date": "2026-06-12",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Agriculture)",
+   "stream": "aee",
+   "minScore": 52,
+   "invitations": 37,
+   "invitationsText": "37"
+  },
+  {
+   "date": "2026-06-11",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Health Care)",
+   "stream": "aee",
+   "minScore": 63,
+   "invitations": 50,
+   "invitationsText": "50"
+  },
+  {
+   "date": "2026-06-10",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 51,
+   "invitations": 54,
+   "invitationsText": "54"
+  },
+  {
+   "date": "2026-06-09",
+   "focus": "Dedicated Health Care Pathway – non-Express Entry",
+   "stream": "dhcp",
+   "minScore": 45,
+   "invitations": 35,
+   "invitationsText": "35"
+  },
+  {
+   "date": "2026-06-08",
+   "focus": "Dedicated Health Care Pathway – Express Entry",
+   "stream": "dhcp",
+   "minScore": 60,
+   "invitations": 49,
+   "invitationsText": "49"
+  },
+  {
+   "date": "2026-06-05",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 50,
+   "invitations": 462,
+   "invitationsText": "462"
+  },
+  {
+   "date": "2026-06-02",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Manufacturing)",
+   "stream": "aee",
+   "minScore": 53,
+   "invitations": 49,
+   "invitationsText": "49"
+  },
+  {
+   "date": "2026-05-29",
+   "focus": "Alberta Express Entry Stream – Accelerated Tech Pathway",
+   "stream": "aee",
+   "minScore": 55,
+   "invitations": 200,
+   "invitationsText": "200"
+  },
+  {
+   "date": "2026-05-27",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 51,
+   "invitations": 993,
+   "invitationsText": "993"
+  },
+  {
+   "date": "2026-05-25",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 50,
+   "invitations": 83,
+   "invitationsText": "83"
+  },
+  {
+   "date": "2026-05-22",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Agriculture)",
+   "stream": "aee",
+   "minScore": 48,
+   "invitations": 76,
+   "invitationsText": "76"
+  },
+  {
+   "date": "2026-05-21",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Manufacturing)",
+   "stream": "aee",
+   "minScore": 56,
+   "invitations": 99,
+   "invitationsText": "99"
+  },
+  {
+   "date": "2026-05-20",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Construction and skilled trade)",
+   "stream": "aee",
+   "minScore": 61,
+   "invitations": 50,
+   "invitationsText": "50"
+  },
+  {
+   "date": "2026-05-13",
+   "focus": "Dedicated Health Care Pathway – Express Entry",
+   "stream": "dhcp",
+   "minScore": 57,
+   "invitations": 61,
+   "invitationsText": "61"
+  },
+  {
+   "date": "2026-05-07",
+   "focus": "Alberta Express Entry Stream – Accelerated Tech Pathway",
+   "stream": "aee",
+   "minScore": 57,
+   "invitations": 146,
+   "invitationsText": "146"
+  },
+  {
+   "date": "2026-05-06",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 54,
+   "invitations": 832,
+   "invitationsText": "832"
+  },
+  {
+   "date": "2026-05-01",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 50,
+   "invitations": 12,
+   "invitationsText": "12"
+  },
+  {
+   "date": "2026-04-27",
+   "focus": "Tourism and Hospitality Stream",
+   "stream": "ths",
+   "minScore": 71,
+   "invitations": 98,
+   "invitationsText": "98"
+  },
+  {
+   "date": "2026-04-23",
+   "focus": "Alberta Express Entry Stream – Law Enforcement Pathway",
+   "stream": "aee",
+   "minScore": 58,
+   "invitations": null,
+   "invitationsText": "Less than 10"
+  },
+  {
+   "date": "2026-04-16",
+   "focus": "Dedicated Health Care Pathway – non-Express Entry",
+   "stream": "dhcp",
+   "minScore": 46,
+   "invitations": 37,
+   "invitationsText": "37"
+  },
+  {
+   "date": "2026-04-15",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Health Care)",
+   "stream": "aee",
+   "minScore": 55,
+   "invitations": 50,
+   "invitationsText": "50"
+  },
+  {
+   "date": "2026-04-14",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Construction and skilled trade)",
+   "stream": "aee",
+   "minScore": 60,
+   "invitations": 50,
+   "invitationsText": "50"
+  },
+  {
+   "date": "2026-04-13",
+   "focus": "Dedicated Health Care Pathway – Express Entry",
+   "stream": "dhcp",
+   "minScore": 59,
+   "invitations": 62,
+   "invitationsText": "62"
+  },
+  {
+   "date": "2026-04-10",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 65,
+   "invitations": 447,
+   "invitationsText": "447"
+  },
+  {
+   "date": "2026-04-09",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 50,
+   "invitations": 74,
+   "invitationsText": "74"
+  },
+  {
+   "date": "2026-04-08",
+   "focus": "Alberta Express Entry Stream – Accelerated Tech Pathway",
+   "stream": "aee",
+   "minScore": 59,
+   "invitations": 146,
+   "invitationsText": "146"
+  },
+  {
+   "date": "2026-03-27",
+   "focus": "Alberta Express Entry Stream – Law Enforcement Pathway",
+   "stream": "aee",
+   "minScore": 46,
+   "invitations": null,
+   "invitationsText": "Less than 10"
+  },
+  {
+   "date": "2026-03-26",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 50,
+   "invitations": 60,
+   "invitationsText": "60"
+  },
+  {
+   "date": "2026-03-24",
+   "focus": "Dedicated Health Care Pathway – non-Express Entry",
+   "stream": "dhcp",
+   "minScore": 54,
+   "invitations": 102,
+   "invitationsText": "102"
+  },
+  {
+   "date": "2026-03-19",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Construction)",
+   "stream": "aee",
+   "minScore": 59,
+   "invitations": 109,
+   "invitationsText": "109"
+  },
+  {
+   "date": "2026-03-17",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Manufacturing)",
+   "stream": "aee",
+   "minScore": 50,
+   "invitations": 27,
+   "invitationsText": "27"
+  },
+  {
+   "date": "2026-03-16",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Health Care)",
+   "stream": "aee",
+   "minScore": 63,
+   "invitations": 50,
+   "invitationsText": "50"
+  },
+  {
+   "date": "2026-03-13",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 51,
+   "invitations": 349,
+   "invitationsText": "349"
+  },
+  {
+   "date": "2026-03-12",
+   "focus": "Dedicated Health Care Pathway – non-Express Entry",
+   "stream": "dhcp",
+   "minScore": 47,
+   "invitations": 47,
+   "invitationsText": "47"
+  },
+  {
+   "date": "2026-03-06",
+   "focus": "Alberta Express Entry Stream – Accelerated Tech Pathway",
+   "stream": "aee",
+   "minScore": 56,
+   "invitations": 139,
+   "invitationsText": "139"
+  },
+  {
+   "date": "2026-03-05",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 61,
+   "invitations": 832,
+   "invitationsText": "832"
+  },
+  {
+   "date": "2026-02-26",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 55,
+   "invitations": 30,
+   "invitationsText": "30"
+  },
+  {
+   "date": "2026-02-24",
+   "focus": "Tourism and Hospitality Stream",
+   "stream": "ths",
+   "minScore": 73,
+   "invitations": 68,
+   "invitationsText": "68"
+  },
+  {
+   "date": "2026-02-20",
+   "focus": "Alberta Opportunity Stream – Priority Sectors",
+   "stream": "aos",
+   "minScore": 56,
+   "invitations": 831,
+   "invitationsText": "831"
+  },
+  {
+   "date": "2026-02-19",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Construction)",
+   "stream": "aee",
+   "minScore": 61,
+   "invitations": 50,
+   "invitationsText": "50"
+  },
+  {
+   "date": "2026-02-17",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Agriculture)",
+   "stream": "aee",
+   "minScore": 49,
+   "invitations": null,
+   "invitationsText": "Less than 10"
+  },
+  {
+   "date": "2026-02-12",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Manufacturing)",
+   "stream": "aee",
+   "minScore": 50,
+   "invitations": 32,
+   "invitationsText": "32"
+  },
+  {
+   "date": "2026-02-11",
+   "focus": "Alberta Express Entry Stream – Accelerated Tech Pathway",
+   "stream": "aee",
+   "minScore": 59,
+   "invitations": 147,
+   "invitationsText": "147"
+  },
+  {
+   "date": "2026-02-10",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 54,
+   "invitations": 212,
+   "invitationsText": "212"
+  },
+  {
+   "date": "2026-02-06",
+   "focus": "Alberta Express Entry Stream – Law Enforcement Pathway",
+   "stream": "aee",
+   "minScore": 50,
+   "invitations": null,
+   "invitationsText": "Less than 10"
+  },
+  {
+   "date": "2026-02-02",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 57,
+   "invitations": 915,
+   "invitationsText": "915"
+  },
+  {
+   "date": "2026-01-29",
+   "focus": "Alberta Express Entry Stream – Accelerated Tech Pathway",
+   "stream": "aee",
+   "minScore": 63,
+   "invitations": 148,
+   "invitationsText": "148"
+  },
+  {
+   "date": "2026-01-27",
+   "focus": "Dedicated Health Care Pathway – non-Express Entry",
+   "stream": "dhcp",
+   "minScore": 45,
+   "invitations": 43,
+   "invitationsText": "43"
+  },
+  {
+   "date": "2026-01-26",
+   "focus": "Dedicated Health Care Pathway – Express Entry",
+   "stream": "dhcp",
+   "minScore": 61,
+   "invitations": 63,
+   "invitationsText": "63"
+  }
+ ],
+ "pool": {
+  "Alberta Opportunity Stream": 21667,
+  "Dedicated Health Care Pathways (Express Entry and Non-Express Entry)": 1179,
+  "Rural Renewal Stream": 1570,
+  "Tourism and Hospitality Stream": 3138,
+  "Accelerated Tech Pathway": 1964,
+  "Law Enforcement Pathway": 48,
+  "Priority sector draws and other initiatives": 4912,
+  "Total": 34478
+ }
+}

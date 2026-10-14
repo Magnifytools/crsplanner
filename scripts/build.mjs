@@ -21,6 +21,8 @@ const mpnp = read('data/rules/mpnp.json');
 const mpnpDraws = read('data/provinces/mpnp-draws.json');
 const sinp = read('data/rules/sinp.json');
 const sinpDraws = read('data/provinces/sinp-draws.json');
+const aaip = read('data/rules/aaip.json');
+const aaipDraws = read('data/provinces/aaip-draws.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -1306,6 +1308,83 @@ ${ee.length >= 2 ? `<h2>Saskatchewan Express Entry: lowest score invited</h2>${c
   return page({ path: '/sinp-draws/', title: 'SINP Draws: Saskatchewan EOI Selection Results and Scores', description: `All ${s.length} Saskatchewan International Skilled Worker EOI selections with lowest scores and invitations. Latest published: ${longDate(last.date)}, score ${last.minScore}.`, body, crumbs: [['Home', '/'], ['SINP draws', '/sinp-draws/']] });
 }
 
+// ---------- Alberta (AAIP) ----------
+const AAIP_STREAMS = { aee: 'Alberta Express Entry Stream', aos: 'Alberta Opportunity Stream', dhcp: 'Dedicated Health Care Pathways', rrs: 'Rural Renewal Stream', ths: 'Tourism and Hospitality Stream', other: 'Other' };
+function aaipCalcPage() {
+  const r = aaip;
+  const groups = [...new Set(r.factors.map((f) => f.group))];
+  const fields = groups.map((g) => `<fieldset><legend>${esc(g)}</legend>${r.factors.filter((f) => f.group === g).map((f) => `<div class="field"><label for="${f.id}">${esc(f.label)}</label><select id="${f.id}" name="${f.id}">${f.options.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('')}</select></div>`).join('')}${g.endsWith('language') ? `<p class="hint">${esc(r.languageRule)}</p><p class="callout small" id="lang-warn" hidden>${esc(r.minimumLanguage)}.</p>` : ''}</fieldset>`).join('');
+  const tables = r.factors.map((f) => `<h3>${esc(f.label)}</h3><div class="table-scroll"><table><tbody>${f.options.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('')}</tbody></table></div>`).join('');
+  const d = aaipDraws.draws;
+  const recent = AAIP_STREAMS && Object.keys(AAIP_STREAMS).filter((s) => d.some((x) => x.stream === s)).map((s) => { const x = d.find((y) => y.stream === s); return `${esc(AAIP_STREAMS[s])}: ${x.minScore} on ${x.date}`; });
+  const body = `
+<section class="intro">
+  <h1>AAIP Points Calculator: Alberta Worker EOI Score (2026)</h1>
+  <p class="lede">Score your Worker Expression of Interest for the Alberta Advantage Immigration Program out of ${r.max}, with every factor from Alberta's points grid dated ${longDate(r.gridDate)}.</p>
+  <p class="meta"><span>Grid checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">AAIP Worker EOI points grid (PDF)</a></span></p>
+</section>
+<div class="tool">
+<form id="aaip-form" novalidate>${fields}</form>
+<aside class="results" aria-label="Your AAIP score">
+  <div class="total"><span><span class="score" id="total" aria-live="polite">0</span> <span class="of">/ ${r.max}</span></span><span class="small">Worker EOI score</span></div>
+  <div class="table-scroll"><table><tbody id="breakdown"></tbody></table></div>
+  <p class="small">Latest minimum scores by stream: ${recent.join('; ')}. Alberta also selects by occupation and sector, so a score above these is not enough on its own; see the <a href="/aaip-draws/">AAIP draws</a>.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>How the score works</h2>
+<p>Alberta gives up to 69 points for human capital (education, language, work experience, age and family in Alberta) and up to 31 for economic factors (an Alberta job offer, its location and whether it is in a regulated occupation in which you are certified). ${esc(r.languageRule)} ${esc(r.minimumLanguage)}.</p>
+<p>Alberta also collects your work permit and Express Entry status, the NOC code of your job offer and your employer's industry code. These give no points but are used to select candidates for draws. An Alberta nomination through the Alberta Express Entry Stream adds 600 CRS points; see the <a href="/">CRS calculator</a>.</p>
+<h2>Points grid</h2>
+${tables}
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Worker Expression of Interest points grid</a>, Government of Alberta, ${longDate(r.gridDate)}</li><li><a href="${r.page}" rel="noopener">AAIP processing information</a>, Government of Alberta</li></ul>
+</article>`;
+  const scripts = `${jsonScript('aaip-rules', { factors: r.factors, bilingual: r.bilingual })}<script type="module" src="/js/aaip.js"></script>`;
+  return page({ path: '/aaip-points-calculator/', title: 'AAIP Points Calculator 2026: Alberta Worker EOI Score', description: `Calculate your Alberta AAIP Worker EOI score out of ${r.max} with the official points grid of ${longDate(r.gridDate)}, and compare it with recent draws.`, body, scripts, crumbs: [['Home', '/'], ['AAIP points calculator', '/aaip-points-calculator/']] });
+}
+
+function aaipDrawsPage() {
+  const a = aaipDraws;
+  const d = a.draws;
+  const last = d[0];
+  const streams = Object.keys(AAIP_STREAMS).filter((s) => d.some((x) => x.stream === s));
+  const stat = streams.map((s) => { const r = d.filter((x) => x.stream === s); const sc = r.map((x) => x.minScore).filter((x) => x !== null); return `<tr><td>${esc(AAIP_STREAMS[s])}</td><td class="n">${r.length}</td><td class="n">${fmt(r.reduce((t, x) => t + (x.invitations || 0), 0))}</td><td class="n">${Math.min(...sc)}–${Math.max(...sc)}</td><td>${r[0].date}, ${r[0].minScore}</td></tr>`; }).join('');
+  const rows = d.map((x) => `<tr data-s="${x.stream}"><td>${x.date}</td><td>${esc(x.focus)}</td><td class="n">${x.minScore ?? ''}</td><td class="n">${esc(x.invitationsText)}</td></tr>`).join('');
+  const chips = `<button type="button" data-s="all" aria-pressed="true">All (${d.length})</button>` + streams.map((s) => `<button type="button" data-s="${s}" aria-pressed="false">${esc(AAIP_STREAMS[s])}</button>`).join('');
+  const aos = d.filter((x) => x.stream === 'aos' && x.minScore).map((x) => ({ date: x.date, crs: x.minScore }));
+  const poolRows = Object.entries(a.pool).map(([k, v]) => `<tr${k === 'Total' ? ' class="section"' : ''}><td>${esc(k)}</td><td class="n">${fmt(v)}</td></tr>`).join('');
+  const y = last.date.slice(0, 4);
+  const body = `
+<section class="intro">
+  <h1>AAIP Draws: Alberta Advantage Immigration Program Draws (${y})</h1>
+  <p class="lede">Every Alberta Advantage Immigration Program draw of ${y} with its stream, minimum score and invitations: ${d.length} draws so far, plus the size of the Worker Expression of Interest pool.</p>
+  <p class="meta"><span>Alberta's page updated ${longDate(a.pageUpdated)}</span><span>Updated automatically</span><span>Source: <a href="${a.source}" rel="noopener">AAIP processing information</a></span></p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">Latest draw</div><div class="v" style="font-size:1.2rem">${longDate(last.date)}</div><div class="small">${esc(last.focus)}</div></div>
+  <div class="card"><div class="k">Minimum score</div><div class="v">${last.minScore}</div><div class="small">${esc(last.invitationsText)} invitations</div></div>
+  <div class="card"><div class="k">Worker EOIs in the pool</div><div class="v">${fmt(a.pool.Total)}</div></div>
+</div>
+<h2>By stream, ${y}</h2>
+<div class="table-scroll"><table><thead><tr><th>Stream</th><th class="n">Draws</th><th class="n">Invitations</th><th class="n">Minimum scores</th><th>Latest</th></tr></thead><tbody>${stat}</tbody></table></div>
+${aos.length >= 2 ? `<h2>Alberta Opportunity Stream: minimum score</h2>${catChart(aos)}` : ''}
+<h2>All ${y} draws</h2>
+<div class="chips" id="chips" role="group" aria-label="Filter by stream">${chips}</div>
+<div class="table-scroll"><table id="aaip-table"><thead><tr><th>Date</th><th>Stream and focus</th><th class="n">Minimum score</th><th class="n">Invitations</th></tr></thead><tbody>${rows}</tbody></table></div>
+<h2>Expressions of interest in the pool</h2>
+<div class="table-scroll"><table><tbody>${poolRows}</tbody></table></div>
+<article class="prose">
+<h2>How to read it</h2>
+<p>Scores are Alberta's Worker EOI points out of 100; estimate yours with the <a href="/aaip-points-calculator/">AAIP points calculator</a>. Alberta says the score is not the only factor: it selects by stream, occupation and sector, does not publish the parameters of recent draws, and does not hold draws on a schedule. Where Alberta reports fewer than 10 invitations, the exact number is not published.</p>
+<p>Nominees through the Alberta Express Entry Stream get 600 CRS points; federal rounds for nominees are on the <a href="/express-entry-draws/pnp/">PNP draws</a> page.</p>
+<h2>Sources</h2>
+<ul><li><a href="${a.source}" rel="noopener">Alberta Advantage Immigration Program: processing information</a>, Government of Alberta, updated ${longDate(a.pageUpdated)}</li></ul>
+</article>
+<script>{const b=[...document.querySelectorAll('#chips button')],r=[...document.querySelectorAll('#aaip-table tbody tr')];b.forEach(x=>x.addEventListener('click',()=>{b.forEach(y=>y.setAttribute('aria-pressed',y===x));const s=x.dataset.s;r.forEach(t=>{t.hidden=s!=='all'&&t.dataset.s!==s;});}));}</script>`;
+  return page({ path: '/aaip-draws/', title: `AAIP Draws ${y}: Alberta Draw Results and Minimum Scores`, description: `Latest AAIP draw: ${longDate(last.date)}, minimum score ${last.minScore}. All ${d.length} Alberta draws of ${y} by stream, with invitations and the EOI pool size.`, body, crumbs: [['Home', '/'], ['AAIP draws', '/aaip-draws/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -1348,7 +1427,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }
