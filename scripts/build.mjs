@@ -12,6 +12,8 @@ const lang = read('data/rules/language-tests.json');
 const draws = read('data/draws.json');
 const changelog = read('data/changelog.json');
 const cats = read('data/rules/categories.json');
+const funds = read('data/rules/proof-of-funds.json');
+const citz = read('data/rules/citizenship.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -872,6 +874,96 @@ function agePage() {
   return page({ path: '/crs-age-points/', title: 'CRS Points by Age: Express Entry Age Points Table (2026)', description: 'Express Entry CRS age points for every age from 17 to 45, single or with a partner, and how many points each birthday costs after 29.', body, crumbs: [['Home', '/'], ['CRS points by age', '/crs-age-points/']] });
 }
 
+// ---------- Physical presence for citizenship ----------
+function presencePage() {
+  const c = citz;
+  const body = `
+<section class="intro">
+  <h1>Physical Presence Calculator for Canadian Citizenship</h1>
+  <p class="lede">Count your days in Canada for a citizenship application: ${fmt(c.requiredDays)} days in the ${c.periodYears} years before you apply, with half-day credit for time before you became a permanent resident. Add your trips and see whether you meet the minimum, and if not, the first date you would.</p>
+  <p class="meta"><span>Rules checked ${longDate(c.checked)}</span><span>Source: <a href="${c.source}" rel="noopener">IRCC citizenship eligibility</a>, modified ${longDate(c.sourceModified)}</span></p>
+</section>
+<div class="tool">
+<form id="pp-form" novalidate>
+  <fieldset><legend>Your dates</legend>
+    <div class="row">
+      <div class="field"><label for="apply">Date you would sign the application</label><input type="date" id="apply" name="apply"></div>
+      <div class="field"><label for="pr">Date you became a permanent resident</label><input type="date" id="pr" name="pr"></div>
+    </div>
+    <div class="field"><label for="temp">Date you first arrived with temporary status (optional)</label><input type="date" id="temp" name="temp">
+      <span class="hint">As a visitor, student, worker or protected person, before becoming a permanent resident. Leave it empty if you became a permanent resident on arrival.</span></div>
+  </fieldset>
+  <fieldset><legend>Trips outside Canada</legend>
+    <div id="trips"></div>
+    <button type="button" id="add-trip">Add a trip</button>
+    <p class="hint">The day you leave and the day you come back both count as days in Canada, as in IRCC's own calculator.</p>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Your physical presence" id="pp-out" aria-live="polite"></aside>
+</div>
+<article class="prose">
+<h2>The rules</h2>
+<ul>
+<li>You need at least ${fmt(c.requiredDays)} days (3 years) of physical presence in the ${c.periodYears} years immediately before the date you sign your application. For an application signed on April 1, 2018, IRCC's own example uses April 1, 2013 to March 31, 2018.</li>
+<li>Each day in Canada as a permanent resident counts as one day.</li>
+<li>Each day in Canada as a temporary resident or protected person before you became a permanent resident counts as half a day, up to ${c.temporaryMaxCredit} days of credit, which is ${c.temporaryMaxCredit * 2} calendar days. That is why at least ${c.requiredDays - c.temporaryMaxCredit} days must be as a permanent resident.</li>
+<li>Time as a protected person counts only from the approval of your claim or PRRA until the day before you became a permanent resident. Time in prison, on parole or on probation, and time waiting for a decision on a refugee claim, does not count. The calculator does not subtract these periods; leave them out of your dates.</li>
+<li>Time outside Canada as a Crown servant, or as the family member of one, counts as time in Canada.</li>
+</ul>
+<p>Physical presence is one of the requirements. Adults also need to have filed income taxes when required, prove English or French skills and pass the citizenship test (ages 18 to 54), and not be under a prohibition. Your answers are saved only in your browser.</p>
+<p class="callout">This is an estimate. Before you apply, count your days with IRCC's official physical presence calculator; IRCC encourages applying with more than the minimum to allow for any miscalculation.</p>
+<h2>Sources</h2>
+<ul><li><a href="${c.source}" rel="noopener">Canadian citizenship: who can apply</a>, IRCC, modified ${longDate(c.sourceModified)}</li><li><a href="${c.calculatorFaq}" rel="noopener">Physical presence calculator: frequently asked questions</a>, IRCC</li></ul>
+</article>`;
+  const scripts = `${jsonScript('presence-rules', c)}<script type="module" src="/js/presence.js"></script>`;
+  return page({ path: '/physical-presence-calculator/', title: 'Physical Presence Calculator for Canadian Citizenship (2026)', description: 'Count your days in Canada for citizenship: 1,095 days in 5 years, half-day credit before permanent residence, trips subtracted, and the earliest date you can apply.', body, scripts, crumbs: [['Home', '/'], ['Physical presence calculator', '/physical-presence-calculator/']] });
+}
+
+// ---------- Proof of funds ----------
+function fundsPage() {
+  const f = funds;
+  const rows = Object.entries(f.amounts).map(([n, v]) => `<tr><td>${n}</td><td class="n">$${fmt(v)}</td></tr>`).join('') + `<tr><td>Each additional family member</td><td class="n">+$${fmt(f.eachAdditional)}</td></tr>`;
+  const body = `
+<section class="intro">
+  <h1>Proof of Funds for Express Entry: How Much Money You Need</h1>
+  <p class="lede">The minimum settlement funds IRCC asks for, by family size, who has to show them and what counts as proof. Enter your family size to see your amount.</p>
+  <p class="meta"><span>Amounts updated by IRCC on ${longDate(f.tableUpdated)}</span><span>Checked ${longDate(f.checked)}</span><span>Source: <a href="${f.source}" rel="noopener">IRCC proof of funds</a></span></p>
+</section>
+<div class="tool">
+<form id="pof-form" novalidate>
+  <fieldset><legend>Your family</legend>
+    <div class="field"><label for="size">Number of family members</label><input type="number" id="size" name="size" min="1" max="20" step="1" value="1" inputmode="numeric">
+      <span class="hint">Count yourself, your spouse or common-law partner, your dependent children and your partner's dependent children, even if they are Canadian citizens or permanent residents or are not coming with you.</span></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Funds you need">
+  <div class="total"><span><span class="score" id="pof-out">$${fmt(f.amounts[1])}</span> <span class="of">CAD</span></span><span class="small">Minimum funds</span></div>
+  <p class="small">If you have more, IRCC asks you to list the full amount in your profile or application.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>Amounts by family size</h2>
+<p>IRCC sets these at ${esc(f.basis)}. The table in force was updated on ${longDate(f.tableUpdated)}.</p>
+<div class="table-scroll"><table><thead><tr><th>Family members</th><th class="n">Funds you need (CAD)</th></tr></thead><tbody>${rows}</tbody></table></div>
+<h2>Who needs proof of funds</h2>
+<p>Candidates in the Federal Skilled Worker Program and the Federal Skilled Trades Program. You do not need it if you are invited under the Canadian Experience Class, or if you are authorized to work in Canada and have a valid job offer, even under the Federal Skilled Worker or Federal Skilled Trades programs. The profile currently asks every applicant for a proof of funds document; if you are exempt, you upload a letter explaining why.</p>
+<p>Because the system can find you eligible for more than one program and you do not know in advance which one you will be invited under, IRCC asks you to keep the funds in your profile up to date.</p>
+<h2>What counts as proof</h2>
+<ul>
+<li>Official letters from each bank or financial institution where you have an account, on its letterhead, with its contact details, your name and your outstanding debts such as credit cards and loans.</li>
+<li>For each account: the account number, the date it was opened, the current balance and the average balance for the past 6 months.</li>
+<li>The money has to be available to you when you apply and when the permanent resident visa is issued, and you must be able to access it legally in Canada.</li>
+<li>Equity in property does not count, and the money cannot be borrowed from another person.</li>
+<li>If your spouse comes with you, money in a joint account counts. Money in an account only in your spouse's name may count if you prove you have access to it.</li>
+</ul>
+<p>Check whether you are eligible for the Canadian Experience Class or another program and where your score stands with the <a href="/">CRS calculator</a>.</p>
+<h2>Sources</h2>
+<ul><li><a href="${f.source}" rel="noopener">Express Entry: Proof of funds</a>, IRCC, page modified ${longDate(f.sourceModified)}, amounts updated ${longDate(f.tableUpdated)}</li></ul>
+</article>
+<script>{const A=${JSON.stringify(f.amounts)},X=${f.eachAdditional},i=document.getElementById('size'),o=document.getElementById('pof-out');const u=()=>{const n=Math.max(1,Math.floor(Number(i.value)||1));const v=n<=7?A[n]:A[7]+(n-7)*X;o.textContent='$'+v.toLocaleString('en-CA');};i.addEventListener('input',u);u();}</script>`;
+  return page({ path: '/proof-of-funds-express-entry/', title: 'Proof of Funds for Express Entry: Amount by Family Size', description: `Express Entry proof of funds: $${fmt(f.amounts[1])} for one person, $${fmt(f.amounts[4])} for a family of four. Full table, who is exempt and what counts as proof.`, body, crumbs: [['Home', '/'], ['Proof of funds', '/proof-of-funds-express-entry/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -914,7 +1006,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }

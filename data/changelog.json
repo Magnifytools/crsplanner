@@ -1,6 +1,10 @@
 [
  {
   "date": "2026-10-14",
+  "what": "Rules added for upcoming tools: proof of funds amounts from IRCC's proof of funds page (amounts updated 2025-07-07) and citizenship physical presence rules from IRCC's citizenship eligibility page (modified 2026-04-21) and IRCC's physical presence calculator FAQ. The physical presence calculator reproduces IRCC's own worked example (1,129 days). A daily check now flags any change in the IRCC pages behind our rules."
+ },
+ {
+  "date": "2026-10-14",
   "what": "New page: Express Entry categories, with the requirement and the occupation list (NOC 2021 and TEER) of each of the 10 current categories, from IRCC's category-based selection page (modified 2026-06-22). Category draw pages now show their 2026 requirement. Added the researchers category to the draws data."
  },
  {

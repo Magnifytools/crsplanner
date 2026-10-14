@@ -1,0 +1,19 @@
+{
+ "id": "citizenship-physical-presence",
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/who.html",
+ "sourceModified": "2026-04-21",
+ "checked": "2026-10-14",
+ "calculatorFaq": "https://eservices.cic.gc.ca/rescalc/redir.do?redir=faq",
+ "requiredDays": 1095,
+ "periodYears": 5,
+ "temporaryDayValue": 0.5,
+ "temporaryMaxCredit": 365,
+ "notes": [
+  "Eligibility period: the 5 years immediately before the date you sign (apply). IRCC's FAQ example: applying on 1 April 2018 uses 1 April 2013 to 31 March 2018.",
+  "Each day in Canada as a permanent resident counts as 1 day; each day as a temporary resident or protected person before becoming a permanent resident counts as 0.5, up to 365 days of credit (730 calendar days).",
+  "Protected person time counts only from approval of the claim or PRRA until 1 day before becoming a permanent resident.",
+  "Does not include time in prison, on parole, on probation, or waiting for a decision on a refugee claim.",
+  "Day of departure and day of return count as days in Canada (IRCC physical presence calculator FAQ, A3).",
+  "Time outside Canada as a Crown servant or family member of one counts as days in Canada."
+ ]
+}
