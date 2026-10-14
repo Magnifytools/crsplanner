@@ -70,7 +70,9 @@ export function normalize(raw, fetchedAt) {
     category: categoryOf(r.drawName),
     size: num(r.drawSize),
     crs: num(r.drawCRS),
-    tieBreak: r.drawDateTime || r.drawCutOff || null,
+    // drawCutOff is the tie-breaking rule (profiles submitted before this moment); drawDateTime is when the round ran.
+    tieBreak: r.drawCutOff ? String(r.drawCutOff).replace(/\s+/g, ' ').trim() : null,
+    time: r.drawDateTime ? String(r.drawDateTime).replace(/\s+/g, ' ').trim() : null,
   })).sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 
   const latest = raw.rounds[0];
@@ -128,8 +130,10 @@ async function main() {
   const out = normalize(raw, new Date().toISOString());
   const target = join(root, 'data/draws.json');
   const before = existsSync(target) ? JSON.parse(readFileSync(target, 'utf8')) : null;
-  writeFileSync(target, JSON.stringify(out, null, 1));
-  const changed = !before || before.latestRound?.n !== out.latestRound.n || before.distribution?.asOf !== out.distribution.asOf;
+  // Only rewrite the file when the data changed, so the scheduled job does not commit a new fetch time every run.
+  const strip = (o) => (o ? JSON.stringify({ ...o, fetchedAt: null }) : '');
+  const changed = strip(before) !== strip(out);
+  if (changed) writeFileSync(target, JSON.stringify(out, null, 1));
   console.log(`${out.rounds.length} rounds, latest #${out.latestRound.n} on ${out.latestRound.date}; pool ${out.distribution.total} as of ${out.distribution.asOf}; changed=${changed}`);
 }
 
