@@ -699,6 +699,178 @@ ${id === 'tcf' ? `<p class="callout">${TCF_NOTE}</p>` : ''}
   return page({ path, title: meta.title, description: `${t.name} to ${name} chart for Express Entry: the score for each ${name} level by ability, minimum scores for FSW, CEC and FST, and CRS points. With a converter.`, body, scripts, crumbs: [['Home', '/'], ['CLB converter', '/clb-converter/'], [`${meta.short} score chart`, path]] });
 }
 
+// ---------- CELPIP <-> IELTS converter ----------
+const EN_TESTS = Object.entries(lang.tests).filter(([, t]) => t.language === 'en');
+function convertPage() {
+  const tables = SK.map((s) => {
+    const rows = [...lang.levels].map((lvl, i) => ({ lvl, i })).reverse().map(({ lvl, i }) => `<tr><td>CLB ${lvl}${lvl === 10 ? '+' : ''}</td>${EN_TESTS.map(([, t]) => `<td class="n">${scoreRange(t, s, i)}</td>`).join('')}</tr>`).join('');
+    return `<h3>${SKL[s]}</h3><div class="table-scroll"><table><thead><tr><th>Level</th>${EN_TESTS.map(([, t]) => `<th class="n">${esc(t.name)}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>`;
+  }).join('');
+  const opts = (sel) => EN_TESTS.map(([id, t]) => `<option value="${id}"${id === sel ? ' selected' : ''}>${esc(t.name)}</option>`).join('');
+  const ie = lang.tests.ielts, ce = lang.tests.celpip;
+  const i9 = lang.levels.indexOf(9);
+  const body = `
+<section class="intro">
+  <h1>CELPIP to IELTS Converter (and IELTS to CELPIP)</h1>
+  <p class="lede">Turn a CELPIP-General score into the IELTS General Training score that gives the same CLB level for Canadian immigration, or the other way round. PTE Core is included too.</p>
+  <p class="meta"><span>Equivalences checked ${longDate(SITE.checked)}</span><span>Source: <a href="${lang.source}" rel="noopener">IRCC language test results</a>, modified ${longDate(lang.sourceModified)}</span></p>
+</section>
+<div class="tool">
+<form id="conv-form" novalidate>
+  <fieldset><legend>Convert</legend>
+    <div class="row">
+      <div class="field"><label for="from">From</label><select id="from" name="from">${opts('celpip')}</select></div>
+      <div class="field"><label for="to">To</label><select id="to" name="to">${opts('ielts')}</select></div>
+    </div>
+    <div class="scores">${SK.map((s) => `<div class="field"><label for="${s}">${SKL[s]}</label><input type="number" inputmode="decimal" id="${s}" name="${s}"></div>`).join('')}</div>
+    <p class="hint">The example is CELPIP 9 in every ability. Replace it with your scores.</p>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Equivalent scores">
+  <div class="cards">${SK.map((s) => `<div class="card"><div class="k">${SKL[s]}</div><div class="v" id="eq-${s}">–</div><div class="small" id="clb-${s}"></div></div>`).join('')}</div>
+  <p class="small">Each result is the score range in the other test that gives the same CLB level. See what it is worth in points with the <a href="/">CRS calculator</a>.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>How the conversion works</h2>
+<p>There is no official table that converts one test into another. What IRCC publishes is the score each test needs for each Canadian Language Benchmark (CLB) level. This converter reads your level from one test and gives the score range that reaches the same level in the other. For immigration that is the comparison that counts, because the CRS and the program minimums only look at your CLB level.</p>
+<p>The steps are not the same in both tests, so the match is a range and not one number. CELPIP-General scores from 4 to 10 are the same number as the CLB level; IELTS needs different bands in each ability. For example, CLB ${lang.levels[i9]} is CELPIP ${ce.listening[i9]} in listening, which in IELTS is ${scoreRange(ie, 'listening', i9)} in listening but ${scoreRange(ie, 'speaking', i9)} in speaking.</p>
+<h2>Equivalence tables by ability</h2>
+${tables}
+<p>Full charts for each test: ${Object.entries(CHART_PAGES).filter(([k]) => lang.tests[k].language === 'en' && isLive(`/${CHART_PAGES[k].slug}/`)).map(([, m]) => `<a href="/${m.slug}/">${m.short}</a>`).join(', ') || '<a href="/clb-converter/">CLB converter</a>'}. For French tests, see the <a href="/clb-converter/">CLB converter</a>.</p>
+<h2>Sources</h2>
+<ul><li><a href="${lang.source}" rel="noopener">Language test results for Express Entry</a>, IRCC, modified ${longDate(lang.sourceModified)}</li></ul>
+</article>`;
+  const scripts = `${jsonScript('lang-rules', lang)}<script type="module" src="/js/convert.js"></script>`;
+  return page({ path: '/celpip-to-ielts/', title: 'CELPIP to IELTS Converter (and IELTS to CELPIP) for Canada', description: 'Convert CELPIP-General to IELTS General Training scores and back through the CLB levels IRCC uses for Express Entry, ability by ability. PTE Core included.', body, scripts, crumbs: [['Home', '/'], ['CLB converter', '/clb-converter/'], ['CELPIP to IELTS', '/celpip-to-ielts/']] });
+}
+
+// ---------- Next draw: how often each type of round happens ----------
+const WD = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+function nextDrawPage() {
+  const yearAgoC = `${Number(latestDate.slice(0, 4)) - 1}${latestDate.slice(4)}`;
+  const recentAll = draws.rounds.filter((r) => r.date > yearAgoC);
+  const per = draws.categories.map((c) => {
+    const rs = recentAll.filter((r) => r.category === c.id);
+    if (!rs.length) return null;
+    const gaps = rs.slice(0, -1).map((r, i) => dayDiff(r.date, rs[i + 1].date));
+    return { c, rs, last: rs[0], med: gaps.length ? median(gaps) : null, min: gaps.length ? Math.min(...gaps) : null, max: gaps.length ? Math.max(...gaps) : null };
+  }).filter(Boolean).sort((a, b) => b.rs.length - a.rs.length);
+  const link = (id, label) => (CAT_PAGES[id] && catPagesList().some((x) => x.id === id) ? `<a href="/express-entry-draws/${CAT_PAGES[id].slug}/">${esc(label)}</a>` : esc(label));
+  const rows = per.map((p) => `<tr><td>${link(p.c.id, p.c.label)}</td><td class="n">${p.rs.length}</td><td class="n">${p.med ?? '–'}</td><td class="n">${p.min === null ? '–' : p.min === p.max ? p.min : `${p.min}–${p.max}`}</td><td>${p.last.date}</td><td class="n" data-since="${p.last.date}">–</td><td class="n">${fmt(p.last.crs)}</td></tr>`).join('');
+  const byDay = [1, 2, 3, 4, 5].map((d) => [WD[d], recentAll.filter((r) => new Date(`${r.date}T12:00:00Z`).getUTCDay() === d).length]);
+  const other = recentAll.length - byDay.reduce((s, [, n]) => s + n, 0);
+  const dates = [...new Set(recentAll.map((r) => r.date))].sort();
+  const weeks = new Set(dates.map((d) => { const t = new Date(`${d}T12:00:00Z`); const day = (t.getUTCDay() + 6) % 7; return new Date(t - day * 864e5).toISOString().slice(0, 10); }));
+  const body = `
+<section class="intro">
+  <h1>Next Express Entry Draw: When Rounds Happen, by Category</h1>
+  <p class="lede">IRCC does not publish a calendar of rounds of invitations. What it does publish is every past round, so here is how often each program and category has had a round in the last 12 months, how long ago the last one was and its cut-off.</p>
+  <p class="meta"><span>Updated daily from IRCC data</span><span>Latest round: #${esc(draws.latestRound.n)} on ${longDate(latestDate)}</span><span>Source: <a href="${draws.page}" rel="noopener">IRCC rounds of invitations</a></span></p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">Rounds in the last 12 months</div><div class="v">${recentAll.length}</div></div>
+  <div class="card"><div class="k">Weeks with at least one round</div><div class="v">${weeks.size}</div><div class="small">out of the last 52</div></div>
+  <div class="card"><div class="k">Latest round</div><div class="v">#${esc(draws.latestRound.n)}</div><div class="small">${longDate(latestDate)}, ${esc(draws.latestRound.name)}</div></div>
+</div>
+<h2>How often each type of round happens</h2>
+<p>Days between rounds are counted from one round of that type to the next. The "days since" column counts to today in your browser.</p>
+<div class="table-scroll"><table><thead><tr><th>Program or category</th><th class="n">Rounds, 12 months</th><th class="n">Median days between</th><th class="n">Shortest–longest gap</th><th>Last round</th><th class="n">Days since</th><th class="n">Last cut-off</th></tr></thead><tbody>${rows}</tbody></table></div>
+<h2>Days of the week</h2>
+<div class="table-scroll"><table><thead><tr><th>Day</th><th class="n">Rounds, last 12 months</th></tr></thead><tbody>${byDay.map(([d, n]) => `<tr><td>${d}</td><td class="n">${n}</td></tr>`).join('')}${other ? `<tr><td>Weekend</td><td class="n">${other}</td></tr>` : ''}</tbody></table></div>
+<article class="prose">
+<h2>What this can and cannot tell you</h2>
+<p>These figures describe what has happened, not what IRCC will do. IRCC decides each round on its own, can change the order of programs and categories at any time, and does not announce rounds in advance. A median gap is a reference: a type of round can come sooner or much later. We do not publish predicted dates or predicted cut-offs.</p>
+<p>When a new round appears on IRCC's page, our <a href="/express-entry-draws/">draws page</a> picks it up within a few hours. To see where your own score stands against each type of round, use the <a href="/">CRS calculator</a>; for the requirements of each category, see <a href="/express-entry-categories/">Express Entry categories</a>.</p>
+<h2>Sources</h2>
+<ul><li><a href="${draws.page}" rel="noopener">Express Entry rounds of invitations</a>, IRCC</li></ul>
+</article>
+<script>{const n=new Date(),t=Date.UTC(n.getFullYear(),n.getMonth(),n.getDate());for(const el of document.querySelectorAll('[data-since]')){const d=Math.round((t-Date.parse(el.dataset.since))/864e5);el.textContent=d>=0?d:'–';}}</script>`;
+  return page({ path: '/next-express-entry-draw/', title: `Next Express Entry Draw: Frequency by Category (${latestDate.slice(0, 4)})`, description: 'When the next Express Entry draw may come: how often each program and category had a round in the last 12 months, days since the last one and its cut-off.', body, crumbs: [['Home', '/'], ['Express Entry draws', '/express-entry-draws/'], ['Next draw', '/next-express-entry-draw/']] });
+}
+
+// ---------- How to increase your CRS score ----------
+function increasePage() {
+  const fl = crs.core.firstLanguage.perAbilityByClb;
+  const p = (L, col) => rowFor(fl, L).points[col];
+  const langRows = [[7, 8], [8, 9], [9, 10]].map(([a, b]) => `<tr><td>CLB ${a} to CLB ${b} in all four</td><td class="n">+${(p(b, 1) - p(a, 1)) * 4}</td><td class="n">+${(p(b, 0) - p(a, 0)) * 4}</td></tr>`).join('');
+  const cw = crs.core.canadianWork.byYears;
+  const cwRows = [1, 2, 3, 4, 5].map((y) => `<tr><td>${y - 1 === 0 ? 'None' : `${y - 1} year${y - 1 > 1 ? 's' : ''}`} to ${y} year${y > 1 ? 's' : ''}${y === 5 ? ' or more' : ''}</td><td class="n">+${cw[y][1] - cw[y - 1][1]}</td><td class="n">+${cw[y][0] - cw[y - 1][0]}</td></tr>`).join('');
+  const ed = crs.core.education.levels;
+  const fr = crs.additional.french;
+  const te = crs.transferability.education.withLanguage;
+  const body = `
+<section class="intro">
+  <h1>How to Increase Your CRS Score: Every Lever, in Points</h1>
+  <p class="lede">The ways to raise a Comprehensive Ranking System score, with the exact points each one adds under IRCC's current criteria. Run your own profile through the <a href="/">CRS calculator</a>: its "How your score could change" panel applies these to your answers.</p>
+  <p class="meta"><span>Rules checked ${longDate(SITE.checked)}</span><span>Source: <a href="${crs.source}" rel="noopener">IRCC CRS criteria</a>, modified ${longDate(crs.sourceModified)}</span></p>
+</section>
+<article class="prose">
+<h2>1. Language test results</h2>
+<p>Language is usually the fastest lever, because one better test result adds points in two places: the core language points and skill transferability.</p>
+<div class="table-scroll"><table><thead><tr><th>First official language</th><th class="n">Core points, single</th><th class="n">With a partner who counts</th></tr></thead><tbody>${langRows}</tbody></table></div>
+<p>Reaching CLB 9 in all four abilities also doubles the transferability rates: education with language goes from ${te.twoOrMoreOrHigher[0]} to ${te.twoOrMoreOrHigher[1]} points for two or more credentials, a master's or a PhD, and foreign work experience with language from ${crs.transferability.foreignWork.withLanguage.threePlus[0]} to ${crs.transferability.foreignWork.withLanguage.threePlus[1]} for three years or more. Each of those two blocks is capped at 50 and transferability at ${crs.transferability.max} in total. Check which scores you need on the <a href="/clb-9/">CLB 9</a> page.</p>
+
+<h2>2. French</h2>
+<p>NCLC ${fr.minNclc} or higher in all four French abilities adds ${fr.withEnglishClb5} additional points if you also have CLB 5 or higher in all four English abilities, or ${fr.withWeakOrNoEnglish} if you do not. French as a second official language adds up to ${crs.core.secondLanguage.max[1]} more points (${crs.core.secondLanguage.max[0]} with a partner who counts). It also makes you eligible for French-language proficiency rounds, which have had some of the lowest cut-offs; see the <a href="/express-entry-draws/french/">French draws</a> and the scores for <a href="/nclc-7/">NCLC 7</a>.</p>
+
+<h2>3. Canadian work experience</h2>
+<div class="table-scroll"><table><thead><tr><th>Skilled work in Canada</th><th class="n">Core points, single</th><th class="n">With a partner who counts</th></tr></thead><tbody>${cwRows}</tbody></table></div>
+<p>Canadian experience also combines with education and with foreign work experience in skill transferability, up to the same caps of 50 per block and 100 in total. Only skilled work counts: TEER 0, 1, 2 or 3.</p>
+
+<h2>4. Education</h2>
+<p>Each level of education has its own points. Two of the steps people miss: a second post-secondary credential, when one of them is a program of three years or more, scores ${ed.twoOrMore[1]} instead of ${ed.bachelor[1]} for a bachelor's alone (single applicant); and a credential from outside Canada only counts with an Educational Credential Assessment (ECA). A Canadian post-secondary credential adds ${crs.additional.canadianEducation.oneOrTwoYears} additional points for one or two years of study, or ${crs.additional.canadianEducation.threePlusYears} for three years or more.</p>
+
+<h2>5. Provincial nomination</h2>
+<p>A nomination from a province or territory through an Express Entry stream adds ${crs.additional.provincialNomination} points, which is why Provincial Nominee Program rounds have cut-offs above 600. See the <a href="/express-entry-draws/pnp/">PNP draws</a>.</p>
+
+<h2>6. Your partner</h2>
+<p>If your partner comes with you and is not a Canadian citizen or permanent resident, up to ${crs.spouse.max} points come from their education (up to ${crs.spouse.education.max}), language (up to ${crs.spouse.language.max}) and Canadian work experience (up to ${crs.spouse.canadianWork.max}), while your own core maximum is lower. Couples can compare the score with either of them as the principal applicant in the calculator.</p>
+
+<h2>7. Other points</h2>
+<p>A brother or sister in Canada who is 18 or older and a citizen or permanent resident adds ${crs.additional.sibling} points. A certificate of qualification in a trade from a Canadian province or territory adds up to ${crs.transferability.certificate.max} in skill transferability, with CLB 5 or higher.</p>
+
+<h2>What no longer works</h2>
+<p>Job offers stopped adding CRS points on March 25, 2025. Age points cannot be raised and fall each year from age 30; see <a href="/crs-age-points/">CRS points by age</a>.</p>
+<h2>Sources</h2>
+<ul><li><a href="${crs.source}" rel="noopener">Comprehensive Ranking System (CRS) criteria</a>, IRCC, modified ${longDate(crs.sourceModified)}</li></ul>
+</article>`;
+  return page({ path: '/how-to-increase-crs-score/', title: 'How to Increase Your CRS Score: Every Lever, in Points (2026)', description: 'Ways to raise your Express Entry CRS score with the exact points each adds: language, French, Canadian work, education, nomination, partner and more.', body, crumbs: [['Home', '/'], ['How to increase your CRS score', '/how-to-increase-crs-score/']] });
+}
+
+// ---------- CRS points by age ----------
+function agePage() {
+  const ages = Object.entries(crs.core.age.byAge);
+  const rows = ages.map(([a, [w, s]], i) => {
+    const prev = i ? ages[i - 1][1] : null;
+    const d = prev ? s - prev[1] : null;
+    return `<tr><td>${a === '17' ? '17 or younger' : a === '45' ? '45 or older' : a}</td><td class="n">${s}</td><td class="n">${w}</td><td class="n">${d === null || d === 0 ? '' : d > 0 ? `+${d}` : d}</td></tr>`;
+  }).join('');
+  const s = (a) => crs.core.age.byAge[a][1];
+  const body = `
+<section class="intro">
+  <h1>CRS Points by Age: Express Entry Age Points Year by Year</h1>
+  <p class="lede">How many Comprehensive Ranking System points each age gives, for single applicants and for applicants whose partner comes with them, and how many you lose with each birthday.</p>
+  <p class="meta"><span>Rules checked ${longDate(SITE.checked)}</span><span>Source: <a href="${crs.source}" rel="noopener">IRCC CRS criteria</a>, modified ${longDate(crs.sourceModified)}</span></p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">Maximum, single</div><div class="v">${crs.core.age.max[1]}</div><div class="small">ages 20 to 29</div></div>
+  <div class="card"><div class="k">At 35, single</div><div class="v">${s('35')}</div></div>
+  <div class="card"><div class="k">At 40, single</div><div class="v">${s('40')}</div></div>
+  <div class="card"><div class="k">From 45</div><div class="v">0</div></div>
+</div>
+<article class="prose">
+<h2>Age points table</h2>
+<div class="table-scroll"><table><thead><tr><th>Age</th><th class="n">Single</th><th class="n">With partner</th><th class="n">Change, single</th></tr></thead><tbody>${rows}</tbody></table></div>
+<h2>How to read it</h2>
+<p>The full ${crs.core.age.max[1]} points (${crs.core.age.max[0]} with a partner who counts) go to applicants aged 20 to 29. From 30 the points fall every year: ${s('29') - s('34')} points lost between 29 and 34, ${s('34') - s('39')} between 34 and 39, and ${s('39') - s('44')} between 39 and 44. The steepest yearly drops come after 40. From 45 the criteria give 0 age points.</p>
+<p>Age only counts in the core part of the score. It does not affect skill transferability or the additional points, so language, Canadian experience, French or a nomination can make up for it; see <a href="/how-to-increase-crs-score/">how to increase your CRS score</a>. Enter your age in the <a href="/">CRS calculator</a> to see your full score.</p>
+<h2>Sources</h2>
+<ul><li><a href="${crs.source}" rel="noopener">Comprehensive Ranking System (CRS) criteria</a>, IRCC, modified ${longDate(crs.sourceModified)}</li></ul>
+</article>`;
+  return page({ path: '/crs-age-points/', title: 'CRS Points by Age: Express Entry Age Points Table (2026)', description: 'Express Entry CRS age points for every age from 17 to 45, single or with a partner, and how many points each birthday costs after 29.', body, crumbs: [['Home', '/'], ['CRS points by age', '/crs-age-points/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -741,6 +913,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }
