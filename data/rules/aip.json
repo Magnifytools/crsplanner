@@ -1,0 +1,110 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration.html",
+ "sourceModified": "2026-09-01",
+ "checked": "2026-10-14",
+ "watchPages": [
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration/how-to-immigrate/eligibility.html",
+   "modified": "2026-05-28"
+  },
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration/how-to-immigrate/job-offer.html",
+   "modified": "2026-09-22"
+  },
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration/how-to-immigrate/work-experience.html",
+   "modified": "2026-05-28"
+  },
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration/language-testing.html",
+   "modified": "2026-05-28"
+  },
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration/education-assessment.html",
+   "modified": "2026-06-22"
+  },
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration/proof-funds.html",
+   "modified": "2026-05-28"
+  }
+ ],
+ "pages": {
+  "jobOffer": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration/how-to-immigrate/job-offer.html",
+  "work": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration/how-to-immigrate/work-experience.html",
+  "language": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration/language-testing.html",
+  "education": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration/education-assessment.html",
+  "funds": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration/proof-funds.html"
+ },
+ "hours": 1560,
+ "years": 5,
+ "experienceTeer": {
+  "0": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "1": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "2": [
+   2,
+   3,
+   4
+  ],
+  "3": [
+   3,
+   4
+  ],
+  "4": [
+   4
+  ]
+ },
+ "clb": {
+  "0": 5,
+  "1": 5,
+  "2": 5,
+  "3": 5,
+  "4": 4
+ },
+ "education": {
+  "0": "Canadian one-year post-secondary credential (or higher), or the foreign equivalent with an ECA",
+  "1": "Canadian one-year post-secondary credential (or higher), or the foreign equivalent with an ECA",
+  "2": "Canadian high school diploma (or higher), or the foreign equivalent with an ECA",
+  "3": "Canadian high school diploma (or higher), or the foreign equivalent with an ECA",
+  "4": "Canadian high school diploma (or higher), or the foreign equivalent with an ECA"
+ },
+ "fundsUpdated": "2025-07-29",
+ "funds": [
+  3815,
+  4750,
+  5840,
+  7090,
+  8042,
+  9070,
+  10098
+ ],
+ "fundsEach": 1028,
+ "provinces": [
+  [
+   "New Brunswick",
+   "https://www.gnb.ca/en/topic/family-home-community/immigration/atlantic-immigration-program.html"
+  ],
+  [
+   "Newfoundland and Labrador",
+   "https://www.gov.nl.ca/immigration/immigrating-to-newfoundland-and-labrador/atlantic-immigration-program/workers/"
+  ],
+  [
+   "Nova Scotia",
+   "https://liveinnovascotia.com/atlantic-immigration-program"
+  ],
+  [
+   "Prince Edward Island",
+   "https://www.princeedwardisland.ca/en/topic/atlantic-immigration-program"
+  ]
+ ]
+}

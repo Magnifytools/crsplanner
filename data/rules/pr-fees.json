@@ -1,0 +1,50 @@
+{
+ "source": "https://ircc.canada.ca/english/information/fees/fees.asp",
+ "sourceModified": "2026-09-21",
+ "checked": "2026-10-14",
+ "changes": "https://ircc.canada.ca/english/information/fees/fee-changes.asp",
+ "lastIncrease": "2026-04-30",
+ "rprf": 600,
+ "programs": {
+  "economic": {
+   "name": "Economic immigration (Express Entry, PNP, AIP, rural and francophone pilots, Quebec skilled workers)",
+   "pa": 990,
+   "spouse": 990,
+   "child": 270,
+   "rprf": true
+  },
+  "business": {
+   "name": "Business immigration (start-up visa, self-employed, Quebec business)",
+   "pa": 1895,
+   "spouse": 990,
+   "child": 270,
+   "rprf": true
+  },
+  "homecare": {
+   "name": "Home Care Worker Immigration pilots (2025)",
+   "pa": 990,
+   "spouse": 990,
+   "child": 270,
+   "rprf": true
+  },
+  "family": {
+   "name": "Spouse, partner or parent and grandparent sponsorship",
+   "pa": 660,
+   "spouse": 660,
+   "child": 180,
+   "rprf": true
+  }
+ },
+ "biometrics": {
+  "person": 85,
+  "family": 170
+ },
+ "prCard": 50,
+ "citizenshipAdult": 653,
+ "citizenshipMinor": 100,
+ "previous": {
+  "rprf": 575,
+  "economicPa": 950,
+  "child": 260
+ }
+}

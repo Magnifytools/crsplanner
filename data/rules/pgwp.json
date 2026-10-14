@@ -1,0 +1,23 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/eligibility.html",
+ "sourceModified": "2026-06-24",
+ "checked": "2026-10-14",
+ "watchPages": [
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/about.html",
+   "modified": "2026-03-09"
+  }
+ ],
+ "minMonths": 8,
+ "minHoursQuebec": 900,
+ "applyWithinDays": 180,
+ "languageSince": "2024-11-01",
+ "fieldOfStudySince": "2024-11-01",
+ "mastersRuleSince": "2024-02-15",
+ "clbDegree": 7,
+ "clbCollege": 5,
+ "fees": {
+  "workPermit": 155,
+  "openHolder": 100
+ }
+}

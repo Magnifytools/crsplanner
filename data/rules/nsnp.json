@@ -1,0 +1,51 @@
+{
+ "source": "https://liveinnovascotia.com/nova-scotia-nominee-program",
+ "checked": "2026-10-14",
+ "fee": {
+  "worker": 1000,
+  "entrepreneur": 2000,
+  "since": "2026-09-01"
+ },
+ "eoiValidityMonths": 12,
+ "eoiValiditySince": "2026-05-01",
+ "watchPages": [
+  {
+   "url": "https://liveinnovascotia.com/eoi-selection",
+   "modified": "2026-08-17"
+  }
+ ],
+ "hashPages": [
+  {
+   "url": "https://liveinnovascotia.com/skilled-worker",
+   "start": "ELIGIBILITY",
+   "end": "Immigration Fraud Reporting",
+   "sha256": "160b8381357ac7a67b5b87381661079ddd5f45f59635865173e26f219306691f"
+  },
+  {
+   "url": "https://liveinnovascotia.com/nova-scotia-graduate",
+   "start": "ELIGIBILITY",
+   "end": "Immigration Fraud Reporting",
+   "sha256": "0722bca43b2ae1c1ea98dfefff88f0d6f2e0336e0dc643ac053294d75be7dbc8"
+  },
+  {
+   "url": "https://liveinnovascotia.com/express-entry",
+   "start": "ELIGIBILITY",
+   "end": "Immigration Fraud Reporting",
+   "sha256": "ad82d2dd81bae37bcb7e8086ede1fa30623759abbeb7acc31b9b02917ce9a4f0"
+  },
+  {
+   "url": "https://liveinnovascotia.com/resources/nominee-program-priorities-nova-scotia",
+   "start": "Current priority focus",
+   "end": "Program priorities may shift",
+   "sha256": "723a9b6be122bf64ce117d79880d0c399fd0292e2cf18af7cff1a0b426a4aec6"
+  }
+ ],
+ "pages": {
+  "sw": "https://liveinnovascotia.com/skilled-worker",
+  "grad": "https://liveinnovascotia.com/nova-scotia-graduate",
+  "ee": "https://liveinnovascotia.com/express-entry",
+  "priorities": "https://liveinnovascotia.com/resources/nominee-program-priorities-nova-scotia",
+  "fees": "https://liveinnovascotia.com/resources/nsnp-update-application-fees-effective-september-1-2026",
+  "selection": "https://liveinnovascotia.com/eoi-selection"
+ }
+}

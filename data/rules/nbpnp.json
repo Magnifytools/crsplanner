@@ -1,0 +1,30 @@
+{
+ "source": "https://www.gnb.ca/en/topic/family-home-community/immigration/provincial-nominee-program.html",
+ "checked": "2026-10-14",
+ "fee": 250,
+ "hashPages": [
+  {
+   "url": "https://www.gnb.ca/en/topic/family-home-community/immigration/provincial-nominee-program/skilled-worker-stream.html",
+   "start": "To be eligible, you must",
+   "end": "Forms Complete",
+   "sha256": "510d45bb3a1c60a61ab00476c249f2bd115d56ebf0f66211859ce65e7da0031d"
+  },
+  {
+   "url": "https://www.gnb.ca/en/topic/family-home-community/immigration/provincial-nominee-program/express-entry-stream.html",
+   "start": "To be eligible, you must",
+   "end": "Forms Complete",
+   "sha256": "2abcf1870180bf55c2e93faae14758d5461fe6dcea9c0a2b894d1fe58285d685"
+  },
+  {
+   "url": "https://www.gnb.ca/en/topic/family-home-community/immigration/provincial-nominee-program/strategic-initiative.html",
+   "start": "To be eligible, you must",
+   "end": "Forms Complete",
+   "sha256": "0f88c9da214fd914b130a7c39102d78c0b6e91e1555c5fdb20a97b7698748942"
+  }
+ ],
+ "pages": {
+  "sw": "https://www.gnb.ca/en/topic/family-home-community/immigration/provincial-nominee-program/skilled-worker-stream.html",
+  "ee": "https://www.gnb.ca/en/topic/family-home-community/immigration/provincial-nominee-program/express-entry-stream.html",
+  "si": "https://www.gnb.ca/en/topic/family-home-community/immigration/provincial-nominee-program/strategic-initiative.html"
+ }
+}

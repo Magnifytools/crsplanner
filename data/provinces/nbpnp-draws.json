@@ -1,0 +1,526 @@
+{
+ "source": "https://www.gnb.ca/en/topic/family-home-community/immigration/invitation-selection-rounds.html",
+ "pageUpdated": "2026-10-14",
+ "rounds": [
+  {
+   "dateText": "September 25 and October 2, 2026",
+   "date": "2026-09-25",
+   "stream": "Atlantic Immigration Program",
+   "pathways": "",
+   "categories": "Construction; Education, social and community services; Manufacturing; Other trades; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 63,
+   "partial": false
+  },
+  {
+   "dateText": "September 17, 2026",
+   "date": "2026-09-17",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "Construction; Education, social and community services; Manufacturing; Other trades; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 102,
+   "partial": false
+  },
+  {
+   "dateText": "September 15 to 18, 2026",
+   "date": "2026-09-15",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Graduates; New Brunswick Experience",
+   "categories": "Construction; Education, social and community services; Manufacturing; Other trades; Professional and IT; Sales and services",
+   "note": null,
+   "count": 197,
+   "partial": false
+  },
+  {
+   "dateText": "September 11, 2026",
+   "date": "2026-09-11",
+   "stream": "Strategic Initiative",
+   "pathways": "Francophone Workers in New Brunswick; New Brunswick Francophone Priorities",
+   "categories": "Construction; Education, social and community services; Manufacturing; Other trades; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 251,
+   "partial": false
+  },
+  {
+   "dateText": "September 10, 2026",
+   "date": "2026-09-10",
+   "stream": "Atlantic Immigration Program",
+   "pathways": "",
+   "categories": "Construction; Education, social and community services; Manufacturing; Other trades; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 60,
+   "partial": false
+  },
+  {
+   "dateText": "August 10 and 20, 2026",
+   "date": "2026-08-10",
+   "stream": "Atlantic Immigration Program",
+   "pathways": "",
+   "categories": "Construction trades; Education, social and community services; Manufacturing; Other trades; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 68,
+   "partial": false
+  },
+  {
+   "dateText": "July 22, 2026",
+   "date": "2026-07-22",
+   "stream": "Atlantic Immigration Program",
+   "pathways": "",
+   "categories": "Construction trades; Education, social and community services; Health care; Manufacturing; Other trades; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 114,
+   "partial": false
+  },
+  {
+   "dateText": "July 18, 2026",
+   "date": "2026-07-18",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Graduates",
+   "categories": "Construction trades; Education, social and community services; Health care; Manufacturing; Other trades; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 209,
+   "partial": false
+  },
+  {
+   "dateText": "July 16 to 18, 2026",
+   "date": "2026-07-16",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience; New Brunswick Priorities",
+   "categories": "Construction trades; Health care",
+   "note": null,
+   "count": 58,
+   "partial": false
+  },
+  {
+   "dateText": "July 16, 2026",
+   "date": "2026-07-16",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "Education, social and community services; Health care; Manufacturing; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 115,
+   "partial": false
+  },
+  {
+   "dateText": "July 16, 2026",
+   "date": "2026-07-16",
+   "stream": "Strategic Initiative",
+   "pathways": "Francophone workers in New Brunswick; New Brunswick Francophone priorities",
+   "categories": "Education, social and community services; Food and accommodation; Health care; Manufacturing; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 254,
+   "partial": false
+  },
+  {
+   "dateText": "June 4, 2026",
+   "date": "2026-06-04",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "Construction trades; Education, social and community services; Health care; Manufacturing; Professional and IT; Transportation",
+   "note": null,
+   "count": 75,
+   "partial": false
+  },
+  {
+   "dateText": "June 3, 2026",
+   "date": "2026-06-03",
+   "stream": "Strategic Initiative",
+   "pathways": "New Brunswick Francophone Priorities",
+   "categories": "Construction trades; Education, social and community services; Health care; Manufacturing; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 94,
+   "partial": false
+  },
+  {
+   "dateText": "June 3, 2026",
+   "date": "2026-06-03",
+   "stream": "Strategic Initiative",
+   "pathways": "Francophone Workers in New Brunswick",
+   "categories": "Construction trades; Education, social and community services; Health care; Manufacturing; Professional and IT; Transportation; Sales and services",
+   "note": null,
+   "count": 52,
+   "partial": false
+  },
+  {
+   "dateText": "June 3, 2026",
+   "date": "2026-06-03",
+   "stream": "Atlantic Immigration Program",
+   "pathways": "",
+   "categories": "Construction trades; Education, social and community services; Health care; Manufacturing; Other trades; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 97,
+   "partial": false
+  },
+  {
+   "dateText": "June 3, 2026",
+   "date": "2026-06-03",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience",
+   "categories": "Construction trades; Health care",
+   "note": null,
+   "count": 243,
+   "partial": false
+  },
+  {
+   "dateText": "June 3, 2026",
+   "date": "2026-06-03",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Graduates",
+   "categories": "Education, social and community services; Construction trades; Health care; Transportation",
+   "note": null,
+   "count": 138,
+   "partial": false
+  },
+  {
+   "dateText": "May 3, 2026",
+   "date": "2026-05-03",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience; New Brunswick Graduates",
+   "categories": "All sectors",
+   "note": null,
+   "count": 113,
+   "partial": false
+  },
+  {
+   "dateText": "May 1, 2026",
+   "date": "2026-05-01",
+   "stream": "Atlantic Immigration Program",
+   "pathways": "",
+   "categories": "Transportation; Manufacturing; Construction Trades",
+   "note": null,
+   "count": 50,
+   "partial": false
+  },
+  {
+   "dateText": "May 1, 2026",
+   "date": "2026-05-01",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience; New Brunswick Graduates",
+   "categories": "Healthcare",
+   "note": null,
+   "count": 87,
+   "partial": false
+  },
+  {
+   "dateText": "April 30, 2026",
+   "date": "2026-04-30",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "Healthcare; Professional & IT",
+   "note": null,
+   "count": 17,
+   "partial": false
+  },
+  {
+   "dateText": "April 30, 2026",
+   "date": "2026-04-30",
+   "stream": "Strategic Initiative",
+   "pathways": "New Brunswick francophone priorities; Francophone workers in New Brunswick",
+   "categories": "All sectors",
+   "note": null,
+   "count": 106,
+   "partial": false
+  },
+  {
+   "dateText": "April 1, 2026",
+   "date": "2026-04-01",
+   "stream": "Atlantic Immigration Program",
+   "pathways": "",
+   "categories": "Transportation; Manufacturing",
+   "note": null,
+   "count": 118,
+   "partial": false
+  },
+  {
+   "dateText": "March 30, 2026",
+   "date": "2026-03-30",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "Health care; Professional and IT occupations",
+   "note": null,
+   "count": 25,
+   "partial": false
+  },
+  {
+   "dateText": "March 3-6, 2026",
+   "date": "2026-03-03",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "Health care; Education, social and community services; Construction trades; Professional occupations",
+   "note": null,
+   "count": 29,
+   "partial": false
+  },
+  {
+   "dateText": "March 3-6, 2026",
+   "date": "2026-03-03",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience; New Brunswick Graduates",
+   "categories": "Health care; Education, social and community services; Construction trades; Professional occupations",
+   "note": null,
+   "count": 279,
+   "partial": false
+  },
+  {
+   "dateText": "March 3-6, 2026",
+   "date": "2026-03-03",
+   "stream": "Strategic Initiative",
+   "pathways": "Francophone Workers in New Brunswick; New Brunswick Francophone Priorities",
+   "categories": "All sectors",
+   "note": null,
+   "count": 189,
+   "partial": false
+  },
+  {
+   "dateText": "March 3-6, 2026",
+   "date": "2026-03-03",
+   "stream": "Atlantic Immigration Program",
+   "pathways": "",
+   "categories": "Health care; Education, social and community services; Construction trades; Professional occupations; Transportation; Manufacturing",
+   "note": null,
+   "count": 125,
+   "partial": false
+  },
+  {
+   "dateText": "February 11, 2026",
+   "date": "2026-02-11",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience; New Brunswick Graduates",
+   "categories": "Health care",
+   "note": null,
+   "count": 196,
+   "partial": false
+  },
+  {
+   "dateText": "February 2, 2026",
+   "date": "2026-02-02",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "All sectors",
+   "note": null,
+   "count": 170,
+   "partial": false
+  },
+  {
+   "dateText": "February 2, 2026",
+   "date": "2026-02-02",
+   "stream": "Strategic Initiative",
+   "pathways": "New Brunswick Francophone Priorities; Francophone Workers in New Brunswick",
+   "categories": "All sectors",
+   "note": null,
+   "count": 160,
+   "partial": false
+  },
+  {
+   "dateText": "January 13-15, 2026",
+   "date": "2026-01-13",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "All sectors",
+   "note": null,
+   "count": 20,
+   "partial": false
+  },
+  {
+   "dateText": "January 13-15, 2026",
+   "date": "2026-01-13",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick experience; New Brunswick graduates",
+   "categories": "All sectors",
+   "note": null,
+   "count": 244,
+   "partial": false
+  },
+  {
+   "dateText": "January 13-15, 2026",
+   "date": "2026-01-13",
+   "stream": "Strategic Initiative",
+   "pathways": "New Brunswick Francophone priorities",
+   "categories": "All sectors",
+   "note": null,
+   "count": 115,
+   "partial": false
+  },
+  {
+   "dateText": "December 9, 2025",
+   "date": "2025-12-09",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "Francophone applicants, all sectors",
+   "note": null,
+   "count": 8,
+   "partial": true
+  },
+  {
+   "dateText": "December 9, 2025",
+   "date": "2025-12-09",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience; New Brunswick Graduates",
+   "categories": "Francophone applicants, all sectors",
+   "note": null,
+   "count": 102,
+   "partial": true
+  },
+  {
+   "dateText": "November 16, 2025",
+   "date": "2025-11-16",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "all sectors",
+   "note": null,
+   "count": 35,
+   "partial": true
+  },
+  {
+   "dateText": "October 8-9, 2025",
+   "date": "2025-10-08",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "All sectors",
+   "note": null,
+   "count": 221,
+   "partial": true
+  },
+  {
+   "dateText": "October 6-7, 2025",
+   "date": "2025-10-06",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience",
+   "categories": "Health care",
+   "note": null,
+   "count": 91,
+   "partial": true
+  },
+  {
+   "dateText": "October 6-7, 2025",
+   "date": "2025-10-06",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Graduates",
+   "categories": "Health care; Education and social & community services; Construction trades",
+   "note": "The October 6-7 draw period did not include NOC 75101 - Material handlers.",
+   "count": 210,
+   "partial": true
+  },
+  {
+   "dateText": "August 11-19, 2025",
+   "date": "2025-08-11",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience",
+   "categories": "Health care; Education and social & community services; Construction trades",
+   "note": "The August 11-19 draw period did not include NOC 42201 - Social and community service workers or NOC 75101 - Material handlers.",
+   "count": 481,
+   "partial": false
+  },
+  {
+   "dateText": "August 11-19, 2025",
+   "date": "2025-08-11",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Graduates",
+   "categories": "All sectors",
+   "note": "The August 11-19 draw period did not include NOC 42201 - Social and community service workers, NOC 62200 - Chefs, or NOC 75101 - Material handlers.",
+   "count": 389,
+   "partial": false
+  },
+  {
+   "dateText": "August 11-19, 2025",
+   "date": "2025-08-11",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience",
+   "categories": "Francophone candidates in all sectors",
+   "note": "The August 11-19 draw period did not include NOC 42201 - Social and community service workers, NOC 62200 - Chefs, or NOC 75101 - Material handlers.",
+   "count": 132,
+   "partial": false
+  },
+  {
+   "dateText": "August 11-19, 2025",
+   "date": "2025-08-11",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "All sectors",
+   "note": "The August 11-19 draw period did not include NOC 42201 - Social and community service workers or NOC 62200 - Chefs.",
+   "count": 50,
+   "partial": false
+  },
+  {
+   "dateText": "June 17, 2025",
+   "date": "2025-06-17",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Priority Occupations",
+   "categories": "Health care",
+   "note": null,
+   "count": 12,
+   "partial": false
+  },
+  {
+   "dateText": "June 16 and 17, 2025",
+   "date": "2025-06-16",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Graduates",
+   "categories": "All sectors",
+   "note": "The June 16 & 17 draw was limited to candidates with work permits expiring in 2025 and in January and February 2026 only. The June 16 & 17 draw did not include Chefs (NOC 62200) or Material Handlers (NOC 75101).",
+   "count": 274,
+   "partial": false
+  },
+  {
+   "dateText": "June 16, 2025",
+   "date": "2025-06-16",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "All sectors",
+   "note": "This draw was limited to candidates who have been working full time for a New Brunswick employer for at least the past 12 consecutive months while authorized to work in Canada. The June 16 draw did not include Chefs (NOC 62200).",
+   "count": 297,
+   "partial": false
+  },
+  {
+   "dateText": "June 16, 2025",
+   "date": "2025-06-16",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience",
+   "categories": "Health care; Education and social & community services; Construction trades",
+   "note": "The June 16 draw was limited to candidates with work permits expiring in 2025 and in January and February 2026 only. The June 16 draw did not include Material Handlers (NOC 75101).",
+   "count": 25,
+   "partial": false
+  },
+  {
+   "dateText": "May 5, 2025",
+   "date": "2025-05-05",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience; New Brunswick Graduates",
+   "categories": "Health care; Education and social & community services; Construction trades",
+   "note": "The May 5 draw did not include Material Handlers (NOC 75101).",
+   "count": 432,
+   "partial": false
+  },
+  {
+   "dateText": "April 9, 2025",
+   "date": "2025-04-09",
+   "stream": "Express Entry",
+   "pathways": "Employment in New Brunswick",
+   "categories": "Healthcare; Education and Social & Community Services; Construction Trades",
+   "note": "This draw was limited to candidates who have been working full time for a New Brunswick employer for at least the past 12 consecutive months while authorized to work in Canada.",
+   "count": 45,
+   "partial": false
+  },
+  {
+   "dateText": "April 7 and April 8, 2025",
+   "date": "2025-04-07",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience; New Brunswick Graduates",
+   "categories": "Healthcare; Education and Social & Community Services; Construction Trades; Agriculture, Aquaculture, and Forestry; IT; Transportation; Manufacturing; Professional Occupations",
+   "note": "This draw was limited to candidates with work permits expiring in 2025 only, apart from occupations in Healthcare, Education and Social and Community Services, and Construction Trades. This draw was limited to occupations categorized under the NOC at the 1000- and 2000-levels, and in TEER categories 0, 1, and 2.",
+   "count": 432,
+   "partial": false
+  },
+  {
+   "dateText": "March 5 and March 6, 2025",
+   "date": "2025-03-05",
+   "stream": "Skilled Worker",
+   "pathways": "New Brunswick Experience; New Brunswick Graduates",
+   "categories": "Healthcare; Education and Social & Community Services; Construction Trades",
+   "note": null,
+   "count": 498,
+   "partial": false
+  }
+ ]
+}

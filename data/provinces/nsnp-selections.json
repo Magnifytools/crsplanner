@@ -1,0 +1,54 @@
+{
+ "source": "https://liveinnovascotia.com/eoi-selection",
+ "pageUpdated": "2026-08-17",
+ "months": [
+  {
+   "month": "2026-01",
+   "selected": 363
+  },
+  {
+   "month": "2026-02",
+   "selected": 357
+  },
+  {
+   "month": "2026-03",
+   "selected": 370
+  },
+  {
+   "month": "2026-04",
+   "selected": 161
+  },
+  {
+   "month": "2026-05",
+   "selected": 789
+  },
+  {
+   "month": "2026-06",
+   "selected": 531
+  },
+  {
+   "month": "2026-07",
+   "selected": 671
+  },
+  {
+   "month": "2026-08",
+   "selected": null
+  },
+  {
+   "month": "2026-09",
+   "selected": null
+  },
+  {
+   "month": "2026-10",
+   "selected": null
+  },
+  {
+   "month": "2026-11",
+   "selected": null
+  },
+  {
+   "month": "2026-12",
+   "selected": null
+  }
+ ]
+}

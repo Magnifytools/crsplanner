@@ -1,0 +1,21 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/study.html",
+ "sourceModified": "2026-03-31",
+ "checked": "2026-10-14",
+ "watchPages": [
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/how-it-works.html",
+   "modified": "2026-03-31"
+  }
+ ],
+ "guide": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/discover-canada.html",
+ "questions": 20,
+ "passMark": 15,
+ "minutes": 45,
+ "attempts": 3,
+ "ages": [
+  18,
+  54
+ ],
+ "onlineDays": 30
+}

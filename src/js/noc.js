@@ -39,6 +39,7 @@ function card({ u, hits }) {
 <p class="small">${esc(T[1])}.</p>
 ${hits.length ? `<p class="small"><strong>Matching job titles:</strong> ${hits.slice(0, 8).map(esc).join('; ')}${hits.length > 8 ? ` and ${hits.length - 8} more` : ''}</p>` : ''}
 <p class="small">${ee}</p>
+${M.sowp && (u.teer <= 1 || M.sowp.includes(u.c)) ? `<p class="small">Your spouse may qualify for an open work permit while you work in this job; see the <a href="/spousal-open-work-permit/">spousal open work permit checker</a>.</p>` : ''}
 ${cats.length ? `<p class="small"><strong>Express Entry category:</strong> ${cats.map(([id, name]) => `<a href="/express-entry-categories/#${id}">${esc(name)}</a>`).join(', ')}</p>` : ''}
 <button type="button" class="linkish" data-code="${u.c}">Main duties and requirements</button><div class="noc-more" id="more-${u.c}" hidden></div></li>`;
 }

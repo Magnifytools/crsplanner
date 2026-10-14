@@ -31,6 +31,18 @@ const bcsirs = read('data/rules/bc-sirs.json');
 const bcDraws = read('data/provinces/bcpnp-draws.json');
 const noc = read('data/noc/noc-2021.json');
 const nocRules = read('data/rules/noc.json');
+const sowp = read('data/rules/sowp.json');
+const bowp = read('data/rules/bowp.json');
+const pgwp = read('data/rules/pgwp.json');
+const prFees = read('data/rules/pr-fees.json');
+const aip = read('data/rules/aip.json');
+const rcip = read('data/rules/rcip.json');
+const nsnp = read('data/rules/nsnp.json');
+const nsSel = read('data/provinces/nsnp-selections.json');
+const nbpnp = read('data/rules/nbpnp.json');
+const nbDraws = read('data/provinces/nbpnp-draws.json');
+const citTest = read('data/rules/citizenship-test.json');
+const citQ = read('data/citizenship/questions.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -1704,7 +1716,7 @@ function nocPage() {
   const n = noc, r = nocRules;
   const catByCode = {};
   for (const c of cats.categories) for (const o of c.occupations || []) (catByCode[o.noc] ||= []).push([c.id, c.name]);
-  const meta = { teer: Object.fromEntries(r.teer.map(([t, d, e]) => [t, [t, d, e]])), cec: cec.languageMin, cats: catByCode };
+  const meta = { teer: Object.fromEntries(r.teer.map(([t, d, e]) => [t, [t, d, e]])), cec: cec.languageMin, cats: catByCode, sowp: isLive('/spousal-open-work-permit/') ? sowp.selectNoc : null };
   const counts = [0, 1, 2, 3, 4, 5].map((t) => n.units.filter((u) => u.teer === t).length);
   const catCount = Object.keys(catByCode).length;
   const groups = Object.entries(n.broad).map(([b, title]) => { const us = n.units.filter((u) => String(u.b) === b); return `<details><summary>${b}. ${esc(title)} (${us.length})</summary><ul>${us.map((u) => `<li><a href="?q=${u.c}">${u.c}</a> ${esc(u.t)} <span class="small">TEER ${u.teer}</span></li>`).join('')}</ul></details>`; }).join('');
@@ -1737,6 +1749,456 @@ function nocPage() {
 </article>`;
   const scripts = `${jsonScript('noc-meta', meta)}<script type="module" src="/js/noc.js"></script>`;
   return page({ path: '/noc-code-finder/', title: 'NOC Code Finder 2021: Search Your Job Title, NOC Code and TEER', description: `Find your NOC 2021 code and TEER from ${fmt(n.units.reduce((t, u) => t + u.ex.length, 0))} official job titles, with what it means for Express Entry, the CEC and the 2026 category lists.`, body, scripts, crumbs: [['Home', '/'], ['NOC code finder', '/noc-code-finder/']] });
+}
+
+// ---------- Work permits: SOWP, BOWP, PGWP ----------
+const nocTitle = Object.fromEntries(noc.units.map((u) => [u.c, u.t]));
+const nocLink = (c) => (isLive('/noc-code-finder/') ? `<a href="/noc-code-finder/?q=${c}">${c}</a>` : c);
+function sowpPage() {
+  const r = sowp;
+  const list = (t) => r.selectNoc.filter((c) => c[1] === String(t)).map((c) => `<li>${nocLink(c)} ${esc(nocTitle[c] || '')}</li>`).join('');
+  const n2 = r.selectNoc.filter((c) => c[1] === '2').length, n3 = r.selectNoc.filter((c) => c[1] === '3').length;
+  const body = `
+<section class="intro">
+  <h1>Spousal Open Work Permit (SOWP) Eligibility Checker</h1>
+  <p class="lede">Check whether your spouse or common-law partner, or your dependent child, can get an open work permit based on your job in Canada, under IRCC's rules in force since ${longDate(r.rulesSince)}, with the full list of the ${r.selectNoc.length} eligible TEER 2 and 3 occupations.</p>
+  <p class="meta"><span>IRCC page modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: open work permits for family members of foreign workers</a></span></p>
+</section>
+<div class="tool">
+<form id="sowp-form" novalidate>
+  <fieldset><legend>You, the worker in Canada</legend>
+    <div class="field"><label for="pr">Have you applied for permanent residence?</label><select id="pr" name="pr"><option value="no">No</option><option value="econ">Yes, through an economic program or pilot (Express Entry, PNP, AIP and others)</option><option value="rural">Yes, through the Rural or Francophone Community Immigration Pilot</option></select></div>
+    <div class="field check"><input type="checkbox" id="permitPr" name="permitPr"><label for="permitPr">My work permit was issued because I applied for that permanent residence program</label></div>
+    <div class="field check"><input type="checkbox" id="pathway" name="pathway"><label for="pathway">My work permit came through a pathway to permanent residence (provincial nomination, AIP, Agri-Food Pilot, start-up visa, Quebec CSQ, Yukon Community Pilot) and I have not applied for PR yet</label></div>
+    <div class="field"><label for="noc">NOC 2021 code of your job</label><input type="text" id="noc" name="noc" inputmode="numeric" maxlength="5" placeholder="e.g. 21231"><span class="hint" id="noc-hint">${isLive('/noc-code-finder/') ? 'Find it with the <a href="/noc-code-finder/">NOC code finder</a>.' : 'Five digits; the second digit is the TEER.'}</span></div>
+    <div class="field"><label for="months">Months left on your work permit when your family member applies</label><input type="number" id="months" name="months" min="0" max="120" inputmode="numeric"></div>
+    <div class="field"><label for="special">Special case</label><select id="special" name="special"><option value="none">None</option><option value="sip">I work on a significant investment project (SIP) in British Columbia</option><option value="qchealth">Quebec recruited me as a nurse, respiratory therapist or medical lab technologist</option><option value="student">I am a student, a co-op student or working off campus without a work permit</option><option value="pgwp">I applied for a PGWP and have no decision yet</option><option value="sowp">I hold a spousal open work permit myself</option></select></div>
+  </fieldset>
+  <fieldset><legend>Your family member</legend>
+    <div class="field"><label for="who">Who is applying</label><select id="who" name="who"><option value="spouse">Spouse or common-law partner</option><option value="child">Dependent child (or their dependent child)</option></select></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Result">
+  <div class="total"><span id="status" class="tag"></span></div>
+  <p id="verdict"></p>
+  <div class="cmp" id="checks"></div>
+  <p class="small">Fees: CA$${r.fees.workPermit} work permit + CA$${r.fees.openHolder} open work permit holder fee.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>The four situations that qualify</h2>
+<ul>
+<li><strong>You applied for permanent residence</strong> through an economic program and your work permit was issued because of it: your spouse and dependent children can apply, if your permit is valid for at least ${r.validityPathway} more months. For the Rural and Francophone Community Immigration Pilots only children qualify here; spouses have a separate open work permit under those pilots.</li>
+<li><strong>You are on a pathway to permanent residence</strong> (for example with a provincial nomination) in a TEER 4 or 5 job: spouse and dependent children can apply, with at least ${r.validityPathway} months left on your permit.</li>
+<li><strong>You work in a high-skilled job</strong>: any TEER 0 or 1 occupation, or one of the ${n2} TEER 2 and ${n3} TEER 3 occupations listed below, with at least ${r.validityHighSkilled} months left on your permit. Since ${longDate(r.rulesSince)} only spouses qualify, not children.</li>
+<li><strong>You work on a significant investment project in B.C.</strong> (since ${longDate(r.sipBC.since)}): your spouse can apply whatever the TEER of your job, without the ${r.validityHighSkilled}-month rule.</li>
+</ul>
+<p>Workers in TEER 4 or 5 jobs who are not on a pathway to permanent residence can no longer bring family on this measure, although family members already in Canada can extend a permit that is shorter than yours. Since ${longDate(r.healthQuebec.since)} the ${r.validityHighSkilled}-month rule does not apply to spouses of nurses (NOC 31301), respiratory therapists (32103) and medical laboratory technologists (32120) recruited by Quebec.</p>
+<h3>Not eligible</h3>
+<p>Family members do not qualify if you made a refugee claim referred to the IRB, are subject to an unenforceable removal order, are a student (including co-op or off-campus work without a work permit), are waiting for a decision on your PGWP, or hold a spousal open work permit yourself.</p>
+<h2>Eligible TEER 2 occupations (${n2})</h2>
+<div class="noc-list"><ul>${list(2)}</ul></div>
+<h2>Eligible TEER 3 occupations (${n3})</h2>
+<div class="noc-list"><ul>${list(3)}</ul></div>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Open work permits for family members of foreign workers: who can apply</a>, IRCC, modified ${longDate(r.sourceModified)}</li><li><a href="${r.watchPages[0].url}" rel="noopener">Fees and overview</a>, IRCC, modified ${longDate(r.watchPages[0].modified)}</li></ul>
+</article>`;
+  const scripts = `${jsonScript('sowp-rules', { select: r.selectNoc, high: r.validityHighSkilled, path: r.validityPathway })}<script type="module" src="/js/sowp.js"></script>`;
+  return page({ path: '/spousal-open-work-permit/', title: 'Spousal Open Work Permit 2026: Eligibility Checker and TEER List', description: `Can your spouse get an open work permit? Check it by your NOC and TEER, with the ${r.selectNoc.length} eligible TEER 2 and 3 occupations and the 16-month rule, from IRCC.`, body, scripts, crumbs: [['Home', '/'], ['Spousal open work permit', '/spousal-open-work-permit/']] });
+}
+
+function bowpPage() {
+  const r = bowp;
+  const P = [
+    ['ee', 'Express Entry (FSW, CEC or FST)', ['Live in Canada and plan to live outside Quebec', 'Valid work permit, or expired permit with maintained status, or eligible to restore', 'Principal applicant on the PR application', 'Complete PR application that passed the completeness check (a profile in the pool is not enough)', 'Acknowledgement of receipt letter']],
+    ['pnpee', 'Provincial Nominee Program through Express Entry', ['Live in Canada and plan to live outside Quebec', 'Valid work permit, or expired permit with maintained status and authority to work, or eligible to restore', 'Principal applicant on the PR application', 'No employment restrictions as a condition of your nomination', 'Complete PR application that passed the completeness check', 'Acknowledgement of receipt letter (and nomination letter)']],
+    ['pnp', 'Provincial Nominee Program, not through Express Entry', ['Live in Canada and plan to live outside Quebec', 'Valid work permit, or expired permit with maintained status, or eligible to restore', 'Principal applicant on the PR application', 'No employment restrictions as a condition of your nomination', 'Complete PR application that passed the eligibility assessment', 'Acknowledgement of receipt letter (and nomination letter)']],
+    ['qsw', 'Quebec skilled worker', ['Live in Canada and plan to live in Quebec', 'Certificat de sélection du Québec (CSQ) valid when you applied for PR', 'Principal applicant on the PR application', 'PR application passed the completeness check', 'Valid work permit, or expired permit with maintained status, or eligible to restore']],
+    ['home', 'Home Child Care Provider or Home Support Worker Pilot (opened 2019 to 2024)', ['Live in Canada and plan to live outside Quebec', 'Approved in principle for permanent residence', 'Proof of 6 months of qualifying work experience', 'Valid work permit, or applied to extend before it expired, or eligible to restore']],
+    ['agri', 'Agri-Food Pilot', ['Live in Canada and plan to live outside Quebec', 'Valid work permit, or expired permit with maintained status, or eligible to restore', 'Principal applicant on the PR application', 'Approved in principle for permanent residence']],
+  ];
+  const body = `
+<section class="intro">
+  <h1>Bridging Open Work Permit (BOWP): Eligibility Checker</h1>
+  <p class="lede">A bridging open work permit lets you keep working in Canada while IRCC processes your permanent residence application. Pick your program and tick off IRCC's requirements to see if you can apply.</p>
+  <p class="meta"><span>IRCC page modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: bridging open work permit</a></span></p>
+</section>
+<div class="tool">
+<form id="bowp-form" novalidate>
+  <fieldset><legend>Your permanent residence application</legend>
+    <div class="field"><label for="program">Program you applied for</label><select id="program" name="program">${P.map(([id, n]) => `<option value="${id}">${esc(n)}</option>`).join('')}</select></div>
+    <div id="reqs"></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Result">
+  <div class="total"><span id="status" class="tag"></span></div>
+  <p id="verdict" class="small"></p>
+  <p class="small">Fees: CA$${r.fees.workPermit} work permit + CA$${r.fees.openHolder} open work permit holder fee = CA$${r.fees.workPermit + r.fees.openHolder}. Apply as an extension or change of conditions and choose "Open work permit".</p>
+</aside>
+</div>
+<article class="prose">
+<h2>Requirements by program</h2>
+${P.map(([, n, reqs]) => `<h3>${esc(n)}</h3><ul>${reqs.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`).join('')}
+<p>Applicants under the Home Care Worker Immigration pilots opened in 2025 are not eligible for a BOWP. IRCC also lists rules for the caring for children and high medical needs classes (applications made before June 18, 2019) and for Quebec investors.</p>
+<h2>Timing and travel</h2>
+<p>Submitting an Express Entry profile is not applying for permanent residence: you can only ask for a BOWP after your PR application is in and you have the acknowledgement of receipt. Until then, extend your current work permit so it does not expire. You can leave Canada while the application is processed, but if your permit expires while you are away you lose your status and cannot work after returning until the new permit is approved. For PNP applicants, you must be in Canada with valid status when IRCC decides on the BOWP.</p>
+<p>Your spouse may also qualify for an open work permit; see the ${isLive('/spousal-open-work-permit/') ? '<a href="/spousal-open-work-permit/">spousal open work permit checker</a>' : 'spousal open work permit rules'}.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Bridging open work permit for permanent residence applicants</a>, IRCC, modified ${longDate(r.sourceModified)}</li></ul>
+</article>`;
+  const scripts = `${jsonScript('bowp-rules', Object.fromEntries(P.map(([id, n, reqs]) => [id, reqs])))}<script type="module" src="/js/bowp.js"></script>`;
+  return page({ path: '/bridging-open-work-permit/', title: 'Bridging Open Work Permit (BOWP) 2026: Eligibility Checker', description: 'Check if you can get a bridging open work permit while your PR application is processed: requirements for Express Entry, PNP, Quebec and pilots, fees and timing, from IRCC.', body, scripts, crumbs: [['Home', '/'], ['Bridging open work permit', '/bridging-open-work-permit/']] });
+}
+
+function pgwpPage() {
+  const r = pgwp;
+  const body = `
+<section class="intro">
+  <h1>PGWP Calculator: Post-Graduation Work Permit Length and Eligibility</h1>
+  <p class="lede">Work out how long your post-graduation work permit can be, the language level you need and the last day to apply, from IRCC's current rules.</p>
+  <p class="meta"><span>IRCC page modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: PGWP, who can apply</a></span></p>
+</section>
+<div class="tool">
+<form id="pgwp-form" novalidate>
+  <fieldset><legend>Your program</legend>
+    <div class="field"><label for="level">Program type</label><select id="level" name="level"><option value="master">Master's degree</option><option value="degree">Bachelor's or doctoral degree</option><option value="uni">Other university program</option><option value="college">College, polytechnic or other non-university program</option></select></div>
+    <div class="field"><label for="months">Program length (months)</label><input type="number" id="months" name="months" min="0" max="120" inputmode="numeric" value="24"><span class="hint">At least 8 months (900 hours in Quebec).</span></div>
+    <div class="field"><label for="online">Share of the program done by distance learning (%)</label><input type="number" id="online" name="online" min="0" max="100" value="0" inputmode="numeric"></div>
+    <div class="field check"><input type="checkbox" id="fulltime" name="fulltime" checked><label for="fulltime">Full-time student every semester (part-time allowed in the last one)</label></div>
+    <div class="field check"><input type="checkbox" id="dli" name="dli" checked><label for="dli">The program is PGWP-eligible on the DLI list</label></div>
+    <div class="field check"><input type="checkbox" id="before" name="before"><label for="before">I applied for my study permit before November 1, 2024</label></div>
+    <div class="field check"><input type="checkbox" id="field" name="field"><label for="field">My program is in an eligible field of study</label></div>
+  </fieldset>
+  <fieldset><legend>Dates and language</legend>
+    <div class="field"><label for="done">Date the school confirmed you completed the program</label><input type="date" id="done" name="done"></div>
+    <div class="field"><label for="passport">Passport expiry date</label><input type="date" id="passport" name="passport"></div>
+    <div class="field"><label for="clb">Lowest CLB/NCLC of your four test results</label><select id="clb" name="clb"><option value="0">No test yet</option>${[4, 5, 6, 7, 8, 9, 10].map((c) => `<option value="${c}">${c}</option>`).join('')}</select><span class="hint">Convert with the <a href="/clb-converter/">CLB converter</a>.</span></div>
+    <div class="field check"><input type="checkbox" id="had" name="had"><label for="had">I already had a PGWP</label></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Result">
+  <div class="total"><span><span class="score" id="len">0</span> <span class="of" id="len-unit">months</span></span><span id="status" class="tag"></span></div>
+  <p class="small" id="len-note"></p>
+  <div class="cmp" id="checks"></div>
+</aside>
+</div>
+<article class="prose">
+<h2>How long the PGWP is</h2>
+<div class="table-scroll"><table><thead><tr><th>Program</th><th>PGWP length</th></tr></thead><tbody>
+<tr><td>Less than 8 months</td><td>Not eligible</td></tr>
+<tr><td>Master's degree of at least 8 months (since ${longDate(r.mastersRuleSince)})</td><td>Up to 3 years</td></tr>
+<tr><td>Other programs of 8 months to less than 2 years</td><td>Up to the length of the program</td></tr>
+<tr><td>Programs of 2 years or more</td><td>Up to 3 years</td></tr>
+</tbody></table></div>
+<p>The permit never goes past your passport's expiry date; if the passport is shorter, renew it and apply on paper to extend the PGWP. If you finished more than one eligible program of at least 8 months, IRCC may combine their lengths. If your program's lock-in date is on or after September 1, 2024, you must do at least half of it in class in Canada and any time studied outside Canada is deducted from the PGWP.</p>
+<h2>Language and field of study</h2>
+<p>Since ${longDate(r.languageSince)} most applicants must show language results: CLB ${r.clbDegree} (NCLC ${r.clbDegree}) in all four abilities for university programs, and CLB ${r.clbCollege} for college and other non-university programs. Graduates of programs other than bachelor's, master's and doctoral degrees whose study permit application was made on or after November 1, 2024 must also have studied in an eligible field. Flight school graduates are exempt from both.</p>
+<h2>Deadline</h2>
+<p>Apply within ${r.applyWithinDays} days of the school's confirmation that you completed the program, and your study permit must have been valid at some point in those ${r.applyWithinDays} days. You cannot get a second PGWP.</p>
+<p>Canadian work on a PGWP counts toward the <a href="/">CRS</a>${isLive('/cec-eligibility-calculator/') ? ' and the <a href="/cec-eligibility-calculator/">Canadian Experience Class</a>' : ''}.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">PGWP: who can apply</a>, IRCC, modified ${longDate(r.sourceModified)}</li><li><a href="${r.watchPages[0].url}" rel="noopener">About the PGWP (length)</a>, IRCC, modified ${longDate(r.watchPages[0].modified)}</li></ul>
+</article>`;
+  const scripts = `${jsonScript('pgwp-rules', { min: r.minMonths, days: r.applyWithinDays, clbDegree: r.clbDegree, clbCollege: r.clbCollege })}<script type="module" src="/js/pgwp.js"></script>`;
+  return page({ path: '/pgwp-calculator/', title: 'PGWP Calculator 2026: Post-Graduation Work Permit Length and Eligibility', description: 'Calculate your PGWP length (up to 3 years), the CLB 7 or CLB 5 language requirement, field of study rules and your 180-day deadline, from IRCC.', body, scripts, crumbs: [['Home', '/'], ['PGWP calculator', '/pgwp-calculator/']] });
+}
+
+function feesPage() {
+  const r = prFees;
+  const rows = Object.values(r.programs).map((p) => `<tr><td>${esc(p.name)}</td><td class="n">$${fmt(p.pa)}</td><td class="n">$${fmt(p.spouse)}</td><td class="n">$${fmt(p.child)}</td></tr>`).join('');
+  const body = `
+<section class="intro">
+  <h1>Canada PR Fees Calculator: IRCC Permanent Residence Fees</h1>
+  <p class="lede">Add up the IRCC fees for your permanent residence application by program and family size, with the right of permanent residence fee and biometrics, using the fee list IRCC raised on ${longDate(r.lastIncrease)}.</p>
+  <p class="meta"><span>IRCC fee list modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC fee list</a></span></p>
+</section>
+<div class="tool">
+<form id="fees-form" novalidate>
+  <fieldset><legend>Your application</legend>
+    <div class="field"><label for="program">Program</label><select id="program" name="program">${Object.entries(r.programs).map(([k, p]) => `<option value="${k}">${esc(p.name)}</option>`).join('')}</select></div>
+    <div class="field check"><input type="checkbox" id="spouse" name="spouse"><label for="spouse">Include a spouse or common-law partner</label></div>
+    <div class="field"><label for="kids">Dependent children</label><input type="number" id="kids" name="kids" min="0" max="15" value="0" inputmode="numeric"></div>
+    <div class="field check"><input type="checkbox" id="rprf" name="rprf" checked><label for="rprf">Pay the right of permanent residence fee now</label></div>
+    <div class="field"><label for="bio">People giving biometrics</label><input type="number" id="bio" name="bio" min="0" max="20" value="1" inputmode="numeric"></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Total fees">
+  <div class="total"><span><span class="score" id="total">0</span> <span class="of">CAD</span></span><span class="small">Total IRCC fees</span></div>
+  <div class="table-scroll"><table><tbody id="breakdown"></tbody></table></div>
+</aside>
+</div>
+<article class="prose">
+<h2>Fees by program (without the RPRF)</h2>
+<div class="table-scroll"><table><thead><tr><th>Program</th><th class="n">Principal applicant</th><th class="n">Spouse or partner</th><th class="n">Each dependent child</th></tr></thead><tbody>${rows}</tbody></table></div>
+<p>For family sponsorship the principal amount is the $90 sponsorship fee plus the $570 processing fee.</p>
+<h2>Right of permanent residence fee</h2>
+<p>The RPRF is $${fmt(r.rprf)} for the principal applicant and for an accompanying spouse or partner. Dependent children don't pay it. You can pay it with the application or when IRCC approves it, and it is the only fee IRCC refunds after processing starts (if you withdraw or are refused).</p>
+<h2>Other fees</h2>
+<ul><li>Biometrics: $${r.biometrics.person} per person, or $${r.biometrics.family} at most for a family applying together.</li><li>Permanent resident card: $${r.prCard}.</li><li>Citizenship later on: $${r.citizenshipAdult} per adult, $${r.citizenshipMinor} per minor.</li></ul>
+<p>On ${longDate(r.lastIncrease)} IRCC raised PR fees: the RPRF went from $${r.previous.rprf} to $${r.rprf} and the economic principal applicant fee from $${r.previous.economicPa} to $${r.programs.economic.pa}. Express Entry candidates also need the <a href="${isLive('/proof-of-funds-express-entry/') ? '/proof-of-funds-express-entry/' : '/'}">${isLive('/proof-of-funds-express-entry/') ? 'proof of funds' : 'CRS'}</a>${isLive('/proof-of-funds-express-entry/') ? ' required by IRCC' : ''}.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Citizenship and immigration application fees</a>, IRCC, modified ${longDate(r.sourceModified)}</li><li><a href="${r.changes}" rel="noopener">Fee changes</a>, IRCC</li></ul>
+</article>`;
+  const scripts = `${jsonScript('fees-rules', r)}<script type="module" src="/js/fees.js"></script>`;
+  return page({ path: '/canada-pr-fees/', title: 'Canada PR Fees 2026: Express Entry and PR Fee Calculator', description: `IRCC permanent residence fees after the ${longDate(r.lastIncrease)} increase: $${r.programs.economic.pa} processing plus $${r.rprf} RPRF per adult for Express Entry and PNP, $${r.programs.economic.child} per child. Calculate your total.`, body, scripts, crumbs: [['Home', '/'], ['Canada PR fees', '/canada-pr-fees/']] });
+}
+
+// ---------- Atlantic and rural programs ----------
+const fundsRows = (arr, each) => arr.map((v, i) => `<tr><td>${i + 1}</td><td class="n">$${fmt(v)}</td></tr>`).join('') + `<tr><td>Each additional person</td><td class="n">+$${fmt(each)}</td></tr>`;
+const teerOpts = (max) => Array.from({ length: max + 1 }, (_, t) => `<option value="${t}">TEER ${t}</option>`).join('');
+function aipPage() {
+  const r = aip;
+  const body = `
+<section class="intro">
+  <h1>Atlantic Immigration Program (AIP): Eligibility Checker</h1>
+  <p class="lede">Check if you meet the Atlantic Immigration Program requirements for a job offer in New Brunswick, Nova Scotia, Prince Edward Island or Newfoundland and Labrador: work experience by TEER, language, education and settlement funds, from IRCC's pages.</p>
+  <p class="meta"><span>IRCC pages modified up to ${longDate([r.sourceModified, ...r.watchPages.map((w) => w.modified)].sort().at(-1))}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: Atlantic Immigration Program</a></span></p>
+</section>
+<div class="tool">
+<form id="aip-form" novalidate>
+  <fieldset><legend>Job offer</legend>
+    <div class="field check"><input type="checkbox" id="designated" name="designated"><label for="designated">Full-time (30+ hours), non-seasonal job offer from a designated employer in an Atlantic province</label></div>
+    <div class="field"><label for="offer">TEER of the job offer</label><select id="offer" name="offer">${teerOpts(4)}</select><span class="hint">${isLive('/noc-code-finder/') ? 'Find it with the <a href="/noc-code-finder/">NOC code finder</a>.' : 'The second digit of the NOC code.'}</span></div>
+  </fieldset>
+  <fieldset><legend>Work experience</legend>
+    <div class="field check"><input type="checkbox" id="grad" name="grad"><label for="grad">I graduated from a 2-year program at a recognized Atlantic post-secondary institution less than 2 years ago (exempt from work experience)</label></div>
+    <div class="field"><label for="exp">TEER of your work experience</label><select id="exp" name="exp">${teerOpts(4)}</select></div>
+    <div class="field"><label for="hours">Paid hours in that occupation in the last ${r.years} years</label><input type="number" id="hours" name="hours" min="0" step="10" inputmode="numeric"><span class="hint">At least ${fmt(r.hours)} hours over at least 1 year; no self-employment.</span></div>
+  </fieldset>
+  <fieldset><legend>Language and education</legend>
+    <div class="field"><label for="clb">Lowest CLB/NCLC of your four test results</label><select id="clb" name="clb"><option value="0">No test yet</option>${[4, 5, 6, 7, 8, 9, 10].map((c) => `<option value="${c}">${c}</option>`).join('')}</select></div>
+    <div class="field"><label for="edu">Highest education (Canadian, or foreign with an ECA)</label><select id="edu" name="edu"><option value="0">Less than high school</option><option value="1">High school diploma</option><option value="2">One-year post-secondary credential or higher</option></select></div>
+  </fieldset>
+  <fieldset><legend>Settlement funds</legend>
+    <div class="field check"><input type="checkbox" id="working" name="working"><label for="working">I already live and work in Canada with a valid work permit (no proof of funds needed)</label></div>
+    <div class="row"><div class="field"><label for="family">Family size</label><input type="number" id="family" name="family" min="1" max="15" value="1" inputmode="numeric"></div>
+    <div class="field"><label for="funds">Funds available (CAD)</label><input type="number" id="funds" name="funds" min="0" step="100" inputmode="numeric"></div></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Result">
+  <div class="total"><span id="status" class="tag"></span></div>
+  <div class="cmp" id="checks"></div>
+  <p class="small">You also need a settlement plan from a service provider organization and the province's endorsement before applying for PR.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>Job offer and work experience by TEER</h2>
+<p>Your experience must be in the same TEER as the job offer or higher: ${fmt(r.hours)} paid hours in the last ${r.years} years, over at least 1 year, doing most of the main duties of your NOC. Job offers in TEER 0 to 3 must last at least 1 year from when you become a permanent resident; TEER 4 offers must be permanent.</p>
+<div class="table-scroll"><table><thead><tr><th>Job offer</th><th>Experience accepted</th><th>Language</th><th>Education</th></tr></thead><tbody>${Object.entries(r.experienceTeer).map(([t, e]) => `<tr><td>TEER ${t}</td><td>TEER ${e.join(', ')}</td><td>CLB ${r.clb[t]}</td><td>${Number(t) <= 1 ? 'One-year post-secondary' : 'High school'}</td></tr>`).join('')}</tbody></table></div>
+<p>Licensed practical nurses (NOC 31201) and registered nurses (31301) can use their experience for offers as nurse aides (33102) or home support workers (44101).</p>
+<h2>Language tests</h2>
+<p>CELPIP-General, IELTS General Training, PTE Core, TEF Canada or TCF Canada, less than 2 years old. Convert your results with the <a href="/clb-converter/">CLB converter</a>.</p>
+<h2>Settlement funds (updated ${longDate(r.fundsUpdated)})</h2>
+<div class="table-scroll"><table><thead><tr><th>Family members</th><th class="n">Funds needed (CAD)</th></tr></thead><tbody>${fundsRows(r.funds, r.fundsEach)}</tbody></table></div>
+<p>Count yourself, your spouse and all dependent children, even if they are not coming. You don't need to show funds if you already live and work in Canada with a valid work permit.</p>
+<h2>Designated employers by province</h2>
+<ul>${r.provinces.map(([n, u]) => `<li><a href="${u}" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>
+<p>Provincial programs in the region: ${isLive('/nova-scotia-nominee-program/') ? '<a href="/nova-scotia-nominee-program/">Nova Scotia</a>' : 'Nova Scotia'}, ${isLive('/new-brunswick-pnp/') ? '<a href="/new-brunswick-pnp/">New Brunswick</a>' : 'New Brunswick'}.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Atlantic Immigration Program</a>, IRCC, modified ${longDate(r.sourceModified)}</li>${r.watchPages.map((w) => `<li><a href="${w.url}" rel="noopener">${esc(w.url.split('/').pop().replace('.html', '').replace(/-/g, ' '))}</a>, IRCC, modified ${longDate(w.modified)}</li>`).join('')}</ul>
+</article>`;
+  const scripts = `${jsonScript('aip-rules', { hours: r.hours, exp: r.experienceTeer, clb: r.clb, funds: r.funds, each: r.fundsEach })}<script type="module" src="/js/aip.js"></script>`;
+  return page({ path: '/atlantic-immigration-program/', title: 'Atlantic Immigration Program 2026: AIP Eligibility Checker', description: `Check your eligibility for the Atlantic Immigration Program: ${fmt(r.hours)} hours of experience by TEER, CLB 5 or 4, education, settlement funds from $${fmt(r.funds[0])}, from IRCC.`, body, scripts, crumbs: [['Home', '/'], ['Atlantic Immigration Program', '/atlantic-immigration-program/']] });
+}
+
+function rcipPage() {
+  const r = rcip;
+  const body = `
+<section class="intro">
+  <h1>Rural Community Immigration Pilot (RCIP): Communities and Eligibility</h1>
+  <p class="lede">The ${r.communities.length} participating communities of the Rural Community Immigration Pilot and a checker for IRCC's requirements: a job offer from a designated employer, work experience by TEER, language, education and settlement funds.</p>
+  <p class="meta"><span>IRCC pages modified up to ${longDate([r.sourceModified, ...r.watchPages.map((w) => w.modified)].sort().at(-1))}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: Rural Community Immigration Pilot</a></span></p>
+</section>
+<div class="tool">
+<form id="rcip-form" novalidate>
+  <fieldset><legend>Job offer</legend>
+    <div class="field"><label for="community">Community</label><select id="community" name="community">${r.communities.map((c) => `<option>${esc(c)}</option>`).join('')}</select></div>
+    <div class="field check"><input type="checkbox" id="designated" name="designated"><label for="designated">Job offer from an employer designated by that community, in one of its priority sectors or occupations</label></div>
+    <div class="field"><label for="offer">TEER of the job offer</label><select id="offer" name="offer">${teerOpts(5)}</select></div>
+  </fieldset>
+  <fieldset><legend>Work experience</legend>
+    <div class="field check"><input type="checkbox" id="grad" name="grad"><label for="grad">I graduated from a public post-secondary school in the community less than 18 months ago (exempt from work experience)</label></div>
+    <div class="field"><label for="exp">TEER of your work experience</label><select id="exp" name="exp">${teerOpts(5)}</select></div>
+    <div class="field check"><input type="checkbox" id="same" name="same"><label for="same">For TEER 5 offers: my experience is in the same 5-digit NOC</label></div>
+    <div class="field"><label for="hours">Paid hours in the last ${r.years} years</label><input type="number" id="hours" name="hours" min="0" step="10" inputmode="numeric"></div>
+  </fieldset>
+  <fieldset><legend>Language, education, funds</legend>
+    <div class="field"><label for="clb">Lowest CLB/NCLC of your four test results</label><select id="clb" name="clb"><option value="0">No test yet</option>${[4, 5, 6, 7, 8, 9, 10].map((c) => `<option value="${c}">${c}</option>`).join('')}</select></div>
+    <div class="field check"><input type="checkbox" id="edu" name="edu"><label for="edu">Canadian high school diploma or higher, or a foreign equivalent with an ECA</label></div>
+    <div class="field check"><input type="checkbox" id="working" name="working"><label for="working">I already work in Canada with a valid work permit (no proof of funds needed)</label></div>
+    <div class="row"><div class="field"><label for="family">Family size</label><input type="number" id="family" name="family" min="1" max="15" value="1" inputmode="numeric"></div>
+    <div class="field"><label for="funds">Funds available (CAD)</label><input type="number" id="funds" name="funds" min="0" step="100" inputmode="numeric"></div></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Result">
+  <div class="total"><span id="status" class="tag"></span></div>
+  <div class="cmp" id="checks"></div>
+  <p class="small">With all requirements met, the employer sends your application to the community for a recommendation; then you apply for PR.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>Participating communities</h2>
+<ul>${r.communities.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+<p>Each community designates employers and sets priority sectors; job postings are on the community sites linked from <a href="${r.pages.jobOffer}" rel="noopener">IRCC's job offer page</a>. A separate Francophone Community Immigration Pilot covers ${r.francophone.join(', ')}.</p>
+<h2>Work experience</h2>
+<p>At least 1 year (${fmt(r.hours)} hours) of paid, related work experience in the last ${r.years} years, not self-employed, in a TEER that matches the job offer:</p>
+<div class="table-scroll"><table><thead><tr><th>Job offer</th><th>Experience accepted</th></tr></thead><tbody>${r.experience.map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join('')}</tbody></table></div>
+<p>Registered nurses (NOC 31301) can use their experience for offers as nurse aides (33102) or home support workers (44101).</p>
+<h2>Language</h2>
+<div class="table-scroll"><table><thead><tr><th>Job offer</th><th class="n">Minimum CLB/NCLC</th></tr></thead><tbody>${r.clb.map(([a, b]) => `<tr><td>${a}</td><td class="n">${b}</td></tr>`).join('')}</tbody></table></div>
+<h2>Settlement funds (updated ${longDate(r.fundsUpdated)})</h2>
+<div class="table-scroll"><table><thead><tr><th>Family members</th><th class="n">Funds needed (CAD)</th></tr></thead><tbody>${fundsRows(r.funds, r.fundsEach)}</tbody></table></div>
+<p>These are the amounts on IRCC's RCIP funds page, which differ from the AIP table. You don't need to show funds if you already work in Canada with a valid work permit.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Rural Community Immigration Pilot</a>, IRCC, modified ${longDate(r.sourceModified)}</li>${r.watchPages.map((w) => `<li><a href="${w.url}" rel="noopener">${esc(w.url.split('/').pop().replace('.html', '').replace(/-/g, ' '))}</a>, IRCC, modified ${longDate(w.modified)}</li>`).join('')}</ul>
+</article>`;
+  const scripts = `${jsonScript('rcip-rules', { hours: r.hours, funds: r.funds, each: r.fundsEach })}<script type="module" src="/js/rcip.js"></script>`;
+  return page({ path: '/rural-community-immigration-pilot/', title: 'Rural Community Immigration Pilot 2026: 14 Communities and Eligibility', description: `The ${r.communities.length} RCIP communities and IRCC's requirements: designated employer job offer, ${fmt(r.hours)} hours of experience by TEER, CLB 4 to 6 and settlement funds. Check yours.`, body, scripts, crumbs: [['Home', '/'], ['Rural Community Immigration Pilot', '/rural-community-immigration-pilot/']] });
+}
+
+function nsnpPage() {
+  const r = nsnp, s = nsSel;
+  const done = s.months.filter((m) => m.selected !== null);
+  const total = done.reduce((t, m) => t + m.selected, 0);
+  const max = Math.max(...done.map((m) => m.selected));
+  const W = 760, H = 220, bw = (W - 40) / done.length;
+  const bars = done.map((m, i) => { const h = (m.selected / max) * (H - 50); return `<rect class="bar-r" x="${(30 + i * bw + 6).toFixed(1)}" y="${(H - 26 - h).toFixed(1)}" width="${(bw - 12).toFixed(1)}" height="${h.toFixed(1)}" rx="3"/><text x="${(30 + i * bw + bw / 2).toFixed(1)}" y="${(H - 30 - h).toFixed(1)}" text-anchor="middle">${m.selected}</text><text x="${(30 + i * bw + bw / 2).toFixed(1)}" y="${H - 8}" text-anchor="middle">${MONTHS[Number(m.month.slice(5)) - 1].slice(0, 3)}</text>`; }).join('');
+  const body = `
+<section class="intro">
+  <h1>Nova Scotia Nominee Program (NSNP) ${done[0].month.slice(0, 4)}: Streams, Selections and Fees</h1>
+  <p class="lede">The Nova Scotia Nominee Program's worker streams and requirements, the ${fmt(total)} candidates selected from the expression of interest pool so far in ${done[0].month.slice(0, 4)}, current priorities and the application fee in force since ${longDate(r.fee.since)}.</p>
+  <p class="meta"><span>Selections page updated ${longDate(s.pageUpdated)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">Live in Nova Scotia: NSNP</a></span></p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">Selected in ${done[0].month.slice(0, 4)}</div><div class="v">${fmt(total)}</div><div class="small">${done.length} months reported</div></div>
+  <div class="card"><div class="k">Application fee</div><div class="v">$${fmt(r.fee.worker)}</div><div class="small">worker streams, since ${longDate(r.fee.since)}</div></div>
+  <div class="card"><div class="k">EOI validity</div><div class="v">${r.eoiValidityMonths} months</div><div class="small">since ${longDate(r.eoiValiditySince)}</div></div>
+</div>
+<h2>Candidates selected by month</h2>
+<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="NSNP selections by month">${bars}</svg>
+<p class="small">Nova Scotia publishes monthly totals only, without scores. Selections focused on healthcare and skilled trades, plus other priority occupations.</p>
+<article class="prose">
+<h2>How selection works</h2>
+<p>You submit a free expression of interest (EOI) to one stream. Nova Scotia selects from the pool by labour market needs, occupation and sector priorities, likelihood of staying in the province, region, immigration status and allocations; it is not first come, first served. If selected you have 7 calendar days to update documents and pay the fee ($${fmt(r.fee.worker)} for worker streams, $${fmt(r.fee.entrepreneur)} for the entrepreneur stream). EOIs expire after ${r.eoiValidityMonths} months.</p>
+<h2>Current priorities</h2>
+<ul><li>Healthcare and skilled trades at TEER 0 to 4, for applicants abroad and temporary residents in Nova Scotia.</li><li>For temporary residents already working in Nova Scotia: NOC broad categories 2, 4, 8 and 9 at TEER 0 to 4.</li><li>Other occupations: TEER 0, 1 and 2 only, for temporary residents working in Nova Scotia.</li><li>TEER 5 is not prioritized.</li></ul>
+<h2>Worker streams</h2>
+<h3>Skilled Worker</h3>
+<ul><li>Full-time permanent job offer from a Nova Scotia employer</li><li>1 year of related work experience (TEER 4 and 5: six months with the employer)</li><li>Age 21 to 55, high school diploma</li><li>CLB 5 for TEER 0 to 3 (native speakers exempt); CLB 4 with a test for TEER 4 and 5</li><li>PGWP holders in TEER 5 jobs are not eligible</li></ul>
+<p>A construction sub-stream covers 22 listed trades and occupations with CLB 5 or 4 always tested, and a physicians sub-stream covers NSHA and IWK offers.</p>
+<h3>Nova Scotia Graduate</h3>
+<ul><li>Open to NOC 32102 (paramedical), 32124 (pharmacy technicians), 33102 (nurse aides) and 42202 (early childhood educators)</li><li>Job offer matching your field, age 19 to 55, CLB 5</li><li>Program of at least 30 weeks (24 for 33102) at a Nova Scotia DLI completed within 3 years, at least half in Nova Scotia</li></ul>
+<h3>Nova Scotia: Express Entry</h3>
+<ul><li>At least 1 year of work in Nova Scotia in TEER 0 to 3</li><li>Age 21 to 55, Canadian high school or equivalent</li><li>CLB 7 for TEER 0 and 1, CLB 5 for TEER 2 and 3</li><li>A profile in the Express Entry pool; work on a PGWP counts only if you graduated in Nova Scotia</li></ul>
+<p>A nomination through the Express Entry stream adds 600 points to your <a href="/">CRS score</a>. Nova Scotia also takes part in the ${isLive('/atlantic-immigration-program/') ? '<a href="/atlantic-immigration-program/">Atlantic Immigration Program</a>' : 'Atlantic Immigration Program'}, which has no provincial fee.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.pages.selection}" rel="noopener">EOI selection</a>, updated ${longDate(s.pageUpdated)}</li><li><a href="${r.pages.sw}" rel="noopener">Skilled Worker</a>, <a href="${r.pages.grad}" rel="noopener">Nova Scotia Graduate</a> and <a href="${r.pages.ee}" rel="noopener">Nova Scotia: Express Entry</a> streams</li><li><a href="${r.pages.priorities}" rel="noopener">Nominee program priorities</a>, April 27, 2026</li><li><a href="${r.pages.fees}" rel="noopener">Application fees effective September 1, 2026</a></li></ul>
+</article>`;
+  return page({ path: '/nova-scotia-nominee-program/', title: `Nova Scotia PNP ${done[0].month.slice(0, 4)}: NSNP Streams, Draws and Fees`, description: `Nova Scotia Nominee Program: ${fmt(total)} candidates selected in ${done[0].month.slice(0, 4)} so far, Skilled Worker, Graduate and Express Entry requirements, priorities and the $${fmt(r.fee.worker)} fee.`, body, crumbs: [['Home', '/'], ['Nova Scotia Nominee Program', '/nova-scotia-nominee-program/']] });
+}
+
+function nbpnpPage() {
+  const r = nbpnp, d = nbDraws.rounds;
+  const y = d[0].date.slice(0, 4);
+  const yr = d.filter((x) => x.date.startsWith(y));
+  const streams = ['Skilled Worker', 'Express Entry', 'Strategic Initiative', 'Atlantic Immigration Program'];
+  const stat = streams.map((s) => { const rs = yr.filter((x) => x.stream === s); return `<tr><td>${s}</td><td class="n">${rs.length}</td><td class="n">${fmt(rs.reduce((t, x) => t + (x.count || 0), 0))}</td><td>${rs[0] ? rs[0].dateText : '–'}</td></tr>`; }).join('');
+  const pnpTotal = yr.filter((x) => x.stream !== 'Atlantic Immigration Program').reduce((t, x) => t + (x.count || 0), 0);
+  const rows = d.map((x) => `<tr><td>${esc(x.dateText)}</td><td>${esc(x.stream)}</td><td>${esc(x.pathways || '–')}</td><td>${esc(x.categories)}${x.note ? `<div class="small">${esc(x.note)}</div>` : ''}</td><td class="n">${x.count ?? '–'}${x.partial ? ' ◊' : ''}</td></tr>`).join('');
+  const body = `
+<section class="intro">
+  <h1>New Brunswick PNP ${y}: NBPNP Draws and Streams</h1>
+  <p class="lede">Every New Brunswick Provincial Nominee Program and Atlantic Immigration Program round published by Immigration New Brunswick, with ${fmt(pnpTotal)} NBPNP invitations so far in ${y}, and the requirements of each stream.</p>
+  <p class="meta"><span>Latest round ${esc(d[0].dateText)}</span><span>Updated automatically</span><span>Source: <a href="${nbDraws.source}" rel="noopener">GNB: invitation and selection rounds</a></span></p>
+</section>
+<h2>${y} by stream</h2>
+<div class="table-scroll"><table><thead><tr><th>Stream</th><th class="n">Rounds</th><th class="n">Invited or selected</th><th>Latest</th></tr></thead><tbody>${stat}</tbody></table></div>
+<p class="small">New Brunswick does not publish scores. For the AIP the figure is applications selected for processing; for the PNP streams, invitations to apply.</p>
+<h2>All rounds</h2>
+<div class="table-scroll"><table><thead><tr><th>Date</th><th>Stream</th><th>Pathways</th><th>Occupational categories</th><th class="n">Number</th></tr></thead><tbody>${rows}</tbody></table></div>
+<p class="small">◊ New Brunswick notes that not all applications from these rounds would be processed in 2025.</p>
+<article class="prose">
+<h2>Streams and requirements</h2>
+<h3>New Brunswick Skilled Worker</h3>
+<p>Age 19 or older, CLB 4 in all four abilities, the support of an employer operating in New Brunswick for at least 24 months, and meeting the NOC requirements of the job. Pathways: <strong>New Brunswick Experience</strong> (6 months full time with the same employer, 6 months living in NB, high school), <strong>New Brunswick Graduates</strong> (PGWP-eligible program at an NB institution, job with the employer, 6 months living in NB) and <strong>Priority Occupations</strong> (offer from a recruitment mission led by New Brunswick, 1 year of related experience).</p>
+<h3>New Brunswick Express Entry</h3>
+<p>Age 19 to 55, a valid Express Entry profile, high school, CLB 7, 1 year of continuous experience in one TEER 0 to 3 NOC in the last 10 years and at least 67 of 100 points on the selection grid (the same scale as the ${isLive('/fsw-67-points-calculator/') ? '<a href="/fsw-67-points-calculator/">FSW 67 points</a>' : 'FSW 67 points'}). Pathways: <strong>Employment in New Brunswick</strong> (12 months living and working full time in NB in TEER 0 to 3) and <strong>New Brunswick Interest</strong> (a letter of interest in your Express Entry profile). A nomination adds 600 <a href="/">CRS</a> points.</p>
+<h3>New Brunswick Strategic Initiative</h3>
+<p>For French speakers: age 19 or older, high school, NCLC 5 in French, 1 year of work in the last 5 years (not needed for NB graduates), proof of funds unless living in NB or with a job offer, and at least 65 of 100 points. Pathways: Francophone Workers in New Brunswick, New Brunswick Francophone Priorities and Francophones Working Remotely in New Brunswick.</p>
+<p>The expression of interest is free; the nomination application costs a non-refundable $${r.fee}. You can only move forward with one application at a time between the NBPNP and the ${isLive('/atlantic-immigration-program/') ? '<a href="/atlantic-immigration-program/">AIP</a>' : 'AIP'}.</p>
+<h2>Sources</h2>
+<ul><li><a href="${nbDraws.source}" rel="noopener">Invitation and selection rounds</a>, Government of New Brunswick</li><li><a href="${r.pages.sw}" rel="noopener">Skilled Worker stream</a>, <a href="${r.pages.ee}" rel="noopener">Express Entry stream</a>, <a href="${r.pages.si}" rel="noopener">Strategic Initiative</a></li></ul>
+</article>`;
+  return page({ path: '/new-brunswick-pnp/', title: `New Brunswick PNP ${y}: NBPNP Draws, Streams and Requirements`, description: `All ${y} New Brunswick PNP and AIP rounds (${fmt(pnpTotal)} NBPNP invitations so far) with the Skilled Worker, Express Entry and Strategic Initiative requirements.`, body, crumbs: [['Home', '/'], ['New Brunswick PNP', '/new-brunswick-pnp/']] });
+}
+
+function citizenshipTestPage() {
+  const r = citTest, Q = citQ;
+  const qs = Q.map((q, i) => `<li class="quiz-q" data-a="${q.a}" id="q${i + 1}"><p class="quiz-p"><strong>${i + 1}.</strong> ${esc(q.q)}</p><ol type="A" class="quiz-o">${q.o.map((o, j) => `<li><button type="button" data-o="${j}">${esc(o)}</button></li>`).join('')}</ol><details><summary>Answer</summary><p><strong>${'ABCD'[q.a]}.</strong> ${esc(q.e)} <span class="small">(Discover Canada: ${esc(q.ch)})</span></p></details></li>`).join('');
+  const body = `
+<section class="intro">
+  <h1>Canadian Citizenship Test Practice: ${Q.length} Free Questions</h1>
+  <p class="lede">Practise for the Canadian citizenship test with ${Q.length} multiple-choice questions written from the official study guide, Discover Canada. The real test has ${r.questions} questions and you need ${r.passMark} right to pass.</p>
+  <p class="meta"><span>Test rules: IRCC page modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: study for the test</a></span></p>
+</section>
+<div class="quiz-bar"><span id="quiz-score" aria-live="polite">Answer the questions below.</span> <button type="button" id="quiz-new">New ${r.questions}-question test</button> <button type="button" id="quiz-all">Show all ${Q.length}</button></div>
+<ol class="quiz" id="quiz">${qs}</ol>
+<article class="prose">
+<h2>How the real test works</h2>
+<ul><li>${r.questions} multiple-choice or true or false questions, in English or French, ${r.minutes} minutes.</li><li>You need ${r.passMark} of ${r.questions} correct to pass, and you get ${r.attempts} chances.</li><li>Most applicants aged ${r.ages[0]} to ${r.ages[1]} on the day they sign the application must take it.</li><li>Most people take it online, monitored by webcam, within ${r.onlineDays} days of the invitation; accommodations can be in person or on Microsoft Teams.</li><li>Questions cover rights and responsibilities, history, geography, economy, government, laws and symbols. There are no questions testing your English or French.</li></ul>
+<p>IRCC bases every question on <a href="${r.guide}" rel="noopener">Discover Canada</a>, the only official study guide, and offers its own practice questions there. These questions are ours, written from facts in the guide; facts that have changed since it was published (such as the number of electoral districts) are left out. Before applying, check your days in Canada with the ${isLive('/physical-presence-calculator/') ? '<a href="/physical-presence-calculator/">physical presence calculator</a>' : 'physical presence calculator'}.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Study for the test</a> and <a href="${r.watchPages[0].url}" rel="noopener">how the test works</a>, IRCC, modified ${longDate(r.sourceModified)}</li><li><a href="${r.guide}" rel="noopener">Discover Canada: The Rights and Responsibilities of Citizenship</a>, IRCC</li></ul>
+</article>`;
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'Quiz', name: 'Canadian citizenship test practice', about: 'Discover Canada study guide', hasPart: Q.map((q) => ({ '@type': 'Question', name: q.q, eduQuestionType: 'Multiple choice', acceptedAnswer: { '@type': 'Answer', text: q.o[q.a] } })) }];
+  const scripts = `<script type="module" src="/js/quiz.js"></script>`;
+  return page({ path: '/canadian-citizenship-test-practice/', title: `Canadian Citizenship Test Practice 2026: ${Q.length} Free Questions`, description: `Free Canadian citizenship practice test: ${Q.length} questions from Discover Canada with answers and explanations. The real test has ${r.questions} questions and you need ${r.passMark} to pass.`, body, scripts, jsonld, crumbs: [['Home', '/'], ['Citizenship test practice', '/canadian-citizenship-test-practice/']] });
+}
+
+function eeYearPage() {
+  const Y = '2026', PY = String(Number(Y) - 1);
+  const rs = draws.rounds.filter((r) => r.date.startsWith(Y));
+  const ps = draws.rounds.filter((r) => r.date.startsWith(PY));
+  const sum = (a) => a.reduce((t, r) => t + (r.size || 0), 0);
+  const name = Object.fromEntries(draws.categories.map((c) => [c.id, c.label]));
+  const cats = [...new Set(rs.map((r) => r.category))];
+  const rowsC = cats.map((c) => { const a = rs.filter((r) => r.category === c); const sc = a.map((r) => r.crs).filter((x) => x !== null); return [c, a.length, sum(a), Math.min(...sc), Math.max(...sc)]; }).sort((a, b) => b[2] - a[2]);
+  const link = (c, l) => (CAT_PAGES[c] && catPagesList().some((x) => x.id === c) ? `<a href="/express-entry-draws/${CAT_PAGES[c].slug}/">${esc(l)}</a>` : esc(l));
+  const months = Array.from({ length: 12 }, (_, i) => `${Y}-${String(i + 1).padStart(2, '0')}`);
+  const mv = months.map((m) => sum(rs.filter((r) => r.date.startsWith(m))));
+  const mx = Math.max(1, ...mv);
+  const W = 760, H = 220, bw = (W - 40) / 12;
+  const bars = mv.map((v, i) => { const h = (v / mx) * (H - 50); return `<rect class="bar-r" x="${(30 + i * bw + 5).toFixed(1)}" y="${(H - 26 - h).toFixed(1)}" width="${(bw - 10).toFixed(1)}" height="${h.toFixed(1)}" rx="3"/>${v ? `<text x="${(30 + i * bw + bw / 2).toFixed(1)}" y="${(H - 30 - h).toFixed(1)}" text-anchor="middle">${fmt(v)}</text>` : ''}<text x="${(30 + i * bw + bw / 2).toFixed(1)}" y="${H - 8}" text-anchor="middle">${MONTHS[i].slice(0, 3)}</text>`; }).join('');
+  const sorted = [...rs].filter((r) => r.crs !== null && r.category !== 'pnp' && r.size >= 1000).sort((a, b) => a.crs - b.crs);
+  const lo = sorted[0], hi = sorted.at(-1), big = [...rs].sort((a, b) => b.size - a.size)[0];
+  const last = rs[0];
+  const body = `
+<section class="intro">
+  <h1>Express Entry in ${Y}: Draws, Invitations and Cut-offs of the Year</h1>
+  <p class="lede">All ${rs.length} Express Entry rounds of ${Y} in one place: ${fmt(sum(rs))} invitations to apply, how they split by category and program, the lowest and highest cut-offs, and how the year compares with ${PY}.</p>
+  <p class="meta"><span>Last round ${longDate(last.date)}</span><span>Updated automatically from IRCC</span><span>Source: <a href="${draws.page}" rel="noopener">IRCC rounds of invitations</a></span></p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">Invitations in ${Y}</div><div class="v">${fmt(sum(rs))}</div><div class="small">${PY}: ${fmt(sum(ps))}</div></div>
+  <div class="card"><div class="k">Rounds</div><div class="v">${rs.length}</div><div class="small">${PY}: ${ps.length}</div></div>
+  <div class="card"><div class="k">Largest round</div><div class="v">${fmt(big.size)}</div><div class="small">${esc(big.name)}, ${longDate(big.date)}</div></div>
+</div>
+<h2>Invitations by month</h2>
+<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Express Entry invitations by month in ${Y}">${bars}</svg>
+<h2>By category and program</h2>
+<div class="table-scroll"><table><thead><tr><th>Round type</th><th class="n">Rounds</th><th class="n">Invitations</th><th class="n">Share</th><th class="n">Cut-off range</th></tr></thead><tbody>${rowsC.map(([c, n, s, a, b]) => `<tr><td>${link(c, name[c] || c)}</td><td class="n">${n}</td><td class="n">${fmt(s)}</td><td class="n">${((s / sum(rs)) * 100).toFixed(1)}%</td><td class="n">${a === b ? a : `${a}–${b}`}</td></tr>`).join('')}</tbody></table></div>
+<article class="prose">
+<h2>Highlights</h2>
+<ul>
+<li>Lowest cut-off in a round of 1,000 invitations or more (PNP rounds aside): <strong>${lo.crs}</strong> (${esc(lo.name)}, ${longDate(lo.date)}).</li>
+<li>Highest cut-off in a round of 1,000 invitations or more (PNP rounds aside): <strong>${hi.crs}</strong> (${esc(hi.name)}, ${longDate(hi.date)}).</li>
+${sum(ps) ? `<li>Invitations were ${sum(rs) >= sum(ps) ? 'up' : 'down'} ${Math.abs(((sum(rs) - sum(ps)) / sum(ps)) * 100).toFixed(1)}% on ${PY} (${fmt(sum(ps))} invitations in ${ps.length} rounds)${latestDate.startsWith(Y) && latestDate < `${Y}-12-31` ? `, counting ${Y} up to ${longDate(last.date)}` : ''}.</li>` : ''}
+</ul>
+<p>Check where your score stands with the <a href="/">CRS calculator</a>, see every round in the <a href="/express-entry-draws/">draws history</a> and the pool on the <a href="/crs-score-distribution/">CRS score distribution</a> page.</p>
+<h2>Sources</h2>
+<ul><li><a href="${draws.page}" rel="noopener">Express Entry rounds of invitations</a>, IRCC (data read from IRCC's rounds file)</li></ul>
+</article>`;
+  return page({ path: `/express-entry-${Y}/`, title: `Express Entry ${Y} in Review: All Draws, Invitations and Cut-offs`, description: `Express Entry in ${Y}: ${fmt(sum(rs))} invitations in ${rs.length} rounds, by category with cut-off ranges, monthly totals and the comparison with ${PY}, from IRCC data.`, body, crumbs: [['Home', '/'], [`Express Entry ${Y}`, `/express-entry-${Y}/`]] });
 }
 
 // ---------- Simple pages ----------
@@ -1781,7 +2243,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage], ['super-visa-income-requirement', superVisaPage], ['parents-grandparents-sponsorship-income', pgpIncomePage], ['bc-pnp-points-calculator', bcCalcPage], ['bc-pnp-draws', bcDrawsPage], ['noc-code-finder', nocPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage], ['super-visa-income-requirement', superVisaPage], ['parents-grandparents-sponsorship-income', pgpIncomePage], ['bc-pnp-points-calculator', bcCalcPage], ['bc-pnp-draws', bcDrawsPage], ['noc-code-finder', nocPage], ['spousal-open-work-permit', sowpPage], ['bridging-open-work-permit', bowpPage], ['pgwp-calculator', pgwpPage], ['express-entry-2026', eeYearPage], ['canada-pr-fees', feesPage], ['atlantic-immigration-program', aipPage], ['nova-scotia-nominee-program', nsnpPage], ['new-brunswick-pnp', nbpnpPage], ['rural-community-immigration-pilot', rcipPage], ['canadian-citizenship-test-practice', citizenshipTestPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }

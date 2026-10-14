@@ -25,6 +25,12 @@ jobs:
       - name: British Columbia (BC PNP) invitations
         run: node scripts/bcpnp.mjs --fetch
         continue-on-error: true
+      - name: New Brunswick (NBPNP and AIP) rounds
+        run: node scripts/nbpnp.mjs --fetch
+        continue-on-error: true
+      - name: Nova Scotia (NSNP) EOI selections
+        run: node scripts/nsnp.mjs --fetch
+        continue-on-error: true
       - run: npm test
       - name: Commit if the data changed
         run: |

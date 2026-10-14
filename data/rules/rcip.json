@@ -1,0 +1,112 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration.html",
+ "sourceModified": "2026-04-30",
+ "checked": "2026-10-14",
+ "watchPages": [
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots.html",
+   "modified": "2026-08-31"
+  },
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration/eligibility.html",
+   "modified": "2025-08-13"
+  },
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration/eligibility/work-experience.html",
+   "modified": "2025-08-13"
+  },
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration/eligibility/language-test.html",
+   "modified": "2025-08-13"
+  },
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration/eligibility/education-assessment.html",
+   "modified": "2026-02-19"
+  },
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration/eligibility/proof-funds.html",
+   "modified": "2025-09-03"
+  },
+  {
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration/job-offer.html",
+   "modified": "2025-08-19"
+  }
+ ],
+ "pages": {
+  "work": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration/eligibility/work-experience.html",
+  "language": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration/eligibility/language-test.html",
+  "education": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration/eligibility/education-assessment.html",
+  "funds": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration/eligibility/proof-funds.html",
+  "jobOffer": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots/rural-immigration/job-offer.html",
+  "hub": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/rural-franco-pilots.html"
+ },
+ "hours": 1560,
+ "years": 3,
+ "experience": [
+  [
+   "TEER 0 or 1",
+   "TEER 0, 1, 2 or 3"
+  ],
+  [
+   "TEER 2",
+   "TEER 1, 2, 3 or 4"
+  ],
+  [
+   "TEER 3 or 4",
+   "TEER 2, 3 or 4"
+  ],
+  [
+   "TEER 5",
+   "The same 5-digit NOC code"
+  ]
+ ],
+ "clb": [
+  [
+   "TEER 0 or 1",
+   6
+  ],
+  [
+   "TEER 2 or 3",
+   5
+  ],
+  [
+   "TEER 4 or 5",
+   4
+  ]
+ ],
+ "fundsUpdated": "2025-07-29",
+ "funds": [
+  10507,
+  13080,
+  16080,
+  19524,
+  22143,
+  24975,
+  27806
+ ],
+ "fundsEach": 2831,
+ "communities": [
+  "Pictou County, NS",
+  "North Bay and Area, ON",
+  "Sudbury, ON",
+  "Timmins, ON",
+  "Sault Ste. Marie, ON",
+  "Thunder Bay, ON",
+  "Steinbach, MB",
+  "Altona/Rhineland, MB",
+  "Brandon, MB",
+  "Moose Jaw, SK",
+  "Claresholm, AB",
+  "West Kootenay, BC",
+  "North Okanagan Shuswap, BC",
+  "Peace Liard, BC"
+ ],
+ "francophone": [
+  "Acadian Peninsula, NB",
+  "Sudbury, ON",
+  "Timmins, ON",
+  "Superior East Region, ON",
+  "St. Pierre Jolys, MB",
+  "Kelowna, BC"
+ ]
+}
