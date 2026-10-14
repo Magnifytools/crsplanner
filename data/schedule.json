@@ -1,0 +1,7 @@
+{
+ "note": "Pages prepared ahead of time and the date they go live (editorial calendar). scripts/release.mjs moves them to released.json on that date.",
+ "pages": {
+  "/celpip-score-chart/": "2026-10-21",
+  "/pte-core-score-chart/": "2026-10-23"
+ }
+}

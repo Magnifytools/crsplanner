@@ -32,6 +32,7 @@ export const CATEGORIES = [
   ['education', 'Education', /Education occupations/i],
   ['agriculture', 'Agriculture and agri-food', /Agriculture/i],
   ['managers', 'Senior managers with Canadian work experience', /Senior managers/i],
+  ['researchers', 'Researchers with Canadian work experience', /Researchers/i],
   ['military', 'Skilled military recruits', /Military/i],
   ['general', 'General (all programs)', /General|No Program Specified/i],
 ];

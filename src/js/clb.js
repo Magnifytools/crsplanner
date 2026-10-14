@@ -3,7 +3,8 @@ import { clbForScore, SKILLS } from './crs.js';
 const $ = (s) => document.querySelector(s);
 const lang = JSON.parse(document.getElementById('lang-rules').textContent);
 const form = $('#clb-form');
-const STORE = 'crsplanner.clb.v1';
+const fixed = form.dataset.test || null; // score-chart pages fix the test
+const STORE = fixed ? `crsplanner.clb.${fixed}.v1` : 'crsplanner.clb.v1';
 
 function limits() {
   const t = lang.tests[form.elements.test.value];
@@ -45,8 +46,10 @@ function update() {
 
 let saved = null;
 try { saved = JSON.parse(localStorage.getItem(STORE) || 'null'); } catch (e) { saved = null; }
-const start = saved || { test: 'ielts', speaking: '6.5', listening: '7.5', reading: '6.5', writing: '6.5' };
-for (const [k, v] of Object.entries(start)) if (form.elements[k]) form.elements[k].value = v;
+// Default example: the CLB 7 threshold of each ability (IELTS keeps its usual example).
+const clb7 = (id) => Object.fromEntries(SKILLS.map((s) => [s, String(lang.tests[id][s][lang.levels.indexOf(7)])]));
+const start = saved || (fixed ? clb7(fixed) : { test: 'ielts', speaking: '6.5', listening: '7.5', reading: '6.5', writing: '6.5' });
+for (const [k, v] of Object.entries(start)) if (form.elements[k] && !(fixed && k === 'test')) form.elements[k].value = v;
 form.addEventListener('input', update);
 form.addEventListener('change', update);
 form.addEventListener('submit', (e) => e.preventDefault());

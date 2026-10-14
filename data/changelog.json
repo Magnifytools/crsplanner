@@ -1,6 +1,10 @@
 [
  {
   "date": "2026-10-14",
+  "what": "New page: Express Entry categories, with the requirement and the occupation list (NOC 2021 and TEER) of each of the 10 current categories, from IRCC's category-based selection page (modified 2026-06-22). Category draw pages now show their 2026 requirement. Added the researchers category to the draws data."
+ },
+ {
+  "date": "2026-10-14",
   "what": "Calculator tested against IRCC's online calculator with 1,000 random profiles: 917 identical; the other 83 differ only because IRCC's calculator gives 0 points to TCF Canada at NCLC 4 while the published criteria give 6 per ability. The calculator now flags that case. New pages: CLB 4 to 10 and NCLC 4 to 10, and the CRS score distribution."
  },
  {

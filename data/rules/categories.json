@@ -1,0 +1,557 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations/category-based-selection.html",
+ "sourceModified": "2026-06-22",
+ "checked": "2026-10-14",
+ "general": "To be invited in a category round you must meet the minimum criteria of Express Entry, which means being eligible for one of its three programs (Federal Skilled Worker, Canadian Experience Class or Federal Skilled Trades), and meet every requirement in the instructions for that round.",
+ "categories": [
+  {
+   "id": "french",
+   "drawId": "french",
+   "name": "French-language proficiency",
+   "requirement": "French test results of NCLC 7 or higher in all four abilities (speaking, listening, reading, writing).",
+   "occupations": null
+  },
+  {
+   "id": "healthcare",
+   "drawId": "health",
+   "name": "Healthcare and social services occupations",
+   "requirement": "At least 12 months of full-time work experience (or the same amount part-time) in the last 3 years, in Canada or abroad, in one of the listed occupations. The months do not need to be continuous.",
+   "occupations": [
+    {
+     "noc": "32104",
+     "teer": 2,
+     "title": "Animal health technologists and veterinary technicians"
+    },
+    {
+     "noc": "31112",
+     "teer": 1,
+     "title": "Audiologists and speech-language pathologists"
+    },
+    {
+     "noc": "32123",
+     "teer": 2,
+     "title": "Cardiology technologists and electrophysiological diagnostic technologists"
+    },
+    {
+     "noc": "31201",
+     "teer": 1,
+     "title": "Chiropractors"
+    },
+    {
+     "noc": "32111",
+     "teer": 2,
+     "title": "Dental hygienists and dental therapists"
+    },
+    {
+     "noc": "31110",
+     "teer": 1,
+     "title": "Dentists"
+    },
+    {
+     "noc": "31121",
+     "teer": 1,
+     "title": "Dietitians and nutritionists"
+    },
+    {
+     "noc": "31102",
+     "teer": 1,
+     "title": "General practitioners and family physicians"
+    },
+    {
+     "noc": "32101",
+     "teer": 2,
+     "title": "Licensed practical nurses"
+    },
+    {
+     "noc": "32201",
+     "teer": 2,
+     "title": "Massage therapists"
+    },
+    {
+     "noc": "33101",
+     "teer": 3,
+     "title": "Medical laboratory assistants and related technical occupations"
+    },
+    {
+     "noc": "32120",
+     "teer": 2,
+     "title": "Medical laboratory technologists"
+    },
+    {
+     "noc": "32121",
+     "teer": 2,
+     "title": "Medical radiation technologists"
+    },
+    {
+     "noc": "32122",
+     "teer": 2,
+     "title": "Medical sonographers"
+    },
+    {
+     "noc": "33102",
+     "teer": 3,
+     "title": "Nurse aides, orderlies and patient service associates"
+    },
+    {
+     "noc": "31302",
+     "teer": 1,
+     "title": "Nurse practitioners"
+    },
+    {
+     "noc": "31300",
+     "teer": 1,
+     "title": "Nursing coordinators and supervisors"
+    },
+    {
+     "noc": "31203",
+     "teer": 1,
+     "title": "Occupational therapists"
+    },
+    {
+     "noc": "31111",
+     "teer": 1,
+     "title": "Optometrists"
+    },
+    {
+     "noc": "32129",
+     "teer": 2,
+     "title": "Other medical technologists and technicians"
+    },
+    {
+     "noc": "31209",
+     "teer": 1,
+     "title": "Other professional occupations in health diagnosing and treating"
+    },
+    {
+     "noc": "32109",
+     "teer": 2,
+     "title": "Other technical occupations in therapy and assessment"
+    },
+    {
+     "noc": "32102",
+     "teer": 2,
+     "title": "Paramedical occupations"
+    },
+    {
+     "noc": "31120",
+     "teer": 1,
+     "title": "Pharmacists"
+    },
+    {
+     "noc": "33103",
+     "teer": 3,
+     "title": "Pharmacy technical assistants and pharmacy assistants"
+    },
+    {
+     "noc": "32124",
+     "teer": 2,
+     "title": "Pharmacy technicians"
+    },
+    {
+     "noc": "31303",
+     "teer": 1,
+     "title": "Physician assistants, midwives and allied health professionals"
+    },
+    {
+     "noc": "31202",
+     "teer": 1,
+     "title": "Physiotherapists"
+    },
+    {
+     "noc": "31200",
+     "teer": 1,
+     "title": "Psychologists"
+    },
+    {
+     "noc": "31301",
+     "teer": 1,
+     "title": "Registered nurses and registered psychiatric nurses"
+    },
+    {
+     "noc": "32103",
+     "teer": 2,
+     "title": "Respiratory therapists, clinical perfusionists and cardiopulmonary technologists"
+    },
+    {
+     "noc": "42201",
+     "teer": 2,
+     "title": "Social and community service workers"
+    },
+    {
+     "noc": "41300",
+     "teer": 1,
+     "title": "Social workers"
+    },
+    {
+     "noc": "31100",
+     "teer": 1,
+     "title": "Specialists in clinical and laboratory medicine"
+    },
+    {
+     "noc": "31101",
+     "teer": 1,
+     "title": "Specialists in surgery"
+    },
+    {
+     "noc": "41301",
+     "teer": 1,
+     "title": "Therapists in counselling and related specialized therapies"
+    },
+    {
+     "noc": "31103",
+     "teer": 1,
+     "title": "Veterinarians"
+    }
+   ]
+  },
+  {
+   "id": "stem",
+   "drawId": "stem",
+   "name": "Science, technology, engineering and math (STEM) occupations",
+   "requirement": "At least 12 months of full-time work experience (or the same amount part-time) in the last 3 years, in Canada or abroad, in one of the listed occupations. The months do not need to be continuous.",
+   "occupations": [
+    {
+     "noc": "20011",
+     "teer": 0,
+     "title": "Architecture and science managers"
+    },
+    {
+     "noc": "22300",
+     "teer": 2,
+     "title": "Civil engineering technologists and technicians"
+    },
+    {
+     "noc": "21300",
+     "teer": 1,
+     "title": "Civil engineers"
+    },
+    {
+     "noc": "21220",
+     "teer": 1,
+     "title": "Cybersecurity specialists"
+    },
+    {
+     "noc": "22310",
+     "teer": 2,
+     "title": "Electrical and electronics engineering technologists and technicians"
+    },
+    {
+     "noc": "21310",
+     "teer": 1,
+     "title": "Electrical and electronics engineers"
+    },
+    {
+     "noc": "21331",
+     "teer": 1,
+     "title": "Geological engineers"
+    },
+    {
+     "noc": "21321",
+     "teer": 1,
+     "title": "Industrial and manufacturing engineers"
+    },
+    {
+     "noc": "63100",
+     "teer": 3,
+     "title": "Insurance agents and brokers"
+    },
+    {
+     "noc": "22301",
+     "teer": 2,
+     "title": "Mechanical engineering technologists and technicians"
+    },
+    {
+     "noc": "21301",
+     "teer": 1,
+     "title": "Mechanical engineers"
+    }
+   ]
+  },
+  {
+   "id": "trades",
+   "drawId": "trades",
+   "name": "Trade occupations",
+   "requirement": "At least 12 months of full-time work experience (or the same amount part-time) in the last 3 years, in Canada or abroad, in one of the listed occupations. The months do not need to be continuous.",
+   "occupations": [
+    {
+     "noc": "72320",
+     "teer": 2,
+     "title": "Bricklayers"
+    },
+    {
+     "noc": "63201",
+     "teer": 3,
+     "title": "Butchers - retail and wholesale"
+    },
+    {
+     "noc": "72311",
+     "teer": 2,
+     "title": "Cabinetmakers"
+    },
+    {
+     "noc": "72310",
+     "teer": 2,
+     "title": "Carpenters"
+    },
+    {
+     "noc": "73100",
+     "teer": 3,
+     "title": "Concrete finishers"
+    },
+    {
+     "noc": "22303",
+     "teer": 2,
+     "title": "Construction estimators"
+    },
+    {
+     "noc": "70010",
+     "teer": 0,
+     "title": "Construction managers"
+    },
+    {
+     "noc": "72400",
+     "teer": 2,
+     "title": "Construction millwrights and industrial mechanics"
+    },
+    {
+     "noc": "82021",
+     "teer": 2,
+     "title": "Contractors and supervisors, oil and gas drilling and services"
+    },
+    {
+     "noc": "72422",
+     "teer": 2,
+     "title": "Electrical mechanics"
+    },
+    {
+     "noc": "72200",
+     "teer": 2,
+     "title": "Electricians (except industrial and power system)"
+    },
+    {
+     "noc": "73113",
+     "teer": 3,
+     "title": "Floor covering installers"
+    },
+    {
+     "noc": "72302",
+     "teer": 2,
+     "title": "Gas fitters"
+    },
+    {
+     "noc": "72402",
+     "teer": 2,
+     "title": "Heating, refrigeration and air conditioning mechanics"
+    },
+    {
+     "noc": "72401",
+     "teer": 2,
+     "title": "Heavy-duty equipment mechanics"
+    },
+    {
+     "noc": "70011",
+     "teer": 0,
+     "title": "Home building and renovation managers"
+    },
+    {
+     "noc": "72201",
+     "teer": 2,
+     "title": "Industrial electricians"
+    },
+    {
+     "noc": "72100",
+     "teer": 2,
+     "title": "Machinists and machining and tooling inspectors"
+    },
+    {
+     "noc": "72999",
+     "teer": 2,
+     "title": "Other technical trades and related occupations"
+    },
+    {
+     "noc": "73112",
+     "teer": 3,
+     "title": "Painters and decorators (except interior decorators)"
+    },
+    {
+     "noc": "72300",
+     "teer": 2,
+     "title": "Plumbers"
+    },
+    {
+     "noc": "73110",
+     "teer": 3,
+     "title": "Roofers and shinglers"
+    },
+    {
+     "noc": "72102",
+     "teer": 2,
+     "title": "Sheet metal workers"
+    },
+    {
+     "noc": "72501",
+     "teer": 2,
+     "title": "Water well drillers"
+    },
+    {
+     "noc": "72106",
+     "teer": 2,
+     "title": "Welders and related machine operators"
+    }
+   ]
+  },
+  {
+   "id": "education",
+   "drawId": "education",
+   "name": "Education occupations",
+   "requirement": "At least 12 months of full-time work experience (or the same amount part-time) in the last 3 years, in Canada or abroad, in one of the listed occupations. The months do not need to be continuous.",
+   "occupations": [
+    {
+     "noc": "42202",
+     "teer": 2,
+     "title": "Early childhood educators and assistants"
+    },
+    {
+     "noc": "43100",
+     "teer": 3,
+     "title": "Elementary and secondary school teacher assistants"
+    },
+    {
+     "noc": "41221",
+     "teer": 1,
+     "title": "Elementary school and kindergarten teachers"
+    },
+    {
+     "noc": "42203",
+     "teer": 2,
+     "title": "Instructors of persons with disabilities"
+    },
+    {
+     "noc": "41220",
+     "teer": 1,
+     "title": "Secondary school teachers"
+    }
+   ]
+  },
+  {
+   "id": "transport",
+   "drawId": "transport",
+   "name": "Transport occupations",
+   "requirement": "At least 12 months of full-time work experience (or the same amount part-time) in the last 3 years, in Canada or abroad, in one of the listed occupations. The months do not need to be continuous.",
+   "occupations": [
+    {
+     "noc": "72600",
+     "teer": 2,
+     "title": "Air pilots, flight engineers and flying instructors"
+    },
+    {
+     "noc": "22313",
+     "teer": 2,
+     "title": "Aircraft instrument, electrical and avionics mechanics, technicians and inspectors"
+    },
+    {
+     "noc": "72404",
+     "teer": 2,
+     "title": "Aircraft mechanics and aircraft inspectors"
+    },
+    {
+     "noc": "72410",
+     "teer": 2,
+     "title": "Automotive service technicians, truck and bus mechanics, and mechanical repairers"
+    }
+   ]
+  },
+  {
+   "id": "physicians",
+   "drawId": "physicians",
+   "name": "Physicians with Canadian work experience",
+   "requirement": "At least 12 months of full-time work experience (or the same amount part-time) in the last 3 years, in Canada, in one of the listed occupations. The months do not need to be continuous.",
+   "occupations": [
+    {
+     "noc": "31102",
+     "teer": 1,
+     "title": "General practitioners and family physicians"
+    },
+    {
+     "noc": "31100",
+     "teer": 1,
+     "title": "Specialists in clinical and laboratory medicine"
+    },
+    {
+     "noc": "31101",
+     "teer": 1,
+     "title": "Specialists in surgery"
+    }
+   ]
+  },
+  {
+   "id": "managers",
+   "drawId": "managers",
+   "name": "Senior managers with Canadian work experience",
+   "requirement": "At least 12 months of full-time work experience (or the same amount part-time) in the last 3 years, in Canada, in one of the listed occupations. The months do not need to be continuous.",
+   "occupations": [
+    {
+     "noc": "00015",
+     "teer": 0,
+     "title": "Senior managers - construction, transportation, production and utilities"
+    },
+    {
+     "noc": "00012",
+     "teer": 0,
+     "title": "Senior managers - financial, communications and other business services"
+    },
+    {
+     "noc": "00013",
+     "teer": 0,
+     "title": "Senior managers - health, education, social and community services and membership organizations"
+    },
+    {
+     "noc": "00014",
+     "teer": 0,
+     "title": "Senior managers - trade, broadcasting and other services"
+    }
+   ]
+  },
+  {
+   "id": "researchers",
+   "drawId": null,
+   "name": "Researchers with Canadian work experience",
+   "requirement": "At least 12 months of full-time work experience (or the same amount part-time) in the last 3 years, in Canada, in one of the listed occupations. The months do not need to be continuous.",
+   "occupations": [
+    {
+     "noc": "41201",
+     "teer": 1,
+     "title": "Post-secondary teaching and research assistants"
+    },
+    {
+     "noc": "41200",
+     "teer": 1,
+     "title": "University professors and lecturers"
+    }
+   ]
+  },
+  {
+   "id": "military",
+   "drawId": "military",
+   "name": "Skilled military recruits",
+   "requirement": "Be a Foreign Skilled Military Applicant (FSMA): serving in a recognized foreign military, with at least 10 years of continuous service, and with work experience and training aligned with the main duties of one of the listed Canadian Armed Forces occupations.",
+   "occupations": [
+    {
+     "noc": "40042",
+     "teer": 0,
+     "title": "Commissioned officers of the Canadian Armed Forces"
+    },
+    {
+     "noc": "43204",
+     "teer": 3,
+     "title": "Operations members of the Canadian Armed Forces"
+    },
+    {
+     "noc": "42102",
+     "teer": 2,
+     "title": "Specialized members of the Canadian Armed Forces"
+    }
+   ]
+  }
+ ]
+}

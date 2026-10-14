@@ -11,15 +11,21 @@ const crs = read('data/rules/crs.json');
 const lang = read('data/rules/language-tests.json');
 const draws = read('data/draws.json');
 const changelog = read('data/changelog.json');
+const cats = read('data/rules/categories.json');
+// Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
+// PREVIEW=1 builds every scheduled page.
+const schedule = read('data/schedule.json');
+const released = new Set(read('data/released.json'));
+const isLive = (path) => !(path in schedule.pages) || released.has(path) || process.env.PREVIEW === '1';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const fmt = (n) => (n === null || n === undefined ? '' : Number(n).toLocaleString('en-CA'));
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const longDate = (iso) => `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${Number(iso.slice(8, 10))}, ${iso.slice(0, 4)}`;
 const jsonScript = (id, obj) => `<script type="application/json" id="${id}">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
-const NAV = [['/', 'CRS calculator'], ['/clb-converter/', 'CLB converter'], ['/express-entry-draws/', 'Draws'], ['/crs-score-distribution/', 'Score distribution']];
+const NAV = [['/', 'CRS calculator'], ['/clb-converter/', 'CLB converter'], ['/express-entry-draws/', 'Draws'], ['/express-entry-categories/', 'Categories'], ['/crs-score-distribution/', 'Score distribution']];
 const LEVELS = [4, 5, 6, 7, 8, 9, 10];
-const footerTools = [['/', 'CRS calculator'], ['/clb-converter/', 'CLB converter'], ['/express-entry-draws/', 'Express Entry draws'], ['/crs-score-distribution/', 'CRS score distribution']];
+const footerTools = [['/', 'CRS calculator'], ['/clb-converter/', 'CLB converter'], ['/express-entry-draws/', 'Express Entry draws'], ['/express-entry-categories/', 'Express Entry categories'], ['/crs-score-distribution/', 'CRS score distribution']];
 
 function page({ path, title, description, body, scripts = '', jsonld = [], crumbs = null }) {
   const url = SITE.url + path;
@@ -251,7 +257,8 @@ function clbPage() {
     const fmtRange = (arr, i, s) => scoreRange(t, s, i);
     const rows = [...lang.levels].map((lvl, i) => ({ lvl, i })).reverse().map(({ lvl, i }) =>
       `<tr><td>${nm} ${lvl}${lvl === 10 ? '+' : ''}</td>${['speaking', 'listening', 'reading', 'writing'].map((s) => `<td class="n">${fmtRange(t[s], i, s)}</td>`).join('')}</tr>`).join('');
-    return `<h3 id="${id}">${esc(t.name)} to ${nm}</h3><div class="table-scroll"><table><thead><tr><th>Level</th><th class="n">Speaking</th><th class="n">Listening</th><th class="n">Reading</th><th class="n">Writing</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    const chart = CHART_PAGES[id] && isLive(`/${CHART_PAGES[id].slug}/`) ? `<p class="small">Minimum scores per program and CRS points: <a href="/${CHART_PAGES[id].slug}/">${CHART_PAGES[id].short} score chart</a>.</p>` : '';
+    return `<h3 id="${id}">${esc(t.name)} to ${nm}</h3>${chart}<div class="table-scroll"><table><thead><tr><th>Level</th><th class="n">Speaking</th><th class="n">Listening</th><th class="n">Reading</th><th class="n">Writing</th></tr></thead><tbody>${rows}</tbody></table></div>`;
   }).join('');
   const body = `
 <section class="intro">
@@ -320,6 +327,7 @@ function drawsPage() {
 <p class="small">${fmt(thisYear.length)} rounds so far in ${year}, with ${fmt(thisYear.reduce((s, r) => s + (r.size || 0), 0))} invitations in total.</p>
 
 <h2>Draws by category</h2>
+<p>What each category requires and which occupations it covers: <a href="/express-entry-categories/">Express Entry categories</a>.</p>
 <p class="levels">${catPagesList().map((c) => `<a href="/express-entry-draws/${CAT_PAGES[c.id].slug}/">${esc(CAT_PAGES[c.id].short)}</a>`).join(' ')}</p>
 
 <h2>Cut-off scores, last three years</h2>
@@ -374,7 +382,7 @@ function levelPage(language, L) {
   const plus = L === 10 ? '+' : '';
   const testNames = tests.map(([, t]) => t.name);
   const listNames = testNames.length === 2 ? testNames.join(' and ') : `${testNames.slice(0, -1).join(', ')} and ${testNames.at(-1)}`;
-  const tables = tests.map(([id, t]) => `<h3>${esc(t.name)}</h3><div class="table-scroll"><table><thead><tr><th>Ability</th><th class="n">Score for ${name} ${L}${plus}</th></tr></thead><tbody>${SK.map((s) => `<tr><td>${SKL[s]}</td><td class="n">${scoreRange(t, s, i)}</td></tr>`).join('')}</tbody></table></div>`).join('');
+  const tables = tests.map(([id, t]) => `<h3>${esc(t.name)}</h3>${CHART_PAGES[id] && isLive(`/${CHART_PAGES[id].slug}/`) ? `<p class="small">All levels: <a href="/${CHART_PAGES[id].slug}/">${CHART_PAGES[id].short} score chart</a>.</p>` : ''}<div class="table-scroll"><table><thead><tr><th>Ability</th><th class="n">Score for ${name} ${L}${plus}</th></tr></thead><tbody>${SK.map((s) => `<tr><td>${SKL[s]}</td><td class="n">${scoreRange(t, s, i)}</td></tr>`).join('')}</tbody></table></div>`).join('');
   const first = rowFor(crs.core.firstLanguage.perAbilityByClb, L).points;
   const second = rowFor(crs.core.secondLanguage.perAbilityByClb, L).points;
   const spouse = rowFor(crs.spouse.language.perAbilityByClb, L).points;
@@ -492,6 +500,7 @@ const CAT_PAGES = {
   agriculture: { slug: 'agriculture', short: 'Agriculture', kw: 'Agriculture Draw', h1: 'Agriculture Draws: Agriculture and Agri-Food Cut-off Scores', about: 'Agriculture and agri-food rounds invited candidates with recent work experience in the eligible occupations.' },
   managers: { slug: 'senior-managers', short: 'Senior managers', kw: 'Senior Managers Draw', h1: 'Senior Managers Draws: Cut-off Scores', about: 'This category invites senior managers with Canadian work experience, as defined by IRCC for the 2026 version of the category.' },
   physicians: { slug: 'physicians', short: 'Physicians', kw: 'Physicians Draw', h1: 'Physicians Draws: Physicians with Canadian Work Experience', about: 'This category invites physicians with Canadian work experience, as defined by IRCC for the 2026 version of the category.' },
+  researchers: { slug: 'researchers', short: 'Researchers', kw: 'Researchers Draw', h1: 'Researchers Draws: Researchers with Canadian Work Experience', about: 'This category invites researchers with Canadian work experience, as defined by IRCC for the 2026 version of the category.' },
   general: { slug: 'general', short: 'General', kw: 'General Draw', h1: 'General (All-Program) Draws: Cut-off Scores', about: 'General rounds invite the top-ranked candidates from all three federal programs. They were the main type of round until category and program rounds took over.' },
 };
 const median = (a) => { const s = [...a].sort((x, y) => x - y); const m = s.length >> 1; return s.length ? (s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2)) : null; };
@@ -554,6 +563,7 @@ ${chartList.length >= 2 ? `<h2>Cut-off scores since ${chartFromC.slice(0, 4)}</h
 <article class="prose">
 <h2>Who these rounds invite</h2>
 <p>${esc(meta.about)} Being above a cut-off only matters if you are eligible for the round.</p>
+${(() => { const k = cats.categories.find((x) => x.drawId === c.id); return k ? `<p><strong>Requirement in ${cats.checked.slice(0, 4)}:</strong> ${esc(k.requirement)}${k.occupations ? ` The category covers ${k.occupations.length} occupation${k.occupations.length > 1 ? 's' : ''}; see the list with NOC codes on the <a href="/express-entry-categories/#${k.id}">Express Entry categories</a> page.` : ` More on the <a href="/express-entry-categories/#${k.id}">Express Entry categories</a> page.`}</p>` : ''; })()}
 ${names.length > 1 ? `<p>IRCC has used ${names.length} names for these rounds over time: ${names.map(esc).join('; ')}. We group them here so the trend can be compared.</p>` : ''}
 <p>Check your own score with the <a href="/">CRS calculator</a>, which compares it with every category's cut-offs of the last 12 months. Other categories: ${others}. All rounds together are on the <a href="/express-entry-draws/">Express Entry draws</a> page.</p>
 </article>`;
@@ -561,6 +571,127 @@ ${names.length > 1 ? `<p>IRCC has used ${names.length} names for these rounds ov
   const longT = `${meta.kw} ${year}: Latest Express Entry ${meta.short} Cut-off and History`;
   const title = !recent.length ? `${meta.kw}s: Express Entry Cut-off History ${all.at(-1).date.slice(0, 4)}–${last.date.slice(0, 4)}` : longT.length <= 65 ? longT : `${meta.kw} ${year}: Latest Cut-off and History`;
   return page({ path, title, description: `Latest ${meta.short} Express Entry draw: #${last.n} on ${longDate(last.date)}, ${fmt(last.size)} invitations, cut-off ${last.crs}. All ${all.length} rounds, trend and frequency.`, body, jsonld, crumbs: [['Home', '/'], ['Express Entry draws', '/express-entry-draws/'], [meta.short, path]] });
+}
+
+// ---------- Express Entry categories ----------
+const CAT_SLUG_BY_DRAW = Object.fromEntries(Object.entries(CAT_PAGES).map(([id, m]) => [id, m.slug]));
+function catStats(drawId) {
+  if (!drawId) return { all: [], recent: [] };
+  const all = draws.rounds.filter((r) => r.category === drawId && r.crs !== null);
+  const yearAgoC = `${Number(latestDate.slice(0, 4)) - 1}${latestDate.slice(4)}`;
+  return { all, recent: all.filter((r) => r.date > yearAgoC) };
+}
+function categoriesPage() {
+  const C = cats.categories;
+  const drawLink = (c) => (c.drawId && catPagesList().some((x) => x.id === c.drawId) ? `/express-entry-draws/${CAT_SLUG_BY_DRAW[c.drawId]}/` : null);
+  const summary = C.map((c) => {
+    const { all, recent } = catStats(c.drawId);
+    const last = all[0];
+    const link = drawLink(c);
+    const lastTxt = last ? `${link ? `<a href="${link}">` : ''}${last.date}, cut-off ${fmt(last.crs)}${link ? '</a>' : ''}` : 'No round yet';
+    const lo = Math.min(...recent.map((r) => r.crs)), hi = Math.max(...recent.map((r) => r.crs));
+    const range = recent.length ? `${lo === hi ? lo : `${lo}–${hi}`} (${recent.length} round${recent.length > 1 ? 's' : ''})` : '–';
+    return `<tr><td><a href="#${c.id}">${esc(c.name)}</a></td><td class="n">${c.occupations ? c.occupations.length : '–'}</td><td>${lastTxt}</td><td class="n">${range}</td></tr>`;
+  }).join('');
+  const sections = C.map((c) => {
+    const { all, recent } = catStats(c.drawId);
+    const link = drawLink(c);
+    const occ = c.occupations ? `<div class="table-scroll"><table><thead><tr><th>Occupation</th><th class="n">NOC 2021</th><th class="n">TEER</th></tr></thead><tbody>${c.occupations.map((o) => `<tr><td>${esc(o.title)}</td><td class="n">${o.noc}</td><td class="n">${o.teer}</td></tr>`).join('')}</tbody></table></div>` : '';
+    const draw = all.length
+      ? `<p>${recent.length ? `${recent.length} round${recent.length > 1 ? 's' : ''} in the last 12 months, ${recent.length > 1 ? `with cut-offs from ${Math.min(...recent.map((r) => r.crs))} to ${Math.max(...recent.map((r) => r.crs))}` : `with a cut-off of ${recent[0].crs}`}.` : 'No rounds in the last 12 months.'} The latest was on ${longDate(all[0].date)}: ${fmt(all[0].size)} invitations, cut-off ${fmt(all[0].crs)}.${link ? ` See every round on the <a href="${link}">${esc(CAT_PAGES[c.drawId].short)} draws page</a>.` : ''}</p>`
+      : '<p>IRCC has not held a round for this category yet.</p>';
+    const tcf = c.id === 'french' ? `<p>Check your level with the <a href="/clb-converter/">CLB converter</a> or see the TEF and TCF scores for <a href="/nclc-7/">NCLC 7</a>. NCLC 7 in all four abilities also gives up to 50 additional CRS points, whether or not you are invited through this category.</p>` : '';
+    return `<h2 id="${c.id}">${esc(c.name)}</h2><p><strong>Requirement:</strong> ${esc(c.requirement)}</p>${occ}${tcf}${draw}`;
+  }).join('\n');
+  const PROGRAM_ROUNDS = ['cec', 'pnp', 'fsw', 'fst', 'general'];
+  const retired = catPagesList().filter((c) => !PROGRAM_ROUNDS.includes(c.id) && !C.some((k) => k.drawId === c.id));
+  // A data-driven example of how far apart cut-offs can be: lowest category round vs lowest CEC round, last 12 months.
+  const lowCat = C.map((c) => ({ c, r: catStats(c.drawId).recent })).filter((x) => x.r.length).map((x) => ({ name: x.c.name, max: Math.max(...x.r.map((r) => r.crs)) })).sort((a, b) => a.max - b.max)[0];
+  const cecRecent = catStats('cec').recent;
+  const contrast = lowCat && cecRecent.length && Math.min(...cecRecent.map((r) => r.crs)) > lowCat.max
+    ? ` In the last 12 months every round for ${esc(lowCat.name[0].toLowerCase() + lowCat.name.slice(1))} closed at ${lowCat.max} points or less, while no Canadian Experience Class round went below ${Math.min(...cecRecent.map((r) => r.crs))}.` : '';
+  const body = `
+<section class="intro">
+  <h1>Express Entry Categories 2026: Who Qualifies and Recent Cut-offs</h1>
+  <p class="lede">IRCC runs category-based rounds for ${C.length} categories in 2026. Here is what each one asks for, the eligible occupations with their NOC codes, and the cut-off scores of its recent rounds.</p>
+  <p class="meta"><span>IRCC page modified ${longDate(cats.sourceModified)}</span><span>Checked ${longDate(cats.checked)}</span><span>Source: <a href="${cats.source}" rel="noopener">IRCC category-based selection</a></span></p>
+</section>
+<div class="table-scroll"><table><thead><tr><th>Category</th><th class="n">Occupations</th><th>Latest round</th><th class="n">Cut-offs, last 12 months</th></tr></thead><tbody>${summary}</tbody></table></div>
+<article class="prose">
+<h2>How category rounds work</h2>
+<p>${esc(cats.general)}</p>
+<p>In a category round IRCC ranks only the candidates who meet that category's requirement and invites the highest CRS scores. Your score is the same in every round; what changes is who you compete with. That is why a category's cut-off can be far below the others.${contrast}</p>
+<p>Your occupation is matched by its NOC 2021 code. The 12 months of experience have to be in the last 3 years and in one listed occupation, but they do not need to be continuous. IRCC can also skip a category for a while if enough of its candidates are already being invited in general or program rounds.</p>
+<p>Compare your own score with each category's cut-offs on the <a href="/">CRS calculator</a>.</p>
+${sections}
+${retired.length ? `<h2>Categories no longer on the list</h2><p>${retired.map((c) => `<a href="/express-entry-draws/${CAT_PAGES[c.id].slug}/">${esc(CAT_PAGES[c.id].short)}</a>`).join(' and ')} had their own rounds in earlier years but are not among IRCC's current categories. Their history stays on our draws pages.</p>` : ''}
+<h2>Sources</h2>
+<ul><li><a href="${cats.source}" rel="noopener">Express Entry: Category-based selection</a>, IRCC, modified ${longDate(cats.sourceModified)}</li><li><a href="${draws.page}" rel="noopener">Express Entry rounds of invitations</a>, IRCC</li></ul>
+</article>`;
+  return page({ path: '/express-entry-categories/', title: 'Express Entry Categories 2026: Eligibility, NOC List, Cut-offs', description: `The ${C.length} Express Entry categories for 2026: requirements, eligible occupations with NOC codes and the cut-off scores of each category's recent rounds.`, body, crumbs: [['Home', '/'], ['Express Entry categories', '/express-entry-categories/']] });
+}
+
+// ---------- Score chart pages, one per test ----------
+const CHART_PAGES = {
+  celpip: { slug: 'celpip-score-chart', short: 'CELPIP', title: 'CELPIP Score Chart: CELPIP to CLB for Express Entry (2026)', h1: 'CELPIP Score Chart for Express Entry', extra: 'For CLB 4 to 10, each CELPIP-General level is the same number as the CLB level: a 9 in an ability is CLB 9. Levels 11 and 12 count as CLB 10. CELPIP-General LS, the speaking and listening version, is not accepted for Express Entry.' },
+  pte: { slug: 'pte-core-score-chart', short: 'PTE Core', title: 'PTE Core Score Chart: PTE Core to CLB for Express Entry (2026)', h1: 'PTE Core Score Chart for Express Entry', extra: 'Only PTE Core is accepted for Express Entry; PTE Academic results are not. Each ability has its own thresholds, so the same score can give different CLB levels in speaking and in listening.' },
+};
+function scoreChartPage(id) {
+  const t = lang.tests[id];
+  const meta = CHART_PAGES[id];
+  const name = t.language === 'fr' ? 'NCLC' : 'CLB';
+  const rows = [...lang.levels].map((lvl, i) => ({ lvl, i })).reverse().map(({ lvl, i }) => `<tr><td>${name} ${lvl}${lvl === 10 ? '+' : ''}</td>${SK.map((s) => `<td class="n">${scoreRange(t, s, i)}</td>`).join('')}</tr>`).join('');
+  const pts = [...lang.levels].reverse().map((L) => {
+    const f = rowFor(crs.core.firstLanguage.perAbilityByClb, L).points;
+    return `<tr><td>${name} ${L}${L === 10 ? '+' : ''}</td><td class="n">${f[1]}</td><td class="n">${f[1] * 4}</td><td class="n">${f[0] * 4}</td></tr>`;
+  }).join('');
+  const at = (L) => SK.map((s) => `${SKL[s].toLowerCase()} ${fmtScore(t, t[s][lang.levels.indexOf(L)])}`).join(', ');
+  const minimums = [
+    ['Federal Skilled Worker Program', 'CLB 7 in all four', at(7)],
+    ['Canadian Experience Class, TEER 0 or 1 jobs', 'CLB 7 in all four', at(7)],
+    ['Canadian Experience Class, TEER 2 or 3 jobs', 'CLB 5 in all four', at(5)],
+    ['Federal Skilled Trades Program', 'CLB 5 speaking and listening, CLB 4 reading and writing', `speaking ${fmtScore(t, t.speaking[1])}, listening ${fmtScore(t, t.listening[1])}, reading ${fmtScore(t, t.reading[0])}, writing ${fmtScore(t, t.writing[0])}`],
+    ['Highest language points in the CRS', 'CLB 10 in all four', at(10)],
+  ].map(([p, need, sc]) => `<tr><td>${p}</td><td>${need}</td><td>${sc}</td></tr>`).join('');
+  const others = Object.entries(CHART_PAGES).filter(([k]) => k !== id && isLive(`/${CHART_PAGES[k].slug}/`)).map(([, m]) => `<a href="/${m.slug}/">${m.short} score chart</a>`);
+  const path = `/${meta.slug}/`;
+  const body = `
+<section class="intro">
+  <h1>${esc(meta.h1)}</h1>
+  <p class="lede">The ${esc(t.name)} scores that give each CLB level for Express Entry, ability by ability, the minimum scores for each program and what they are worth in CRS points. Enter your results to see your levels.</p>
+  <p class="meta"><span>Equivalences checked ${longDate(SITE.checked)}</span><span>Source: <a href="${lang.source}" rel="noopener">IRCC language test results</a>, modified ${longDate(lang.sourceModified)}</span></p>
+</section>
+<div class="tool">
+<form id="clb-form" data-test="${id}" novalidate>
+  <input type="hidden" name="test" value="${id}">
+  <fieldset><legend>Your ${esc(t.name)} results</legend>
+    ${SK.map((s) => `<div class="field"><label for="${s}">${SKL[s]}</label><input type="number" inputmode="decimal" id="${s}" name="${s}"></div>`).join('').replace(/^/, '<div class="scores">') + '</div>'}
+    <p class="hint">The example shows the scores for CLB 7. Replace them with yours.</p>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Your CLB levels">
+  <div class="cards">${SK.map((s) => `<div class="card"><div class="k">${SKL[s]}</div><div class="v" id="out-${s}">–</div></div>`).join('')}</div>
+  <div><h2 class="panel-h">Lowest level across the four</h2><p class="score" id="out-min" style="font-size:1.4rem;margin:0"></p></div>
+  <div class="cmp" id="out-checks"></div>
+  <p class="small">See your full score with the <a href="/">CRS calculator</a>.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>${esc(t.name)} to CLB chart</h2>
+<p>${esc(meta.extra)}</p>
+<div class="table-scroll"><table><thead><tr><th>Level</th>${SK.map((s) => `<th class="n">${SKL[s]}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
+<p>A result below the CLB 4 row does not reach CLB 4 and gives no CRS points for that ability. Each level has its own page: ${LEVELS.map((l) => `<a href="/clb-${l}/">CLB ${l}${l === 10 ? '+' : ''}</a>`).join(', ')}.</p>
+<h2>Minimum ${esc(meta.short)} scores for each program</h2>
+<div class="table-scroll"><table><thead><tr><th>Program</th><th>Minimum</th><th>${esc(meta.short)} scores</th></tr></thead><tbody>${minimums}</tbody></table></div>
+<h2>CRS points for each level</h2>
+<p>As your first official language, per ability and for all four abilities at the same level.</p>
+<div class="table-scroll"><table><thead><tr><th>Level</th><th class="n">Per ability, single</th><th class="n">All four, single</th><th class="n">All four, with a partner who counts</th></tr></thead><tbody>${pts}</tbody></table></div>
+<p>CLB 7 and CLB 9 in all four abilities also unlock skill transferability points for education and foreign work experience. The <a href="/">CRS calculator</a> adds all of it up${others.length ? `, and the same chart exists for other tests: ${others.join(', ')}` : ''}. To compare several tests at once, use the <a href="/clb-converter/">CLB converter</a>.</p>
+<h2>Sources</h2>
+<ul><li><a href="${lang.source}" rel="noopener">Language test results for Express Entry</a>, IRCC, modified ${longDate(lang.sourceModified)}</li><li><a href="${crs.source}" rel="noopener">CRS criteria</a>, IRCC, modified ${longDate(crs.sourceModified)}</li></ul>
+</article>`;
+  const scripts = `${jsonScript('lang-rules', lang)}<script type="module" src="/js/clb.js"></script>`;
+  return page({ path, title: meta.title, description: `${t.name} to CLB chart for Express Entry: the score for each CLB level by ability, minimum scores for FSW, CEC and FST, and CRS points. With a converter.`, body, scripts, crumbs: [['Home', '/'], ['CLB converter', '/clb-converter/'], [`${meta.short} score chart`, path]] });
 }
 
 // ---------- Simple pages ----------
@@ -604,6 +735,8 @@ out('', home());
 out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
+out('express-entry-categories', categoriesPage(), cats.checked);
+for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }
 out('about', simple('/about/', 'About CRS Planner and How We Check the Rules', 'Who runs CRS Planner, where the rules come from and how the calculators are tested against IRCC.', 'About CRS Planner', aboutHtml));
