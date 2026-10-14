@@ -1,0 +1,11 @@
+{
+ "id": "pr-residency-obligation",
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/permanent-residents/status.html",
+ "sourceModified": "2026-04-09",
+ "checked": "2026-10-14",
+ "law": "https://laws-lois.justice.gc.ca/eng/acts/i-2.5/section-28.html",
+ "lawCurrentTo": "2026-09-21",
+ "timeAbroad": "https://www.ircc.canada.ca/english/helpcentre/answer.asp?qnum=1466&top=10",
+ "requiredDays": 730,
+ "periodYears": 5
+}

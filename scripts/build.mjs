@@ -14,6 +14,7 @@ const changelog = read('data/changelog.json');
 const cats = read('data/rules/categories.json');
 const funds = read('data/rules/proof-of-funds.json');
 const citz = read('data/rules/citizenship.json');
+const resid = read('data/rules/residency.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -911,6 +912,7 @@ function presencePage() {
 <li>Time outside Canada as a Crown servant, or as the family member of one, counts as time in Canada.</li>
 </ul>
 <p>Physical presence is one of the requirements. Adults also need to have filed income taxes when required, prove English or French skills and pass the citizenship test (ages 18 to 54), and not be under a prohibition. Your answers are saved only in your browser.</p>
+${isLive('/pr-residency-obligation-calculator/') ? '<p>To check the 730-day rule for keeping permanent resident status, use the <a href="/pr-residency-obligation-calculator/">PR residency obligation calculator</a>.</p>' : ''}
 <p class="callout">This is an estimate. Before you apply, count your days with IRCC's official physical presence calculator; IRCC encourages applying with more than the minimum to allow for any miscalculation.</p>
 <h2>Sources</h2>
 <ul><li><a href="${c.source}" rel="noopener">Canadian citizenship: who can apply</a>, IRCC, modified ${longDate(c.sourceModified)}</li><li><a href="${c.calculatorFaq}" rel="noopener">Physical presence calculator: frequently asked questions</a>, IRCC</li></ul>
@@ -964,6 +966,62 @@ function fundsPage() {
   return page({ path: '/proof-of-funds-express-entry/', title: 'Proof of Funds for Express Entry: Amount by Family Size', description: `Express Entry proof of funds: $${fmt(f.amounts[1])} for one person, $${fmt(f.amounts[4])} for a family of four. Full table, who is exempt and what counts as proof.`, body, crumbs: [['Home', '/'], ['Proof of funds', '/proof-of-funds-express-entry/']] });
 }
 
+// ---------- PR residency obligation ----------
+function residencyPage() {
+  const r = resid;
+  const body = `
+<section class="intro">
+  <h1>PR Residency Obligation Calculator: 730 Days in 5 Years</h1>
+  <p class="lede">Check whether you meet the residency obligation to keep your permanent resident status, for example before renewing your PR card: at least ${r.requiredDays} days in a five-year period, counting your trips and the time abroad that counts as time in Canada.</p>
+  <p class="meta"><span>Rules checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC PR status</a>, modified ${longDate(r.sourceModified)}</span></p>
+</section>
+<div class="tool">
+<form id="ro-form" novalidate>
+  <fieldset><legend>Your dates</legend>
+    <div class="row">
+      <div class="field"><label for="pr">Date you became a permanent resident</label><input type="date" id="pr" name="pr"></div>
+      <div class="field"><label for="check">Date to check</label><input type="date" id="check" name="check"><span class="hint">Today, or the date you plan to apply for a PR card or come back to Canada.</span></div>
+    </div>
+  </fieldset>
+  <fieldset><legend>Trips outside Canada</legend>
+    <div id="trips"></div>
+    <button type="button" id="add-trip">Add a trip</button>
+    <p class="hint">The day you leave and the day you come back are counted as days in Canada, the same way IRCC's citizenship calculator counts them.</p>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Your residency days" id="ro-out" aria-live="polite"></aside>
+</div>
+<article class="prose">
+<h2>The rule</h2>
+<p>To keep your status, you must have been in Canada for at least ${r.requiredDays} days during a five-year period. The days do not need to be continuous. Which five years are checked depends on how long you have been a permanent resident:</p>
+<ul>
+<li>Less than five years: you must show that you will be able to reach ${r.requiredDays} days in the five years right after you became a permanent resident.</li>
+<li>Five years or more: you must show that you met it in the five years right before you are examined, for example when you apply for a PR card or a permanent resident travel document.</li>
+</ul>
+<h2>Time abroad that counts</h2>
+<p>Days outside Canada count toward the ${r.requiredDays} if, during that time, you were:</p>
+<ul>
+<li>working full time outside Canada for a Canadian business or organization, or for the federal, provincial or territorial government;</li>
+<li>travelling with your spouse or common-law partner who is a Canadian citizen;</li>
+<li>travelling with your spouse or common-law partner who is a permanent resident working full time outside Canada for a Canadian business or a Canadian government;</li>
+<li>a dependent child travelling with a parent who is a Canadian citizen, or a permanent resident working full time outside Canada in the same way.</li>
+</ul>
+<p>Tick "This time abroad counts" on those trips. Other conditions set by regulation can also apply; check them with IRCC if you are unsure.</p>
+<h2>If you are short</h2>
+<p>You do not lose permanent resident status when your PR card expires, and not automatically when you fall below ${r.requiredDays} days. IRCC lists the cases where status is lost, such as an officer determining that you are no longer a permanent resident after an inquiry or a PR travel document appeal, renouncing it voluntarily, or a removal order coming into force. An officer can also decide that humanitarian and compassionate reasons justify keeping your status. If you are short, get advice before you travel or apply.</p>
+<p class="callout">This is an estimate based on the dates you enter. It is not a decision on your status.</p>
+<p>Planning citizenship next? Use the <a href="/physical-presence-calculator/">physical presence calculator</a>: citizenship needs 1,095 days in five years and counts time differently.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="${r.source}" rel="noopener">Understand permanent resident status</a>, IRCC, modified ${longDate(r.sourceModified)}</li>
+<li><a href="${r.timeAbroad}" rel="noopener">Can my time abroad count toward my permanent resident status?</a>, IRCC Help Centre</li>
+<li><a href="${r.law}" rel="noopener">Immigration and Refugee Protection Act, section 28</a>, current to ${longDate(r.lawCurrentTo)}</li>
+</ul>
+</article>`;
+  const scripts = `${jsonScript('residency-rules', r)}<script type="module" src="/js/residency.js"></script>`;
+  return page({ path: '/pr-residency-obligation-calculator/', title: 'PR Residency Obligation Calculator: 730 Days in 5 Years', description: 'Check the 730-day residency obligation for Canadian permanent residents before renewing your PR card: your five-year period, trips, and time abroad that counts.', body, scripts, crumbs: [['Home', '/'], ['PR residency obligation', '/pr-residency-obligation-calculator/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -1006,7 +1064,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }
