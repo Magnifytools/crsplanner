@@ -19,6 +19,8 @@ const owp = read('data/rules/oinp-owp.json');
 const oinpDraws = read('data/provinces/oinp-draws.json');
 const mpnp = read('data/rules/mpnp.json');
 const mpnpDraws = read('data/provinces/mpnp-draws.json');
+const sinp = read('data/rules/sinp.json');
+const sinpDraws = read('data/provinces/sinp-draws.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -1222,6 +1224,88 @@ ${missing.length ? `<p class="small">Manitoba's website has no notice for ${miss
   return page({ path: '/mpnp-draws/', title: `MPNP Draws ${y}: Manitoba EOI Draw History and Scores`, description: `Latest Manitoba PNP draw: #${last.n} on ${longDate(last.date)}, ${fmt(last.laas)} letters of advice to apply. All ${d.length} MPNP EOI draws with lowest scores.`, body, jsonld, crumbs: [['Home', '/'], ['MPNP draws', '/mpnp-draws/']] });
 }
 
+// ---------- Saskatchewan (SINP) ----------
+function sinpCalcPage() {
+  const r = sinp;
+  const opt = (arr) => arr.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('');
+  const fields = r.factors.map((f) => `<div class="field"><label for="${f.id}">${esc(f.label)}</label><select id="${f.id}" name="${f.id}">${opt(f.options)}</select></div>`).join('');
+  const c = r.connection;
+  const tables = r.factors.map((f) => `<h3>${esc(f.label)}</h3><div class="table-scroll"><table><tbody>${f.options.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('')}</tbody></table></div>`).join('');
+  const last = sinpDraws.selections[0];
+  const body = `
+<section class="intro">
+  <h1>SINP Points Calculator: Saskatchewan International Skilled Worker Grid</h1>
+  <p class="lede">Score yourself on the Saskatchewan Immigrant Nominee Program points grid for International Skilled Workers, out of ${r.max}. Saskatchewan Express Entry, Occupations In-Demand and Employment Offer candidates need at least ${r.minimumToApply} points to apply.</p>
+  <p class="meta"><span>Grid checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">SINP: Assess your eligibility</a></span></p>
+</section>
+<div class="tool">
+<form id="sinp-form" novalidate>
+  <fieldset><legend>Subcategory</legend>
+    <div class="field"><label for="sub">International Skilled Worker subcategory</label><select id="sub" name="sub"><option value="ee">Saskatchewan Express Entry</option><option value="oid">Occupations In-Demand</option><option value="offer">Employment Offer</option></select></div>
+  </fieldset>
+  <fieldset><legend>Labour market success</legend>${fields}<p class="hint">Turn your test results into CLB levels with the <a href="/clb-converter/">CLB converter</a>. Work experience must relate to the occupation in your application; one year is 12 full months.</p></fieldset>
+  <fieldset><legend>Connection to Saskatchewan</legend>
+    <div id="conn-offer"><div class="field check"><input type="checkbox" id="offer" name="offer"><label for="offer">${esc(c.offer[0])} (${c.offer[1]})</label></div></div>
+    <div id="conn-other">
+      <div class="field check"><input type="checkbox" id="relative" name="relative"><label for="relative">${esc(c.relative[0])} (${c.relative[1]})</label></div>
+      <div class="field check"><input type="checkbox" id="pastWork" name="pastWork"><label for="pastWork">${esc(c.pastWork[0])} (${c.pastWork[1]})</label></div>
+      <div class="field check"><input type="checkbox" id="pastStudy" name="pastStudy"><label for="pastStudy">${esc(c.pastStudy[0])} (${c.pastStudy[1]})</label></div>
+    </div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Your SINP score">
+  <div class="total"><span><span class="score" id="total" aria-live="polite">0</span> <span class="of">/ ${r.max}</span></span><span id="status" class="tag"></span></div>
+  <div class="table-scroll"><table><tbody id="breakdown"></tbody></table></div>
+  <p class="small">Meeting the minimum lets you submit an Expression of Interest; invitations go to the highest scores in the occupations Saskatchewan selects. The latest selection in Saskatchewan's published results was on ${longDate(last.date)}, with a lowest score of ${last.minScore}; see the <a href="/sinp-draws/">SINP draws</a>.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>The grid</h2>
+<p>Factor I, labour market success, is worth up to 80 points: education, skilled work experience, language and age. Factor II, connection to the Saskatchewan labour market, is worth up to ${c.max}: ${c.offer[1]} for a high-skilled job offer from a Saskatchewan employer in the Employment Offer subcategory, or, in the Express Entry and Occupations In-Demand subcategories, ${c.relative[1]} for a close relative in Saskatchewan and ${c.pastWork[1]} each for past work or study there.</p>
+${tables}
+<h2>How selection works</h2>
+<p>Saskatchewan invites the highest point scores from its Expression of Interest pool. When too many candidates share a score, it chooses first those with connections to Saskatchewan, then those with the most work experience and highest language scores. It can limit selections to occupations in demand, and you will not be invited unless your occupation is selected. A nomination through the Saskatchewan Express Entry subcategory adds 600 CRS points; see the <a href="/">CRS calculator</a>.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">SINP: Assess your eligibility (points grid)</a>, Government of Saskatchewan, checked ${longDate(r.checked)}</li><li><a href="${sinpDraws.page}" rel="noopener">International Skilled Worker EOI system</a>, Government of Saskatchewan</li></ul>
+</article>`;
+  const scripts = `${jsonScript('sinp-rules', { factors: r.factors, connection: r.connection, minimumToApply: r.minimumToApply })}<script type="module" src="/js/sinp.js"></script>`;
+  return page({ path: '/sinp-points-calculator/', title: 'SINP Points Calculator: Saskatchewan Skilled Worker Grid (2026)', description: `Check your Saskatchewan Immigrant Nominee Program points out of ${r.max} on the International Skilled Worker grid, and whether you reach the ${r.minimumToApply}-point minimum.`, body, scripts, crumbs: [['Home', '/'], ['SINP points calculator', '/sinp-points-calculator/']] });
+}
+
+function sinpDrawsPage() {
+  const d = sinpDraws;
+  const s = d.selections;
+  const last = s[0];
+  const rows = s.map((x) => `<tr><td>${x.date}</td><td>${esc(x.subcategory)}</td><td class="n">${x.minScore}</td><td class="n">${fmt(x.invited)}</td><td>${esc(x.target)}</td></tr>`).join('');
+  const byYear = [...new Set(s.map((x) => x.date.slice(0, 4)))].map((y) => { const r = s.filter((x) => x.date.startsWith(y)); return `<tr><td>${y}</td><td class="n">${r.length}</td><td class="n">${fmt(r.reduce((a, x) => a + x.invited, 0))}</td><td class="n">${Math.min(...r.map((x) => x.minScore))}–${Math.max(...r.map((x) => x.minScore))}</td></tr>`; }).join('');
+  const ee = s.filter((x) => x.subcategory === 'Express Entry').map((x) => ({ date: x.date, crs: x.minScore }));
+  const lastYear = last.date.slice(0, 4);
+  const body = `
+<section class="intro">
+  <h1>SINP Draws: Saskatchewan EOI Selection Results</h1>
+  <p class="lede">Every International Skilled Worker Expression of Interest selection in Saskatchewan's published results: ${s.length} selections since ${s.at(-1).date.slice(0, 4)} for the Saskatchewan Express Entry and Occupations In-Demand subcategories, with the lowest score invited out of 110.</p>
+  <p class="meta"><span>Saskatchewan's results document updated ${longDate(d.documentUpdated)}</span><span>Checked ${longDate(d.checked)}</span><span>Source: <a href="${d.source}" rel="noopener">SINP ISW EOI selection results (PDF)</a></span></p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">Latest selection published</div><div class="v" style="font-size:1.2rem">${longDate(last.date)}</div><div class="small">lowest score ${last.minScore}</div></div>
+  <div class="card"><div class="k">Selections in ${lastYear}</div><div class="v">${s.filter((x) => x.date.startsWith(lastYear)).length}</div></div>
+  <div class="card"><div class="k">Candidates invited, all years</div><div class="v">${fmt(s.reduce((a, x) => a + x.invited, 0))}</div></div>
+</div>
+<p class="callout">Saskatchewan's results document was last updated on ${longDate(d.documentUpdated)} and lists no selection after that date. We check it every day and will add new selections when they appear.</p>
+<h2>By year</h2>
+<div class="table-scroll"><table><thead><tr><th>Year</th><th class="n">Selections</th><th class="n">Invited</th><th class="n">Lowest scores</th></tr></thead><tbody>${byYear}</tbody></table></div>
+${ee.length >= 2 ? `<h2>Saskatchewan Express Entry: lowest score invited</h2>${catChart(ee)}` : ''}
+<h2>All selections</h2>
+<div class="table-scroll"><table><thead><tr><th>Date</th><th>Subcategory</th><th class="n">Lowest score</th><th class="n">Invited</th><th>Who was considered</th></tr></thead><tbody>${rows}</tbody></table></div>
+<article class="prose">
+<h2>How to read it</h2>
+<p>Scores are SINP points out of 110, not CRS points; estimate yours with the <a href="/sinp-points-calculator/">SINP points calculator</a>. Most selections only considered candidates with an Educational Credential Assessment or Canadian education and in a list of occupations; the full list of occupation codes for each selection is in Saskatchewan's document. The selections for candidates living in Ukraine do not state a subcategory.</p>
+<h2>Sources</h2>
+<ul><li><a href="${d.source}" rel="noopener">SINP International Skilled Workers: EOI selection results</a>, Government of Saskatchewan, updated ${longDate(d.documentUpdated)}</li></ul>
+</article>`;
+  return page({ path: '/sinp-draws/', title: 'SINP Draws: Saskatchewan EOI Selection Results and Scores', description: `All ${s.length} Saskatchewan International Skilled Worker EOI selections with lowest scores and invitations. Latest published: ${longDate(last.date)}, score ${last.minScore}.`, body, crumbs: [['Home', '/'], ['SINP draws', '/sinp-draws/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -1264,7 +1348,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }

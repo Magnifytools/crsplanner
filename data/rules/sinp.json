@@ -1,0 +1,221 @@
+{
+ "id": "sinp-isw-grid",
+ "source": "https://www.saskatchewan.ca/residents/moving-to-saskatchewan/live-in-saskatchewan/by-immigrating/saskatchewan-immigrant-nominee-program/assess-your-eligibility",
+ "checked": "2026-10-14",
+ "contentHash": "ec101b015972661029e8dbba468253b40c6a50d7d97798b841c6ebcb0bb6ec54",
+ "hashStart": "SINP International Skilled Worker Points Grid",
+ "hashEnd": "MAXIMUM POINTS TOTAL",
+ "extraWatch": [
+  {
+   "url": "https://publications.saskatchewan.ca:443/api/v1/products/102708/formats/113850/download",
+   "sha256": "14733e7d7b1924d15379f4fd9b3e5d024150379652587e4f84207eedd6572b54",
+   "what": "SINP ISW EOI selection results PDF"
+  }
+ ],
+ "minimumToApply": 60,
+ "appliesNote": "International Skilled Worker: Saskatchewan Express Entry and Occupations In-Demand need at least 60 points; Employment Offer uses the same grid with 30 points for the job offer.",
+ "factors": [
+  {
+   "id": "education",
+   "group": "Labour market success",
+   "label": "Education and training",
+   "options": [
+    [
+     "Master's or doctorate (Canadian equivalency)",
+     23
+    ],
+    [
+     "Bachelor's degree, or a degree of at least three years at a university or college",
+     20
+    ],
+    [
+     "Trade certification equivalent to journeyperson status in Saskatchewan",
+     20
+    ],
+    [
+     "Diploma requiring two (but less than three) years of post-secondary study",
+     15
+    ],
+    [
+     "Certificate, or at least two semesters (less than a two-year program) of post-secondary study",
+     12
+    ],
+    [
+     "None of these",
+     0
+    ]
+   ]
+  },
+  {
+   "id": "exp5",
+   "group": "Labour market success",
+   "label": "Skilled work experience in the 5 years before applying",
+   "options": [
+    [
+     "5 years",
+     10
+    ],
+    [
+     "4 years",
+     8
+    ],
+    [
+     "3 years",
+     6
+    ],
+    [
+     "2 years",
+     4
+    ],
+    [
+     "1 year",
+     2
+    ],
+    [
+     "Less than 1 year",
+     0
+    ]
+   ]
+  },
+  {
+   "id": "exp10",
+   "group": "Labour market success",
+   "label": "Skilled work experience 6 to 10 years before applying",
+   "options": [
+    [
+     "5 years",
+     5
+    ],
+    [
+     "4 years",
+     4
+    ],
+    [
+     "3 years",
+     3
+    ],
+    [
+     "2 years",
+     2
+    ],
+    [
+     "Less than 2 years",
+     0
+    ]
+   ]
+  },
+  {
+   "id": "lang1",
+   "group": "Labour market success",
+   "label": "First language test (English or French)",
+   "options": [
+    [
+     "CLB 8 or higher",
+     20
+    ],
+    [
+     "CLB 7",
+     18
+    ],
+    [
+     "CLB 6",
+     16
+    ],
+    [
+     "CLB 5",
+     14
+    ],
+    [
+     "CLB 4",
+     12
+    ],
+    [
+     "No language test results",
+     0
+    ]
+   ]
+  },
+  {
+   "id": "lang2",
+   "group": "Labour market success",
+   "label": "Second language test (English or French)",
+   "options": [
+    [
+     "CLB 8 or higher",
+     10
+    ],
+    [
+     "CLB 7",
+     8
+    ],
+    [
+     "CLB 6",
+     6
+    ],
+    [
+     "CLB 5",
+     4
+    ],
+    [
+     "CLB 4",
+     2
+    ],
+    [
+     "Not applicable",
+     0
+    ]
+   ]
+  },
+  {
+   "id": "age",
+   "group": "Labour market success",
+   "label": "Age",
+   "options": [
+    [
+     "Less than 18",
+     0
+    ],
+    [
+     "18 to 21",
+     8
+    ],
+    [
+     "22 to 34",
+     12
+    ],
+    [
+     "35 to 45",
+     10
+    ],
+    [
+     "46 to 50",
+     8
+    ],
+    [
+     "More than 50",
+     0
+    ]
+   ]
+  }
+ ],
+ "connection": {
+  "offer": [
+   "High-skilled employment offer from a Saskatchewan employer (Employment Offer subcategory only)",
+   30
+  ],
+  "relative": [
+   "Close family relative in Saskatchewan who is a citizen or permanent resident",
+   20
+  ],
+  "pastWork": [
+   "At least 12 months of work in Saskatchewan in the past five years on a valid work permit",
+   5
+  ],
+  "pastStudy": [
+   "At least one full-time academic year at a recognized Saskatchewan post-secondary institution on a valid study permit",
+   5
+  ],
+  "max": 30
+ },
+ "max": 110
+}

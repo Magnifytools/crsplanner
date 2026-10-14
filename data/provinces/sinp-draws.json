@@ -1,0 +1,534 @@
+{
+ "source": "https://publications.saskatchewan.ca:443/api/v1/products/102708/formats/113850/download",
+ "page": "https://www.saskatchewan.ca/residents/moving-to-saskatchewan/live-in-saskatchewan/by-immigrating/saskatchewan-immigrant-nominee-program/browse-sinp-programs/applicants-international-skilled-workers/international-skilled-worker-eoi-system",
+ "documentUpdated": "2024-09-12",
+ "checked": "2026-10-14",
+ "sha256": "14733e7d7b1924d15379f4fd9b3e5d024150379652587e4f84207eedd6572b54",
+ "selections": [
+  {
+   "date": "2024-09-12",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 88,
+   "invited": 32,
+   "target": "ECA or Canadian education; 24 selected occupations"
+  },
+  {
+   "date": "2024-09-12",
+   "subcategory": "Express Entry",
+   "minScore": 88,
+   "invited": 57,
+   "target": "ECA or Canadian education; 32 selected occupations"
+  },
+  {
+   "date": "2024-06-13",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 88,
+   "invited": 32,
+   "target": "ECA or Canadian education; 59 selected occupations"
+  },
+  {
+   "date": "2024-06-13",
+   "subcategory": "Express Entry",
+   "minScore": 88,
+   "invited": 88,
+   "target": "ECA or Canadian education; 59 selected occupations"
+  },
+  {
+   "date": "2024-03-07",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 89,
+   "invited": 14,
+   "target": "ECA or Canadian education; 25 selected occupations"
+  },
+  {
+   "date": "2024-03-07",
+   "subcategory": "Express Entry",
+   "minScore": 89,
+   "invited": 21,
+   "target": "ECA or Canadian education; 25 selected occupations"
+  },
+  {
+   "date": "2023-12-27",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 69,
+   "invited": 48,
+   "target": "ECA or Canadian education; 7 selected occupations"
+  },
+  {
+   "date": "2023-12-27",
+   "subcategory": "Express Entry",
+   "minScore": 69,
+   "invited": 15,
+   "target": "ECA or Canadian education; 7 selected occupations"
+  },
+  {
+   "date": "2023-10-23",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 84,
+   "invited": 40,
+   "target": "ECA or Canadian education; 25 selected occupations"
+  },
+  {
+   "date": "2023-10-23",
+   "subcategory": "Express Entry",
+   "minScore": 84,
+   "invited": 59,
+   "target": "ECA or Canadian education; 25 selected occupations"
+  },
+  {
+   "date": "2023-08-16",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 60,
+   "invited": 12,
+   "target": "Invited Candidates are residing in In-Demand Ireland. This selection is supporting a recruitment initiative to Ireland to connect qualified candidates with labo"
+  },
+  {
+   "date": "2023-08-16",
+   "subcategory": "Express Entry",
+   "minScore": 60,
+   "invited": 23,
+   "target": "Invited Candidates are residing in Entry Ireland. This selection is supporting a recruitment mission to Ireland to connect qualified candidates with labour mark"
+  },
+  {
+   "date": "2023-08-16",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 60,
+   "invited": 78,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2023-08-16",
+   "subcategory": "Express Entry",
+   "minScore": 60,
+   "invited": 98,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2023-08-16",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 60,
+   "invited": 207,
+   "target": "Invited Candidates are residing in India. In-Demand This selection is supporting a recruitment mission to India to connect qualified candidates with labour mark"
+  },
+  {
+   "date": "2023-08-16",
+   "subcategory": "Express Entry",
+   "minScore": 60,
+   "invited": 224,
+   "target": "Invited Candidates are residing in India. Entry This selection is supporting a recruitment mission to India to connect qualified candidates with labour market o"
+  },
+  {
+   "date": "2023-06-08",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 69,
+   "invited": 232,
+   "target": "ECA or Canadian education; 18 selected occupations"
+  },
+  {
+   "date": "2023-06-08",
+   "subcategory": "Express Entry",
+   "minScore": 69,
+   "invited": 268,
+   "target": "ECA or Canadian education; 18 selected occupations"
+  },
+  {
+   "date": "2023-05-18",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 67,
+   "invited": 260,
+   "target": "ECA or Canadian education; 30 selected occupations"
+  },
+  {
+   "date": "2023-05-18",
+   "subcategory": "Express Entry",
+   "minScore": 67,
+   "invited": 784,
+   "target": "ECA or Canadian education; 30 selected occupations"
+  },
+  {
+   "date": "2023-05-03",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 68,
+   "invited": 293,
+   "target": "ECA or Canadian education; 32 selected occupations"
+  },
+  {
+   "date": "2023-05-03",
+   "subcategory": "Express Entry",
+   "minScore": 68,
+   "invited": 739,
+   "target": "ECA or Canadian education; 32 selected occupations"
+  },
+  {
+   "date": "2023-04-20",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 69,
+   "invited": 444,
+   "target": "ECA or Canadian education; 38 selected occupations"
+  },
+  {
+   "date": "2023-04-20",
+   "subcategory": "Express Entry",
+   "minScore": 69,
+   "invited": 623,
+   "target": "ECA or Canadian education; 38 selected occupations"
+  },
+  {
+   "date": "2023-03-23",
+   "subcategory": "Express Entry",
+   "minScore": 82,
+   "invited": 184,
+   "target": "ECA or Canadian education; 109 selected occupations"
+  },
+  {
+   "date": "2023-03-23",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 82,
+   "invited": 312,
+   "target": "ECA or Canadian education; 109 selected occupations"
+  },
+  {
+   "date": "2023-02-16",
+   "subcategory": "Express Entry",
+   "minScore": 84,
+   "invited": 242,
+   "target": "ECA or Canadian education; 104 selected occupations"
+  },
+  {
+   "date": "2023-02-16",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 84,
+   "invited": 184,
+   "target": "ECA or Canadian education; 104 selected occupations"
+  },
+  {
+   "date": "2023-02-16",
+   "subcategory": "Not stated",
+   "minScore": 65,
+   "invited": 1,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2022-12-21",
+   "subcategory": "Express Entry",
+   "minScore": 80,
+   "invited": 153,
+   "target": "ECA or Canadian education; 109 selected occupations"
+  },
+  {
+   "date": "2022-12-21",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 80,
+   "invited": 315,
+   "target": "ECA or Canadian education; 109 selected occupations"
+  },
+  {
+   "date": "2022-12-15",
+   "subcategory": "Express Entry",
+   "minScore": 82,
+   "invited": 348,
+   "target": "ECA or Canadian education; 119 selected occupations"
+  },
+  {
+   "date": "2022-12-15",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 82,
+   "invited": 285,
+   "target": "ECA or Canadian education; 119 selected occupations"
+  },
+  {
+   "date": "2022-12-15",
+   "subcategory": "Not stated",
+   "minScore": 62,
+   "invited": 2,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2022-11-08",
+   "subcategory": "Express Entry",
+   "minScore": 69,
+   "invited": 10,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-11-08",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 69,
+   "invited": 21,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-11-08",
+   "subcategory": "Not stated",
+   "minScore": 64,
+   "invited": 4,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2022-09-28",
+   "subcategory": "Express Entry",
+   "minScore": 81,
+   "invited": 639,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-09-28",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 83,
+   "invited": 507,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-09-15",
+   "subcategory": "Express Entry",
+   "minScore": 60,
+   "invited": 53,
+   "target": "Not all occupations were selected. The 15, Entry occupations chosen and eligible for the EOI selection on September 15, , have the following classification numb"
+  },
+  {
+   "date": "2022-09-15",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 60,
+   "invited": 273,
+   "target": "Not all occupations were selected. The 15, In-Demand occupations chosen and eligible for the EOI selection on September 15, , have the following classification "
+  },
+  {
+   "date": "2022-09-07",
+   "subcategory": "Express Entry",
+   "minScore": 70,
+   "invited": 521,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-09-07",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 70,
+   "invited": 422,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-09-06",
+   "subcategory": "Express Entry",
+   "minScore": 60,
+   "invited": 143,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-09-06",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 60,
+   "invited": 240,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-09-06",
+   "subcategory": "Express Entry",
+   "minScore": 69,
+   "invited": 159,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-09-06",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 69,
+   "invited": 218,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-09-01",
+   "subcategory": "Express Entry",
+   "minScore": 61,
+   "invited": 312,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-09-01",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 61,
+   "invited": 629,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-08-25",
+   "subcategory": "Express Entry",
+   "minScore": 65,
+   "invited": 295,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-08-25",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 65,
+   "invited": 334,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-08-18",
+   "subcategory": "Express Entry",
+   "minScore": 67,
+   "invited": 416,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-08-18",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 67,
+   "invited": 252,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-08-11",
+   "subcategory": "Express Entry",
+   "minScore": 68,
+   "invited": 433,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-08-11",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 68,
+   "invited": 312,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-07-27",
+   "subcategory": "Express Entry",
+   "minScore": 68,
+   "invited": 279,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-07-27",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 68,
+   "invited": 469,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-07-21",
+   "subcategory": "Express Entry",
+   "minScore": 68,
+   "invited": 797,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-07-21",
+   "subcategory": "Not stated",
+   "minScore": 60,
+   "invited": 5,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2022-07-14",
+   "subcategory": "Not stated",
+   "minScore": 66,
+   "invited": 2,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2022-07-14",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 69,
+   "invited": 195,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-07-14",
+   "subcategory": "Express Entry",
+   "minScore": 69,
+   "invited": 430,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-07-06",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 61,
+   "invited": 5,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2022-07-06",
+   "subcategory": "Express Entry",
+   "minScore": 73,
+   "invited": 279,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-07-06",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 73,
+   "invited": 398,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-05-05",
+   "subcategory": "Express Entry",
+   "minScore": 85,
+   "invited": 106,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-05-05",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 85,
+   "invited": 91,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-05-05",
+   "subcategory": "Not stated",
+   "minScore": 71,
+   "invited": 1,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2022-03-08",
+   "subcategory": "Express Entry",
+   "minScore": 87,
+   "invited": 39,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-03-08",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 87,
+   "invited": 43,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-03-08",
+   "subcategory": "Express Entry",
+   "minScore": 61,
+   "invited": 3,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2022-03-04",
+   "subcategory": "Express Entry",
+   "minScore": 61,
+   "invited": 14,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2022-03-04",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 60,
+   "invited": 22,
+   "target": "Candidates living in Ukraine (special measure)"
+  },
+  {
+   "date": "2022-01-12",
+   "subcategory": "Express Entry",
+   "minScore": 68,
+   "invited": 37,
+   "target": "ECA or Canadian education; selected occupations"
+  },
+  {
+   "date": "2022-01-12",
+   "subcategory": "Occupations In-Demand",
+   "minScore": 68,
+   "invited": 67,
+   "target": "ECA or Canadian education; selected occupations"
+  }
+ ]
+}
