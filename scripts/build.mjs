@@ -15,6 +15,8 @@ const cats = read('data/rules/categories.json');
 const funds = read('data/rules/proof-of-funds.json');
 const citz = read('data/rules/citizenship.json');
 const resid = read('data/rules/residency.json');
+const owp = read('data/rules/oinp-owp.json');
+const oinpDraws = read('data/provinces/oinp-draws.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -1022,6 +1024,97 @@ function residencyPage() {
   return page({ path: '/pr-residency-obligation-calculator/', title: 'PR Residency Obligation Calculator: 730 Days in 5 Years', description: 'Check the 730-day residency obligation for Canadian permanent residents before renewing your PR card: your five-year period, trips, and time abroad that counts.', body, scripts, crumbs: [['Home', '/'], ['PR residency obligation', '/pr-residency-obligation-calculator/']] });
 }
 
+// ---------- Ontario (OINP) ----------
+const OINP_STREAM_ORDER = ['owp', 'foreign-worker', 'international-student', 'in-demand', 'masters', 'phd', 'entrepreneur'];
+function oinpCalcPage() {
+  const r = owp;
+  const max = r.factors.reduce((s, f) => s + Math.max(...f.options.map((o) => o[1])), 0);
+  const groups = [...new Set(r.factors.map((f) => f.group))];
+  const fields = groups.map((g) => `<fieldset><legend>${esc(g)}</legend>${r.factors.filter((f) => f.group === g).map((f) => `<div class="field"><label for="${f.id}">${esc(f.label)}</label><select id="${f.id}" name="${f.id}">${f.options.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('')}</select></div>`).join('')}</fieldset>`).join('');
+  const tables = r.factors.map((f) => `<h3>${esc(f.label)}</h3><div class="table-scroll"><table><tbody>${f.options.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('')}</tbody></table></div>`).join('');
+  const owpRounds = oinpDraws.rounds.filter((x) => x.stream === 'owp');
+  const body = `
+<section class="intro">
+  <h1>OINP Points Calculator: Ontario Workforce Priority Stream (2026)</h1>
+  <p class="lede">Score your expression of interest for the Ontario Immigrant Nominee Program under the new Ontario Workforce Priority stream, the only OINP stream open since July 2026. Every factor and point value comes from Ontario's stream page.</p>
+  <p class="meta"><span>Scoring checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">Ontario Workforce Priority stream</a>, updated ${longDate(r.sourceModified)}</span></p>
+</section>
+<div class="tool">
+<form id="oinp-form" novalidate>
+  <fieldset><legend>Shortcut</legend>
+    <div class="field"><label for="noc">NOC 2021 code of the job offer (optional)</label><input type="text" id="noc" name="noc" inputmode="numeric" maxlength="5" placeholder="e.g. 21231"><span class="hint" id="noc-hint">The first digit is the broad occupational category and the second the TEER category; we set both for you.</span></div>
+    <div class="field check"><input type="checkbox" id="physician" name="physician"><label for="physician">I am applying as a self-employed physician (no job offer; the hourly wage factor does not apply)</label></div>
+  </fieldset>
+  ${fields}
+</form>
+<aside class="results" aria-label="Your OINP score">
+  <div class="total"><span><span class="score" id="total" aria-live="polite">0</span> <span class="of">/ ${max}</span></span><span class="small">Expression of interest score</span></div>
+  <details class="breakdown" open><summary>Points by factor</summary><div class="table-scroll"><table><tbody id="breakdown"></tbody></table></div></details>
+  <p class="small">${owpRounds.length ? `Ontario has published ${owpRounds.length} Ontario Workforce Priority rounds; see the <a href="/oinp-draws/">OINP draws</a>.` : `Ontario had not published any invitation round for this stream when its invitations page was last updated (${longDate(oinpDraws.sourceUpdated)}), so there is no cut-off to compare with yet. Scores from the closed streams used other grids and are not comparable.`}</p>
+</aside>
+</div>
+<article class="prose">
+<h2>What changed in 2026</h2>
+<p>Ontario replaced its Employer Job Offer, Masters Graduate and PhD Graduate streams with a single Ontario Workforce Priority stream. Its webpages were published on July 20, 2026 and the expression of interest portal opened on August 4, 2026. On October 5, 2026 Ontario changed the earnings factor so that $80,000 or more in a single year gives 10 points; this calculator includes that change. Calculators built for the old streams use a different grid.</p>
+<h2>How the score works</h2>
+<p>You register an expression of interest after your employer submits a job offer in Ontario's Employer Portal (self-employed physicians contact the OINP instead). Ontario scores it on the factors below and invites candidates from the pool. The score is not the same as the stream requirements: you also need to meet the work experience, language and education criteria for your job offer's TEER category, and prove every factor you claimed if you are invited.</p>
+<p>Language points use the lowest of your four CLB levels, from your better test if you have both English and French; check your levels with the <a href="/clb-converter/">CLB converter</a>. A nomination that goes through Express Entry adds 600 CRS points; see the <a href="/">CRS calculator</a>.</p>
+<h2>Scoring grid</h2>
+${tables}
+<h2>Regions</h2>
+<ul>${Object.entries(r.regions).map(([k, v]) => `<li><strong>${esc(k)}</strong>: ${esc(v)}.</li>`).join('')}</ul>
+<p>Past invitation rounds of the closed streams are on the <a href="/oinp-draws/">OINP draws</a> page.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Ontario Workforce Priority stream</a>, Government of Ontario, updated ${longDate(r.sourceModified)}</li><li><a href="${r.updates}" rel="noopener">2026 Ontario Immigrant Nominee Program updates</a>, Government of Ontario</li></ul>
+</article>`;
+  const scripts = `${jsonScript('oinp-rules', { factors: r.factors })}<script type="module" src="/js/oinp.js"></script>`;
+  return page({ path: '/oinp-points-calculator/', title: 'OINP Points Calculator 2026: Ontario Workforce Priority Stream', description: `Calculate your OINP expression of interest score for the new Ontario Workforce Priority stream: all ${r.factors.length} factors, ${max} points maximum, with the October 2026 earnings update.`, body, scripts, crumbs: [['Home', '/'], ['OINP points calculator', '/oinp-points-calculator/']] });
+}
+
+function oinpDrawsPage() {
+  const d = oinpDraws;
+  const streams = OINP_STREAM_ORDER.filter((s) => d.rounds.some((x) => x.stream === s));
+  const name = (s) => d.rounds.find((x) => x.stream === s).streamName;
+  const stat = streams.map((s) => {
+    const rs = d.rounds.filter((x) => x.stream === s);
+    const yrs = [...new Set(rs.map((x) => x.date.slice(0, 4)))];
+    return `<tr><td>${esc(name(s))}</td><td class="n">${rs.length}</td><td class="n">${fmt(rs.reduce((a, x) => a + (x.invitations || 0), 0))}</td><td>${rs[0].date}</td><td class="n">${yrs.at(-1)}–${yrs[0]}</td></tr>`;
+  }).join('');
+  const rows = d.rounds.map((x) => `<tr data-s="${x.stream}"><td>${x.date}</td><td>${esc(x.streamName)}</td><td class="n">${fmt(x.invitations)}</td><td class="n">${esc(x.scoreText || '')}</td><td>${esc(x.notes || '')}</td></tr>`).join('');
+  const chips = `<button type="button" data-s="all" aria-pressed="true">All (${d.rounds.length})</button>` + streams.map((s) => `<button type="button" data-s="${s}" aria-pressed="false">${esc(name(s).replace('Employer Job Offer: ', ''))}</button>`).join('');
+  const last = d.rounds[0];
+  const owpN = d.rounds.filter((x) => x.stream === 'owp').length;
+  const y = last.date.slice(0, 4);
+  const yr = d.rounds.filter((x) => x.date.startsWith(y));
+  const body = `
+<section class="intro">
+  <h1>OINP Draws: Ontario PNP Invitations and Score History</h1>
+  <p class="lede">Every invitation round Ontario has published for the Ontario Immigrant Nominee Program since 2021: ${fmt(d.rounds.length)} rounds by stream, with invitations, minimum scores and targets.</p>
+  <p class="meta"><span>Ontario's page updated ${longDate(d.sourceUpdated)}</span><span>Checked ${longDate(d.fetchedAt)}</span><span>Source: <a href="${d.source}" rel="noopener">Invitations to apply to the OINP</a></span></p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">Latest round published</div><div class="v" style="font-size:1.2rem">${longDate(last.date)}</div><div class="small">${esc(last.streamName)}, ${fmt(last.invitations)} invitations</div></div>
+  <div class="card"><div class="k">Rounds in ${y}</div><div class="v">${yr.length}</div><div class="small">${fmt(yr.reduce((a, x) => a + (x.invitations || 0), 0))} invitations</div></div>
+  <div class="card"><div class="k">Ontario Workforce Priority rounds</div><div class="v">${owpN}</div><div class="small">${owpN ? 'published so far' : 'none published yet'}</div></div>
+</div>
+<p class="callout">${owpN ? '' : `Since July 2026 Ontario has one open stream, Ontario Workforce Priority, and has not published any invitation round for it yet. `}The rounds below are from streams that are now closed and used other scoring grids, so their minimum scores do not translate to the new stream. Score your profile with the <a href="/oinp-points-calculator/">OINP points calculator</a>.</p>
+<h2>Rounds by stream</h2>
+<div class="table-scroll"><table><thead><tr><th>Stream</th><th class="n">Rounds</th><th class="n">Invitations</th><th>Latest</th><th class="n">Years</th></tr></thead><tbody>${stat}</tbody></table></div>
+<h2>All rounds</h2>
+<div class="chips" id="chips" role="group" aria-label="Filter by stream">${chips}</div>
+<div class="table-scroll"><table id="oinp-table"><thead><tr><th>Date</th><th>Stream</th><th class="n">Invitations</th><th class="n">Score</th><th>Target</th></tr></thead><tbody>${rows}</tbody></table></div>
+<article class="prose">
+<h2>How to read it</h2>
+<p>Most rounds since 2025 were targeted: by region, by occupation group (health, early childhood education, skilled trades, mining) or for French-speaking candidates. A round's minimum score only applies to the candidates it targeted, and the Entrepreneur stream gives a score range instead of a minimum. "N/A" means Ontario did not publish a score for that round.</p>
+${d.dropped.length ? `<p class="small">Ontario's page lists ${d.dropped.length === 1 ? 'one row' : `${d.dropped.length} rows`} under a year it does not belong to that repeat${d.dropped.length === 1 ? 's' : ''} a row of another stream (${d.dropped.map((x) => `${x.date}, ${fmt(x.invitations)} invitations`).join('; ')}). We list it only once.</p>` : ''}
+<p>Ontario nominations through Express Entry add 600 CRS points; federal rounds for nominees are on the <a href="/express-entry-draws/pnp/">PNP draws</a> page.</p>
+<h2>Sources</h2>
+<ul><li><a href="${d.source}" rel="noopener">Invitations to apply to the OINP</a>, Government of Ontario, updated ${longDate(d.sourceUpdated)}</li><li><a href="${owp.updates}" rel="noopener">2026 OINP updates</a>, Government of Ontario</li></ul>
+</article>
+<script>{const b=[...document.querySelectorAll('#chips button')],r=[...document.querySelectorAll('#oinp-table tbody tr')];b.forEach(x=>x.addEventListener('click',()=>{b.forEach(y=>y.setAttribute('aria-pressed',y===x));const s=x.dataset.s;r.forEach(t=>{t.hidden=s!=='all'&&t.dataset.s!==s;});}));}</script>`;
+  return page({ path: '/oinp-draws/', title: `OINP Draws ${y}: Ontario PNP Invitations and Score History`, description: `All ${d.rounds.length} OINP invitation rounds since 2021 by stream, with minimum scores and targets, and the status of the new Ontario Workforce Priority stream.`, body, crumbs: [['Home', '/'], ['OINP draws', '/oinp-draws/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -1064,7 +1157,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }

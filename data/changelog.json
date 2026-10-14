@@ -1,6 +1,10 @@
 [
  {
   "date": "2026-10-14",
+  "what": "Ontario: scoring grid of the new Ontario Workforce Priority stream from Ontario's stream page (updated 2026-10-06, including the 5 October earnings change), and every OINP invitation round published since 2021 from Ontario's invitations page (updated 2026-08-11), now read automatically."
+ },
+ {
+  "date": "2026-10-14",
   "what": "Rules added for upcoming tools: proof of funds amounts from IRCC's proof of funds page (amounts updated 2025-07-07) and citizenship physical presence rules from IRCC's citizenship eligibility page (modified 2026-04-21) and IRCC's physical presence calculator FAQ. The physical presence calculator reproduces IRCC's own worked example (1,129 days). A daily check now flags any change in the IRCC pages behind our rules."
  },
  {

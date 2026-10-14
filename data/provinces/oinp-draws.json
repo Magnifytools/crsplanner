@@ -1,0 +1,2585 @@
+{
+ "source": "https://www.ontario.ca/page/invitations-apply-oinp",
+ "sourceUpdated": "2026-08-11",
+ "rounds": [
+  {
+   "date": "2026-04-30",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 786,
+   "profilesCreated": "July 2, 2025 – April 28, 2026",
+   "minScore": 57,
+   "scoreText": "57 and above",
+   "notes": "Targeted draw for the Greater Toronto Area (GTA)"
+  },
+  {
+   "date": "2026-04-30",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 277,
+   "profilesCreated": "July 2, 2025 – April 28, 2026",
+   "minScore": 81,
+   "scoreText": "81 and above",
+   "notes": "Targeted draw for the Greater Toronto Area (GTA)"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 318,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 63,
+   "scoreText": "63 and above",
+   "notes": "Targeted draw for Eastern Ontario"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 57,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 60,
+   "scoreText": "60 and above",
+   "notes": "Targeted draw for Northern Ontario"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 194,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 60,
+   "scoreText": "60 and above",
+   "notes": "Targeted draw for Southwestern Ontario"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 128,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 60,
+   "scoreText": "60 and above",
+   "notes": "Targeted draw for Central Ontario (excluding GTA)"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 173,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 87,
+   "scoreText": "87 and above",
+   "notes": "Targeted draw for Eastern Ontario"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 167,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 87,
+   "scoreText": "87 and above",
+   "notes": "Targeted draw for Northern Ontario"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 173,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 84,
+   "scoreText": "84 and above",
+   "notes": "Targeted draw for Southwestern Ontario"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 173,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 84,
+   "scoreText": "84 and above",
+   "notes": "Targeted draw for Central Ontario (excluding GTA)"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 48,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 34,
+   "scoreText": "34 and above",
+   "notes": "Targeted draw for Eastern Ontario"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 79,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 34,
+   "scoreText": "34 and above",
+   "notes": "Targeted draw for Northern Ontario"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 430,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 34,
+   "scoreText": "34 and above",
+   "notes": "Targeted draw for Southwestern Ontario"
+  },
+  {
+   "date": "2026-04-23",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 162,
+   "profilesCreated": "July 2, 2025 – April 21, 2026",
+   "minScore": 34,
+   "scoreText": "34 and above",
+   "notes": "Targeted draw for Central Ontario (excluding GTA)"
+  },
+  {
+   "date": "2026-04-22",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 674,
+   "profilesCreated": "April 22, 2025 – April 20, 2026",
+   "minScore": 61,
+   "scoreText": "61 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2026-04-22",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 244,
+   "profilesCreated": "April 22, 2025 – April 20, 2026",
+   "minScore": 56,
+   "scoreText": "56 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2026-04-15",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 1024,
+   "profilesCreated": "July 2, 2025 – April 13, 2026",
+   "minScore": 36,
+   "scoreText": "36 and above",
+   "notes": "Targeted draw for other priority occupations"
+  },
+  {
+   "date": "2026-04-08",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 15,
+   "profilesCreated": "July 2, 2025 – April 6, 2026",
+   "minScore": 43,
+   "scoreText": "43 and above",
+   "notes": "Targeted draw for Physicians"
+  },
+  {
+   "date": "2026-04-08",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 81,
+   "profilesCreated": "July 2, 2025 – April 6, 2026",
+   "minScore": 35,
+   "scoreText": "35 and above",
+   "notes": "Targeted draw for Francophones candidates"
+  },
+  {
+   "date": "2026-04-08",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 9,
+   "profilesCreated": "July 2, 2025 – April 6, 2026",
+   "minScore": 46,
+   "scoreText": "46 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2026-04-08",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 512,
+   "profilesCreated": "July 2, 2025 – April 6, 2026",
+   "minScore": 20,
+   "scoreText": "20 and above",
+   "notes": "Targeted draw for healthcare and early childhood education occupations"
+  },
+  {
+   "date": "2026-04-08",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 41,
+   "profilesCreated": "July 2, 2025 – April 6, 2026",
+   "minScore": 63,
+   "scoreText": "63 and above",
+   "notes": "Targeted draw for Francophones candidates"
+  },
+  {
+   "date": "2026-04-08",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 16,
+   "profilesCreated": "July 2, 2025 – April 6, 2026",
+   "minScore": 57,
+   "scoreText": "57 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2026-04-08",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 1123,
+   "profilesCreated": "July 2, 2025 – April 6, 2026",
+   "minScore": 46,
+   "scoreText": "46 and above",
+   "notes": "Targeted draw for healthcare and early childhood education occupations"
+  },
+  {
+   "date": "2026-04-08",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 24,
+   "profilesCreated": "July 2, 2025 – April 6, 2026",
+   "minScore": 25,
+   "scoreText": "25 and above",
+   "notes": "Targeted draw for Francophones candidates"
+  },
+  {
+   "date": "2026-04-08",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 7,
+   "profilesCreated": "July 2, 2025 – April 6, 2026",
+   "minScore": 33,
+   "scoreText": "33 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2026-04-01",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 372,
+   "profilesCreated": "July 2, 2025 – March 30, 2026",
+   "minScore": 56,
+   "scoreText": "56 and above",
+   "notes": "Targeted draw for Priority Occupations in the Mining Sector"
+  },
+  {
+   "date": "2026-04-01",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 355,
+   "profilesCreated": "July 2, 2025 – March 30, 2026",
+   "minScore": 85,
+   "scoreText": "85 and above",
+   "notes": "Targeted draw for Priority Occupations in the Mining Sector"
+  },
+  {
+   "date": "2026-04-01",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 32,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 34,
+   "scoreText": "34 and above",
+   "notes": "Targeted draw for Priority Occupations in the Mining Sector"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 64,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 57,
+   "scoreText": "57 and above",
+   "notes": "Targeted draw for Eastern Ontario"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 28,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 54,
+   "scoreText": "54 and above",
+   "notes": "Targeted draw for Northern Ontario"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 99,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 53,
+   "scoreText": "53 and above",
+   "notes": "Targeted draw for Southwestern Ontario"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 51,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 55,
+   "scoreText": "55 and above",
+   "notes": "Targeted draw for Central Ontario (excluding GTA)"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 355,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 61,
+   "scoreText": "61 and above",
+   "notes": "Targeted draw for the Greater Toronto Area (GTA)"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 79,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 83,
+   "scoreText": "83 and above",
+   "notes": "Targeted draw for Eastern Ontario"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 29,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 80,
+   "scoreText": "80 and above",
+   "notes": "Targeted draw for Northern Ontario"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 152,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 81,
+   "scoreText": "81 and above",
+   "notes": "Targeted draw for Southwestern Ontario"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 82,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 82,
+   "scoreText": "82 and above",
+   "notes": "Targeted draw for Central Ontario (excluding GTA)"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 76,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 90,
+   "scoreText": "90 and above",
+   "notes": "Targeted draw for the Greater Toronto Area (GTA)"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 31,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 34,
+   "scoreText": "34 and above",
+   "notes": "Targeted draw for Eastern Ontario"
+  },
+  {
+   "date": "2026-03-25",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 66,
+   "profilesCreated": "July 2, 2025 – March 23, 2026",
+   "minScore": 32,
+   "scoreText": "32 and above",
+   "notes": "Targeted draw for Central Ontario (excluding GTA)"
+  },
+  {
+   "date": "2026-03-18",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 97,
+   "profilesCreated": "July 2, 2025 – March 16, 2026",
+   "minScore": 36,
+   "scoreText": "36 and above",
+   "notes": "Targeted draw for Physicians"
+  },
+  {
+   "date": "2026-03-18",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 11,
+   "profilesCreated": "July 2, 2025 – March 16, 2026",
+   "minScore": 47,
+   "scoreText": "47 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2026-03-18",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 17,
+   "profilesCreated": "July 2, 2025 – March 16, 2026",
+   "minScore": 61,
+   "scoreText": "61 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2026-03-18",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 11,
+   "profilesCreated": "July 2, 2025 – March 16, 2026",
+   "minScore": 30,
+   "scoreText": "30 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2026-03-18",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 582,
+   "profilesCreated": "March 18, 2025 – March 16, 2026",
+   "minScore": 30,
+   "scoreText": "30 and above",
+   "notes": "Targeted draw"
+  },
+  {
+   "date": "2026-03-18",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 525,
+   "profilesCreated": "March 18, 2025 – March 16, 2026",
+   "minScore": 49,
+   "scoreText": "49 and above",
+   "notes": "Targeted draw"
+  },
+  {
+   "date": "2026-02-18",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 951,
+   "profilesCreated": "July 2, 2025 – February 16, 2026",
+   "minScore": 50,
+   "scoreText": "50 and above",
+   "notes": "Targeted draw for skilled trades-related occupations"
+  },
+  {
+   "date": "2026-02-18",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 453,
+   "profilesCreated": "July 2, 2025 – February 16, 2026",
+   "minScore": 80,
+   "scoreText": "80 and above",
+   "notes": "Targeted draw for skilled trades-related occupations"
+  },
+  {
+   "date": "2026-02-02",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 129,
+   "profilesCreated": "July 2, 2025 – January 28, 2026",
+   "minScore": 33,
+   "scoreText": "33 and above",
+   "notes": "Targeted draw for Physicians"
+  },
+  {
+   "date": "2026-02-02",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 14,
+   "profilesCreated": "July 2, 2025 – January 28, 2026",
+   "minScore": 44,
+   "scoreText": "44 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2026-02-02",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 634,
+   "profilesCreated": "July 2, 2025 – January 28, 2026",
+   "minScore": 36,
+   "scoreText": "36 and above",
+   "notes": "Targeted draw for healthcare and early childhood education occupations"
+  },
+  {
+   "date": "2026-02-02",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 26,
+   "profilesCreated": "July 2, 2025 – January 28, 2026",
+   "minScore": 69,
+   "scoreText": "69 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2026-02-02",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 1015,
+   "profilesCreated": "July 2, 2025 – January 28, 2026",
+   "minScore": 56,
+   "scoreText": "56 and above",
+   "notes": "Targeted draw for healthcare and early childhood education occupations"
+  },
+  {
+   "date": "2026-02-02",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 7,
+   "profilesCreated": "July 2, 2025 – January 28, 2026",
+   "minScore": 34,
+   "scoreText": "34 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-12-11",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 89,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 54,
+   "scoreText": "54 and above",
+   "notes": "Targeted draw for Eastern Ontario"
+  },
+  {
+   "date": "2025-12-11",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 29,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 51,
+   "scoreText": "51 and above",
+   "notes": "Targeted draw for Northern Ontario"
+  },
+  {
+   "date": "2025-12-11",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 103,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 51,
+   "scoreText": "51 and above",
+   "notes": "Targeted draw for Southwestern Ontario"
+  },
+  {
+   "date": "2025-12-11",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 84,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 49,
+   "scoreText": "49 and above",
+   "notes": "Targeted draw for Central Ontario (excluding GTA )"
+  },
+  {
+   "date": "2025-12-11",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 93,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 77,
+   "scoreText": "77 and above",
+   "notes": "Targeted draw for Eastern Ontario"
+  },
+  {
+   "date": "2025-12-11",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 39,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 77,
+   "scoreText": "77 and above",
+   "notes": "Targeted draw for Northern Ontario"
+  },
+  {
+   "date": "2025-12-11",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 136,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 73,
+   "scoreText": "73 and above",
+   "notes": "Targeted draw for Southwestern Ontario"
+  },
+  {
+   "date": "2025-12-11",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 105,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 71,
+   "scoreText": "71 and above",
+   "notes": "Targeted draw for Central Ontario (excluding GTA )"
+  },
+  {
+   "date": "2025-12-11",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 123,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 30,
+   "scoreText": "30 and above",
+   "notes": "Targeted draw for Eastern Ontario"
+  },
+  {
+   "date": "2025-12-11",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 115,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 30,
+   "scoreText": "30 and above",
+   "notes": "Targeted draw for Central Ontario (excluding GTA )"
+  },
+  {
+   "date": "2025-12-10",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 29,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 45,
+   "scoreText": "45 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-12-10",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 398,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 49,
+   "scoreText": "49 and above",
+   "notes": "Targeted draw for health occupations and early childhood educators and assistants"
+  },
+  {
+   "date": "2025-12-10",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 33,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 63,
+   "scoreText": "63 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-12-10",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 659,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 73,
+   "scoreText": "73 and above",
+   "notes": "Targeted draw for health occupations and early childhood educators and assistants"
+  },
+  {
+   "date": "2025-12-10",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 14,
+   "profilesCreated": "July 2, 2025 – December 9, 2025",
+   "minScore": 30,
+   "scoreText": "30 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-10-09",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 24,
+   "profilesCreated": "July 2, 2025 – October 9, 2025",
+   "minScore": 51,
+   "scoreText": "51 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-10-09",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 671,
+   "profilesCreated": "July 2, 2025 – October 9, 2025",
+   "minScore": 38,
+   "scoreText": "38 and above",
+   "notes": "Targeted draw for health occupations and early childhood educators and assistants"
+  },
+  {
+   "date": "2025-10-09",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 53,
+   "profilesCreated": "July 2, 2025 – October 9, 2025",
+   "minScore": 75,
+   "scoreText": "75 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-10-09",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 757,
+   "profilesCreated": "July 2, 2025 – October 9, 2025",
+   "minScore": 56,
+   "scoreText": "56 and above",
+   "notes": "Targeted draw for health occupations and early childhood educators and assistants"
+  },
+  {
+   "date": "2025-10-09",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 13,
+   "profilesCreated": "July 2, 2025 – October 9, 2025",
+   "minScore": 33,
+   "scoreText": "33 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-10-09",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 162,
+   "profilesCreated": "July 2, 2025 – October 9, 2025",
+   "minScore": 31,
+   "scoreText": "31 and above",
+   "notes": "Targeted draw for health occupations"
+  },
+  {
+   "date": "2025-09-03",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 1134,
+   "profilesCreated": "July 2, 2025 – September 3, 2025",
+   "minScore": 42,
+   "scoreText": "42 and above",
+   "notes": "Targeted draw for other priority occupations"
+  },
+  {
+   "date": "2025-09-03",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 759,
+   "profilesCreated": "July 2, 2025 – September 3, 2025",
+   "minScore": 63,
+   "scoreText": "63 and above",
+   "notes": "Targeted draw for other priority occupations"
+  },
+  {
+   "date": "2025-09-02",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 1305,
+   "profilesCreated": "July 2, 2025 – September 2, 2025",
+   "minScore": 41,
+   "scoreText": "41 and above",
+   "notes": "Targeted draw for health occupations and early childhood educators and assistants"
+  },
+  {
+   "date": "2025-09-02",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 1105,
+   "profilesCreated": "July 2, 2025 – September 2, 2025",
+   "minScore": 58,
+   "scoreText": "58 and above",
+   "notes": "Targeted draw for health occupations and early childhood educators and assistants"
+  },
+  {
+   "date": "2025-09-02",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 233,
+   "profilesCreated": "July 2, 2025 – September 2, 2025",
+   "minScore": 33,
+   "scoreText": "33 and above",
+   "notes": "Targeted draw for health occupations"
+  },
+  {
+   "date": "2025-08-28",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 94,
+   "profilesCreated": "July 2, 2025 – August 28, 2025",
+   "minScore": 53,
+   "scoreText": "53 and above",
+   "notes": "Targeted draw for candidates in Northern Ontario"
+  },
+  {
+   "date": "2025-08-28",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 57,
+   "profilesCreated": "July 2, 2025 – August 28, 2025",
+   "minScore": 45,
+   "scoreText": "45 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-08-28",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 236,
+   "profilesCreated": "July 2, 2025 – August 28, 2025",
+   "minScore": 66,
+   "scoreText": "66 and above",
+   "notes": "Targeted draw for candidates in Northern Ontario"
+  },
+  {
+   "date": "2025-08-28",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 56,
+   "profilesCreated": "July 2, 2025 – August 28, 2025",
+   "minScore": 68,
+   "scoreText": "68 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-08-28",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 25,
+   "profilesCreated": "July 2, 2025 – August 28, 2025",
+   "minScore": 34,
+   "scoreText": "34 and above",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-06-06",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 32,
+   "profilesCreated": "June 3 2024– June 3, 2025",
+   "minScore": 36,
+   "scoreText": "36 and above",
+   "notes": "Targeted draw for additional candidates in Greater Sudbury/Grand Sudbury"
+  },
+  {
+   "date": "2025-06-06",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 34,
+   "profilesCreated": "June 3 2024–June 3, 2025",
+   "minScore": 54,
+   "scoreText": "54 and above",
+   "notes": "Targeted draw for additional candidates in Greater Sudbury/Grand Sudbury"
+  },
+  {
+   "date": "2025-06-06",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 6,
+   "profilesCreated": "June 3 2024–June 3, 2025",
+   "minScore": 32,
+   "scoreText": "32 and above",
+   "notes": "Targeted draw for additional candidates in Greater Sudbury/Grand Sudbury"
+  },
+  {
+   "date": "2025-06-03",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 391,
+   "profilesCreated": "June 3 2024– June 3, 2025",
+   "minScore": 36,
+   "scoreText": "36 and above",
+   "notes": "Targeted draw for candidates in Northern Ontario"
+  },
+  {
+   "date": "2025-06-03",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 411,
+   "profilesCreated": "June 3 2024– June 3, 2025",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-06-03",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 5,
+   "profilesCreated": "June 3 2024– June 3, 2025",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Career development practitioners and career counsellors (except education)"
+  },
+  {
+   "date": "2025-06-03",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 334,
+   "profilesCreated": "June 3 2024– June 3, 2025",
+   "minScore": 85,
+   "scoreText": "85 and above",
+   "notes": "Targeted draw for candidates in Eastern Ontario"
+  },
+  {
+   "date": "2025-06-03",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 493,
+   "profilesCreated": "June 3 2024– June 3, 2025",
+   "minScore": 54,
+   "scoreText": "54 and above",
+   "notes": "Targeted draw for candidates in Northern Ontario"
+  },
+  {
+   "date": "2025-06-03",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 363,
+   "profilesCreated": "June 3 2024– June 3, 2025",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-06-03",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 1350,
+   "profilesCreated": "June 3 2024– June 3, 2025",
+   "minScore": 68,
+   "scoreText": "68 and above",
+   "notes": "Targeted draw for health occupations"
+  },
+  {
+   "date": "2025-06-03",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 89,
+   "profilesCreated": "June 3 2024– June 3, 2025",
+   "minScore": 32,
+   "scoreText": "32 and above",
+   "notes": "Targeted draw for candidates in Northern Ontario"
+  },
+  {
+   "date": "2025-06-03",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 69,
+   "profilesCreated": "June 3 2024– June 3, 2025",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Economic Development through Immigration (REDI)"
+  },
+  {
+   "date": "2025-06-03",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 214,
+   "profilesCreated": "June 3 2024– June 3, 2025",
+   "minScore": 34,
+   "scoreText": "34 and above",
+   "notes": "Targeted draw for health occupations"
+  },
+  {
+   "date": "2025-01-15",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 4,
+   "profilesCreated": "January 15 2024– January 15, 2025",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2024-10-08",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 885,
+   "profilesCreated": "October 8, 2023 – October 8, 2024",
+   "minScore": 48,
+   "scoreText": "48 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2024-10-08",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 841,
+   "profilesCreated": "October 8, 2023 – October 8, 2024",
+   "minScore": 52,
+   "scoreText": "52 and above",
+   "notes": "Targeted draw for other priority occupations"
+  },
+  {
+   "date": "2024-10-08",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 2,
+   "profilesCreated": "October 8, 2023 – October 8, 2024",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2024-09-17",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 1249,
+   "profilesCreated": "September 17, 2023 – September 17, 2024",
+   "minScore": 53,
+   "scoreText": "53 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-09-17",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 194,
+   "profilesCreated": "September 17, 2023 – September 17, 2024",
+   "minScore": 45,
+   "scoreText": "45 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-09-10",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 15,
+   "profilesCreated": "September 10, 2023 – September 10, 2024",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2024-09-10",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 806,
+   "profilesCreated": "September 10, 2023 – September 10, 2024",
+   "minScore": 67,
+   "scoreText": "67 and above",
+   "notes": "Targeted draw for health professions"
+  },
+  {
+   "date": "2024-09-10",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 1017,
+   "profilesCreated": "September 10, 2023 – September 10, 2024",
+   "minScore": 67,
+   "scoreText": "67 and above",
+   "notes": "Targeted draw for skilled trades"
+  },
+  {
+   "date": "2024-09-10",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 649,
+   "profilesCreated": "September 10, 2023 – September 10, 2024",
+   "minScore": 34,
+   "scoreText": "34 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-08-13",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 420,
+   "profilesCreated": "August 13, 2023 – August 13, 2024",
+   "minScore": 50,
+   "scoreText": "50 and above",
+   "notes": "Targeted draw for health occupations"
+  },
+  {
+   "date": "2024-08-13",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 958,
+   "profilesCreated": "August 13, 2023 – August 13, 2024",
+   "minScore": 54,
+   "scoreText": "54 and above",
+   "notes": "Targeted draw for other priority occupations"
+  },
+  {
+   "date": "2024-07-16",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 5,
+   "profilesCreated": "July 16, 2023 – July 16, 2024",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2024-07-16",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 839,
+   "profilesCreated": "July 16, 2023 – July 16, 2024",
+   "minScore": 77,
+   "scoreText": "77 and above",
+   "notes": "Targeted draw for other priority occupations"
+  },
+  {
+   "date": "2024-07-16",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 424,
+   "profilesCreated": "July 16, 2023 – July 16, 2024",
+   "minScore": 81,
+   "scoreText": "81 and above",
+   "notes": "Targeted draw for health occupations"
+  },
+  {
+   "date": "2024-07-16",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 265,
+   "profilesCreated": "July 16, 2023 – July 16, 2024",
+   "minScore": 35,
+   "scoreText": "35 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-07-09",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 1556,
+   "profilesCreated": "July 9, 2023 – July 9, 2024",
+   "minScore": 54,
+   "scoreText": "54 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-07-09",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 110,
+   "profilesCreated": "July 9, 2023 – July 9, 2024",
+   "minScore": 50,
+   "scoreText": "50 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-06-17",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 106,
+   "profilesCreated": "June 17, 2023 – June 17, 2024",
+   "minScore": 39,
+   "scoreText": "39 and above",
+   "notes": "Targeted draw for Early childhood educators and assistants candidates"
+  },
+  {
+   "date": "2024-06-17",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 84,
+   "profilesCreated": "June 17, 2023 – June 17, 2024",
+   "minScore": 60,
+   "scoreText": "60 and above",
+   "notes": "Targeted draw for Early childhood educators and assistants candidates"
+  },
+  {
+   "date": "2024-06-11",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 124,
+   "profilesCreated": "June 11, 2023 – June 11, 2024",
+   "minScore": 43,
+   "scoreText": "43 and above",
+   "notes": "Targeted draw for Early childhood educators and assistants candidates"
+  },
+  {
+   "date": "2024-06-11",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 120,
+   "profilesCreated": "June 11, 2023 – June 11, 2024",
+   "minScore": 65,
+   "scoreText": "65 and above",
+   "notes": "Targeted draw for Early childhood educators and assistants candidates"
+  },
+  {
+   "date": "2024-04-23",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 209,
+   "profilesCreated": "April 23, 2023 – April 23, 2024",
+   "minScore": 53,
+   "scoreText": "53 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2024-04-23",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 2,
+   "profilesCreated": "April 23, 2023 – April 23, 2024",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2024-03-19",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 1370,
+   "profilesCreated": "March 19, 2023 – March 19, 2024",
+   "minScore": 52,
+   "scoreText": "52 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-03-19",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 104,
+   "profilesCreated": "March 19, 2023 – March 19, 2024",
+   "minScore": 42,
+   "scoreText": "42 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-03-12",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 11,
+   "profilesCreated": "March 12, 2023 – March 12, 2024",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2024-03-12",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 1306,
+   "profilesCreated": "March 12, 2023 – March 12, 2024",
+   "minScore": 72,
+   "scoreText": "72 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-03-12",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 649,
+   "profilesCreated": "March 12, 2023 – March 12, 2024",
+   "minScore": 66,
+   "scoreText": "66 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2024-03-12",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 684,
+   "profilesCreated": "March 12, 2023 – March 12, 2024",
+   "minScore": 72,
+   "scoreText": "72 and above",
+   "notes": "Targeted draw for health and tech occupations"
+  },
+  {
+   "date": "2024-02-08",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 1182,
+   "profilesCreated": "February 8, 2023 – February 8, 2024",
+   "minScore": 78,
+   "scoreText": "78 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-02-08",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 1252,
+   "profilesCreated": "February 8, 2023 – February 8, 2024",
+   "minScore": 73,
+   "scoreText": "73 and above",
+   "notes": "Targeted draw for health and tech occupations"
+  },
+  {
+   "date": "2024-01-24",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 12,
+   "profilesCreated": "January 24, 2023 – January 24, 2024",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2024-01-24",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 1344,
+   "profilesCreated": "January 24, 2023 – January 24, 2024",
+   "minScore": 50,
+   "scoreText": "50 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-01-24",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 125,
+   "profilesCreated": "January 24, 2023 – January 24, 2024",
+   "minScore": 45,
+   "scoreText": "45 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-01-19",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 1654,
+   "profilesCreated": "January 19, 2023 – January 19, 2024",
+   "minScore": 50,
+   "scoreText": "50 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2024-01-09",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 630,
+   "profilesCreated": "January 9, 2023 – January 9, 2024",
+   "minScore": 33,
+   "scoreText": "33 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2024-01-09",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 821,
+   "profilesCreated": "January 9, 2023 – January 9, 2024",
+   "minScore": 40,
+   "scoreText": "40 and above",
+   "notes": "Targeted draw for health and tech occupations"
+  },
+  {
+   "date": "2023-12-05",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 761,
+   "profilesCreated": "December 5, 2022 – December 5, 2023",
+   "minScore": 34,
+   "scoreText": "34 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2023-12-05",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 1663,
+   "profilesCreated": "December 5, 2022 – December 5, 2023",
+   "minScore": 43,
+   "scoreText": "43 and above",
+   "notes": "Targeted draw for health and tech occupations"
+  },
+  {
+   "date": "2023-12-05",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 13,
+   "profilesCreated": "December 5, 2022 – December 5, 2023",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways. Project candidates"
+  },
+  {
+   "date": "2023-12-05",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 262,
+   "profilesCreated": "November 22, 2022 – August 15, 2023",
+   "minScore": 30,
+   "scoreText": "30 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-10-30",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 1051,
+   "profilesCreated": "November 22, 2022 – October 30, 2023",
+   "minScore": 43,
+   "scoreText": "43 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-10-30",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 66,
+   "profilesCreated": "November 22, 2022 – October 30, 2023",
+   "minScore": 42,
+   "scoreText": "42 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-09-25",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 10,
+   "profilesCreated": null,
+   "minScore": 136,
+   "scoreText": "136 to 163",
+   "notes": null
+  },
+  {
+   "date": "2023-09-19",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 537,
+   "profilesCreated": "November 22, 2022 –September 19, 2023",
+   "minScore": 41,
+   "scoreText": "41 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-09-19",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 71,
+   "profilesCreated": "November 22, 2022 – September 19, 2023",
+   "minScore": 40,
+   "scoreText": "40 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-08-30",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 772,
+   "profilesCreated": "November 22, 2022 – August 30, 2023",
+   "minScore": 44,
+   "scoreText": "44 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-08-15",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 375,
+   "profilesCreated": "November 22, 2022 – August 15, 2023",
+   "minScore": 30,
+   "scoreText": "30 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2023-08-15",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 1131,
+   "profilesCreated": "November 22, 2022 – August 15, 2023",
+   "minScore": 46,
+   "scoreText": "46 and above",
+   "notes": "Targeted draw for health and tech occupations"
+  },
+  {
+   "date": "2023-08-15",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 408,
+   "profilesCreated": "November 22, 2022 – August 15, 2023",
+   "minScore": 61,
+   "scoreText": "61 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2023-08-15",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 445,
+   "profilesCreated": "November 22, 2022 – August 15, 2023",
+   "minScore": 61,
+   "scoreText": "61 and above",
+   "notes": "Targeted draw for tech and health occupations"
+  },
+  {
+   "date": "2023-08-15",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 256,
+   "profilesCreated": "November 22, 2022 – August 15, 2023",
+   "minScore": 23,
+   "scoreText": "23 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-08-01",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 1,
+   "profilesCreated": "November 22, 2022 – August 1, 2023",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways. Project candidates"
+  },
+  {
+   "date": "2023-08-01",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 755,
+   "profilesCreated": "November 22, 2022 – August 1, 2023",
+   "minScore": 48,
+   "scoreText": "48 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-08-01",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 84,
+   "profilesCreated": "November 22, 2022 – August 1, 2023",
+   "minScore": 39,
+   "scoreText": "39 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-07-28",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 11,
+   "profilesCreated": null,
+   "minScore": 134,
+   "scoreText": "134 to 151",
+   "notes": null
+  },
+  {
+   "date": "2023-06-20",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 426,
+   "profilesCreated": "November 22, 2022 – June 20, 2023",
+   "minScore": 36,
+   "scoreText": "36 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2023-06-20",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 318,
+   "profilesCreated": "November 22, 2022 – June 20, 2023",
+   "minScore": 33,
+   "scoreText": "33 and above",
+   "notes": "Targeted draw for health occupations"
+  },
+  {
+   "date": "2023-06-20",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 256,
+   "profilesCreated": "November 22, 2022 – June 20, 2023",
+   "minScore": 26,
+   "scoreText": "26 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-06-06",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 451,
+   "profilesCreated": "November 22, 2022 – June 6, 2023",
+   "minScore": 57,
+   "scoreText": "57 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2023-06-06",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 1175,
+   "profilesCreated": "November 22, 2022 – June 6, 2023",
+   "minScore": 46,
+   "scoreText": "46 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-06-06",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 134,
+   "profilesCreated": "November 22, 2022 – June 6, 2023",
+   "minScore": 42,
+   "scoreText": "42 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-05-12",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 14,
+   "profilesCreated": null,
+   "minScore": 135,
+   "scoreText": "135 to 178",
+   "notes": null
+  },
+  {
+   "date": "2023-05-09",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 400,
+   "profilesCreated": "November 22, 2022 – May 9, 2023",
+   "minScore": 43,
+   "scoreText": "43 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2023-05-09",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 584,
+   "profilesCreated": "November 22, 2022– May 9, 2023",
+   "minScore": 62,
+   "scoreText": "62 and above",
+   "notes": "Targeted draw for tech and health occupations"
+  },
+  {
+   "date": "2023-04-11",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 295,
+   "profilesCreated": "November 22, 2022 – April 11, 2023",
+   "minScore": 30,
+   "scoreText": "30 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-04-04",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 6,
+   "profilesCreated": "November 22, 2022 – April 4, 2023",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways. Project candidates"
+  },
+  {
+   "date": "2023-04-04",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 752,
+   "profilesCreated": "November 22, 2022 – April 4, 2023",
+   "minScore": 52,
+   "scoreText": "52 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-04-04",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 131,
+   "profilesCreated": "November 22, 2022 – April 4, 2023",
+   "minScore": 48,
+   "scoreText": "48 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-03-31",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 13,
+   "profilesCreated": null,
+   "minScore": 139,
+   "scoreText": "139 to 159",
+   "notes": null
+  },
+  {
+   "date": "2023-03-14",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 2,
+   "profilesCreated": "November 22, 2022 – March 14, 2023",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways. Project candidates"
+  },
+  {
+   "date": "2023-03-14",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 606,
+   "profilesCreated": "November 22, 2022 – March 14, 2023",
+   "minScore": 70,
+   "scoreText": "70 and above",
+   "notes": "Targeted draw for tech and health occupations"
+  },
+  {
+   "date": "2023-03-14",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 300,
+   "profilesCreated": "November 22, 2022 – March 14, 2023",
+   "minScore": 74,
+   "scoreText": "74 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2023-02-10",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 304,
+   "profilesCreated": "November 22, 2022 - February 10, 2023",
+   "minScore": 30,
+   "scoreText": "30 and above",
+   "notes": "Targeted draw for tech and health occupations"
+  },
+  {
+   "date": "2023-02-10",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 1,
+   "profilesCreated": "November 22, 2022 - February 10, 2023",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways. Project candidates"
+  },
+  {
+   "date": "2023-01-31",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 611,
+   "profilesCreated": "November 22, 2022 - January 31, 2023",
+   "minScore": 53,
+   "scoreText": "53 and above",
+   "notes": "Targeted draw for tech and health occupations"
+  },
+  {
+   "date": "2023-01-27",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 10,
+   "profilesCreated": null,
+   "minScore": 137,
+   "scoreText": "137 to 162",
+   "notes": null
+  },
+  {
+   "date": "2023-01-25",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 692,
+   "profilesCreated": "November 22, 2022 – January 25, 2023",
+   "minScore": 44,
+   "scoreText": "44 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-01-24",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 2,
+   "profilesCreated": "November 22, 2022 - January 24, 2023",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways. Project candidates"
+  },
+  {
+   "date": "2023-01-24",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 620,
+   "profilesCreated": "November 22, 2022 – January 24, 2023",
+   "minScore": 82,
+   "scoreText": "82 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2023-01-10",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 402,
+   "profilesCreated": "November 22, 2022 – January 10, 2023",
+   "minScore": 35,
+   "scoreText": "35 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2023-01-10",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 2,
+   "profilesCreated": "November 22, 2022 – January 10, 2023",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2022-12-22",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 14,
+   "profilesCreated": null,
+   "minScore": 140,
+   "scoreText": "140 to 173",
+   "notes": null
+  },
+  {
+   "date": "2022-12-21",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 725,
+   "profilesCreated": "November 22, 2022 – December 21, 2022",
+   "minScore": 46,
+   "scoreText": "46 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-10-25",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 1,
+   "profilesCreated": "October 25, 2021-October 25, 2022",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2022-10-25",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 535,
+   "profilesCreated": "October 25, 2021-October 25, 2022",
+   "minScore": 35,
+   "scoreText": "35 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-10-25",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 106,
+   "profilesCreated": "October 25, 2021-October 25, 2022",
+   "minScore": 24,
+   "scoreText": "24 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-09-27",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 3,
+   "profilesCreated": "September 27, 2021 – September 27, 2022",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2022-09-20",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 823,
+   "profilesCreated": "September 20, 2021 – September 20, 2022",
+   "minScore": 33,
+   "scoreText": "33 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-08-30",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 1,
+   "profilesCreated": "August 30, 2021 – August 30, 2022",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2022-08-30",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 680,
+   "profilesCreated": "August 30, 2021 – August 30, 2022",
+   "minScore": 37,
+   "scoreText": "37 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-08-30",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 101,
+   "profilesCreated": "August 30, 2021 – August 30, 2022",
+   "minScore": 26,
+   "scoreText": "26 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-08-17",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 30,
+   "profilesCreated": null,
+   "minScore": 138,
+   "scoreText": "138 to 160",
+   "notes": null
+  },
+  {
+   "date": "2022-07-27",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 2,
+   "profilesCreated": "July 27, 2021 – July 27, 2022",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2022-07-15",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 33,
+   "profilesCreated": null,
+   "minScore": 146,
+   "scoreText": "146 to 174",
+   "notes": null
+  },
+  {
+   "date": "2022-06-29",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 2,
+   "profilesCreated": "June 9, 2021 –June 29, 2022",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2022-06-29",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 424,
+   "profilesCreated": "June 29, 2021 –June 29, 2022",
+   "minScore": 74,
+   "scoreText": "74 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-06-29",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 293,
+   "profilesCreated": "June 29, 2021 – June 29, 2022",
+   "minScore": 24,
+   "scoreText": "24 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-06-01",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 217,
+   "profilesCreated": "June 1, 2021 –June 1, 2022",
+   "minScore": 62,
+   "scoreText": "62 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2022-06-01",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 229,
+   "profilesCreated": "June 1,2021 –June 1 2022",
+   "minScore": 79,
+   "scoreText": "79 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-06-01",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 491,
+   "profilesCreated": "June 1, 2021 – June 1, 2022",
+   "minScore": 38,
+   "scoreText": "38 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-06-01",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 65,
+   "profilesCreated": "June 1, 2021 – June 1, 2022",
+   "minScore": 28,
+   "scoreText": "28 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-05-04",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 57,
+   "profilesCreated": "May 4, 2021 – May 4, 2022",
+   "minScore": 27,
+   "scoreText": "27 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-03-30",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 155,
+   "profilesCreated": "April 28, 2021 – March 30, 2022",
+   "minScore": 23,
+   "scoreText": "23 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2022-03-30",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 65,
+   "profilesCreated": "April 28, 2021 – March 30, 2022",
+   "minScore": 21,
+   "scoreText": "21 and above",
+   "notes": "Targeted draw for health, manufacturing, agricultural occupations and select trades occupations"
+  },
+  {
+   "date": "2022-03-30",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 398,
+   "profilesCreated": "April 28, 2021 – March 30, 2022",
+   "minScore": 39,
+   "scoreText": "39 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-03-03",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 21,
+   "profilesCreated": null,
+   "minScore": 152,
+   "scoreText": "152 to 169",
+   "notes": null
+  },
+  {
+   "date": "2022-03-01",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 456,
+   "profilesCreated": "April 28, 2021 – March 1, 2022",
+   "minScore": 39,
+   "scoreText": "39 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2022-03-01",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 215,
+   "profilesCreated": "April 28, 2021 – March 1, 2022",
+   "minScore": 42,
+   "scoreText": "42 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2022-03-01",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 411,
+   "profilesCreated": "April 28, 2021 – March 1, 2022",
+   "minScore": 72,
+   "scoreText": "72 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-03-01",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 238,
+   "profilesCreated": "April 28, 2021 – March 1, 2022",
+   "minScore": 41,
+   "scoreText": "41 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-02-28",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 173,
+   "profilesCreated": "September 14, 2021 – February 28, 2022",
+   "minScore": 16,
+   "scoreText": "16 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-02-22",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 8,
+   "profilesCreated": "October 22, 2021 – February 22, 2022",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2022-02-09",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 476,
+   "profilesCreated": "April 28, 2021 – February 9, 2022",
+   "minScore": 24,
+   "scoreText": "24 and above",
+   "notes": "Targeted draw for skilled trades occupations"
+  },
+  {
+   "date": "2022-02-09",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 166,
+   "profilesCreated": "April 28, 2021 – February 9, 2022",
+   "minScore": 41,
+   "scoreText": "41 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2022-02-09",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 107,
+   "profilesCreated": "April 28, 2021 – February 9, 2022",
+   "minScore": 15,
+   "scoreText": "15 and above",
+   "notes": "Targeted draw for health, manufacturing, agricultural and select trades occupations"
+  },
+  {
+   "date": "2022-01-11",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 264,
+   "profilesCreated": "April 28, 2021 – January 11, 2022",
+   "minScore": 38,
+   "scoreText": "38 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2022-01-11",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 762,
+   "profilesCreated": "April 28, 2021 – January 11, 2022",
+   "minScore": 59,
+   "scoreText": "59 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2022-01-11",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 58,
+   "profilesCreated": "April 28, 2021 – January 11, 2022",
+   "minScore": 11,
+   "scoreText": "11 and above",
+   "notes": "Targeted draw for health, manufacturing and agricultural occupations"
+  },
+  {
+   "date": "2021-12-07",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 470,
+   "profilesCreated": "April 28, 2021 – December 7, 2021",
+   "minScore": 37,
+   "scoreText": "37 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2021-12-07",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 33,
+   "profilesCreated": "April 28, 2021 – December 7, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Immigration Pilot candidates"
+  },
+  {
+   "date": "2021-12-07",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 583,
+   "profilesCreated": "April 28, 2021 – December 7, 2021",
+   "minScore": 62,
+   "scoreText": "62 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2021-12-07",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 37,
+   "profilesCreated": "April 28, 2021 – December 7, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Immigration Pilot candidates"
+  },
+  {
+   "date": "2021-12-07",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 53,
+   "profilesCreated": "April 28, 2021 – December 7, 2021",
+   "minScore": 20,
+   "scoreText": "20 and above",
+   "notes": "Targeted draw for health, manufacturing and agricultural occupations"
+  },
+  {
+   "date": "2021-12-07",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 10,
+   "profilesCreated": "April 28, 2021 – December 7, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Immigration Pilot candidates"
+  },
+  {
+   "date": "2021-10-27",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 20,
+   "profilesCreated": null,
+   "minScore": 147,
+   "scoreText": "147 to 174",
+   "notes": null
+  },
+  {
+   "date": "2021-10-20",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 4,
+   "profilesCreated": "April 28, 2021 – October 20, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2021-10-20",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 479,
+   "profilesCreated": "April 28, 2021- October 20, 2021",
+   "minScore": 35,
+   "scoreText": "35 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-10-20",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 63,
+   "profilesCreated": "April 28, 2021- October 20, 2021",
+   "minScore": 25,
+   "scoreText": "25 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-09-22",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 65,
+   "profilesCreated": "April 28, 2021 – September 22, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for health, manufacturing and agricultural occupations"
+  },
+  {
+   "date": "2021-09-22",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 7,
+   "profilesCreated": "April 28, 2021 – September 22, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Immigration Pilot candidates"
+  },
+  {
+   "date": "2021-09-21",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 406,
+   "profilesCreated": "April 28, 2021-September 21, 2021",
+   "minScore": 37,
+   "scoreText": "37 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2021-09-21",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 36,
+   "profilesCreated": "April 28, 2021-September 21, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Immigration Pilot candidates"
+  },
+  {
+   "date": "2021-09-21",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 523,
+   "profilesCreated": "April 28, 2021-September 21, 2021",
+   "minScore": 61,
+   "scoreText": "61 and above",
+   "notes": "General Draw"
+  },
+  {
+   "date": "2021-09-21",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 30,
+   "profilesCreated": "April 28, 2021-September 21, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Immigration Pilot candidates"
+  },
+  {
+   "date": "2021-09-14",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 627,
+   "profilesCreated": "April 28, 2021- September 14, 2021",
+   "minScore": 35,
+   "scoreText": "35 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-09-14",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 64,
+   "profilesCreated": "April 28, 2021 – September 14, 2021",
+   "minScore": 16,
+   "scoreText": "16 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-08-26",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 20,
+   "profilesCreated": null,
+   "minScore": 142,
+   "scoreText": "142 to 200",
+   "notes": null
+  },
+  {
+   "date": "2021-08-25",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 326,
+   "profilesCreated": "April 28, 2021 – August 25, 2021",
+   "minScore": 37,
+   "scoreText": "37 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-08-18",
+   "stream": "masters",
+   "streamName": "Masters Graduate",
+   "invitations": 402,
+   "profilesCreated": "April 28, 2021 – August 18, 2021",
+   "minScore": 39,
+   "scoreText": "39 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-08-18",
+   "stream": "phd",
+   "streamName": "PhD Graduate",
+   "invitations": 77,
+   "profilesCreated": "April 28, 2021 – August 18, 2021",
+   "minScore": 17,
+   "scoreText": "17 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-08-11",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 48,
+   "profilesCreated": "April 28, 2021 – August 11, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for health, manufacturing and agricultural occupations"
+  },
+  {
+   "date": "2021-08-06",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 1,
+   "profilesCreated": "April 28, 2021 – August 6, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Economic Mobility Pathways Project candidates"
+  },
+  {
+   "date": "2021-07-15",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 54,
+   "profilesCreated": "April 28, 2021 – July 15, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for health, manufacturing and agricultural occupations"
+  },
+  {
+   "date": "2021-07-15",
+   "stream": "in-demand",
+   "streamName": "Employer Job Offer: In-Demand Skills",
+   "invitations": 1,
+   "profilesCreated": "April 28, 2021 – July 15, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Immigration Pilot candidates"
+  },
+  {
+   "date": "2021-07-13",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 24,
+   "profilesCreated": "April 28, 2021 – July 13, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Immigration Pilot candidates"
+  },
+  {
+   "date": "2021-07-13",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 1211,
+   "profilesCreated": "April 28, 2021 – July 13, 2021",
+   "minScore": 33,
+   "scoreText": "33 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-07-13",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 19,
+   "profilesCreated": "April 28, 2021 – July 13, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Immigration Pilot candidates"
+  },
+  {
+   "date": "2021-07-13",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 431,
+   "profilesCreated": "April 28, 2021 – July 13, 2021",
+   "minScore": 62,
+   "scoreText": "62 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-07-07",
+   "stream": "entrepreneur",
+   "streamName": "Entrepreneur",
+   "invitations": 21,
+   "profilesCreated": null,
+   "minScore": 146,
+   "scoreText": "146 to 200",
+   "notes": null
+  },
+  {
+   "date": "2021-06-16",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 569,
+   "profilesCreated": "April 28, 2021 – June 16, 2021",
+   "minScore": 38,
+   "scoreText": "38 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-06-16",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 371,
+   "profilesCreated": "April 28, 2021 – Jun 16, 2021",
+   "minScore": 66,
+   "scoreText": "66 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-05-26",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 147,
+   "profilesCreated": "April 28, 2021 – May 26, 2021",
+   "minScore": 73,
+   "scoreText": "73 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-05-26",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 11,
+   "profilesCreated": "April 28, 2021 – May 26, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Immigration Pilot candidates"
+  },
+  {
+   "date": "2021-05-25",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 64,
+   "profilesCreated": "April 28, 2021 – May 25, 2021",
+   "minScore": null,
+   "scoreText": "N/A",
+   "notes": "Targeted draw for Regional Immigration Pilot candidates"
+  },
+  {
+   "date": "2021-05-18",
+   "stream": "international-student",
+   "streamName": "Employer Job Offer: International Student",
+   "invitations": 138,
+   "profilesCreated": "April 28, 2021 – May 18, 2021",
+   "minScore": 77,
+   "scoreText": "77 and above",
+   "notes": "General draw"
+  },
+  {
+   "date": "2021-05-11",
+   "stream": "foreign-worker",
+   "streamName": "Employer Job Offer: Foreign Worker",
+   "invitations": 81,
+   "profilesCreated": "April 28, 2021 – May 11, 2021",
+   "minScore": 31,
+   "scoreText": "31 and above",
+   "notes": "Targeted draw in health and skilled trades occupations"
+  }
+ ],
+ "dropped": [
+  {
+   "date": "2024-07-16",
+   "stream": "in-demand",
+   "invitations": 424,
+   "reason": "listed under 2023 and repeats a row of another stream"
+  }
+ ],
+ "fetchedAt": "2026-10-14"
+}

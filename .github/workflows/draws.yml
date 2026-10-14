@@ -13,13 +13,16 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - run: node scripts/draws.mjs --fetch
+      - name: Ontario (OINP) invitations
+        run: node scripts/oinp.mjs --fetch
+        continue-on-error: true
       - run: npm test
       - name: Commit if the data changed
         run: |
           git config user.name "crsplanner-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add data/draws.json data/archive
-          if git diff --cached --quiet -- data/draws.json; then
+          git add data/draws.json data/archive data/provinces
+          if git diff --cached --quiet -- data/draws.json data/provinces; then
             echo "No new round or distribution"; git reset -q
           else
             git commit -m "Draws: update from IRCC $(date -u +%F)" && git push

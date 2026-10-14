@@ -14,8 +14,14 @@ for (const f of readdirSync(dir).filter((x) => x.endsWith('.json'))) {
     const res = await fetch(rule.source, { headers: { 'user-agent': 'crsplanner-rules-watch (+https://crsplanner.com/about/)' } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const html = await res.text();
-    const m = html.match(/<meta[^>]+name="dcterms\.modified"[^>]+content="([\d-]+)"/i) || html.match(/content="([\d-]+)"[^>]+name="dcterms\.modified"/i);
-    if (!m) throw new Error('no dcterms.modified found');
+    let m = html.match(/<meta[^>]+name="dcterms\.modified"[^>]+content="([\d-]+)"/i) || html.match(/content="([\d-]+)"[^>]+name="dcterms\.modified"/i);
+    if (!m) {
+      // ontario.ca and similar pages print "Updated: October 06, 2026"
+      const u = html.match(/Updated:\s*([A-Za-z]+) (\d{1,2}), (\d{4})/);
+      const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+      if (u) m = [null, `${u[3]}-${String(MONTHS.indexOf(u[1].toLowerCase()) + 1).padStart(2, '0')}-${u[2].padStart(2, '0')}`];
+    }
+    if (!m) throw new Error('no modified date found');
     if (m[1] !== rule.sourceModified) { changed++; console.log(`CHANGED ${f}: IRCC page modified ${m[1]}, our data is from ${rule.sourceModified}. ${rule.source}`); }
     else console.log(`ok ${f}: ${m[1]}`);
   } catch (e) { errors++; console.log(`ERROR ${f}: ${e.message}`); }

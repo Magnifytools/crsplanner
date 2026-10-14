@@ -1,0 +1,32 @@
+{
+ "id": "oinp-owp-eoi",
+ "source": "https://www.ontario.ca/page/ontario-workforce-priority-stream",
+ "sourceModified": "2026-10-06",
+ "checked": "2026-10-14",
+ "updates": "https://www.ontario.ca/page/2026-ontario-immigrant-nominee-program-updates",
+ "notes": [
+  "Ontario Workforce Priority (OWP) stream, expression of interest scoring. Page published 2026-07-20; EOI portal opened 2026-08-04; all other OINP streams closed.",
+  "Earnings history factor updated on 2026-10-05 (OINP update of 2026-10-07): $80,000 or more in a year now gives 10 points."
+ ],
+ "factors": [
+  { "id": "teer", "group": "Employment / labour market", "label": "NOC TEER category of the job offer", "options": [["TEER 0 or 1", 9], ["TEER 2 or 3", 6], ["TEER 4", 0], ["TEER 5", 0]] },
+  { "id": "broad", "group": "Employment / labour market", "label": "NOC broad occupational category (first digit of the NOC)", "options": [["Category 3 (health)", 10], ["Category 7 (trades, transport and equipment operators)", 8], ["Category 2 (natural and applied sciences)", 6], ["Category 0, 1, 4, 8 or 9", 4], ["Category 5 or 6", 2]] },
+  { "id": "wage", "group": "Employment / labour market", "label": "Hourly wage of the job offer", "options": [["$40 per hour or higher", 15], ["$35 to $39.99", 12], ["$30 to $34.99", 10], ["$25 to $29.99", 8], ["$20 to $24.99", 5], ["Less than $20", 0]], "physicianNA": true },
+  { "id": "ontarioWork", "group": "Employment / labour market", "label": "Ontario work experience", "options": [["Over 24 months full time in the job offer position", 18], ["13 to 24 months full time in the job offer position", 15], ["6 to 12 months full time in the job offer position", 12], ["Under 6 months in the position, but over 24 months full time (or part-time equivalent) in Ontario", 12], ["Under 6 months in the position, 13 to 24 months in Ontario", 9], ["Under 6 months in the position, 6 to 12 months in Ontario", 6], ["Less than 6 months in Ontario, or not working in Ontario", 0]] },
+  { "id": "earnings", "group": "Employment / labour market", "label": "Canadian earnings in a single year (CRA Notice of Assessment, last 5 years)", "options": [["$80,000 or more", 10], ["$70,000 to $79,999", 8], ["$50,000 to $69,999", 6], ["$30,000 to $49,999", 4], ["Under $30,000", 0]] },
+  { "id": "status", "group": "Employment / labour market", "label": "Legal status in Canada", "options": [["Valid work permit", 10], ["Valid study permit", 5], ["No valid work or study permit", 0]] },
+  { "id": "education", "group": "Education", "label": "Highest level of education (Canadian credential or ECA)", "options": [["Doctorate, or degree in medicine, dentistry, veterinary medicine or optometry", 10], ["Master's degree", 8], ["University certificate or diploma above a bachelor's", 6], ["Bachelor's degree or equivalent", 6], ["Ontario College Graduate Certificate", 5], ["University certificate or diploma below a bachelor's", 5], ["College, CEGEP or other non-university certificate or diploma", 5], ["Apprenticeship or trades certificate or diploma", 5], ["Less than college or trade certificate", 0]] },
+  { "id": "cdnCredentials", "group": "Education", "label": "Canadian post-secondary credentials (at least one year full time)", "options": [["More than one", 10], ["One", 5], ["None", 0]] },
+  { "id": "language", "group": "Language", "label": "Official language: lowest CLB across the four abilities (best of your English or French test)", "options": [["CLB 9 or higher", 15], ["CLB 8", 12], ["CLB 7", 8], ["CLB 6", 4], ["CLB 5 or lower", 0]] },
+  { "id": "officialLanguages", "group": "Language", "label": "Knowledge of official languages", "options": [["2 official languages (CLB 6+ in all four abilities in both tests)", 10], ["1 official language", 5]] },
+  { "id": "region", "group": "Regionalization", "label": "Region of the job offer's work location", "options": [["Northern Ontario", 15], ["Eastern Ontario", 10], ["Central Ontario outside the GTA", 10], ["Southwestern Ontario", 10], ["Inside the GTA, except Toronto", 5], ["Toronto", 0]] }
+ ],
+ "regions": {
+  "Northern Ontario": "Muskoka, Haliburton, Nipissing, Parry Sound, Manitoulin, Sudbury, Greater Sudbury, Timiskaming, Cochrane, Algoma, Thunder Bay, Rainy River and Kenora",
+  "Eastern Ontario": "Frontenac, Hastings, Kawartha Lakes, Lanark, Leeds and Grenville, Lennox and Addington, Northumberland, Ottawa, Peterborough, Prescott and Russell, Prince Edward, Renfrew, and Stormont, Dundas and Glengarry",
+  "Central Ontario outside the GTA": "Dufferin, Grey, Simcoe, Waterloo and Wellington",
+  "Southwestern Ontario": "Brant, Bruce, Chatham-Kent, Elgin, Essex, Haldimand-Norfolk, Hamilton, Huron, Lambton, Middlesex, Niagara, Oxford and Perth",
+  "Inside the GTA, except Toronto": "the regional municipalities of Durham, Halton, Peel and York",
+  "Toronto": "the City of Toronto"
+ }
+}
