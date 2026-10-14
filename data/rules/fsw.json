@@ -1,0 +1,16 @@
+{
+ "id": "fsw-67",
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html",
+ "sourceModified": "2026-09-24",
+ "educationSource": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/education-assessment.html",
+ "checked": "2026-10-14",
+ "passMark": 67,
+ "max": 100,
+ "language": { "firstPerAbility": [[9, 6], [8, 5], [7, 4]], "firstMinClb": 7, "secondAllClb5": 4, "max": 28 },
+ "education": [["Doctoral (PhD) level", 25], ["Master's level, or professional degree needed to practise a licensed profession", 23], ["Two or more certificates, diplomas or degrees, one of them three years or longer", 22], ["Bachelor's degree or other program of three or more years", 21], ["Two-year program", 19], ["One-year program", 15], ["Secondary school (high school diploma)", 5]],
+ "experience": [["1 year", 9], ["2 to 3 years", 11], ["4 to 5 years", 13], ["6 years or more", 15]],
+ "age": { "under18": 0, "18-35": 12, "36": 11, "37": 10, "38": 9, "39": 8, "40": 7, "41": 6, "42": 5, "43": 4, "44": 3, "45": 2, "46": 1, "47+": 0 },
+ "arrangedEmployment": 10,
+ "adaptability": [["spouseLanguage", "Your spouse or partner has CLB 4 or higher in all four abilities in English or French", 5], ["study", "You completed at least 2 academic years of full-time study in Canada", 5], ["spouseStudy", "Your spouse or partner completed at least 2 academic years of full-time study in Canada", 5], ["work", "You did at least 1 year of full-time skilled work (TEER 0 to 3) in Canada while authorized", 10], ["spouseWork", "Your spouse or partner did at least 1 year of full-time work in Canada while authorized", 5], ["arranged", "You earned points for arranged employment", 5], ["relative", "You or your spouse have a relative in Canada (citizen or PR, 18+): parent, grandparent, child, grandchild, sibling, aunt, uncle, niece or nephew", 5]],
+ "adaptabilityMax": 10
+}

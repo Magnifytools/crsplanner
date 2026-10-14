@@ -1,0 +1,9 @@
+{
+ "id": "cec-eligibility",
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/canadian-experience-class.html",
+ "sourceModified": "2026-09-24",
+ "checked": "2026-10-14",
+ "hours": 1560,
+ "years": 3,
+ "languageMin": { "teer01": 7, "teer23": 5 }
+}

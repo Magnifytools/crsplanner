@@ -23,6 +23,8 @@ const sinp = read('data/rules/sinp.json');
 const sinpDraws = read('data/provinces/sinp-draws.json');
 const aaip = read('data/rules/aaip.json');
 const aaipDraws = read('data/provinces/aaip-draws.json');
+const fsw = read('data/rules/fsw.json');
+const cec = read('data/rules/cec.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -1385,6 +1387,115 @@ ${aos.length >= 2 ? `<h2>Alberta Opportunity Stream: minimum score</h2>${catChar
   return page({ path: '/aaip-draws/', title: `AAIP Draws ${y}: Alberta Draw Results and Minimum Scores`, description: `Latest AAIP draw: ${longDate(last.date)}, minimum score ${last.minScore}. All ${d.length} Alberta draws of ${y} by stream, with invitations and the EOI pool size.`, body, crumbs: [['Home', '/'], ['AAIP draws', '/aaip-draws/']] });
 }
 
+// ---------- FSW 67 points and CEC eligibility ----------
+const testSelect = () => Object.entries(lang.tests).map(([id, t]) => `<option value="${id}"${id === 'ielts' ? ' selected' : ''}>${esc(t.name)}</option>`).join('');
+const scoreBox = () => `<div class="scores">${SK.map((s) => `<div class="field"><label for="${s}">${SKL[s]}</label><input type="number" inputmode="decimal" id="${s}" name="${s}"><span class="clb-tag" id="${s}-clb"></span></div>`).join('')}</div>`;
+function fswPage() {
+  const r = fsw;
+  const ages = Array.from({ length: 31 }, (_, i) => 17 + i).map((a) => `<option value="${a}">${a === 17 ? 'Under 18' : a === 47 ? '47 or older' : a}</option>`).join('');
+  const t2 = (arr) => arr.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('');
+  const ageRows = Object.entries(r.age).map(([k, v]) => `<tr><td>${k === 'under18' ? 'Under 18' : k === '47+' ? '47 or older' : k.replace('-', ' to ')}</td><td class="n">${v}</td></tr>`).join('');
+  const body = `
+<section class="intro">
+  <h1>FSW Points Calculator: the 67-Point Federal Skilled Worker Grid</h1>
+  <p class="lede">Check whether you reach the 67 points out of 100 needed for the Federal Skilled Worker Program, the first step before entering the Express Entry pool. These are not CRS points.</p>
+  <p class="meta"><span>Rules checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC Federal Skilled Worker Program</a>, modified ${longDate(r.sourceModified)}</span></p>
+</section>
+<div class="tool">
+<form id="fsw-form" novalidate>
+  <fieldset><legend>Language (first official language)</legend>
+    <div class="field"><label for="test">Test</label><select id="test" name="test">${testSelect()}</select></div>
+    ${scoreBox()}
+    <div class="field check" style="margin-top:12px"><input type="checkbox" id="second" name="second"><label for="second">Second official language at CLB 5 or higher in all four abilities (+${r.language.secondAllClb5})</label></div>
+  </fieldset>
+  <fieldset><legend>Education, experience and age</legend>
+    <div class="field"><label for="edu">Education (Canadian credential or ECA result)</label><select id="edu" name="edu">${r.education.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('')}</select></div>
+    <div class="row"><div class="field"><label for="exp">Years of skilled work experience</label><select id="exp" name="exp">${r.experience.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('')}</select></div>
+    <div class="field"><label for="age">Age on the day IRCC gets your application</label><select id="age" name="age">${ages}</select></div></div>
+    <div class="field check"><input type="checkbox" id="offer" name="offer"><label for="offer">Valid job offer of at least 1 year from a Canadian employer that meets one of IRCC's four situations (+${r.arrangedEmployment})</label></div>
+  </fieldset>
+  <fieldset><legend>Adaptability (maximum ${r.adaptabilityMax})</legend>
+    ${r.adaptability.filter(([id]) => id !== 'arranged').map(([id, l, p]) => `<div class="field check"><input type="checkbox" id="${id}" name="${id}"><label for="${id}">${esc(l)} (+${p})</label></div>`).join('')}
+    <p class="hint">A job offer that earns arranged employment points also adds 5 adaptability points.</p>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Your FSW points">
+  <div class="total"><span><span class="score" id="total" aria-live="polite">0</span> <span class="of">/ ${r.max}</span></span><span id="status" class="tag"></span></div>
+  <div class="table-scroll"><table><tbody id="breakdown"></tbody></table></div>
+  <p class="small">Reaching 67 makes you eligible to enter the pool under this program. Your rank in the pool is your CRS score: check it with the <a href="/">CRS calculator</a>.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>Minimum requirements before the points</h2>
+<ul>
+<li>At least 1 year of continuous paid skilled work (TEER 0, 1, 2 or 3), or 1,560 hours, in the last 10 years, in the same occupation (your primary occupation).</li>
+<li>CLB 7 or higher in all four abilities of English or French.</li>
+<li>A Canadian secondary or post-secondary credential, or a foreign credential with an Educational Credential Assessment.</li>
+<li>Proof of funds, unless you can legally work in Canada and have a valid job offer; see <a href="/proof-of-funds-express-entry/">proof of funds</a>.</li>
+<li>Plan to live outside Quebec.</li>
+</ul>
+<h2>The selection grid</h2>
+<h3>Language (maximum ${r.language.max})</h3><p>First official language, per ability: CLB 9 or higher 6, CLB 8 5, CLB 7 4; below CLB 7 you are not eligible. Second official language: ${r.language.secondAllClb5} points with at least CLB 5 in all four abilities.</p>
+<h3>Education (maximum 25)</h3><div class="table-scroll"><table><tbody>${t2(r.education)}</tbody></table></div>
+<p class="small">Education points by ECA result are from IRCC's <a href="${r.educationSource}" rel="noopener">education credential assessment page</a>.</p>
+<h3>Skilled work experience (maximum 15)</h3><div class="table-scroll"><table><tbody>${t2(r.experience)}</tbody></table></div>
+<h3>Age (maximum 12)</h3><div class="table-scroll"><table><tbody>${ageRows}</tbody></table></div>
+<h3>Arranged employment (maximum ${r.arrangedEmployment}) and adaptability (maximum ${r.adaptabilityMax})</h3><div class="table-scroll"><table><tbody>${r.adaptability.map(([, l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('')}</tbody></table></div>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Federal Skilled Worker Program</a>, IRCC, modified ${longDate(r.sourceModified)}</li><li><a href="${r.educationSource}" rel="noopener">Education credential assessment</a>, IRCC</li></ul>
+</article>`;
+  const scripts = `${jsonScript('fsw-rules', r)}${jsonScript('lang-rules', lang)}<script type="module" src="/js/fsw.js"></script>`;
+  return page({ path: '/fsw-67-points-calculator/', title: 'FSW 67 Points Calculator: Federal Skilled Worker Eligibility', description: 'Check if you reach 67 of 100 points for the Federal Skilled Worker Program: language, education, experience, age, job offer and adaptability, from IRCC rules.', body, scripts, crumbs: [['Home', '/'], ['FSW 67 points calculator', '/fsw-67-points-calculator/']] });
+}
+
+function cecPage() {
+  const r = cec;
+  const { recent, all } = catStats('cec');
+  const last = all[0];
+  const body = `
+<section class="intro">
+  <h1>CEC Eligibility Calculator: Canadian Experience Class Check</h1>
+  <p class="lede">Check the minimum requirements of the Canadian Experience Class: ${r.hours.toLocaleString('en-CA')} hours of skilled Canadian work in the last ${r.years} years, the language level for your job's TEER category and the rest. Then compare your score with recent CEC cut-offs.</p>
+  <p class="meta"><span>Rules checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC Canadian Experience Class</a>, modified ${longDate(r.sourceModified)}</span></p>
+</section>
+<div class="tool">
+<form id="cec-form" novalidate>
+  <fieldset><legend>Canadian work experience</legend>
+    <div class="row"><div class="field"><label for="weeks">Weeks worked in the last 3 years</label><input type="number" id="weeks" name="weeks" min="0" max="160" inputmode="numeric"></div>
+    <div class="field"><label for="hpw">Paid hours per week</label><input type="number" id="hpw" name="hpw" min="0" max="80" inputmode="numeric"><span class="hint">Hours above 30 a week do not count.</span></div></div>
+    <div class="field"><label for="hours">Total hours of skilled work (TEER 0 to 3)</label><input type="number" id="hours" name="hours" min="0" inputmode="numeric"><span class="hint">Filled in from weeks and hours; edit it if you had several jobs.</span></div>
+    <div class="field"><label for="teer">TEER category of your Canadian job</label><select id="teer" name="teer"><option value="01">TEER 0 or 1</option><option value="23">TEER 2 or 3</option></select></div>
+    <div class="field check"><input type="checkbox" id="authorized" name="authorized"><label for="authorized">I was authorized to work in Canada under temporary resident status, and physically in Canada if I worked remotely</label></div>
+    <div class="field check"><input type="checkbox" id="clean" name="clean"><label for="clean">None of these hours were as a full-time student, co-op term, self-employed (except eligible physicians), volunteer or unpaid intern</label></div>
+  </fieldset>
+  <fieldset><legend>Language</legend>
+    <div class="field"><label for="test">Test</label><select id="test" name="test">${testSelect()}</select></div>
+    ${scoreBox()}
+  </fieldset>
+  <fieldset><legend>Where you will live</legend><div class="field check"><input type="checkbox" id="quebec" name="quebec"><label for="quebec">I plan to live outside Quebec</label></div></fieldset>
+</form>
+<aside class="results" aria-label="CEC check">
+  <div class="total"><span class="panel-h" style="margin:0">Canadian Experience Class</span><span id="status" class="tag"></span></div>
+  <div class="cmp" id="checks"></div>
+  <p class="small">${recent.length ? `CEC rounds in the last 12 months closed between ${Math.min(...recent.map((x) => x.crs))} and ${Math.max(...recent.map((x) => x.crs))} points; the latest, on ${longDate(last.date)}, at ${last.crs}.` : ''} See your score with the <a href="/">CRS calculator</a> and every round on the <a href="/express-entry-draws/cec/">CEC draws</a> page.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>The requirements</h2>
+<ul>
+<li><strong>Work:</strong> at least 1 year of paid skilled work in Canada (TEER 0, 1, 2 or 3), or ${r.hours.toLocaleString('en-CA')} hours at up to 30 hours a week, in the ${r.years} years before you apply. Part-time and several jobs can add up. Experience gained in Quebec counts if you plan to live elsewhere.</li>
+<li><strong>Language:</strong> CLB or NCLC ${r.languageMin.teer01} in all four abilities for TEER 0 or 1 jobs, ${r.languageMin.teer23} for TEER 2 or 3 jobs; see the <a href="/clb-converter/">CLB converter</a>.</li>
+<li><strong>Education:</strong> none required, though an education credential adds CRS points.</li>
+<li><strong>Proof of funds:</strong> not required for the Canadian Experience Class.</li>
+<li>You must be admissible to Canada and plan to live outside Quebec.</li>
+</ul>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Canadian Experience Class</a>, IRCC, modified ${longDate(r.sourceModified)}</li><li><a href="${lang.source}" rel="noopener">Language test results for Express Entry</a>, IRCC</li><li><a href="${funds.source}" rel="noopener">Proof of funds</a>, IRCC</li></ul>
+</article>`;
+  const scripts = `${jsonScript('cec-rules', r)}${jsonScript('lang-rules', lang)}<script type="module" src="/js/cec.js"></script>`;
+  return page({ path: '/cec-eligibility-calculator/', title: 'CEC Eligibility Calculator: Canadian Experience Class (2026)', description: 'Check if you qualify for the Canadian Experience Class: 1,560 hours of Canadian skilled work in 3 years, CLB 7 or 5 by TEER, and recent CEC cut-offs.', body, scripts, crumbs: [['Home', '/'], ['CEC eligibility calculator', '/cec-eligibility-calculator/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -1427,7 +1538,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }

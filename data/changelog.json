@@ -1,6 +1,10 @@
 [
  {
   "date": "2026-10-14",
+  "what": "Federal Skilled Worker 67-point grid and Canadian Experience Class requirements from IRCC's program pages (modified 2026-09-24), with education points from IRCC's education credential assessment page."
+ },
+ {
+  "date": "2026-10-14",
   "what": "Alberta: Worker EOI points grid from Alberta's PDF dated 2026-09-28 and the 2026 AAIP draws from the AAIP processing information page (updated 2026-10-07), now read automatically."
  },
  {
