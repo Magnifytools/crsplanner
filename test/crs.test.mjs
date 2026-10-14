@@ -86,3 +86,8 @@ test('What-if: one more year of Canadian work for profile A adds core + transfer
   // core +40; education+CW 25 but education already capped at 50; foreign+CW 25 but foreign capped at 50
   assert.equal(w.delta, 40);
 });
+
+test('TCF Canada at NCLC 4 scores 6 per ability, as in the published criteria (IRCC tool gives 0)', () => {
+  const r = calculate(rules, lang, { ...base, firstLanguage: { test: 'tcf', scores: { speaking: 4, listening: 331, reading: 342, writing: 4 } } });
+  assert.equal(r.items.find((i) => i.key === 'firstLanguage').points, 24);
+});

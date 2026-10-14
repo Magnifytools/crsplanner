@@ -1,7 +1,7 @@
 {
  "source": "https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json",
  "page": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations.html",
- "fetchedAt": "2026-10-14T09:05:59.833Z",
+ "fetchedAt": "2026-10-14T10:28:21.841Z",
  "latestRound": {
   "n": "448",
   "date": "2026-10-13",
@@ -13,6 +13,7 @@
  },
  "distribution": {
   "asOf": "October 12, 2026",
+  "asOfIso": "2026-10-12",
   "total": 229456,
   "buckets": [
    {
@@ -99,6 +100,32 @@
     "range": "0-300",
     "count": 7639,
     "sub": false
+   }
+  ]
+ },
+ "distributionHistory": {
+  "ranges": [
+   "601-1200",
+   "501-600",
+   "451-500",
+   "401-450",
+   "351-400",
+   "301-350",
+   "0-300"
+  ],
+  "snapshots": [
+   {
+    "asOf": "2026-10-12",
+    "total": 229456,
+    "counts": [
+     749,
+     21638,
+     71612,
+     63528,
+     47167,
+     17123,
+     7639
+    ]
    }
   ]
  },

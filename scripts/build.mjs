@@ -17,7 +17,9 @@ const fmt = (n) => (n === null || n === undefined ? '' : Number(n).toLocaleStrin
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const longDate = (iso) => `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${Number(iso.slice(8, 10))}, ${iso.slice(0, 4)}`;
 const jsonScript = (id, obj) => `<script type="application/json" id="${id}">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
-const NAV = [['/', 'CRS calculator'], ['/clb-converter/', 'CLB converter'], ['/express-entry-draws/', 'Express Entry draws']];
+const NAV = [['/', 'CRS calculator'], ['/clb-converter/', 'CLB converter'], ['/express-entry-draws/', 'Draws'], ['/crs-score-distribution/', 'Score distribution']];
+const LEVELS = [4, 5, 6, 7, 8, 9, 10];
+const footerTools = [['/', 'CRS calculator'], ['/clb-converter/', 'CLB converter'], ['/express-entry-draws/', 'Express Entry draws'], ['/crs-score-distribution/', 'CRS score distribution']];
 
 function page({ path, title, description, body, scripts = '', jsonld = [], crumbs = null }) {
   const url = SITE.url + path;
@@ -55,7 +57,12 @@ ${body}
 </main>
 <footer class="site-foot"><div class="wrap">
 <p>CRS Planner is an independent site. It is not affiliated with Immigration, Refugees and Citizenship Canada (IRCC) or the Government of Canada, and it is not immigration or legal advice. Rules last checked ${longDate(SITE.checked)}.</p>
-<nav aria-label="Site"><a href="/about/">About and method</a><a href="/changelog/">Changelog</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav>
+<div class="foot-grid">
+<div><p class="foot-h">Tools</p><ul>${footerTools.map(([h, l]) => `<li><a href="${h}">${l}</a></li>`).join('')}</ul></div>
+<div><p class="foot-h">English: CLB levels</p><ul>${LEVELS.map((l) => `<li><a href="/clb-${l}/">CLB ${l}${l === 10 ? '+' : ''}</a></li>`).join('')}</ul></div>
+<div><p class="foot-h">French: NCLC levels</p><ul>${LEVELS.map((l) => `<li><a href="/nclc-${l}/">NCLC ${l}${l === 10 ? '+' : ''}</a></li>`).join('')}</ul></div>
+<div><p class="foot-h">CRS Planner</p><ul><li><a href="/about/">About and method</a></li><li><a href="/changelog/">Changelog</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/terms/">Terms</a></li></ul></div>
+</div>
 </div></footer>
 ${scripts}
 </body>
@@ -174,6 +181,7 @@ function home() {
 <aside class="results" id="results" aria-label="Your CRS score">
   <div class="total"><span><span class="score" id="total" aria-live="polite">0</span> <span class="of">/ 1,200</span></span><span class="small">Estimated CRS score</span></div>
   <div class="bars" id="bars"></div>
+  <p class="callout small" id="tcf-note" hidden></p>
   <details class="breakdown"><summary>Every point, line by line</summary>
     <div class="table-scroll"><table><tbody id="breakdown-body"></tbody></table></div><p class="small" id="cap-notes"></p></details>
   <div><h2 class="panel-h">Against the last 12 months of draws</h2><div class="cmp" id="compare"></div>
@@ -239,14 +247,7 @@ function clbPage() {
   const tests = Object.entries(lang.tests);
   const tables = tests.map(([id, t]) => {
     const nm = t.language === 'fr' ? 'NCLC' : 'CLB';
-    const fmtRange = (arr, i, s) => {
-      const lo = arr[i];
-      const next = arr[i + 1];
-      const hiMax = t.maxBySkill ? t.maxBySkill[s] : t.max;
-      if (next === undefined) return lo === hiMax ? `${lo}` : `${lo} to ${hiMax}`;
-      const hi = Math.round((next - t.step) * 10) / 10;
-      return hi <= lo ? `${lo}` : `${lo} to ${hi}`;
-    };
+    const fmtRange = (arr, i, s) => scoreRange(t, s, i);
     const rows = [...lang.levels].map((lvl, i) => ({ lvl, i })).reverse().map(({ lvl, i }) =>
       `<tr><td>${nm} ${lvl}${lvl === 10 ? '+' : ''}</td>${['speaking', 'listening', 'reading', 'writing'].map((s) => `<td class="n">${fmtRange(t[s], i, s)}</td>`).join('')}</tr>`).join('');
     return `<h3 id="${id}">${esc(t.name)} to ${nm}</h3><div class="table-scroll"><table><thead><tr><th>Level</th><th class="n">Speaking</th><th class="n">Listening</th><th class="n">Reading</th><th class="n">Writing</th></tr></thead><tbody>${rows}</tbody></table></div>`;
@@ -276,6 +277,9 @@ function clbPage() {
 <h2>Equivalence tables</h2>
 <p>Each table shows the score range that gives each level. A result below the lowest row is under CLB or NCLC 4.</p>
 ${tables}
+<p class="callout">${TCF_NOTE}</p>
+<h2>CLB and NCLC levels one by one</h2>
+<p>English: ${LEVELS.map((l) => `<a href="/clb-${l}/">CLB ${l}${l === 10 ? '+' : ''}</a>`).join(', ')}. French: ${LEVELS.map((l) => `<a href="/nclc-${l}/">NCLC ${l}${l === 10 ? '+' : ''}</a>`).join(', ')}.</p>
 <h2>Sources</h2>
 <ul><li><a href="${lang.source}" rel="noopener">Language test results for Express Entry</a>, IRCC</li></ul>
 </article>`;
@@ -323,9 +327,7 @@ function drawsPage() {
 <div class="table-scroll"><table id="draws-table"><thead><tr><th>Date</th><th class="n">Round</th><th>Program or category</th><th class="n">Invitations</th><th class="n">Lowest score</th></tr></thead><tbody>${rows}</tbody></table></div>
 
 <h2>Score distribution of the pool</h2>
-<p>${fmt(draws.distribution.total)} profiles were in the pool on ${esc(draws.distribution.asOf)}.</p>
-<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Number of profiles by CRS score range">${bars}</svg>
-<div class="table-scroll"><table><thead><tr><th>CRS score range</th><th class="n">Profiles</th><th class="n">Share</th></tr></thead><tbody>${distRows}</tbody></table></div>
+<p>${fmt(draws.distribution.total)} profiles were in the pool on ${esc(draws.distribution.asOf)}. See how they spread by score range on the <a href="/crs-score-distribution/">CRS score distribution</a> page.</p>
 
 <article class="prose">
 <h2>How to read the draws</h2>
@@ -343,7 +345,134 @@ function drawsPage() {
     temporalCoverage: `2015-01-31/${latestDate}`, spatialCoverage: 'Canada',
     creator: { '@type': 'Organization', name: SITE.name, url: SITE.url },
   }];
-  return page({ path: '/express-entry-draws/', title: `Express Entry Draws ${year}: All Rounds, Cut-off Scores and Categories`, description: `Every Express Entry draw since 2015 (${draws.rounds.length} rounds), filterable by CEC, PNP, French and other categories, with cut-off trends and the current CRS distribution.`, body, scripts, jsonld, crumbs: [['Home', '/'], ['Express Entry draws', '/express-entry-draws/']] });
+  return page({ path: '/express-entry-draws/', title: `Express Entry Draws ${year}: All Rounds and Cut-off Scores`, description: `Every Express Entry draw since 2015 (${draws.rounds.length} rounds), filterable by CEC, PNP, French and other categories, with cut-off trends and the current CRS distribution.`, body, scripts, jsonld, crumbs: [['Home', '/'], ['Express Entry draws', '/express-entry-draws/']] });
+}
+
+// ---------- CLB / NCLC level pages ----------
+const SK = ['speaking', 'listening', 'reading', 'writing'];
+const SKL = { speaking: 'Speaking', listening: 'Listening', reading: 'Reading', writing: 'Writing' };
+const rowFor = (table, l) => table.find((r) => l >= r.minClb);
+const fmtScore = (t, v) => (t.step < 1 ? Number(v).toFixed(1) : String(v));
+function scoreRange(t, s, i) {
+  const lo = t[s][i];
+  const next = t[s][i + 1];
+  if (next === undefined) return `${fmtScore(t, lo)} or higher`;
+  const hi = Math.round((next - t.step) * 10) / 10;
+  return hi <= lo ? fmtScore(t, lo) : `${fmtScore(t, lo)} to ${fmtScore(t, hi)}`;
+}
+const TCF_NOTE = 'IRCC’s online CRS calculator gives 0 points for TCF Canada results at NCLC 4, while the published CRS criteria give 6 points per ability for CLB or NCLC 4 and 5, and the same calculator does give them for TEF Canada. CRS Planner follows the published criteria. We found this on 14 October 2026 while testing our calculator against IRCC’s with 1,000 random profiles.';
+
+function levelPage(language, L) {
+  const fr = language === 'fr';
+  const name = fr ? 'NCLC' : 'CLB';
+  const tests = Object.entries(lang.tests).filter(([, t]) => t.language === language);
+  const i = lang.levels.indexOf(L);
+  const plus = L === 10 ? '+' : '';
+  const testNames = tests.map(([, t]) => t.name);
+  const listNames = testNames.length === 2 ? testNames.join(' and ') : `${testNames.slice(0, -1).join(', ')} and ${testNames.at(-1)}`;
+  const tables = tests.map(([id, t]) => `<h3>${esc(t.name)}</h3><div class="table-scroll"><table><thead><tr><th>Ability</th><th class="n">Score for ${name} ${L}${plus}</th></tr></thead><tbody>${SK.map((s) => `<tr><td>${SKL[s]}</td><td class="n">${scoreRange(t, s, i)}</td></tr>`).join('')}</tbody></table></div>`).join('');
+  const first = rowFor(crs.core.firstLanguage.perAbilityByClb, L).points;
+  const second = rowFor(crs.core.secondLanguage.perAbilityByClb, L).points;
+  const spouse = rowFor(crs.spouse.language.perAbilityByClb, L).points;
+  const transfer = L >= 9 ? 'the top rate: up to 50 points for education and 50 for foreign work experience' : L >= 7 ? 'the lower rate: up to 25 points for education and 25 for foreign work experience; CLB 9 in all four abilities doubles them' : 'nothing for education or foreign work experience, which start at CLB 7';
+  const programs = [
+    ['Federal Skilled Worker Program', `${name} 7 in all four abilities`, L >= 7],
+    ['Canadian Experience Class, TEER 0 or 1 jobs', `${name} 7 in all four abilities`, L >= 7],
+    ['Canadian Experience Class, TEER 2 or 3 jobs', `${name} 5 in all four abilities`, L >= 5],
+    ['Federal Skilled Trades Program', `${name} 5 in speaking and listening, ${name} 4 in reading and writing`, L >= 5],
+  ];
+  const progRows = programs.map(([p, need, ok]) => `<tr><td>${p}</td><td>${need}</td><td>${ok ? 'Met' : 'Not met'}</td></tr>`).join('');
+  const nav = `<p class="levels">${LEVELS.map((l) => (l === L ? `<strong>${name} ${l}${l === 10 ? '+' : ''}</strong>` : `<a href="/${fr ? 'nclc' : 'clb'}-${l}/">${name} ${l}${l === 10 ? '+' : ''}</a>`)).join(' ')}</p>`;
+  const frenchBonus = fr
+    ? `<h2>French bonus points</h2><p>${L >= 7 ? `At NCLC ${L} in all four abilities you qualify for the French bonus: 50 additional points if you also have CLB 5 or higher in all four English abilities, or 25 if your English is CLB 4 or lower or you have no English test.` : `The French bonus starts at NCLC 7 in all four abilities. At NCLC ${L} it does not apply.`}</p>`
+    : '';
+  const tcfNote = fr && L === 4 ? `<p class="callout">${TCF_NOTE}</p>` : '';
+  const other = fr ? `<a href="/clb-${L}/">CLB ${L}${plus} in English</a>` : `<a href="/nclc-${L}/">NCLC ${L}${plus} in French</a>`;
+  const body = `
+<section class="intro">
+  <h1>${fr ? `NCLC ${L}${plus} in French: TEF Canada and TCF Canada scores` : `CLB ${L}${plus}: the IELTS, CELPIP and PTE Core scores you need`}</h1>
+  <p class="lede">${fr ? `NCLC ${L} is the French equivalent of CLB ${L}.` : ''} These are the ${listNames} results that count as ${name} ${L}${plus} for Express Entry, ability by ability, and what that level is worth in CRS points.</p>
+  <p class="meta"><span>Equivalences checked ${longDate(SITE.checked)}</span><span>Source: <a href="${lang.source}" rel="noopener">IRCC language test results</a></span></p>
+</section>
+${nav}
+<article class="prose">
+<h2>Scores for ${name} ${L}${plus}</h2>
+<p>You need the score in each ability separately. Your level is set ability by ability, so one weaker result does not lower the others.</p>
+${tables}
+${tcfNote}
+<h2>What ${name} ${L}${plus} is worth in the CRS</h2>
+<div class="table-scroll"><table><thead><tr><th>Used as</th><th class="n">Per ability</th><th class="n">All four abilities</th></tr></thead><tbody>
+<tr><td>First official language, single applicant</td><td class="n">${first[1]}</td><td class="n">${first[1] * 4}</td></tr>
+<tr><td>First official language, with a partner who counts</td><td class="n">${first[0]}</td><td class="n">${first[0] * 4}</td></tr>
+<tr><td>Second official language</td><td class="n">${second[1]}</td><td class="n">${Math.min(second[1] * 4, crs.core.secondLanguage.max[1])}</td></tr>
+<tr><td>Your partner’s language</td><td class="n">${spouse}</td><td class="n">${Math.min(spouse * 4, crs.spouse.language.max)}</td></tr>
+</tbody></table></div>
+<p>With ${name} ${L} in all four abilities of your first official language, skill transferability gives ${transfer}.</p>
+${frenchBonus}
+<h2>Program minimums</h2>
+<div class="table-scroll"><table><thead><tr><th>Program</th><th>Minimum</th><th>With ${name} ${L}${plus} in all four</th></tr></thead><tbody>${progRows}</tbody></table></div>
+<p>Calculate your full score with the <a href="/">CRS calculator</a>, convert a mixed set of results with the <a href="/clb-converter/">CLB converter</a>, or see ${other}.</p>
+<h2>Sources</h2>
+<ul><li><a href="${lang.source}" rel="noopener">Language test results for Express Entry</a>, IRCC</li><li><a href="${crs.source}" rel="noopener">CRS criteria</a>, IRCC, modified ${longDate(crs.sourceModified)}</li></ul>
+</article>`;
+  const path = `/${fr ? 'nclc' : 'clb'}-${L}/`;
+  const title = fr ? `NCLC ${L}${plus} French: TEF and TCF Canada Scores (2026)` : `CLB ${L}${plus} Equivalent: IELTS, CELPIP and PTE Core Scores (2026)`;
+  const desc = fr ? `TEF Canada and TCF Canada scores for NCLC ${L} (CLB ${L} in French), CRS points per ability, the French bonus and program minimums.` : `IELTS General, CELPIP and PTE Core scores for CLB ${L}, ability by ability, with the CRS points it gives and the Express Entry programs it qualifies you for.`;
+  return page({ path, title, description: desc, body, crumbs: [['Home', '/'], ['CLB converter', '/clb-converter/'], [`${name} ${L}${plus}`, path]] });
+}
+
+// ---------- CRS score distribution ----------
+function distributionPage() {
+  const d = draws.distribution;
+  const main = d.buckets.filter((b) => !b.sub);
+  const maxB = Math.max(...main.map((b) => b.count));
+  const W = 760, rowH = 30, H = main.length * rowH + 10;
+  const bars = main.map((b, i) => `<text x="0" y="${i * rowH + 19}">${b.range}</text><rect class="bar-r" x="80" y="${i * rowH + 6}" height="18" width="${((b.count / maxB) * 560).toFixed(1)}" rx="3"/><text x="${(86 + (b.count / maxB) * 560).toFixed(1)}" y="${i * rowH + 19}">${fmt(b.count)}</text>`).join('');
+  const rows = d.buckets.map((b) => `<tr${b.sub ? '' : ' class="section"'}><td>${b.sub ? '&nbsp;&nbsp;' : ''}${b.range}</td><td class="n">${fmt(b.count)}</td><td class="n">${((b.count / d.total) * 100).toFixed(1)}%</td></tr>`).join('');
+  // Share of the pool at 501+ and 451+ in the latest snapshot
+  const above = (ranges) => main.filter((b) => ranges.includes(b.range)).reduce((s, b) => s + b.count, 0);
+  const a501 = above(['601-1200', '501-600']);
+  const a451 = a501 + above(['451-500']);
+  const hist = draws.distributionHistory || { snapshots: [] };
+  const snaps = hist.snapshots.filter((s) => s.asOf >= `${Number(latestDate.slice(0, 4)) - 2}${latestDate.slice(4)}`);
+  let histHtml = '';
+  if (snaps.length >= 2) {
+    const HW = 760, HH = 240, L0 = 56, R0 = 12, T0 = 12, B0 = 28;
+    const t = (x) => Date.parse(x);
+    const x0 = t(snaps[0].asOf), x1 = t(snaps.at(-1).asOf);
+    const maxT = Math.ceil(Math.max(...snaps.map((s) => s.total)) / 50000) * 50000;
+    const X = (x) => L0 + ((t(x) - x0) / Math.max(1, x1 - x0)) * (HW - L0 - R0);
+    const Y = (v) => T0 + (1 - v / maxT) * (HH - T0 - B0);
+    let g = '';
+    for (let v = 0; v <= maxT; v += 50000) g += `<line class="grid" x1="${L0}" x2="${HW - R0}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L0 - 6}" y="${Y(v) + 4}" text-anchor="end">${fmt(v)}</text>`;
+    const path = snaps.map((s, k) => `${k ? 'L' : 'M'}${X(s.asOf).toFixed(1)} ${Y(s.total).toFixed(1)}`).join('');
+    const y0 = new Date(x0).getUTCFullYear(), y1 = new Date(x1).getUTCFullYear();
+    for (let y = y0 + 1; y <= y1; y++) g += `<text x="${X(`${y}-01-01`)}" y="${HH - 8}" text-anchor="middle">${y}</text>`;
+    const first = snaps[0], last = snaps.at(-1);
+    histHtml = `<h2>Size of the pool over time</h2><svg class="chart" viewBox="0 0 ${HW} ${HH}" role="img" aria-label="Number of profiles in the Express Entry pool over time">${g}<path class="line" d="${path}"/></svg><p class="small">${snaps.length} snapshots published by IRCC between ${first.asOf} and ${last.asOf}: from ${fmt(first.total)} to ${fmt(last.total)} profiles.</p>`;
+  }
+  const body = `
+<section class="intro">
+  <h1>CRS Score Distribution of the Express Entry Pool</h1>
+  <p class="lede">How many profiles sit in each CRS score range, from IRCC's latest snapshot of the pool, and how the pool has changed.</p>
+  <p class="meta"><span>Snapshot of ${esc(d.asOf)}</span><span>Updated with every round</span><span>Source: <a href="${draws.page}" rel="noopener">IRCC rounds of invitations</a></span></p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">Profiles in the pool</div><div class="v">${fmt(d.total)}</div></div>
+  <div class="card"><div class="k">With 501 points or more</div><div class="v">${fmt(a501)}</div><div class="small">${((a501 / d.total) * 100).toFixed(1)}% of the pool</div></div>
+  <div class="card"><div class="k">With 451 points or more</div><div class="v">${fmt(a451)}</div><div class="small">${((a451 / d.total) * 100).toFixed(1)}% of the pool</div></div>
+</div>
+<h2>Profiles by score range</h2>
+<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Number of profiles by CRS score range">${bars}</svg>
+<div class="table-scroll"><table><thead><tr><th>CRS score range</th><th class="n">Profiles</th><th class="n">Share</th></tr></thead><tbody>${rows}</tbody></table></div>
+${histHtml}
+<article class="prose">
+<h2>How to use it</h2>
+<p>Find your score with the <a href="/">CRS calculator</a> and look at how many profiles are above you. A general round only invites from the top of the whole pool, but most rounds now target one program or category, so the profiles that matter are the ones competing in the same round as you. Compare with each category's recent cut-offs on the <a href="/express-entry-draws/">draws page</a>.</p>
+<p>IRCC publishes this snapshot with each round of invitations. The 451 to 500 and 401 to 450 ranges are also broken down in ten-point steps.</p>
+</article>`;
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'Dataset', name: 'CRS score distribution of the Express Entry pool', description: 'Number of Express Entry profiles by CRS score range, as published by IRCC with each round of invitations.', url: SITE.url + '/crs-score-distribution/', isBasedOn: draws.page, dateModified: d.asOfIso || latestDate, spatialCoverage: 'Canada', creator: { '@type': 'Organization', name: SITE.name, url: SITE.url } }];
+  return page({ path: '/crs-score-distribution/', title: `CRS Score Distribution ${latestDate.slice(0, 4)}: Express Entry Pool by Score`, description: `${fmt(d.total)} profiles in the Express Entry pool on ${d.asOf}, by CRS score range, with the share above 450 and 500 points and the pool size over time.`, body, jsonld, crumbs: [['Home', '/'], ['CRS score distribution', '/crs-score-distribution/']] });
 }
 
 // ---------- Simple pages ----------
@@ -355,7 +484,7 @@ const aboutHtml = `
 <h2>Method</h2>
 <ul>
 <li>Every rule comes from an IRCC page, linked next to the tool that uses it, with the date that page was last modified and the date we last checked it.</li>
-<li>The CRS calculator is tested against IRCC's own calculator with sample profiles before each release. The first three test profiles (single, couple, and French as first language) matched it point for point on ${longDate(SITE.checked)}.</li>
+<li>The CRS calculator is tested against IRCC's own calculator. On 14 October 2026 we ran 1,000 random profiles through both: 917 matched point for point. The other 83 all had a TCF Canada result at NCLC 4, which IRCC's calculator scores as 0 while the published criteria give 6 points per ability; with that one difference applied, all 1,000 matched. We follow the published criteria and the calculator tells you when the two differ.</li>
 <li>Draw data is read every day from the data IRCC publishes for its rounds of invitations page. We keep a dated copy of each download.</li>
 <li>When a rule changes, we update the tool, note it in the <a href="/changelog/">changelog</a> and show the new revision date on the page.</li>
 </ul>
@@ -381,20 +510,22 @@ function changelogPage() {
 
 // ---------- Write ----------
 rmSync(DIST, { recursive: true, force: true });
-const out = (p, html) => { const f = join(DIST, p, 'index.html'); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, html); };
+const written = [];
+const out = (p, html, lastmod = SITE.checked) => { const f = join(DIST, p, 'index.html'); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, html); written.push([p ? `/${p}/` : '/', lastmod]); };
 out('', home());
 out('clb-converter', clbPage());
-out('express-entry-draws', drawsPage());
+out('express-entry-draws', drawsPage(), latestDate);
+out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
+for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }
 out('about', simple('/about/', 'About CRS Planner and How We Check the Rules', 'Who runs CRS Planner, where the rules come from and how the calculators are tested against IRCC.', 'About CRS Planner', aboutHtml));
-out('privacy', simple('/privacy/', 'Privacy | CRS Planner', 'What CRS Planner stores and what it does not.', 'Privacy', privacyHtml));
-out('terms', simple('/terms/', 'Terms of Use | CRS Planner', 'Terms of use and disclaimer for CRS Planner.', 'Terms of use', termsHtml));
+out('privacy', simple('/privacy/', 'Privacy | CRS Planner', 'What CRS Planner stores in your browser, what it does not collect, and who processes connection data. Contact for data requests.', 'Privacy', privacyHtml));
+out('terms', simple('/terms/', 'Terms of Use | CRS Planner', 'Terms of use and disclaimer for CRS Planner: estimates based on IRCC rules, not immigration or legal advice.', 'Terms of use', termsHtml));
 out('changelog', changelogPage());
 writeFileSync(join(DIST, 'favicon.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#111827"/><text x="16" y="21" font-family="monospace" font-size="12" font-weight="700" text-anchor="middle" fill="#ff6b6b">CRS</text></svg>');
 cpSync(join(ROOT, 'src/css'), join(DIST, 'css'), { recursive: true });
 cpSync(join(ROOT, 'src/js'), join(DIST, 'js'), { recursive: true });
-const urls = ['/', '/clb-converter/', '/express-entry-draws/', '/about/', '/changelog/', '/privacy/', '/terms/'];
-writeFileSync(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${SITE.url}${u}</loc><lastmod>${u === '/express-entry-draws/' ? latestDate : SITE.checked}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+writeFileSync(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${written.map(([u, d]) => `<url><loc>${SITE.url}${u}</loc><lastmod>${d}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 writeFileSync(join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE.url}/sitemap.xml\n`);
 writeFileSync(join(DIST, '404.html'), page({ path: '/404', title: 'Page not found | CRS Planner', description: 'Page not found.', body: '<section class="intro"><h1>Page not found</h1><p>Try the <a href="/">CRS calculator</a> or the <a href="/express-entry-draws/">draws history</a>.</p></section>' }));
 cpSync(join(ROOT, 'extras/_worker.js'), join(DIST, '_worker.js'));
-console.log(`Built ${urls.length} pages into dist/`);
+console.log(`Built ${written.length} pages into dist/`);

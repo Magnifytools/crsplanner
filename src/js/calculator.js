@@ -6,6 +6,9 @@ const rules = readJson('crs-rules');
 const lang = readJson('lang-rules');
 const recent = readJson('recent-draws');
 const STORE = 'crsplanner.profile.v1';
+// IRCC's online calculator scores TCF Canada at NCLC 4 as 0; the published criteria give 6 per ability.
+const langIrccTool = JSON.parse(JSON.stringify(lang));
+for (const s of SKILLS) langIrccTool.tests.tcf[s][0] = langIrccTool.tests.tcf[s][1];
 
 const EXAMPLE = {
   marital: 'single', spouseCitizen: 'no', spouseComing: 'yes', age: '29', education: 'master', canadianEducation: 'none',
@@ -168,6 +171,10 @@ function update(save = true) {
   const profile = toProfile(v);
   const result = calculate(rules, lang, profile);
   render(result, profile);
+  const alt = calculate(rules, langIrccTool, profile).total;
+  const note = $('#tcf-note');
+  note.hidden = alt === result.total;
+  if (alt !== result.total) note.textContent = `IRCC's online calculator would show ${result.total - alt} points less for this profile: it gives 0 points to TCF Canada results at NCLC 4, while the published CRS criteria give 6 per ability. This score follows the published criteria.`;
   if (save) { try { localStorage.setItem(STORE, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } }
 }
 

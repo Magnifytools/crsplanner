@@ -46,6 +46,16 @@ const num = (v) => {
   return Number.isFinite(n) ? n : null;
 };
 
+const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+// "October 12, 2026" -> "2026-10-12"
+export function isoDate(text) {
+  const m = String(text || '').trim().match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})/);
+  if (!m) return null;
+  const mi = MONTHS.indexOf(m[1].toLowerCase());
+  if (mi < 0) return null;
+  return `${m[3]}-${String(mi + 1).padStart(2, '0')}-${m[2].padStart(2, '0')}`;
+}
+
 export function normalize(raw, fetchedAt) {
   if (!raw || !Array.isArray(raw.rounds) || raw.rounds.length === 0) throw new Error('Unexpected structure: no rounds array');
   const required = ['drawNumber', 'drawDate', 'drawName', 'drawSize', 'drawCRS'];
@@ -70,13 +80,27 @@ export function normalize(raw, fetchedAt) {
   const check = distribution.filter((d) => !d.sub).reduce((s, d) => s + d.count, 0);
   if (total !== null && check !== total) throw new Error(`Distribution does not add up: ${check} vs ${total}`);
 
+  // One snapshot of the pool per distinct "as on" date published with the rounds.
+  const MAIN = DIST_FIELDS.filter(([, , sub]) => !sub);
+  const seen = new Map();
+  for (const r of raw.rounds) {
+    const asOf = isoDate(r.drawDistributionAsOn);
+    const tot = num(r.dd18);
+    if (!asOf || !tot || seen.has(asOf)) continue;
+    const counts = MAIN.map(([k]) => num(r[k]));
+    if (counts.some((c) => c === null) || counts.reduce((s, c) => s + c, 0) !== tot) continue;
+    seen.set(asOf, { asOf, total: tot, counts });
+  }
+  const history = { ranges: MAIN.map(([, range]) => range), snapshots: [...seen.values()].sort((a, b) => (a.asOf < b.asOf ? -1 : 1)) };
+
   const usedCats = [...new Set(rounds.map((r) => r.category))];
   return {
     source: SOURCE_URL,
     page: PAGE_URL,
     fetchedAt,
     latestRound: rounds[0],
-    distribution: { asOf: latest.drawDistributionAsOn || null, total, buckets: distribution },
+    distribution: { asOf: latest.drawDistributionAsOn || null, asOfIso: isoDate(latest.drawDistributionAsOn), total, buckets: distribution },
+    distributionHistory: history,
     categories: CATEGORIES.filter(([id]) => usedCats.includes(id)).map(([id, label]) => ({ id, label })),
     rounds,
   };

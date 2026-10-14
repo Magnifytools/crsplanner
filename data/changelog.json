@@ -1,3 +1,10 @@
 [
-  { "date": "2026-10-14", "what": "Launch version. CRS rules from IRCC's CRS criteria page (modified 2026-06-22), language equivalences from IRCC's language test page, draws history to round #448 (2026-10-13)." }
+ {
+  "date": "2026-10-14",
+  "what": "Calculator tested against IRCC's online calculator with 1,000 random profiles: 917 identical; the other 83 differ only because IRCC's calculator gives 0 points to TCF Canada at NCLC 4 while the published criteria give 6 per ability. The calculator now flags that case. New pages: CLB 4 to 10 and NCLC 4 to 10, and the CRS score distribution."
+ },
+ {
+  "date": "2026-10-14",
+  "what": "Launch version. CRS rules from IRCC's CRS criteria page (modified 2026-06-22), language equivalences from IRCC's language test page, draws history to round #448 (2026-10-13)."
+ }
 ]

@@ -144,3 +144,10 @@ tr.section td { font-weight: 600; background: var(--surface-2); }
   .scorebar .score { font-size: 1.5rem; font-weight: 600; color: var(--bg); }
   body { padding-bottom: 64px; }
 }
+
+/* Footer link grid and level navigation */
+.foot-grid { display: grid; gap: 16px 24px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.foot-grid ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.foot-grid a { color: var(--muted); }
+.foot-h { font-weight: 600; color: var(--ink); margin: 0 0 6px; }
+.levels { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .95rem; margin: 8px 0 0; }
