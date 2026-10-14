@@ -634,6 +634,9 @@ ${retired.length ? `<h2>Categories no longer on the list</h2><p>${retired.map((c
 // ---------- Score chart pages, one per test ----------
 const CHART_PAGES = {
   celpip: { slug: 'celpip-score-chart', short: 'CELPIP', title: 'CELPIP Score Chart: CELPIP to CLB for Express Entry (2026)', h1: 'CELPIP Score Chart for Express Entry', extra: 'For CLB 4 to 10, each CELPIP-General level is the same number as the CLB level: a 9 in an ability is CLB 9. Levels 11 and 12 count as CLB 10. CELPIP-General LS, the speaking and listening version, is not accepted for Express Entry.' },
+  ielts: { slug: 'ielts-score-chart', short: 'IELTS', title: 'IELTS Score Chart for Canada PR: IELTS to CLB (2026)', h1: 'IELTS Score Chart for Canada PR (Express Entry)', extra: 'Only IELTS General Training is accepted for Express Entry; IELTS Academic is not, and neither are IELTS One Skill Retake results. Listening asks for more than the other abilities from CLB 8 up: CLB 9 is 8.0 in listening but 7.0 in speaking, reading and writing.' },
+  tef: { slug: 'tef-canada-score-chart', short: 'TEF Canada', title: 'TEF Canada Score Chart: TEF to NCLC for Express Entry (2026)', h1: 'TEF Canada Score Chart for Express Entry', extra: 'Each ability has its own scale: speaking and writing are scored out of 450, listening out of 360 and reading out of 300. NCLC is the French name for the CLB levels; NCLC 7 is CLB 7.' },
+  tcf: { slug: 'tcf-canada-score-chart', short: 'TCF Canada', title: 'TCF Canada Score Chart: TCF to NCLC for Express Entry (2026)', h1: 'TCF Canada Score Chart for Express Entry', extra: 'Speaking and writing are scored out of 20; listening and reading out of 699. NCLC is the French name for the CLB levels; NCLC 7 is CLB 7.' },
   pte: { slug: 'pte-core-score-chart', short: 'PTE Core', title: 'PTE Core Score Chart: PTE Core to CLB for Express Entry (2026)', h1: 'PTE Core Score Chart for Express Entry', extra: 'Only PTE Core is accepted for Express Entry; PTE Academic results are not. Each ability has its own thresholds, so the same score can give different CLB levels in speaking and in listening.' },
 };
 function scoreChartPage(id) {
@@ -647,18 +650,19 @@ function scoreChartPage(id) {
   }).join('');
   const at = (L) => SK.map((s) => `${SKL[s].toLowerCase()} ${fmtScore(t, t[s][lang.levels.indexOf(L)])}`).join(', ');
   const minimums = [
-    ['Federal Skilled Worker Program', 'CLB 7 in all four', at(7)],
-    ['Canadian Experience Class, TEER 0 or 1 jobs', 'CLB 7 in all four', at(7)],
-    ['Canadian Experience Class, TEER 2 or 3 jobs', 'CLB 5 in all four', at(5)],
-    ['Federal Skilled Trades Program', 'CLB 5 speaking and listening, CLB 4 reading and writing', `speaking ${fmtScore(t, t.speaking[1])}, listening ${fmtScore(t, t.listening[1])}, reading ${fmtScore(t, t.reading[0])}, writing ${fmtScore(t, t.writing[0])}`],
-    ['Highest language points in the CRS', 'CLB 10 in all four', at(10)],
+    ['Federal Skilled Worker Program', `${name} 7 in all four`, at(7)],
+    ['Canadian Experience Class, TEER 0 or 1 jobs', `${name} 7 in all four`, at(7)],
+    ['Canadian Experience Class, TEER 2 or 3 jobs', `${name} 5 in all four`, at(5)],
+    ['Federal Skilled Trades Program', `${name} 5 speaking and listening, ${name} 4 reading and writing`, `speaking ${fmtScore(t, t.speaking[1])}, listening ${fmtScore(t, t.listening[1])}, reading ${fmtScore(t, t.reading[0])}, writing ${fmtScore(t, t.writing[0])}`],
+    ['Highest language points in the CRS', `${name} 10 in all four`, at(10)],
+    ...(t.language === 'fr' ? [['French bonus (25 or 50 additional points)', 'NCLC 7 in all four', at(7)]] : []),
   ].map(([p, need, sc]) => `<tr><td>${p}</td><td>${need}</td><td>${sc}</td></tr>`).join('');
   const others = Object.entries(CHART_PAGES).filter(([k]) => k !== id && isLive(`/${CHART_PAGES[k].slug}/`)).map(([, m]) => `<a href="/${m.slug}/">${m.short} score chart</a>`);
   const path = `/${meta.slug}/`;
   const body = `
 <section class="intro">
   <h1>${esc(meta.h1)}</h1>
-  <p class="lede">The ${esc(t.name)} scores that give each CLB level for Express Entry, ability by ability, the minimum scores for each program and what they are worth in CRS points. Enter your results to see your levels.</p>
+  <p class="lede">The ${esc(t.name)} scores that give each ${name} level for Express Entry, ability by ability, the minimum scores for each program and what they are worth in CRS points. Enter your results to see your levels.</p>
   <p class="meta"><span>Equivalences checked ${longDate(SITE.checked)}</span><span>Source: <a href="${lang.source}" rel="noopener">IRCC language test results</a>, modified ${longDate(lang.sourceModified)}</span></p>
 </section>
 <div class="tool">
@@ -666,10 +670,10 @@ function scoreChartPage(id) {
   <input type="hidden" name="test" value="${id}">
   <fieldset><legend>Your ${esc(t.name)} results</legend>
     ${SK.map((s) => `<div class="field"><label for="${s}">${SKL[s]}</label><input type="number" inputmode="decimal" id="${s}" name="${s}"></div>`).join('').replace(/^/, '<div class="scores">') + '</div>'}
-    <p class="hint">The example shows the scores for CLB 7. Replace them with yours.</p>
+    <p class="hint">The example shows the scores for ${name} 7. Replace them with yours.</p>
   </fieldset>
 </form>
-<aside class="results" aria-label="Your CLB levels">
+<aside class="results" aria-label="Your ${name} levels">
   <div class="cards">${SK.map((s) => `<div class="card"><div class="k">${SKL[s]}</div><div class="v" id="out-${s}">–</div></div>`).join('')}</div>
   <div><h2 class="panel-h">Lowest level across the four</h2><p class="score" id="out-min" style="font-size:1.4rem;margin:0"></p></div>
   <div class="cmp" id="out-checks"></div>
@@ -677,21 +681,22 @@ function scoreChartPage(id) {
 </aside>
 </div>
 <article class="prose">
-<h2>${esc(t.name)} to CLB chart</h2>
+<h2>${esc(t.name)} to ${name} chart</h2>
 <p>${esc(meta.extra)}</p>
 <div class="table-scroll"><table><thead><tr><th>Level</th>${SK.map((s) => `<th class="n">${SKL[s]}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
-<p>A result below the CLB 4 row does not reach CLB 4 and gives no CRS points for that ability. Each level has its own page: ${LEVELS.map((l) => `<a href="/clb-${l}/">CLB ${l}${l === 10 ? '+' : ''}</a>`).join(', ')}.</p>
+${id === 'tcf' ? `<p class="callout">${TCF_NOTE}</p>` : ''}
+<p>A result below the ${name} 4 row does not reach ${name} 4. Each level has its own page: ${LEVELS.map((l) => `<a href="/${name.toLowerCase()}-${l}/">${name} ${l}${l === 10 ? '+' : ''}</a>`).join(', ')}.</p>
 <h2>Minimum ${esc(meta.short)} scores for each program</h2>
 <div class="table-scroll"><table><thead><tr><th>Program</th><th>Minimum</th><th>${esc(meta.short)} scores</th></tr></thead><tbody>${minimums}</tbody></table></div>
 <h2>CRS points for each level</h2>
 <p>As your first official language, per ability and for all four abilities at the same level.</p>
 <div class="table-scroll"><table><thead><tr><th>Level</th><th class="n">Per ability, single</th><th class="n">All four, single</th><th class="n">All four, with a partner who counts</th></tr></thead><tbody>${pts}</tbody></table></div>
-<p>CLB 7 and CLB 9 in all four abilities also unlock skill transferability points for education and foreign work experience. The <a href="/">CRS calculator</a> adds all of it up${others.length ? `, and the same chart exists for other tests: ${others.join(', ')}` : ''}. To compare several tests at once, use the <a href="/clb-converter/">CLB converter</a>.</p>
+<p>${name} 7 and ${name} 9 in all four abilities also unlock skill transferability points for education and foreign work experience. The <a href="/">CRS calculator</a> adds all of it up${others.length ? `, and the same chart exists for other tests: ${others.join(', ')}` : ''}. To compare several tests at once, use the <a href="/clb-converter/">CLB converter</a>.</p>
 <h2>Sources</h2>
 <ul><li><a href="${lang.source}" rel="noopener">Language test results for Express Entry</a>, IRCC, modified ${longDate(lang.sourceModified)}</li><li><a href="${crs.source}" rel="noopener">CRS criteria</a>, IRCC, modified ${longDate(crs.sourceModified)}</li></ul>
 </article>`;
   const scripts = `${jsonScript('lang-rules', lang)}<script type="module" src="/js/clb.js"></script>`;
-  return page({ path, title: meta.title, description: `${t.name} to CLB chart for Express Entry: the score for each CLB level by ability, minimum scores for FSW, CEC and FST, and CRS points. With a converter.`, body, scripts, crumbs: [['Home', '/'], ['CLB converter', '/clb-converter/'], [`${meta.short} score chart`, path]] });
+  return page({ path, title: meta.title, description: `${t.name} to ${name} chart for Express Entry: the score for each ${name} level by ability, minimum scores for FSW, CEC and FST, and CRS points. With a converter.`, body, scripts, crumbs: [['Home', '/'], ['CLB converter', '/clb-converter/'], [`${meta.short} score chart`, path]] });
 }
 
 // ---------- Simple pages ----------
