@@ -1,0 +1,7189 @@
+{
+ "source": "https://immigratemanitoba.com/notices/eoi-draw/",
+ "api": "https://immigratemanitoba.com/wp-json/wp/v2/posts",
+ "draws": [
+  {
+   "n": 281,
+   "date": "2026-10-08",
+   "url": "https://immigratemanitoba.com/2026/10/expression-of-interest-draw-281/",
+   "laas": 340,
+   "expressEntry": 103,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Occupation-specific selections",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit group listed below",
+     "laas": 46,
+     "minScore": null
+    },
+    {
+     "group": "Occupation-specific selections",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit groups listed below",
+     "laas": 211,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 83,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 280,
+   "date": "2026-09-24",
+   "url": "https://immigratemanitoba.com/2026/09/expression-of-interest-draw-280/",
+   "laas": 474,
+   "expressEntry": 148,
+   "minScores": [
+    760
+   ],
+   "segments": [
+    {
+     "group": "Occupation-specific selections",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit group listed below",
+     "laas": 1,
+     "minScore": null
+    },
+    {
+     "group": "Occupation-specific selections",
+     "criteria": "Top scoring profiles declaring current employment in Manitoba in Broad Occupational Category 2 – Natural and applied sciences and related occupations ,",
+     "laas": 417,
+     "minScore": 760
+    },
+    {
+     "group": "Francophone selection",
+     "criteria": "Profiles declaring their language of communication with the MPNP to be French, and a valid French language test result",
+     "laas": 16,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 40,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 279,
+   "date": "2026-09-10",
+   "url": "https://immigratemanitoba.com/2026/09/expression-of-interest-draw-279/",
+   "laas": 793,
+   "expressEntry": 272,
+   "minScores": [
+    825
+   ],
+   "segments": [
+    {
+     "group": "Occupation-specific selections",
+     "criteria": "All profiles declaring current employment in Manitoba in Broad Occupational Category 3 – Health occupations ,",
+     "laas": 233,
+     "minScore": null
+    },
+    {
+     "group": "Francophone selection",
+     "criteria": "Profiles declaring their language of communication with the MPNP to be French, and a valid French language test result",
+     "laas": 11,
+     "minScore": null
+    },
+    {
+     "group": "Completed post-secondary study in Manitoba",
+     "criteria": "Top Scoring profiles declaring that the applicant or their spouse have completed post-secondary education in Manitoba",
+     "laas": 508,
+     "minScore": 825
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 41,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 278,
+   "date": "2026-08-27",
+   "url": "https://immigratemanitoba.com/2026/08/expression-of-interest-draw-278/",
+   "laas": 741,
+   "expressEntry": 150,
+   "minScores": [
+    731
+   ],
+   "segments": [
+    {
+     "group": "Occupation-specific selections",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit groups listed below",
+     "laas": 62,
+     "minScore": null
+    },
+    {
+     "group": "Occupation-specific selections",
+     "criteria": "Top scoring profiles declaring current employment in Manitoba in major group 72 – Technical trades and transportation officers and controllers,",
+     "laas": 600,
+     "minScore": 731
+    },
+    {
+     "group": "Francophone selection",
+     "criteria": "Profiles declaring their language of communication with the MPNP to be French, and a valid French language test result",
+     "laas": 21,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 58,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 277,
+   "date": "2026-08-13",
+   "url": "https://immigratemanitoba.com/2026/08/expression-of-interest-draw-277/",
+   "laas": 53,
+   "expressEntry": 6,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 53,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 276,
+   "date": "2026-07-30",
+   "url": "https://immigratemanitoba.com/2026/07/expression-of-interest-draw-276/",
+   "laas": 221,
+   "expressEntry": 94,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Occupation-specific selections",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit groups listed below",
+     "laas": 74,
+     "minScore": null
+    },
+    {
+     "group": "Occupation-specific selections",
+     "criteria": "Top scoring profiles declaring current employment in Manitoba in broad occupational category 9 – Occupations in manufacturing and utilities,",
+     "laas": 60,
+     "minScore": null
+    },
+    {
+     "group": "Francophone selection",
+     "criteria": "Profiles declaring their language of communication with the MPNP to be French, and a valid French language test result",
+     "laas": 17,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 70,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 275,
+   "date": "2026-07-16",
+   "url": "https://immigratemanitoba.com/2026/07/expression-of-interest-draw-275/",
+   "laas": 2146,
+   "expressEntry": 825,
+   "minScores": [
+    825
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream (IES) – Graduate Internship Pathway (GIP) eligibility requirements",
+     "laas": 78,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit groups listed below",
+     "laas": 24,
+     "minScore": null
+    },
+    {
+     "group": "Francophone selection",
+     "criteria": "Profiles declaring their language of communication with the MPNP to be French, and a valid French language test result",
+     "laas": 84,
+     "minScore": null
+    },
+    {
+     "group": "Completed post-secondary study in Manitoba",
+     "criteria": "Top Scoring profiles declaring that the applicant or their spouse have completed post-secondary education in Manitoba",
+     "laas": 1874,
+     "minScore": 825
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 86,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 274,
+   "date": "2026-07-02",
+   "url": "https://immigratemanitoba.com/2026/07/expression-of-interest-draw-274/",
+   "laas": 77,
+   "expressEntry": 15,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 77,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 273,
+   "date": "2026-06-18",
+   "url": "https://immigratemanitoba.com/2026/06/expression-of-interest-draw-273/",
+   "laas": 124,
+   "expressEntry": 22,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 124,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 272,
+   "date": "2026-06-04",
+   "url": "https://immigratemanitoba.com/2026/06/expression-of-interest-draw-272/",
+   "laas": 104,
+   "expressEntry": 15,
+   "minScores": [],
+   "segments": []
+  },
+  {
+   "n": 271,
+   "date": "2026-05-21",
+   "url": "https://immigratemanitoba.com/2026/05/expression-of-interest-draw-271/",
+   "laas": 96,
+   "expressEntry": 20,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 96,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 270,
+   "date": "2026-05-07",
+   "url": "https://immigratemanitoba.com/2026/05/expression-of-interest-draw-270/",
+   "laas": 906,
+   "expressEntry": 326,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit groups listed below",
+     "laas": 431,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 475,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 269,
+   "date": "2026-04-23",
+   "url": "https://immigratemanitoba.com/2026/04/expression-of-interest-draw-269/",
+   "laas": 308,
+   "expressEntry": 105,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in the broad occupational category listed below",
+     "laas": 192,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 116,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 268,
+   "date": "2026-04-09",
+   "url": "https://immigratemanitoba.com/2026/04/expression-of-interest-draw-268/",
+   "laas": 32,
+   "expressEntry": 8,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 32,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 267,
+   "date": "2026-03-26",
+   "url": "https://immigratemanitoba.com/2026/03/expression-of-interest-draw-267/",
+   "laas": 14,
+   "expressEntry": 3,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 14,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 266,
+   "date": "2026-03-12",
+   "url": "https://immigratemanitoba.com/2026/03/expression-of-interest-draw-266/",
+   "laas": 46,
+   "expressEntry": 5,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 46,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 265,
+   "date": "2026-02-26",
+   "url": "https://immigratemanitoba.com/2026/02/expression-of-interest-draw-265/",
+   "laas": 72,
+   "expressEntry": 11,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 72,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 264,
+   "date": "2026-02-12",
+   "url": "https://immigratemanitoba.com/2026/02/expression-of-interest-draw-264/",
+   "laas": 29,
+   "expressEntry": 6,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 29,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 263,
+   "date": "2026-01-29",
+   "url": "https://immigratemanitoba.com/2026/01/expression-of-interest-draw-263/",
+   "laas": 47,
+   "expressEntry": 6,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 47,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 262,
+   "date": "2026-01-15",
+   "url": "https://immigratemanitoba.com/2026/01/expression-of-interest-draw-262/",
+   "laas": 55,
+   "expressEntry": 10,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 55,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 261,
+   "date": "2025-12-31",
+   "url": "https://immigratemanitoba.com/2025/12/expression-of-interest-draw-261/",
+   "laas": 421,
+   "expressEntry": 118,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit group and broad occupational category listed below",
+     "laas": 353,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 68,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 260,
+   "date": "2025-12-18",
+   "url": "https://immigratemanitoba.com/2025/12/expression-of-interest-draw-260/",
+   "laas": 63,
+   "expressEntry": 8,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 63,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 259,
+   "date": "2025-12-05",
+   "url": "https://immigratemanitoba.com/2025/12/expression-of-interest-draw-259/",
+   "laas": 184,
+   "expressEntry": 61,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 184,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 258,
+   "date": "2025-11-20",
+   "url": "https://immigratemanitoba.com/2025/11/expression-of-interest-draw-258/",
+   "laas": 35,
+   "expressEntry": 5,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 35,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 257,
+   "date": "2025-11-06",
+   "url": "https://immigratemanitoba.com/2025/11/expression-of-interest-draw-257/",
+   "laas": 47,
+   "expressEntry": 10,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 47,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 256,
+   "date": "2025-10-23",
+   "url": "https://immigratemanitoba.com/2025/10/expression-of-interest-draw-256/",
+   "laas": 29,
+   "expressEntry": 9,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 29,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 255,
+   "date": "2025-10-09",
+   "url": "https://immigratemanitoba.com/2025/10/expression-of-interest-draw-254-2/",
+   "laas": 862,
+   "expressEntry": 203,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit group and broad occupational category listed below",
+     "laas": 583,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 279,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 254,
+   "date": "2025-09-18",
+   "url": "https://immigratemanitoba.com/2025/09/expression-of-interest-draw-254/",
+   "laas": 911,
+   "expressEntry": 341,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 911,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 253,
+   "date": "2025-09-04",
+   "url": "https://immigratemanitoba.com/2025/09/expression-of-interest-draw-253/",
+   "laas": 3347,
+   "expressEntry": 415,
+   "minScores": [
+    812
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 1866,
+     "minScore": null
+    },
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting Skilled Worker in Manitoba pathway eligibility requirements and a principal applicant who is a citizen of Ukraine.",
+     "laas": 1466,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 15,
+     "minScore": 812
+    }
+   ]
+  },
+  {
+   "n": 252,
+   "date": "2025-08-21",
+   "url": "https://immigratemanitoba.com/2025/08/eoi-draw-252/",
+   "laas": 77,
+   "expressEntry": 18,
+   "minScores": [
+    612
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 77,
+     "minScore": 612
+    }
+   ]
+  },
+  {
+   "n": 251,
+   "date": "2025-08-07",
+   "url": "https://immigratemanitoba.com/2025/08/eoi-draw-251/",
+   "laas": 37,
+   "expressEntry": 7,
+   "minScores": [
+    724
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 37,
+     "minScore": 724
+    }
+   ]
+  },
+  {
+   "n": 250,
+   "date": "2025-07-24",
+   "url": "https://immigratemanitoba.com/2025/07/eoi-draw-250/",
+   "laas": 19,
+   "expressEntry": 3,
+   "minScores": [
+    611
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 19,
+     "minScore": 611
+    }
+   ]
+  },
+  {
+   "n": 249,
+   "date": "2025-07-10",
+   "url": "https://immigratemanitoba.com/2025/07/eoi-draw-249/",
+   "laas": 67,
+   "expressEntry": 29,
+   "minScores": [
+    673
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream (IES) – Graduate Internship Pathway (GIP) eligibility requirements",
+     "laas": 40,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 27,
+     "minScore": 673
+    }
+   ]
+  },
+  {
+   "n": 248,
+   "date": "2025-06-26",
+   "url": "https://immigratemanitoba.com/2025/06/eoi-draw-248/",
+   "laas": 492,
+   "expressEntry": 65,
+   "minScores": [
+    712
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements and declare a Manitoba Supporter who is a close relative, is a Canadian permanent resident or citizen and is an established reside…",
+     "laas": 478,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 14,
+     "minScore": 712
+    }
+   ]
+  },
+  {
+   "n": 247,
+   "date": "2025-06-12",
+   "url": "https://immigratemanitoba.com/2025/06/eoi-draw-247/",
+   "laas": 36,
+   "expressEntry": 5,
+   "minScores": [
+    613
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 36,
+     "minScore": 613
+    }
+   ]
+  },
+  {
+   "n": 246,
+   "date": "2025-05-29",
+   "url": "https://immigratemanitoba.com/2025/05/eoi-draw-246/",
+   "laas": 30,
+   "expressEntry": 5,
+   "minScores": [
+    606
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 30,
+     "minScore": 606
+    }
+   ]
+  },
+  {
+   "n": 245,
+   "date": "2025-05-15",
+   "url": "https://immigratemanitoba.com/2025/05/eoi-draw-245/",
+   "laas": 62,
+   "expressEntry": 8,
+   "minScores": [
+    626
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 62,
+     "minScore": 626
+    }
+   ]
+  },
+  {
+   "n": 244,
+   "date": "2025-05-01",
+   "url": "https://immigratemanitoba.com/2025/05/eoi-draw-244/",
+   "laas": 26,
+   "expressEntry": 7,
+   "minScores": [
+    727
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 26,
+     "minScore": 727
+    }
+   ]
+  },
+  {
+   "n": 243,
+   "date": "2025-04-17",
+   "url": "https://immigratemanitoba.com/2025/04/eoi-draw-243/",
+   "laas": 27,
+   "expressEntry": 3,
+   "minScores": [
+    621
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 27,
+     "minScore": 621
+    }
+   ]
+  },
+  {
+   "n": 242,
+   "date": "2025-04-03",
+   "url": "https://immigratemanitoba.com/2025/04/eoi-draw-242/",
+   "laas": 4,
+   "expressEntry": 0,
+   "minScores": [
+    721
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 4,
+     "minScore": 721
+    }
+   ]
+  },
+  {
+   "n": 241,
+   "date": "2025-03-21",
+   "url": "https://immigratemanitoba.com/2025/03/eoi-draw-241/",
+   "laas": 108,
+   "expressEntry": 23,
+   "minScores": [
+    844,
+    705
+   ],
+   "segments": [
+    {
+     "group": "Completed post-secondary study in Manitoba",
+     "criteria": "Profiles declaring that the applicant or their spouse have completed post-secondary education in Manitoba",
+     "laas": 101,
+     "minScore": 844
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 7,
+     "minScore": 705
+    }
+   ]
+  },
+  {
+   "n": 240,
+   "date": "2025-03-06",
+   "url": "https://immigratemanitoba.com/2025/03/eoi-draw-240/",
+   "laas": 111,
+   "expressEntry": 27,
+   "minScores": [
+    861,
+    724
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "profiles",
+     "laas": 98,
+     "minScore": 861
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 13,
+     "minScore": 724
+    }
+   ]
+  },
+  {
+   "n": 239,
+   "date": "2025-02-20",
+   "url": "https://immigratemanitoba.com/2025/02/eoi-draw-239/",
+   "laas": 41,
+   "expressEntry": 7,
+   "minScores": [
+    711
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements, declare their highest level of completed education to be a Master’s Degree or higher and declare a Manitoba Supporter who is a cl…",
+     "laas": 19,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 22,
+     "minScore": 711
+    }
+   ]
+  },
+  {
+   "n": 238,
+   "date": "2025-02-06",
+   "url": "https://immigratemanitoba.com/2025/02/eoi-draw-238/",
+   "laas": 76,
+   "expressEntry": 18,
+   "minScores": [
+    612
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements and at least four years of full-time work experience in the past five years. Please see note #4 for more details.",
+     "laas": 59,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 17,
+     "minScore": 612
+    }
+   ]
+  },
+  {
+   "n": 237,
+   "date": "2025-01-23",
+   "url": "https://immigratemanitoba.com/2025/01/eoi-draw-237/",
+   "laas": 128,
+   "expressEntry": 22,
+   "minScores": [
+    609
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 128,
+     "minScore": 609
+    }
+   ]
+  },
+  {
+   "n": 236,
+   "date": "2025-01-09",
+   "url": "https://immigratemanitoba.com/2025/01/eoi-draw-236/",
+   "laas": 197,
+   "expressEntry": 52,
+   "minScores": [
+    838,
+    615
+   ],
+   "segments": [
+    {
+     "group": "Completed post-secondary study in Manitoba",
+     "criteria": "Profiles declaring that the applicant or their spouse have completed post-secondary education in Manitoba",
+     "laas": 145,
+     "minScore": 838
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles declaring their Manitoba destination to be Winkler",
+     "laas": 52,
+     "minScore": 615
+    }
+   ]
+  },
+  {
+   "n": 235,
+   "date": "2024-12-27",
+   "url": "https://immigratemanitoba.com/2024/12/eoi-draw-235/",
+   "laas": 276,
+   "expressEntry": 56,
+   "minScores": [
+    857,
+    632
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "profiles",
+     "laas": 239,
+     "minScore": 857
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit groups listed below",
+     "laas": 18,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit group listed below",
+     "laas": 19,
+     "minScore": 632
+    }
+   ]
+  },
+  {
+   "n": 234,
+   "date": "2024-12-18",
+   "url": "https://immigratemanitoba.com/2024/12/eoi-draw-234/",
+   "laas": 399,
+   "expressEntry": 43,
+   "minScores": [
+    630
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 297,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 102,
+     "minScore": 630
+    }
+   ]
+  },
+  {
+   "n": 233,
+   "date": "2024-11-22",
+   "url": "https://immigratemanitoba.com/2024/11/eoi-draw-233/",
+   "laas": 279,
+   "expressEntry": 55,
+   "minScores": [
+    840,
+    617
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring a Manitoba Supporter who is a close relative, is a Canadian permanent resident or citizen, is an established resident of Manitoba and has been residing in Manitoba for at least one year",
+     "laas": 89,
+     "minScore": 840
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 165,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 25,
+     "minScore": 617
+    }
+   ]
+  },
+  {
+   "n": 232,
+   "date": "2024-11-08",
+   "url": "https://immigratemanitoba.com/2024/11/eoi-draw-232/",
+   "laas": 274,
+   "expressEntry": 33,
+   "minScores": [
+    672,
+    709
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit group listed below",
+     "laas": 41,
+     "minScore": 672
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 188,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 45,
+     "minScore": 709
+    }
+   ]
+  },
+  {
+   "n": 231,
+   "date": "2024-10-24",
+   "url": "https://immigratemanitoba.com/2024/10/eoi-draw-231/",
+   "laas": 253,
+   "expressEntry": 43,
+   "minScores": [
+    872,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "profiles",
+     "laas": 50,
+     "minScore": 872
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 156,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 47,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 230,
+   "date": "2024-10-10",
+   "url": "https://immigratemanitoba.com/2024/10/eoi-draw-230/",
+   "laas": 234,
+   "expressEntry": 36,
+   "minScores": [
+    845,
+    711
+   ],
+   "segments": [
+    {
+     "group": "Completed post-secondary study in Manitoba",
+     "criteria": "Profiles declaring that the applicant or their spouse have completed post-secondary education in Manitoba",
+     "laas": 82,
+     "minScore": 845
+    },
+    {
+     "group": "Completed post-secondary study in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 114,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 38,
+     "minScore": 711
+    }
+   ]
+  },
+  {
+   "n": 229,
+   "date": "2024-09-27",
+   "url": "https://immigratemanitoba.com/2024/09/eoi-draw-229/",
+   "laas": 348,
+   "expressEntry": 56,
+   "minScores": [
+    582
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 269,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 79,
+     "minScore": 582
+    }
+   ]
+  },
+  {
+   "n": 228,
+   "date": "2024-09-12",
+   "url": "https://immigratemanitoba.com/2024/09/eoi-draw-228/",
+   "laas": 206,
+   "expressEntry": 21,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Completed post-secondary study in Manitoba",
+     "criteria": "Profiles declaring current employment in the following occupations and that they or their spouse have completed post-secondary education in Manitoba",
+     "laas": 206,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 227,
+   "date": "2024-08-30",
+   "url": "https://immigratemanitoba.com/2024/08/eoi-draw-227/",
+   "laas": 150,
+   "expressEntry": 21,
+   "minScores": [
+    727
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 126,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 24,
+     "minScore": 727
+    }
+   ]
+  },
+  {
+   "n": 226,
+   "date": "2024-08-15",
+   "url": "https://immigratemanitoba.com/2024/08/eoi-draw-226/",
+   "laas": 292,
+   "expressEntry": 37,
+   "minScores": [
+    703
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 252,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 40,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 225,
+   "date": "2024-08-01",
+   "url": "https://immigratemanitoba.com/2024/08/eoi-draw-225/",
+   "laas": 203,
+   "expressEntry": 29,
+   "minScores": [
+    724
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit group and broad occupational category listed below",
+     "laas": 145,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 58,
+     "minScore": 724
+    }
+   ]
+  },
+  {
+   "n": 224,
+   "date": "2024-07-18",
+   "url": "https://immigratemanitoba.com/2024/07/eoi-draw-224/",
+   "laas": 161,
+   "expressEntry": 16,
+   "minScores": [
+    645
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 109,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 52,
+     "minScore": 645
+    }
+   ]
+  },
+  {
+   "n": 223,
+   "date": "2024-07-04",
+   "url": "https://immigratemanitoba.com/2024/07/eoi-draw-223/",
+   "laas": 126,
+   "expressEntry": 19,
+   "minScores": [
+    709
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 85,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 41,
+     "minScore": 709
+    }
+   ]
+  },
+  {
+   "n": 222,
+   "date": "2024-06-25",
+   "url": "https://immigratemanitoba.com/2024/06/eoi-draw-222/",
+   "laas": 250,
+   "expressEntry": 93,
+   "minScores": [
+    516
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "profiles declaring a nursing occupation as their current occupation",
+     "laas": 250,
+     "minScore": 516
+    }
+   ]
+  },
+  {
+   "n": 221,
+   "date": "2024-06-21",
+   "url": "https://immigratemanitoba.com/2024/06/eoi-draw-221/",
+   "laas": 163,
+   "expressEntry": 31,
+   "minScores": [
+    721
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 111,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 52,
+     "minScore": 721
+    }
+   ]
+  },
+  {
+   "n": 220,
+   "date": "2024-06-06",
+   "url": "https://immigratemanitoba.com/2024/06/eoi-draw-220/",
+   "laas": 254,
+   "expressEntry": 35,
+   "minScores": [
+    834,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "profiles",
+     "laas": 135,
+     "minScore": 834
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 74,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 45,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 219,
+   "date": "2024-05-23",
+   "url": "https://immigratemanitoba.com/2024/05/eoi-draw-219/",
+   "laas": 253,
+   "expressEntry": 29,
+   "minScores": [
+    782,
+    688
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring a Manitoba Supporter who is a close relative, is a Canadian permanent resident or citizen, is an established resident of Manitoba and has been residing in Manitoba for at least one year",
+     "laas": 121,
+     "minScore": 782
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 93,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 39,
+     "minScore": 688
+    }
+   ]
+  },
+  {
+   "n": 218,
+   "date": "2024-05-09",
+   "url": "https://immigratemanitoba.com/2024/05/eoi-draw-218/",
+   "laas": 371,
+   "expressEntry": 66,
+   "minScores": [
+    836,
+    698
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 18,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles All eligible Skilled Worker in Manitoba profiles",
+     "laas": 242,
+     "minScore": 836
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 76,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 35,
+     "minScore": 698
+    }
+   ]
+  },
+  {
+   "n": 217,
+   "date": "2024-05-02",
+   "url": "https://immigratemanitoba.com/2024/05/eoi-draw-217/",
+   "laas": 941,
+   "expressEntry": 181,
+   "minScores": [
+    796
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 488,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 427,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 26,
+     "minScore": 796
+    }
+   ]
+  },
+  {
+   "n": 215,
+   "date": "2024-04-24",
+   "url": "https://immigratemanitoba.com/2024/04/eoi-draw-215/",
+   "laas": 327,
+   "expressEntry": 68,
+   "minScores": [
+    811,
+    644
+   ],
+   "segments": [
+    {
+     "group": null,
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements and declared at least 4 years of work experience in the past five years",
+     "laas": 203,
+     "minScore": 811
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "profiles with declared work experience of at least 4 years in the past five years",
+     "laas": 66,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 58,
+     "minScore": 644
+    }
+   ]
+  },
+  {
+   "n": 214,
+   "date": "2024-04-09",
+   "url": "https://immigratemanitoba.com/2024/04/eoi-draw-214/",
+   "laas": 363,
+   "expressEntry": 81,
+   "minScores": [
+    691
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 276,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 87,
+     "minScore": 691
+    }
+   ]
+  },
+  {
+   "n": 212,
+   "date": "2024-03-08",
+   "url": "https://immigratemanitoba.com/2024/03/eoi-draw-212/",
+   "laas": 104,
+   "expressEntry": 20,
+   "minScores": [
+    614
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 104,
+     "minScore": 614
+    }
+   ]
+  },
+  {
+   "n": 210,
+   "date": "2024-02-08",
+   "url": "https://immigratemanitoba.com/2024/02/eoi-draw-210/",
+   "laas": 282,
+   "expressEntry": 26,
+   "minScores": [
+    619,
+    713
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "profiles declaring a Manitoba Supporter who is a close relative, is a Canadian permanent resident or citizen, is an established resident of Manitoba and has been residing in Manitoba for at least one year",
+     "laas": 151,
+     "minScore": 619
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 83,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 48,
+     "minScore": 713
+    }
+   ]
+  },
+  {
+   "n": 208,
+   "date": "2024-01-25",
+   "url": "https://immigratemanitoba.com/2024/01/eoi-draw-208/",
+   "laas": 275,
+   "expressEntry": 29,
+   "minScores": [
+    772,
+    713
+   ],
+   "segments": [
+    {
+     "group": "Completed post-secondary study in Manitoba",
+     "criteria": "Profiles declaring that the applicant or their spouse have completed post-secondary education in Manitoba",
+     "laas": 156,
+     "minScore": 772
+    },
+    {
+     "group": "Completed post-secondary study in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 78,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 41,
+     "minScore": 713
+    }
+   ]
+  },
+  {
+   "n": 207,
+   "date": "2024-01-11",
+   "url": "https://immigratemanitoba.com/2024/01/eoi-draw-207/",
+   "laas": 423,
+   "expressEntry": 73,
+   "minScores": [
+    607,
+    823,
+    639
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "profiles declaring a Manitoba Supporter who is a close relative, is a Canadian permanent resident or citizen, is an established resident of Manitoba and has been residing in Manitoba for at least one year",
+     "laas": 168,
+     "minScore": 607
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles All eligible profiles",
+     "laas": 166,
+     "minScore": 823
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 58,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 31,
+     "minScore": 639
+    }
+   ]
+  },
+  {
+   "n": 205,
+   "date": "2023-12-28",
+   "url": "https://immigratemanitoba.com/2023/12/eoi-draw-205/",
+   "laas": 254,
+   "expressEntry": 53,
+   "minScores": [
+    612,
+    698
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring a Manitoba Supporter who is a close relative, is a Canadian permanent resident or citizen, is an established resident of Manitoba and has been residing in Manitoba for at least one year",
+     "laas": 160,
+     "minScore": 612
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 67,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 27,
+     "minScore": 698
+    }
+   ]
+  },
+  {
+   "n": 204,
+   "date": "2023-12-21",
+   "url": "https://immigratemanitoba.com/2023/12/eoi-draw-204/",
+   "laas": 1113,
+   "expressEntry": 529,
+   "minScores": [
+    601
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 1113,
+     "minScore": 601
+    }
+   ]
+  },
+  {
+   "n": 203,
+   "date": "2023-12-14",
+   "url": "https://immigratemanitoba.com/2023/12/eoi-draw-203/",
+   "laas": 283,
+   "expressEntry": 20,
+   "minScores": [
+    774,
+    714
+   ],
+   "segments": [
+    {
+     "group": "Completed post-secondary study in Manitoba",
+     "criteria": "Profiles declaring that the applicant or their spouse have completed post-secondary education in Manitoba",
+     "laas": 160,
+     "minScore": 774
+    },
+    {
+     "group": "Completed post-secondary study in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 62,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 61,
+     "minScore": 714
+    }
+   ]
+  },
+  {
+   "n": 201,
+   "date": "2023-11-30",
+   "url": "https://immigratemanitoba.com/2023/11/eoi-draw-201/",
+   "laas": 268,
+   "expressEntry": 50,
+   "minScores": [
+    610,
+    720
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring a Manitoba Supporter who is a close relative, is a Canadian permanent resident or citizen, is an established resident of Manitoba and has been residing in Manitoba for at least one year",
+     "laas": 148,
+     "minScore": 610
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 82,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 38,
+     "minScore": 720
+    }
+   ]
+  },
+  {
+   "n": 200,
+   "date": "2023-11-16",
+   "url": "https://immigratemanitoba.com/2023/11/eoi-draw-200/",
+   "laas": 301,
+   "expressEntry": 69,
+   "minScores": [
+    809,
+    721
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 100,
+     "minScore": 809
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 92,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 61,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 48,
+     "minScore": 721
+    }
+   ]
+  },
+  {
+   "n": 198,
+   "date": "2023-11-02",
+   "url": "https://immigratemanitoba.com/2023/11/eoi-draw-198/",
+   "laas": 400,
+   "expressEntry": 60,
+   "minScores": [
+    785,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 204,
+     "minScore": 785
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 131,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 65,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 197,
+   "date": "2023-10-05",
+   "url": "https://immigratemanitoba.com/2023/10/eoi-draw-197/",
+   "laas": 542,
+   "expressEntry": 140,
+   "minScores": [
+    610,
+    629,
+    601
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 219,
+     "minScore": 610
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 222,
+     "minScore": 629
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 60,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 41,
+     "minScore": 601
+    }
+   ]
+  },
+  {
+   "n": 195,
+   "date": "2023-09-28",
+   "url": "https://immigratemanitoba.com/2023/09/eoi-draw-195/",
+   "laas": 1072,
+   "expressEntry": 504,
+   "minScores": [
+    605
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 1072,
+     "minScore": 605
+    }
+   ]
+  },
+  {
+   "n": 194,
+   "date": "2023-09-21",
+   "url": "https://immigratemanitoba.com/2023/09/eoi-draw-194/",
+   "laas": 620,
+   "expressEntry": 59,
+   "minScores": [
+    612,
+    631,
+    723
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 298,
+     "minScore": 612
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 239,
+     "minScore": 631
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 56,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 27,
+     "minScore": 723
+    }
+   ]
+  },
+  {
+   "n": 193,
+   "date": "2023-09-07",
+   "url": "https://immigratemanitoba.com/2023/09/eoi-draw-193/",
+   "laas": 558,
+   "expressEntry": 158,
+   "minScores": [
+    595,
+    724
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 230,
+     "minScore": 595
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 2,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 52,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 40,
+     "minScore": 724
+    }
+   ]
+  },
+  {
+   "n": 192,
+   "date": "2023-08-31",
+   "url": "https://immigratemanitoba.com/2023/08/eoi-draw-192/",
+   "laas": 288,
+   "expressEntry": 127,
+   "minScores": [
+    600
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba and who declared the intention to reside in a community outside of the city of Winnipeg",
+     "laas": 288,
+     "minScore": 600
+    }
+   ]
+  },
+  {
+   "n": 190,
+   "date": "2023-08-24",
+   "url": "https://immigratemanitoba.com/2023/08/eoi-draw-190/",
+   "laas": 623,
+   "expressEntry": 178,
+   "minScores": [
+    612,
+    646,
+    724
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 256,
+     "minScore": 612
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 250,
+     "minScore": 646
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 63,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 54,
+     "minScore": 724
+    }
+   ]
+  },
+  {
+   "n": 189,
+   "date": "2023-08-10",
+   "url": "https://immigratemanitoba.com/2023/08/eoi-draw-189/",
+   "laas": 615,
+   "expressEntry": 43,
+   "minScores": [
+    605,
+    647,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 249,
+     "minScore": 605
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 279,
+     "minScore": 647
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 47,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 40,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 187,
+   "date": "2023-07-27",
+   "url": "https://immigratemanitoba.com/2023/07/eoi-draw-187/",
+   "laas": 609,
+   "expressEntry": 106,
+   "minScores": [
+    614,
+    649,
+    714
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 335,
+     "minScore": 614
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 202,
+     "minScore": 649
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 51,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 21,
+     "minScore": 714
+    }
+   ]
+  },
+  {
+   "n": 186,
+   "date": "2023-07-20",
+   "url": "https://immigratemanitoba.com/2023/07/eoi-draw-186/",
+   "laas": 595,
+   "expressEntry": 340,
+   "minScores": [
+    611
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 595,
+     "minScore": 611
+    }
+   ]
+  },
+  {
+   "n": 185,
+   "date": "2023-07-13",
+   "url": "https://immigratemanitoba.com/2023/07/eoi-draw-185/",
+   "laas": 540,
+   "expressEntry": 77,
+   "minScores": [
+    604,
+    661,
+    774
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 205,
+     "minScore": 604
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 237,
+     "minScore": 661
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 57,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 41,
+     "minScore": 774
+    }
+   ]
+  },
+  {
+   "n": 184,
+   "date": "2023-06-29",
+   "url": "https://immigratemanitoba.com/2023/06/eoi-draw-184/",
+   "laas": 587,
+   "expressEntry": 162,
+   "minScores": [
+    613,
+    662,
+    717
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 315,
+     "minScore": 613
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 184,
+     "minScore": 662
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 62,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 26,
+     "minScore": 717
+    }
+   ]
+  },
+  {
+   "n": 182,
+   "date": "2023-06-15",
+   "url": "https://immigratemanitoba.com/2023/06/eoi-draw-182/",
+   "laas": 540,
+   "expressEntry": 187,
+   "minScores": [
+    602,
+    665,
+    718
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 255,
+     "minScore": 602
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 205,
+     "minScore": 665
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 59,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 21,
+     "minScore": 718
+    }
+   ]
+  },
+  {
+   "n": 181,
+   "date": "2023-06-01",
+   "url": "https://immigratemanitoba.com/2023/06/eoi-draw-181/",
+   "laas": 589,
+   "expressEntry": 214,
+   "minScores": [
+    607,
+    669,
+    801
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 262,
+     "minScore": 607
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 240,
+     "minScore": 669
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 56,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 31,
+     "minScore": 801
+    }
+   ]
+  },
+  {
+   "n": 179,
+   "date": "2023-05-18",
+   "url": "https://immigratemanitoba.com/2023/05/eoi-draw-179/",
+   "laas": 526,
+   "expressEntry": 225,
+   "minScores": [
+    610,
+    701,
+    721
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 287,
+     "minScore": 610
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 191,
+     "minScore": 701
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 21,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 27,
+     "minScore": 721
+    }
+   ]
+  },
+  {
+   "n": 178,
+   "date": "2023-05-04",
+   "url": "https://immigratemanitoba.com/2023/05/eoi-draw-178/",
+   "laas": 539,
+   "expressEntry": 204,
+   "minScores": [
+    606,
+    650,
+    699
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 252,
+     "minScore": 606
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 199,
+     "minScore": 650
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 39,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 49,
+     "minScore": 699
+    }
+   ]
+  },
+  {
+   "n": 177,
+   "date": "2023-04-27",
+   "url": "https://immigratemanitoba.com/2023/04/eoi-draw-177/",
+   "laas": 558,
+   "expressEntry": 344,
+   "minScores": [
+    616
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 558,
+     "minScore": 616
+    }
+   ]
+  },
+  {
+   "n": 176,
+   "date": "2023-04-20",
+   "url": "https://immigratemanitoba.com/2023/04/eoi-draw-176/",
+   "laas": 507,
+   "expressEntry": 91,
+   "minScores": [
+    615,
+    651,
+    719
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 249,
+     "minScore": 615
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 194,
+     "minScore": 651
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 38,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 26,
+     "minScore": 719
+    }
+   ]
+  },
+  {
+   "n": 174,
+   "date": "2023-04-06",
+   "url": "https://immigratemanitoba.com/2023/04/eoi-draw-174/",
+   "laas": 566,
+   "expressEntry": 157,
+   "minScores": [
+    615,
+    670,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 225,
+     "minScore": 615
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 226,
+     "minScore": 670
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 61,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 54,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 173,
+   "date": "2023-03-23",
+   "url": "https://immigratemanitoba.com/2023/03/eoi-draw-173/",
+   "laas": 566,
+   "expressEntry": 82,
+   "minScores": [
+    612,
+    672,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations identified with high labour needs based on data published by Statistics Canada",
+     "laas": 266,
+     "minScore": 612
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 200,
+     "minScore": 672
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 52,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 48,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 171,
+   "date": "2023-03-09",
+   "url": "https://immigratemanitoba.com/2023/03/eoi-draw-171/",
+   "laas": 597,
+   "expressEntry": 45,
+   "minScores": [
+    612,
+    675,
+    666
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations under National Occupational Classification (NOC) 2021 major group 65 (sales and service support occupations), as a sector identified with high labour ne…",
+     "laas": 224,
+     "minScore": 612
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 277,
+     "minScore": 675
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 53,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 43,
+     "minScore": 666
+    }
+   ]
+  },
+  {
+   "n": 169,
+   "date": "2023-02-23",
+   "url": "https://immigratemanitoba.com/2023/02/eoi-draw-169/",
+   "laas": 583,
+   "expressEntry": 140,
+   "minScores": [
+    615,
+    693,
+    721
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles declaring current employment in Manitoba in occupations with the highest-anticipated labour shortages, as identified in the most recent Manitoba Labour Market Outlook ,",
+     "laas": 207,
+     "minScore": 615
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "All profiles that were not selected in the occupation-specific selection",
+     "laas": 298,
+     "minScore": 693
+    },
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Profiles that declared meeting International Education Stream eligibility requirements.",
+     "laas": 51,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 27,
+     "minScore": 721
+    }
+   ]
+  },
+  {
+   "n": 168,
+   "date": "2023-02-09",
+   "url": "https://immigratemanitoba.com/2023/02/eoi-draw-168/",
+   "laas": 308,
+   "expressEntry": 33,
+   "minScores": [
+    720,
+    709
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 221,
+     "minScore": 720
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 55,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 32,
+     "minScore": 709
+    }
+   ]
+  },
+  {
+   "n": 166,
+   "date": "2023-01-26",
+   "url": "https://immigratemanitoba.com/2023/01/eoi-draw-166/",
+   "laas": 336,
+   "expressEntry": 32,
+   "minScores": [
+    726,
+    713
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 253,
+     "minScore": 726
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 60,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 23,
+     "minScore": 713
+    }
+   ]
+  },
+  {
+   "n": 165,
+   "date": "2023-01-12",
+   "url": "https://immigratemanitoba.com/2023/01/eoi-draw-165/",
+   "laas": 322,
+   "expressEntry": 27,
+   "minScores": [
+    734,
+    713
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 260,
+     "minScore": 734
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 42,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 20,
+     "minScore": 713
+    }
+   ]
+  },
+  {
+   "n": 164,
+   "date": "2022-12-29",
+   "url": "https://immigratemanitoba.com/2022/12/eoi-draw-164/",
+   "laas": 280,
+   "expressEntry": 21,
+   "minScores": [
+    750,
+    711
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 202,
+     "minScore": 750
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 38,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 40,
+     "minScore": 711
+    }
+   ]
+  },
+  {
+   "n": 162,
+   "date": "2022-12-16",
+   "url": "https://immigratemanitoba.com/2022/12/eoi-draw-162/",
+   "laas": 249,
+   "expressEntry": 36,
+   "minScores": [
+    771,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 155,
+     "minScore": 771
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 46,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 48,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 161,
+   "date": "2022-12-15",
+   "url": "https://immigratemanitoba.com/2022/12/eoi-draw-161/",
+   "laas": 1030,
+   "expressEntry": 656,
+   "minScores": [
+    600
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 1030,
+     "minScore": 600
+    }
+   ]
+  },
+  {
+   "n": 160,
+   "date": "2022-12-01",
+   "url": "https://immigratemanitoba.com/2022/12/eoi-draw-160/",
+   "laas": 305,
+   "expressEntry": 31,
+   "minScores": [
+    775,
+    673
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 206,
+     "minScore": 775
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 56,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 43,
+     "minScore": 673
+    }
+   ]
+  },
+  {
+   "n": 158,
+   "date": "2022-11-17",
+   "url": "https://immigratemanitoba.com/2022/11/eoi-draw-158/",
+   "laas": 518,
+   "expressEntry": 125,
+   "minScores": [
+    797,
+    686
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 177,
+     "minScore": 797
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 198,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 143,
+     "minScore": 686
+    }
+   ]
+  },
+  {
+   "n": 157,
+   "date": "2022-09-15",
+   "url": "https://immigratemanitoba.com/2022/09/eoi-draw-157/",
+   "laas": 436,
+   "expressEntry": 150,
+   "minScores": [
+    613,
+    726
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 388,
+     "minScore": 613
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 41,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 7,
+     "minScore": 726
+    }
+   ]
+  },
+  {
+   "n": 155,
+   "date": "2022-09-08",
+   "url": "https://immigratemanitoba.com/2022/09/eoi-draw-155/",
+   "laas": 278,
+   "expressEntry": 76,
+   "minScores": [
+    616,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 217,
+     "minScore": 616
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 41,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 20,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 154,
+   "date": "2022-08-26",
+   "url": "https://immigratemanitoba.com/2022/08/eoi-draw-154/",
+   "laas": 353,
+   "expressEntry": 79,
+   "minScores": [
+    619,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 259,
+     "minScore": 619
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 36,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 58,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 153,
+   "date": "2022-08-11",
+   "url": "https://immigratemanitoba.com/2022/08/eoi-draw-153/",
+   "laas": 345,
+   "expressEntry": 86,
+   "minScores": [
+    623,
+    718
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 257,
+     "minScore": 623
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 55,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 33,
+     "minScore": 718
+    }
+   ]
+  },
+  {
+   "n": 152,
+   "date": "2022-07-28",
+   "url": "https://immigratemanitoba.com/2022/07/eoi-draw-152/",
+   "laas": 354,
+   "expressEntry": 56,
+   "minScores": [
+    633,
+    726
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 299,
+     "minScore": 633
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 41,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 15,
+     "minScore": 726
+    }
+   ]
+  },
+  {
+   "n": 150,
+   "date": "2022-07-14",
+   "url": "https://immigratemanitoba.com/2022/07/eoi-draw-150/",
+   "laas": 366,
+   "expressEntry": 55,
+   "minScores": [
+    699,
+    715
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 293,
+     "minScore": 699
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 40,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 33,
+     "minScore": 715
+    }
+   ]
+  },
+  {
+   "n": 149,
+   "date": "2022-06-30",
+   "url": "https://immigratemanitoba.com/2022/06/eoi-draw-149/",
+   "laas": 348,
+   "expressEntry": 59,
+   "minScores": [
+    773,
+    711
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 186,
+     "minScore": 773
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 79,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 83,
+     "minScore": 711
+    }
+   ]
+  },
+  {
+   "n": 147,
+   "date": "2022-06-02",
+   "url": "https://immigratemanitoba.com/2022/06/eoi-draw-147/",
+   "laas": 146,
+   "expressEntry": 34,
+   "minScores": [
+    714
+   ],
+   "segments": [
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 54,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 92,
+     "minScore": 714
+    }
+   ]
+  },
+  {
+   "n": 145,
+   "date": "2022-05-05",
+   "url": "https://immigratemanitoba.com/2022/05/eoi-draw-145/",
+   "laas": 315,
+   "expressEntry": 48,
+   "minScores": [
+    651,
+    691
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 249,
+     "minScore": 651
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 32,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 34,
+     "minScore": 691
+    }
+   ]
+  },
+  {
+   "n": 144,
+   "date": "2022-04-21",
+   "url": "https://immigratemanitoba.com/2022/04/eoi-draw-144/",
+   "laas": 303,
+   "expressEntry": 46,
+   "minScores": [
+    707,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 201,
+     "minScore": 707
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 41,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 61,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 142,
+   "date": "2022-04-07",
+   "url": "https://immigratemanitoba.com/2022/04/eoi-draw-142/",
+   "laas": 223,
+   "expressEntry": 30,
+   "minScores": [
+    739,
+    683
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 156,
+     "minScore": 739
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 34,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 33,
+     "minScore": 683
+    }
+   ]
+  },
+  {
+   "n": 141,
+   "date": "2022-03-24",
+   "url": "https://immigratemanitoba.com/2022/03/eoi-draw-141/",
+   "laas": 191,
+   "expressEntry": 43,
+   "minScores": [
+    769,
+    712
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 102,
+     "minScore": 769
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 25,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 64,
+     "minScore": 712
+    }
+   ]
+  },
+  {
+   "n": 139,
+   "date": "2022-03-10",
+   "url": "https://immigratemanitoba.com/2022/03/eoi-draw-139/",
+   "laas": 120,
+   "expressEntry": 33,
+   "minScores": [
+    781,
+    718
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 50,
+     "minScore": 781
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 36,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 34,
+     "minScore": 718
+    }
+   ]
+  },
+  {
+   "n": 137,
+   "date": "2022-02-24",
+   "url": "https://immigratemanitoba.com/2022/02/eoi-draw-137/",
+   "laas": 278,
+   "expressEntry": 66,
+   "minScores": [
+    612,
+    685
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 206,
+     "minScore": 612
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 33,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 39,
+     "minScore": 685
+    }
+   ]
+  },
+  {
+   "n": 136,
+   "date": "2022-02-10",
+   "url": "https://immigratemanitoba.com/2022/02/eoi-draw-136/",
+   "laas": 273,
+   "expressEntry": 68,
+   "minScores": [
+    615,
+    705
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 202,
+     "minScore": 615
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 40,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 31,
+     "minScore": 705
+    }
+   ]
+  },
+  {
+   "n": 135,
+   "date": "2022-01-27",
+   "url": "https://immigratemanitoba.com/2022/01/eoi-draw-135/",
+   "laas": 315,
+   "expressEntry": 69,
+   "minScores": [
+    609,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 212,
+     "minScore": 609
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 40,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 63,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 134,
+   "date": "2022-01-13",
+   "url": "https://immigratemanitoba.com/2022/01/eoi-draw-134/",
+   "laas": 443,
+   "expressEntry": 97,
+   "minScores": [
+    459,
+    711
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 357,
+     "minScore": 459
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 33,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 53,
+     "minScore": 711
+    }
+   ]
+  },
+  {
+   "n": 133,
+   "date": "2021-12-30",
+   "url": "https://immigratemanitoba.com/2021/12/eoi-draw-133/",
+   "laas": 393,
+   "expressEntry": 73,
+   "minScores": [
+    375,
+    726
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 332,
+     "minScore": 375
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 26,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 35,
+     "minScore": 726
+    }
+   ]
+  },
+  {
+   "n": 132,
+   "date": "2021-12-16",
+   "url": "https://immigratemanitoba.com/2021/12/eoi-draw-132/",
+   "laas": 349,
+   "expressEntry": 64,
+   "minScores": [
+    447,
+    712
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 296,
+     "minScore": 447
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 40,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 13,
+     "minScore": 712
+    }
+   ]
+  },
+  {
+   "n": 131,
+   "date": "2021-12-02",
+   "url": "https://immigratemanitoba.com/2021/12/eoi-draw-131/",
+   "laas": 438,
+   "expressEntry": 71,
+   "minScores": [
+    449,
+    726
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 358,
+     "minScore": 449
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 29,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 51,
+     "minScore": 726
+    }
+   ]
+  },
+  {
+   "n": 130,
+   "date": "2021-11-18",
+   "url": "https://immigratemanitoba.com/2021/11/eoi-draw-130/",
+   "laas": 428,
+   "expressEntry": 68,
+   "minScores": [
+    464,
+    726
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 376,
+     "minScore": 464
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 30,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 22,
+     "minScore": 726
+    }
+   ]
+  },
+  {
+   "n": 129,
+   "date": "2021-11-04",
+   "url": "https://immigratemanitoba.com/2021/11/eoi-draw-129/",
+   "laas": 421,
+   "expressEntry": 75,
+   "minScores": [
+    460,
+    713
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 350,
+     "minScore": 460
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 33,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 38,
+     "minScore": 713
+    }
+   ]
+  },
+  {
+   "n": 128,
+   "date": "2021-10-21",
+   "url": "https://immigratemanitoba.com/2021/10/eoi-draw-128/",
+   "laas": 459,
+   "expressEntry": 94,
+   "minScores": [
+    375,
+    716
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 388,
+     "minScore": 375
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 37,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 39,
+     "minScore": 716
+    }
+   ]
+  },
+  {
+   "n": 127,
+   "date": "2021-10-07",
+   "url": "https://immigratemanitoba.com/2021/10/eoi-draw-127/",
+   "laas": 426,
+   "expressEntry": 84,
+   "minScores": [
+    446,
+    729
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 350,
+     "minScore": 446
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 55,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 21,
+     "minScore": 729
+    }
+   ]
+  },
+  {
+   "n": 126,
+   "date": "2021-09-23",
+   "url": "https://immigratemanitoba.com/2021/09/eoi-draw-126/",
+   "laas": 650,
+   "expressEntry": 135,
+   "minScores": [
+    401,
+    718
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 529,
+     "minScore": 401
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 54,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 67,
+     "minScore": 718
+    }
+   ]
+  },
+  {
+   "n": 125,
+   "date": "2021-09-02",
+   "url": "https://immigratemanitoba.com/2021/09/eoi-draw-125/",
+   "laas": 602,
+   "expressEntry": 101,
+   "minScores": [
+    445,
+    698
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 463,
+     "minScore": 445
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 55,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 84,
+     "minScore": 698
+    }
+   ]
+  },
+  {
+   "n": 124,
+   "date": "2021-08-12",
+   "url": "https://immigratemanitoba.com/2021/08/eoi-draw-124/",
+   "laas": 275,
+   "expressEntry": 36,
+   "minScores": [
+    454,
+    719
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 238,
+     "minScore": 454
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 31,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 6,
+     "minScore": 719
+    }
+   ]
+  },
+  {
+   "n": 123,
+   "date": "2021-07-29",
+   "url": "https://immigratemanitoba.com/2021/07/eoi-draw-123/",
+   "laas": 375,
+   "expressEntry": 42,
+   "minScores": [
+    400,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 285,
+     "minScore": 400
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 43,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 47,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 122,
+   "date": "2021-07-27",
+   "url": "https://immigratemanitoba.com/2021/07/eoi-draw-122/",
+   "laas": 1140,
+   "expressEntry": 1140,
+   "minScores": [
+    557
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 1140,
+     "minScore": 557
+    }
+   ]
+  },
+  {
+   "n": 121,
+   "date": "2021-07-09",
+   "url": "https://immigratemanitoba.com/2021/07/eoi-draw-121/",
+   "laas": 277,
+   "expressEntry": 48,
+   "minScores": [
+    445,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 201,
+     "minScore": 445
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 23,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 53,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 120,
+   "date": "2021-06-28",
+   "url": "https://immigratemanitoba.com/2021/06/eoi-draw-120/",
+   "laas": 1017,
+   "expressEntry": 1017,
+   "minScores": [
+    565
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 1017,
+     "minScore": 565
+    }
+   ]
+  },
+  {
+   "n": 119,
+   "date": "2021-06-17",
+   "url": "https://immigratemanitoba.com/2021/06/eoi-draw-119/",
+   "laas": 141,
+   "expressEntry": 10,
+   "minScores": [
+    430,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 95,
+     "minScore": 430
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 22,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 24,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 118,
+   "date": "2021-06-07",
+   "url": "https://immigratemanitoba.com/2021/06/eoi-draw-118/",
+   "laas": 142,
+   "expressEntry": 13,
+   "minScores": [
+    375,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 95,
+     "minScore": 375
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 22,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 25,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 117,
+   "date": "2021-05-27",
+   "url": "https://immigratemanitoba.com/2021/05/eoi-draw-117/",
+   "laas": 404,
+   "expressEntry": 404,
+   "minScores": [
+    601
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 404,
+     "minScore": 601
+    }
+   ]
+  },
+  {
+   "n": 116,
+   "date": "2021-05-25",
+   "url": "https://immigratemanitoba.com/2021/05/eoi-draw-116/",
+   "laas": 232,
+   "expressEntry": 20,
+   "minScores": [
+    415,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 166,
+     "minScore": 415
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 20,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 46,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 115,
+   "date": "2021-05-06",
+   "url": "https://immigratemanitoba.com/2021/05/eoi-draw-115/",
+   "laas": 150,
+   "expressEntry": 14,
+   "minScores": [
+    400,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 108,
+     "minScore": 400
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 13,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 29,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 114,
+   "date": "2021-04-26",
+   "url": "https://immigratemanitoba.com/2021/04/eoi-draw-114/",
+   "laas": 367,
+   "expressEntry": 34,
+   "minScores": [
+    440,
+    721
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 301,
+     "minScore": 440
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 55,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 11,
+     "minScore": 721
+    }
+   ]
+  },
+  {
+   "n": 113,
+   "date": "2021-04-19",
+   "url": "https://immigratemanitoba.com/2021/04/eoi-draw-113/",
+   "laas": 399,
+   "expressEntry": 373,
+   "minScores": [
+    703,
+    612
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 30,
+     "minScore": 703
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code.",
+     "laas": 369,
+     "minScore": 612
+    }
+   ]
+  },
+  {
+   "n": 112,
+   "date": "2021-04-08",
+   "url": "https://immigratemanitoba.com/2021/04/eoi-draw-112/",
+   "laas": 243,
+   "expressEntry": 15,
+   "minScores": [
+    456,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 208,
+     "minScore": 456
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 21,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 14,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 111,
+   "date": "2021-03-25",
+   "url": "https://immigratemanitoba.com/2021/03/eoi-draw-111/",
+   "laas": 335,
+   "expressEntry": 49,
+   "minScores": [
+    423,
+    711
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 285,
+     "minScore": 423
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 41,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 9,
+     "minScore": 711
+    }
+   ]
+  },
+  {
+   "n": 110,
+   "date": "2021-03-11",
+   "url": "https://immigratemanitoba.com/2021/03/eoi-draw-110/",
+   "laas": 299,
+   "expressEntry": 35,
+   "minScores": [
+    459,
+    728
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 261,
+     "minScore": 459
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 35,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 3,
+     "minScore": 728
+    }
+   ]
+  },
+  {
+   "n": 109,
+   "date": "2021-02-26",
+   "url": "https://immigratemanitoba.com/2021/02/eoi-draw-109/",
+   "laas": 207,
+   "expressEntry": 5,
+   "minScores": [
+    457,
+    698
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 158,
+     "minScore": 457
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 28,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 21,
+     "minScore": 698
+    }
+   ]
+  },
+  {
+   "n": 108,
+   "date": "2021-02-12",
+   "url": "https://immigratemanitoba.com/2021/02/eoi-draw-108/",
+   "laas": 296,
+   "expressEntry": 20,
+   "minScores": [
+    514,
+    676
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 240,
+     "minScore": 514
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 33,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 23,
+     "minScore": 676
+    }
+   ]
+  },
+  {
+   "n": 107,
+   "date": "2021-01-28",
+   "url": "https://immigratemanitoba.com/2021/01/eoi-draw-107/",
+   "laas": 218,
+   "expressEntry": 13,
+   "minScores": [
+    518,
+    681
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 178,
+     "minScore": 518
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 23,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 17,
+     "minScore": 681
+    }
+   ]
+  },
+  {
+   "n": 106,
+   "date": "2021-01-14",
+   "url": "https://immigratemanitoba.com/2021/01/eoi-draw-106/",
+   "laas": 272,
+   "expressEntry": 18,
+   "minScores": [
+    461,
+    722
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 236,
+     "minScore": 461
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 29,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 7,
+     "minScore": 722
+    }
+   ]
+  },
+  {
+   "n": 105,
+   "date": "2020-12-30",
+   "url": "https://immigratemanitoba.com/2020/12/eoi-draw-105/",
+   "laas": 188,
+   "expressEntry": 13,
+   "minScores": [
+    461,
+    718
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 157,
+     "minScore": 461
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 18,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 13,
+     "minScore": 718
+    }
+   ]
+  },
+  {
+   "n": 104,
+   "date": "2020-12-17",
+   "url": "https://immigratemanitoba.com/2020/12/eoi-draw-104/",
+   "laas": 419,
+   "expressEntry": 37,
+   "minScores": [
+    375,
+    706
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 329,
+     "minScore": 375
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 40,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 50,
+     "minScore": 706
+    }
+   ]
+  },
+  {
+   "n": 103,
+   "date": "2020-11-19",
+   "url": "https://immigratemanitoba.com/2020/11/eoi-draw-103/",
+   "laas": 196,
+   "expressEntry": 40,
+   "minScores": [
+    526,
+    769
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 144,
+     "minScore": 526
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 30,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 22,
+     "minScore": 769
+    }
+   ]
+  },
+  {
+   "n": 102,
+   "date": "2020-11-05",
+   "url": "https://immigratemanitoba.com/2020/11/eoi-draw-102/",
+   "laas": 205,
+   "expressEntry": 7,
+   "minScores": [
+    461,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 166,
+     "minScore": 461
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 23,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 16,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 101,
+   "date": "2020-10-22",
+   "url": "https://immigratemanitoba.com/2020/10/eoi-draw-101/",
+   "laas": 206,
+   "expressEntry": 22,
+   "minScores": [
+    375,
+    771
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 161,
+     "minScore": 375
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 30,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 15,
+     "minScore": 771
+    }
+   ]
+  },
+  {
+   "n": 100,
+   "date": "2020-10-08",
+   "url": "https://immigratemanitoba.com/2020/10/eoi-draw-100/",
+   "laas": 191,
+   "expressEntry": 20,
+   "minScores": [
+    528,
+    611
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 152,
+     "minScore": 528
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 25,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 14,
+     "minScore": 611
+    }
+   ]
+  },
+  {
+   "n": 99,
+   "date": "2020-09-24",
+   "url": "https://immigratemanitoba.com/2020/09/eoi-draw-99/",
+   "laas": 189,
+   "expressEntry": 18,
+   "minScores": [
+    464,
+    847
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 160,
+     "minScore": 464
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 25,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 4,
+     "minScore": 847
+    }
+   ]
+  },
+  {
+   "n": 98,
+   "date": "2020-09-10",
+   "url": "https://immigratemanitoba.com/2020/09/eoi-draw-98/",
+   "laas": 212,
+   "expressEntry": 22,
+   "minScores": [
+    450,
+    719
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 168,
+     "minScore": 450
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 35,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 9,
+     "minScore": 719
+    }
+   ]
+  },
+  {
+   "n": 97,
+   "date": "2020-08-27",
+   "url": "https://immigratemanitoba.com/2020/08/eoi-draw-97/",
+   "laas": 213,
+   "expressEntry": 23,
+   "minScores": [
+    475,
+    824
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 171,
+     "minScore": 475
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 34,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 8,
+     "minScore": 824
+    }
+   ]
+  },
+  {
+   "n": 96,
+   "date": "2020-08-13",
+   "url": "https://immigratemanitoba.com/2020/08/eoi-draw-96/",
+   "laas": 253,
+   "expressEntry": 23,
+   "minScores": [
+    485,
+    672
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 197,
+     "minScore": 485
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 23,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 33,
+     "minScore": 672
+    }
+   ]
+  },
+  {
+   "n": 95,
+   "date": "2020-07-30",
+   "url": "https://immigratemanitoba.com/2020/07/eoi-draw-95/",
+   "laas": 199,
+   "expressEntry": 15,
+   "minScores": [
+    475,
+    764
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 157,
+     "minScore": 475
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 21,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 21,
+     "minScore": 764
+    }
+   ]
+  },
+  {
+   "n": 94,
+   "date": "2020-07-16",
+   "url": "https://immigratemanitoba.com/2020/07/eoi-draw-94/",
+   "laas": 174,
+   "expressEntry": 18,
+   "minScores": [
+    430,
+    811
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 134,
+     "minScore": 430
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 29,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 11,
+     "minScore": 811
+    }
+   ]
+  },
+  {
+   "n": 93,
+   "date": "2020-07-02",
+   "url": "https://immigratemanitoba.com/2020/07/eoi-draw-93/",
+   "laas": 125,
+   "expressEntry": 10,
+   "minScores": [
+    475,
+    816
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 101,
+     "minScore": 475
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 18,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 6,
+     "minScore": 816
+    }
+   ]
+  },
+  {
+   "n": 92,
+   "date": "2020-06-19",
+   "url": "https://immigratemanitoba.com/2020/06/eoi-draw-92/",
+   "laas": 181,
+   "expressEntry": 10,
+   "minScores": [
+    504,
+    686
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 111,
+     "minScore": 504
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 12,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 58,
+     "minScore": 686
+    }
+   ]
+  },
+  {
+   "n": 91,
+   "date": "2020-06-04",
+   "url": "https://immigratemanitoba.com/2020/06/eoi-draw-91/",
+   "laas": 124,
+   "expressEntry": 9,
+   "minScores": [
+    523,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 84,
+     "minScore": 523
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 19,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 21,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 90,
+   "date": "2020-05-21",
+   "url": "https://immigratemanitoba.com/2020/05/eoi-draw-90/",
+   "laas": 99,
+   "expressEntry": 9,
+   "minScores": [
+    485,
+    613
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 72,
+     "minScore": 485
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 12,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 15,
+     "minScore": 613
+    }
+   ]
+  },
+  {
+   "n": 89,
+   "date": "2020-05-07",
+   "url": "https://immigratemanitoba.com/2020/05/eoi-draw-89/",
+   "laas": 123,
+   "expressEntry": 14,
+   "minScores": [
+    475,
+    802
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 94,
+     "minScore": 475
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 15,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 14,
+     "minScore": 802
+    }
+   ]
+  },
+  {
+   "n": 88,
+   "date": "2020-04-23",
+   "url": "https://immigratemanitoba.com/2020/04/eoi-draw-88/",
+   "laas": 132,
+   "expressEntry": 7,
+   "minScores": [
+    489,
+    714
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 93,
+     "minScore": 489
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 14,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 25,
+     "minScore": 714
+    }
+   ]
+  },
+  {
+   "n": 87,
+   "date": "2020-04-09",
+   "url": "https://immigratemanitoba.com/2020/04/eoi-draw-87/",
+   "laas": 153,
+   "expressEntry": 15,
+   "minScores": [
+    500,
+    742
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 123,
+     "minScore": 500
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 14,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 16,
+     "minScore": 742
+    }
+   ]
+  },
+  {
+   "n": 86,
+   "date": "2020-03-26",
+   "url": "https://immigratemanitoba.com/2020/03/eoi-draw-86/",
+   "laas": 226,
+   "expressEntry": 29,
+   "minScores": [
+    496,
+    714
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 168,
+     "minScore": 496
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 20,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 38,
+     "minScore": 714
+    }
+   ]
+  },
+  {
+   "n": 85,
+   "date": "2020-03-12",
+   "url": "https://immigratemanitoba.com/2020/03/eoi-draw-85/",
+   "laas": 222,
+   "expressEntry": 17,
+   "minScores": [
+    496,
+    672
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 191,
+     "minScore": 496
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 18,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 13,
+     "minScore": 672
+    }
+   ]
+  },
+  {
+   "n": 84,
+   "date": "2020-02-27",
+   "url": "https://immigratemanitoba.com/2020/02/eoi-draw-84/",
+   "laas": 217,
+   "expressEntry": 20,
+   "minScores": [
+    499,
+    707
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 161,
+     "minScore": 499
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 32,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 24,
+     "minScore": 707
+    }
+   ]
+  },
+  {
+   "n": 83,
+   "date": "2020-02-13",
+   "url": "https://immigratemanitoba.com/2020/02/eoi-draw-83/",
+   "laas": 242,
+   "expressEntry": 15,
+   "minScores": [
+    525,
+    611
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 182,
+     "minScore": 525
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 33,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 27,
+     "minScore": 611
+    }
+   ]
+  },
+  {
+   "n": 82,
+   "date": "2020-01-30",
+   "url": "https://immigratemanitoba.com/2020/01/eoi-draw-82/",
+   "laas": 181,
+   "expressEntry": 11,
+   "minScores": [
+    548,
+    679
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 124,
+     "minScore": 548
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 18,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 39,
+     "minScore": 679
+    }
+   ]
+  },
+  {
+   "n": 81,
+   "date": "2020-01-17",
+   "url": "https://immigratemanitoba.com/2020/01/eoi-draw-81/",
+   "laas": 249,
+   "expressEntry": 22,
+   "minScores": [
+    545,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 192,
+     "minScore": 545
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 23,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 34,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 80,
+   "date": "2020-01-02",
+   "url": "https://immigratemanitoba.com/2020/01/eoi-draw-80/",
+   "laas": 186,
+   "expressEntry": 24,
+   "minScores": [
+    534,
+    708
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 122,
+     "minScore": 534
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 22,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 42,
+     "minScore": 708
+    }
+   ]
+  },
+  {
+   "n": 79,
+   "date": "2019-12-19",
+   "url": "https://immigratemanitoba.com/2019/12/eoi-draw-79/",
+   "laas": 183,
+   "expressEntry": 16,
+   "minScores": [
+    542,
+    559
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 149,
+     "minScore": 542
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 17,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 17,
+     "minScore": 559
+    }
+   ]
+  },
+  {
+   "n": 78,
+   "date": "2019-12-06",
+   "url": "https://immigratemanitoba.com/2019/12/eoi-draw-78/",
+   "laas": 221,
+   "expressEntry": 18,
+   "minScores": [
+    522,
+    718
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 165,
+     "minScore": 522
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 33,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 23,
+     "minScore": 718
+    }
+   ]
+  },
+  {
+   "n": 77,
+   "date": "2019-11-21",
+   "url": "https://immigratemanitoba.com/2019/11/eoi-draw-77/",
+   "laas": 230,
+   "expressEntry": 20,
+   "minScores": [
+    504,
+    739
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 185,
+     "minScore": 504
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 29,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 16,
+     "minScore": 739
+    }
+   ]
+  },
+  {
+   "n": 76,
+   "date": "2019-11-07",
+   "url": "https://immigratemanitoba.com/2019/11/eoi-draw-76/",
+   "laas": 180,
+   "expressEntry": 23,
+   "minScores": [
+    560,
+    719
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 133,
+     "minScore": 560
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 23,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 24,
+     "minScore": 719
+    }
+   ]
+  },
+  {
+   "n": 75,
+   "date": "2019-10-24",
+   "url": "https://immigratemanitoba.com/2019/10/eoi-draw-75/",
+   "laas": 157,
+   "expressEntry": 12,
+   "minScores": [
+    567,
+    685
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 117,
+     "minScore": 567
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 16,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 24,
+     "minScore": 685
+    }
+   ]
+  },
+  {
+   "n": 74,
+   "date": "2019-10-11",
+   "url": "https://immigratemanitoba.com/2019/10/eoi-draw-74/",
+   "laas": 193,
+   "expressEntry": 24,
+   "minScores": [
+    567,
+    718
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 147,
+     "minScore": 567
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 24,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 22,
+     "minScore": 718
+    }
+   ]
+  },
+  {
+   "n": 73,
+   "date": "2019-09-25",
+   "url": "https://immigratemanitoba.com/2019/09/eoi-draw-73/",
+   "laas": 224,
+   "expressEntry": 15,
+   "minScores": [
+    537,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 140,
+     "minScore": 537
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 25,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 59,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 72,
+   "date": "2019-09-12",
+   "url": "https://immigratemanitoba.com/2019/09/eoi-draw-72/",
+   "laas": 347,
+   "expressEntry": 45,
+   "minScores": [
+    545,
+    706
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 254,
+     "minScore": 545
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 40,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 53,
+     "minScore": 706
+    }
+   ]
+  },
+  {
+   "n": 71,
+   "date": "2019-08-15",
+   "url": "https://immigratemanitoba.com/2019/08/eoi-draw-71/",
+   "laas": 360,
+   "expressEntry": 32,
+   "minScores": [
+    542,
+    685
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 241,
+     "minScore": 542
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 36,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 83,
+     "minScore": 685
+    }
+   ]
+  },
+  {
+   "n": 70,
+   "date": "2019-07-18",
+   "url": "https://immigratemanitoba.com/2019/07/eoi-draw-70/",
+   "laas": 173,
+   "expressEntry": 29,
+   "minScores": [
+    539,
+    718
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 110,
+     "minScore": 539
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 23,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 40,
+     "minScore": 718
+    }
+   ]
+  },
+  {
+   "n": 69,
+   "date": "2019-07-05",
+   "url": "https://immigratemanitoba.com/2019/07/eoi-draw-69/",
+   "laas": 354,
+   "expressEntry": 91,
+   "minScores": [
+    565,
+    619,
+    594
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 85,
+     "minScore": 565
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 21,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 45,
+     "minScore": 619
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List or a close relati…",
+     "laas": 203,
+     "minScore": 594
+    }
+   ]
+  },
+  {
+   "n": 68,
+   "date": "2019-06-20",
+   "url": "https://immigratemanitoba.com/2019/06/eoi-draw-68/",
+   "laas": 450,
+   "expressEntry": 133,
+   "minScores": [
+    475,
+    704,
+    599
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 101,
+     "minScore": 475
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 26,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 35,
+     "minScore": 704
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List or a close relati…",
+     "laas": 288,
+     "minScore": 599
+    }
+   ]
+  },
+  {
+   "n": 67,
+   "date": "2019-06-07",
+   "url": "https://immigratemanitoba.com/2019/06/eoi-draw-67/",
+   "laas": 209,
+   "expressEntry": 18,
+   "minScores": [
+    542,
+    701
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 121,
+     "minScore": 542
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 28,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 60,
+     "minScore": 701
+    }
+   ]
+  },
+  {
+   "n": 66,
+   "date": "2019-05-23",
+   "url": "https://immigratemanitoba.com/2019/05/eoi-draw-66/",
+   "laas": 196,
+   "expressEntry": 27,
+   "minScores": [
+    548,
+    506
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 119,
+     "minScore": 548
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 17,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 60,
+     "minScore": 506
+    }
+   ]
+  },
+  {
+   "n": 65,
+   "date": "2019-05-09",
+   "url": "https://immigratemanitoba.com/2019/05/eoi-draw-65/",
+   "laas": 170,
+   "expressEntry": 15,
+   "minScores": [
+    569,
+    616
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 101,
+     "minScore": 569
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 17,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 52,
+     "minScore": 616
+    }
+   ]
+  },
+  {
+   "n": 64,
+   "date": "2019-04-25",
+   "url": "https://immigratemanitoba.com/2019/04/eoi-draw-64/",
+   "laas": 299,
+   "expressEntry": 30,
+   "minScores": [
+    510,
+    632
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 208,
+     "minScore": 510
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 25,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 66,
+     "minScore": 632
+    }
+   ]
+  },
+  {
+   "n": 63,
+   "date": "2019-04-11",
+   "url": "https://immigratemanitoba.com/2019/04/eoi-draw-63/",
+   "laas": 403,
+   "expressEntry": null,
+   "minScores": [
+    695,
+    561
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 51,
+     "minScore": 695
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List or a close relati…",
+     "laas": 352,
+     "minScore": 561
+    }
+   ]
+  },
+  {
+   "n": 62,
+   "date": "2019-03-28",
+   "url": "https://immigratemanitoba.com/2019/03/eoi-draw-62/",
+   "laas": 595,
+   "expressEntry": null,
+   "minScores": [
+    433,
+    719,
+    563
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 262,
+     "minScore": 433
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 44,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 29,
+     "minScore": 719
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List or a close relati…",
+     "laas": 260,
+     "minScore": 563
+    }
+   ]
+  },
+  {
+   "n": 61,
+   "date": "2019-03-14",
+   "url": "https://immigratemanitoba.com/2019/03/eoi-draw-61/",
+   "laas": 337,
+   "expressEntry": null,
+   "minScores": [
+    695,
+    564
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 63,
+     "minScore": 695
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List or a close relati…",
+     "laas": 274,
+     "minScore": 564
+    }
+   ]
+  },
+  {
+   "n": 60,
+   "date": "2019-03-01",
+   "url": "https://immigratemanitoba.com/2019/03/eoi-draw-60/",
+   "laas": 403,
+   "expressEntry": null,
+   "minScores": [
+    566,
+    621,
+    565
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 126,
+     "minScore": 566
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 20,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 41,
+     "minScore": 621
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List or a close relati…",
+     "laas": 216,
+     "minScore": 565
+    }
+   ]
+  },
+  {
+   "n": 59,
+   "date": "2019-02-21",
+   "url": "https://immigratemanitoba.com/2019/02/eoi-draw-59/",
+   "laas": 338,
+   "expressEntry": null,
+   "minScores": [
+    566
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 338,
+     "minScore": 566
+    }
+   ]
+  },
+  {
+   "n": 58,
+   "date": "2019-02-15",
+   "url": "https://immigratemanitoba.com/2019/02/eoi-draw-58/",
+   "laas": 444,
+   "expressEntry": null,
+   "minScores": [
+    574,
+    726,
+    570
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 120,
+     "minScore": 574
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 34,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 22,
+     "minScore": 726
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List or a close relati…",
+     "laas": 268,
+     "minScore": 570
+    }
+   ]
+  },
+  {
+   "n": 57,
+   "date": "2019-01-31",
+   "url": "https://immigratemanitoba.com/2019/01/eoi-draw-57/",
+   "laas": 456,
+   "expressEntry": null,
+   "minScores": [
+    575,
+    705,
+    572
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 124,
+     "minScore": 575
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 17,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 16,
+     "minScore": 705
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List or a close relati…",
+     "laas": 299,
+     "minScore": 572
+    }
+   ]
+  },
+  {
+   "n": 56,
+   "date": "2019-01-17",
+   "url": "https://immigratemanitoba.com/2019/01/eoi-draw-56/",
+   "laas": 626,
+   "expressEntry": null,
+   "minScores": [
+    650,
+    729
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 200,
+     "minScore": 650
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 32,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 27,
+     "minScore": 729
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List or a close relati…",
+     "laas": 367,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 55,
+   "date": "2018-12-20",
+   "url": "https://immigratemanitoba.com/2018/12/eoi-draw-55/",
+   "laas": 492,
+   "expressEntry": null,
+   "minScores": [
+    502,
+    718
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 106,
+     "minScore": 502
+    },
+    {
+     "group": "International Education Stream",
+     "criteria": "International Education Stream",
+     "laas": 35,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 44,
+     "minScore": 718
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List or a close relati…",
+     "laas": 307,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 54,
+   "date": "2018-12-05",
+   "url": "https://immigratemanitoba.com/2018/12/eoi-draw-54/",
+   "laas": 530,
+   "expressEntry": null,
+   "minScores": [
+    375,
+    711
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 213,
+     "minScore": 375
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 62,
+     "minScore": 711
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List or a close relati…",
+     "laas": 255,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 53,
+   "date": "2018-11-08",
+   "url": "https://immigratemanitoba.com/2018/11/eoi-draw-53/",
+   "laas": 469,
+   "expressEntry": null,
+   "minScores": [
+    602,
+    705,
+    610
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 300,
+     "minScore": 602
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 69,
+     "minScore": 705
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a close relative residing in Manitoba or past education or work experience in Manitoba, at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List , …",
+     "laas": 100,
+     "minScore": 610
+    }
+   ]
+  },
+  {
+   "n": 52,
+   "date": "2018-10-12",
+   "url": "https://immigratemanitoba.com/2018/10/eoi-draw-52/",
+   "laas": 354,
+   "expressEntry": null,
+   "minScores": [
+    500,
+    617
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 318,
+     "minScore": 500
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 36,
+     "minScore": 617
+    }
+   ]
+  },
+  {
+   "n": 51,
+   "date": "2018-09-28",
+   "url": "https://immigratemanitoba.com/2018/09/eoi-draw-51/",
+   "laas": 392,
+   "expressEntry": null,
+   "minScores": [
+    679,
+    713,
+    592
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 201,
+     "minScore": 679
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 31,
+     "minScore": 713
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a close relative residing in Manitoba or past education or work experience in Manitoba, at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List , …",
+     "laas": 160,
+     "minScore": 592
+    }
+   ]
+  },
+  {
+   "n": 50,
+   "date": "2018-09-14",
+   "url": "https://immigratemanitoba.com/2018/09/eoi-draw-50/",
+   "laas": 432,
+   "expressEntry": null,
+   "minScores": [
+    721,
+    709,
+    604
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 200,
+     "minScore": 721
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 82,
+     "minScore": 709
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a close relative residing in Manitoba or past education or work experience in Manitoba, at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List , …",
+     "laas": 150,
+     "minScore": 604
+    }
+   ]
+  },
+  {
+   "n": 49,
+   "date": "2018-08-17",
+   "url": "https://immigratemanitoba.com/2018/08/eoi-draw-49/",
+   "laas": 515,
+   "expressEntry": null,
+   "minScores": [
+    500,
+    642
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 410,
+     "minScore": 500
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 105,
+     "minScore": 642
+    }
+   ]
+  },
+  {
+   "n": 48,
+   "date": "2018-07-09",
+   "url": "https://immigratemanitoba.com/2018/07/eoi-draw-48/",
+   "laas": 132,
+   "expressEntry": null,
+   "minScores": [
+    519
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 132,
+     "minScore": 519
+    }
+   ]
+  },
+  {
+   "n": 47,
+   "date": "2018-07-06",
+   "url": "https://immigratemanitoba.com/2018/07/eoi-draw-47/",
+   "laas": 555,
+   "expressEntry": null,
+   "minScores": [
+    564,
+    639,
+    572,
+    519
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 104,
+     "minScore": 564
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 32,
+     "minScore": 639
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a close relative residing in Manitoba or past education or work experience in Manitoba, at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List , …",
+     "laas": 217,
+     "minScore": 572
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List .",
+     "laas": 202,
+     "minScore": 519
+    }
+   ]
+  },
+  {
+   "n": 46,
+   "date": "2018-06-21",
+   "url": "https://immigratemanitoba.com/2018/06/eoi-draw-46/",
+   "laas": 592,
+   "expressEntry": null,
+   "minScores": [
+    522,
+    703,
+    579,
+    562
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 213,
+     "minScore": 522
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 115,
+     "minScore": 703
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a close relative residing in Manitoba or past education or work experience in Manitoba, at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List , …",
+     "laas": 150,
+     "minScore": 579
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List .",
+     "laas": 114,
+     "minScore": 562
+    }
+   ]
+  },
+  {
+   "n": 45,
+   "date": "2018-05-31",
+   "url": "https://immigratemanitoba.com/2018/05/eoi-draw-45/",
+   "laas": 502,
+   "expressEntry": null,
+   "minScores": [
+    485,
+    698,
+    584
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 187,
+     "minScore": 485
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 53,
+     "minScore": 698
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a close relative residing in Manitoba or past education or work experience in Manitoba, at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List , …",
+     "laas": 262,
+     "minScore": 584
+    }
+   ]
+  },
+  {
+   "n": 44,
+   "date": "2018-05-11",
+   "url": "https://immigratemanitoba.com/2018/05/eoi-draw-44/",
+   "laas": 626,
+   "expressEntry": null,
+   "minScores": [
+    500,
+    706,
+    602,
+    562
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 267,
+     "minScore": 500
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 99,
+     "minScore": 706
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a close relative residing in Manitoba or past education or work experience in Manitoba, at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List , …",
+     "laas": 109,
+     "minScore": 602
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List .",
+     "laas": 151,
+     "minScore": 562
+    }
+   ]
+  },
+  {
+   "n": 43,
+   "date": "2018-04-13",
+   "url": "https://immigratemanitoba.com/2018/04/eoi-draw-43/",
+   "laas": 400,
+   "expressEntry": null,
+   "minScores": [
+    534,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 316,
+     "minScore": 534
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 84,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 42,
+   "date": "2018-03-13",
+   "url": "https://immigratemanitoba.com/2018/03/eoi-draw-42/",
+   "laas": 638,
+   "expressEntry": null,
+   "minScores": [
+    545,
+    703,
+    590,
+    545
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 184,
+     "minScore": 545
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 57,
+     "minScore": 703
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a close relative residing in Manitoba or past education or work experience in Manitoba, at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List , …",
+     "laas": 144,
+     "minScore": 590
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List .",
+     "laas": 253,
+     "minScore": 545
+    }
+   ]
+  },
+  {
+   "n": 41,
+   "date": "2018-02-26",
+   "url": "https://immigratemanitoba.com/2018/02/eoi-draw-41/",
+   "laas": 481,
+   "expressEntry": null,
+   "minScores": [
+    489,
+    695,
+    599
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 283,
+     "minScore": 489
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 44,
+     "minScore": 695
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a close relative residing in Manitoba or past education or work experience in Manitoba, at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List , …",
+     "laas": 154,
+     "minScore": 599
+    }
+   ]
+  },
+  {
+   "n": 40,
+   "date": "2018-01-31",
+   "url": "https://immigratemanitoba.com/2018/01/eoi-draw-40/",
+   "laas": 546,
+   "expressEntry": null,
+   "minScores": [
+    524,
+    647,
+    605,
+    560
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 191,
+     "minScore": 524
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 64,
+     "minScore": 647
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a close relative residing in Manitoba or past education or work experience in Manitoba, at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List , …",
+     "laas": 143,
+     "minScore": 605
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List .",
+     "laas": 148,
+     "minScore": 560
+    }
+   ]
+  },
+  {
+   "n": 39,
+   "date": "2018-01-11",
+   "url": "https://immigratemanitoba.com/2018/01/eoi-draw-39/",
+   "laas": 291,
+   "expressEntry": null,
+   "minScores": [
+    520,
+    815,
+    565
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 119,
+     "minScore": 520
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 17,
+     "minScore": 815
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Profiles that declared having a valid Express Entry profile number and job seeker validation code, and at least 6 months of recent experience in an occupation on Manitoba’s In-Demand Occupations List .",
+     "laas": 155,
+     "minScore": 565
+    }
+   ]
+  },
+  {
+   "n": 38,
+   "date": "2017-12-29",
+   "url": "https://immigratemanitoba.com/2017/12/eoi-draw-38/",
+   "laas": 178,
+   "expressEntry": null,
+   "minScores": [
+    545,
+    711
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 133,
+     "minScore": 545
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 45,
+     "minScore": 711
+    }
+   ]
+  },
+  {
+   "n": 37,
+   "date": "2017-12-13",
+   "url": "https://immigratemanitoba.com/2017/12/eoi-draw-37/",
+   "laas": 254,
+   "expressEntry": null,
+   "minScores": [
+    375,
+    675
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 209,
+     "minScore": 375
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 45,
+     "minScore": 675
+    }
+   ]
+  },
+  {
+   "n": 36,
+   "date": "2017-11-23",
+   "url": "https://immigratemanitoba.com/2017/11/eoi-draw-36/",
+   "laas": 272,
+   "expressEntry": null,
+   "minScores": [
+    567,
+    664
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 250,
+     "minScore": 567
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 22,
+     "minScore": 664
+    }
+   ]
+  },
+  {
+   "n": 35,
+   "date": "2017-10-31",
+   "url": "https://immigratemanitoba.com/2017/10/eoi-draw-35/",
+   "laas": 395,
+   "expressEntry": null,
+   "minScores": [
+    577,
+    730
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 351,
+     "minScore": 577
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 44,
+     "minScore": 730
+    }
+   ]
+  },
+  {
+   "n": 34,
+   "date": "2017-09-26",
+   "url": "https://immigratemanitoba.com/2017/09/eoi-draw-34/",
+   "laas": 349,
+   "expressEntry": null,
+   "minScores": [
+    602,
+    721
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 300,
+     "minScore": 602
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 49,
+     "minScore": 721
+    }
+   ]
+  },
+  {
+   "n": 33,
+   "date": "2017-08-15",
+   "url": "https://immigratemanitoba.com/2017/08/eoi-draw-33/",
+   "laas": 443,
+   "expressEntry": null,
+   "minScores": [
+    585,
+    719
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 401,
+     "minScore": 585
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 42,
+     "minScore": 719
+    }
+   ]
+  },
+  {
+   "n": 32,
+   "date": "2017-07-11",
+   "url": "https://immigratemanitoba.com/2017/07/eoi-draw-32/",
+   "laas": 494,
+   "expressEntry": null,
+   "minScores": [
+    612,
+    712
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 458,
+     "minScore": 612
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 36,
+     "minScore": 712
+    }
+   ]
+  },
+  {
+   "n": 31,
+   "date": "2017-06-16",
+   "url": "https://immigratemanitoba.com/2017/06/eoi-draw-31/",
+   "laas": 204,
+   "expressEntry": null,
+   "minScores": [
+    705,
+    689
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 180,
+     "minScore": 705
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 24,
+     "minScore": 689
+    }
+   ]
+  },
+  {
+   "n": 30,
+   "date": "2017-05-30",
+   "url": "https://immigratemanitoba.com/2017/05/eoi-draw-30/",
+   "laas": 401,
+   "expressEntry": null,
+   "minScores": [
+    735,
+    706
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 258,
+     "minScore": 735
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 143,
+     "minScore": 706
+    }
+   ]
+  },
+  {
+   "n": 29,
+   "date": "2017-03-30",
+   "url": "https://immigratemanitoba.com/2017/03/eoi-draw-29/",
+   "laas": 225,
+   "expressEntry": null,
+   "minScores": [
+    657,
+    698
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 201,
+     "minScore": 657
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 24,
+     "minScore": 698
+    }
+   ]
+  },
+  {
+   "n": 28,
+   "date": "2017-03-16",
+   "url": "https://immigratemanitoba.com/2017/03/eoi-draw-28/",
+   "laas": 313,
+   "expressEntry": null,
+   "minScores": [
+    684,
+    703
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 250,
+     "minScore": 684
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 63,
+     "minScore": 703
+    }
+   ]
+  },
+  {
+   "n": 27,
+   "date": "2017-02-27",
+   "url": "https://immigratemanitoba.com/2017/02/eoi-draw-27/",
+   "laas": 324,
+   "expressEntry": null,
+   "minScores": [
+    719,
+    575
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 200,
+     "minScore": 719
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 124,
+     "minScore": 575
+    }
+   ]
+  },
+  {
+   "n": 26,
+   "date": "2017-01-27",
+   "url": "https://immigratemanitoba.com/2017/01/eoi-draw-26/",
+   "laas": 189,
+   "expressEntry": null,
+   "minScores": [
+    734,
+    707
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 150,
+     "minScore": 734
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 39,
+     "minScore": 707
+    }
+   ]
+  },
+  {
+   "n": 25,
+   "date": "2016-12-30",
+   "url": "https://immigratemanitoba.com/2016/12/eoi-draw-25/",
+   "laas": 201,
+   "expressEntry": null,
+   "minScores": [
+    702,
+    787
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 181,
+     "minScore": 702
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 20,
+     "minScore": 787
+    }
+   ]
+  },
+  {
+   "n": 24,
+   "date": "2016-12-21",
+   "url": "https://immigratemanitoba.com/2016/12/eoi-draw-24/",
+   "laas": 115,
+   "expressEntry": null,
+   "minScores": [
+    605
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 115,
+     "minScore": 605
+    }
+   ]
+  },
+  {
+   "n": 23,
+   "date": "2016-11-29",
+   "url": "https://immigratemanitoba.com/2016/11/eoi-draw-23/",
+   "laas": 179,
+   "expressEntry": null,
+   "minScores": [
+    713,
+    716
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 150,
+     "minScore": 713
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 29,
+     "minScore": 716
+    }
+   ]
+  },
+  {
+   "n": 22,
+   "date": "2016-10-28",
+   "url": "https://immigratemanitoba.com/2016/10/eoi-draw-22/",
+   "laas": 177,
+   "expressEntry": null,
+   "minScores": [
+    654,
+    712
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 150,
+     "minScore": 654
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 27,
+     "minScore": 712
+    }
+   ]
+  },
+  {
+   "n": 21,
+   "date": "2016-09-29",
+   "url": "https://immigratemanitoba.com/2016/09/eoi-draw-21/",
+   "laas": 298,
+   "expressEntry": null,
+   "minScores": [
+    435,
+    620
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 258,
+     "minScore": 435
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 40,
+     "minScore": 620
+    }
+   ]
+  },
+  {
+   "n": 20,
+   "date": "2016-08-24",
+   "url": "https://immigratemanitoba.com/2016/08/eoi-draw-20/",
+   "laas": 714,
+   "expressEntry": null,
+   "minScores": [
+    592,
+    543
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 176,
+     "minScore": 592
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 538,
+     "minScore": 543
+    }
+   ]
+  },
+  {
+   "n": 19,
+   "date": "2016-07-29",
+   "url": "https://immigratemanitoba.com/2016/07/eoi-draw-19/",
+   "laas": 609,
+   "expressEntry": null,
+   "minScores": [
+    593,
+    545
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 155,
+     "minScore": 593
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 454,
+     "minScore": 545
+    }
+   ]
+  },
+  {
+   "n": 18,
+   "date": "2016-06-29",
+   "url": "https://immigratemanitoba.com/2016/06/eoi-draw-18/",
+   "laas": 551,
+   "expressEntry": null,
+   "minScores": [
+    593,
+    547
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 173,
+     "minScore": 593
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 378,
+     "minScore": 547
+    }
+   ]
+  },
+  {
+   "n": 17,
+   "date": "2016-06-08",
+   "url": "https://immigratemanitoba.com/2016/06/eoi-draw-17/",
+   "laas": 611,
+   "expressEntry": null,
+   "minScores": [
+    665,
+    550
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 200,
+     "minScore": 665
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 411,
+     "minScore": 550
+    }
+   ]
+  },
+  {
+   "n": 16,
+   "date": "2016-05-16",
+   "url": "https://immigratemanitoba.com/2016/05/eoi-draw-16/",
+   "laas": 356,
+   "expressEntry": null,
+   "minScores": [
+    722,
+    569
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 150,
+     "minScore": 722
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 206,
+     "minScore": 569
+    }
+   ]
+  },
+  {
+   "n": 15,
+   "date": "2016-04-06",
+   "url": "https://immigratemanitoba.com/2016/04/eoi-draw-15/",
+   "laas": 771,
+   "expressEntry": null,
+   "minScores": [
+    467,
+    543
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 299,
+     "minScore": 467
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 472,
+     "minScore": 543
+    }
+   ]
+  },
+  {
+   "n": 14,
+   "date": "2016-03-09",
+   "url": "https://immigratemanitoba.com/2016/03/eoi-draw-14/",
+   "laas": 627,
+   "expressEntry": null,
+   "minScores": [
+    657,
+    545
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 175,
+     "minScore": 657
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 452,
+     "minScore": 545
+    }
+   ]
+  },
+  {
+   "n": 13,
+   "date": "2016-02-10",
+   "url": "https://immigratemanitoba.com/2016/02/eoi-draw-13/",
+   "laas": 624,
+   "expressEntry": null,
+   "minScores": [
+    673,
+    547
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 175,
+     "minScore": 673
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 449,
+     "minScore": 547
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "date": "2016-01-13",
+   "url": "https://immigratemanitoba.com/2016/01/eoi-draw-12/",
+   "laas": 540,
+   "expressEntry": null,
+   "minScores": [
+    692,
+    548
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 150,
+     "minScore": 692
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 390,
+     "minScore": 548
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "date": "2015-12-17",
+   "url": "https://immigratemanitoba.com/2015/12/eoi-draw-11/",
+   "laas": 724,
+   "expressEntry": null,
+   "minScores": [
+    694,
+    549
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 126,
+     "minScore": 694
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 598,
+     "minScore": 549
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "date": "2015-11-27",
+   "url": "https://immigratemanitoba.com/2015/11/eoi-draw-10/",
+   "laas": 602,
+   "expressEntry": null,
+   "minScores": [
+    698,
+    553
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 125,
+     "minScore": 698
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 477,
+     "minScore": 553
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "date": "2015-11-03",
+   "url": "https://immigratemanitoba.com/2015/11/eoi-draw-9/",
+   "laas": 456,
+   "expressEntry": null,
+   "minScores": [
+    499,
+    556
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 100,
+     "minScore": 499
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 356,
+     "minScore": 556
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "date": "2015-10-13",
+   "url": "https://immigratemanitoba.com/2015/10/eoi-draw-8/",
+   "laas": 372,
+   "expressEntry": null,
+   "minScores": [
+    506,
+    558
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 100,
+     "minScore": 506
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 272,
+     "minScore": 558
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "date": "2015-09-25",
+   "url": "https://immigratemanitoba.com/2015/09/eoi-draw-7/",
+   "laas": 342,
+   "expressEntry": null,
+   "minScores": [
+    545,
+    560
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 100,
+     "minScore": 545
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 242,
+     "minScore": 560
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "date": "2015-09-09",
+   "url": "https://immigratemanitoba.com/2015/09/eoi-draw-6/",
+   "laas": 486,
+   "expressEntry": null,
+   "minScores": [
+    550,
+    562
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 125,
+     "minScore": 550
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 361,
+     "minScore": 562
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "date": "2015-08-13",
+   "url": "https://immigratemanitoba.com/2015/08/eoi-draw-5/",
+   "laas": 466,
+   "expressEntry": null,
+   "minScores": [
+    575,
+    570
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 174,
+     "minScore": 575
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 292,
+     "minScore": 570
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "date": "2015-07-17",
+   "url": "https://immigratemanitoba.com/2015/07/eoi-draw-4/",
+   "laas": 216,
+   "expressEntry": null,
+   "minScores": [
+    670,
+    578
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 111,
+     "minScore": 670
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 105,
+     "minScore": 578
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "date": "2015-06-25",
+   "url": "https://immigratemanitoba.com/2015/06/eoi-draw-3/",
+   "laas": 252,
+   "expressEntry": null,
+   "minScores": [
+    673,
+    581
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 100,
+     "minScore": 673
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 152,
+     "minScore": 581
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "date": "2015-06-05",
+   "url": "https://immigratemanitoba.com/2015/06/eoi-draw-2/",
+   "laas": 328,
+   "expressEntry": null,
+   "minScores": [
+    675,
+    588
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 126,
+     "minScore": 675
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 202,
+     "minScore": 588
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "date": "2015-05-20",
+   "url": "https://immigratemanitoba.com/2015/05/eoi-draw-1/",
+   "laas": 152,
+   "expressEntry": null,
+   "minScores": [
+    700,
+    607
+   ],
+   "segments": [
+    {
+     "group": "Skilled Worker in Manitoba",
+     "criteria": "Skilled Worker in Manitoba",
+     "laas": 75,
+     "minScore": 700
+    },
+    {
+     "group": "Skilled Worker Overseas",
+     "criteria": "Skilled Worker Overseas",
+     "laas": 77,
+     "minScore": 607
+    }
+   ]
+  }
+ ]
+}

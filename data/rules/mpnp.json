@@ -1,0 +1,21 @@
+{
+ "id": "mpnp-eoi",
+ "source": "https://immigratemanitoba.com/mpnp/apply/eoi/",
+ "sourceApi": "https://immigratemanitoba.com/wp-json/wp/v2/pages/6596?_fields=modified",
+ "sourceModified": "2026-10-02",
+ "checked": "2026-10-14",
+ "applies": "Skilled Worker Stream (Skilled Worker in Manitoba, Skilled Worker Overseas) and International Education Stream",
+ "max": 1000,
+ "language": { "firstPerBand": [[8, 25], [7, 22], [6, 20], [5, 17], [4, 12], [0, 0]], "secondOverallClb5": 25, "max": 125 },
+ "age": { "18": 20, "19": 30, "20": 40, "21-45": 75, "46": 40, "47": 30, "48": 20, "49": 10, "50+": 0, "max": 75 },
+ "experience": { "options": [["Less than one year", 0], ["One year", 40], ["Two years", 50], ["Three years", 60], ["Four years or more", 75]], "licensed": 100, "max": 175, "note": "Full years of full-time work (30+ hours a week, periods of 6 months or more with an employer) in the last 5 years, not rounded up. 100 more points if fully recognized by the Manitoba licensing body of a regulated profession or trade." },
+ "education": { "options": [["Master's degree or doctorate", 125], ["Two post-secondary programs of at least two years each", 115], ["One post-secondary program of three years or more", 110], ["One post-secondary program of two years", 100], ["One-year post-secondary program", 70], ["Trade certificate", 70], ["No formal post-secondary education", 0]], "max": 125 },
+ "adaptability": {
+  "connection": [["Close relative in Manitoba", 200], ["Previous authorized work experience in Manitoba (six months or more)", 100], ["Completed post-secondary program in Manitoba (two years or more)", 100], ["Completed post-secondary program in Manitoba (one year)", 50], ["Close friend or distant relative in Manitoba", 50]],
+  "demand": [["Ongoing employment in Manitoba for six months or more with a long-term job offer from the same employer", 500], ["Invitation to Apply under a Strategic Initiative", 500]],
+  "regional": 50,
+  "max": 500,
+  "note": "Only the highest-scoring connection counts. Regional development points (destination outside Winnipeg) are added to another Manitoba connection, except Manitoba Demand."
+ },
+ "risk": { "otherProvinceWork": -100, "otherProvinceStudy": -100, "min": -200, "note": "No deduction for a close relative in another province or a previous immigration application to another province." }
+}

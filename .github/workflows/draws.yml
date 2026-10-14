@@ -16,6 +16,9 @@ jobs:
       - name: Ontario (OINP) invitations
         run: node scripts/oinp.mjs --fetch
         continue-on-error: true
+      - name: Manitoba (MPNP) draws
+        run: node scripts/mpnp.mjs --fetch
+        continue-on-error: true
       - run: npm test
       - name: Commit if the data changed
         run: |

@@ -17,6 +17,8 @@ const citz = read('data/rules/citizenship.json');
 const resid = read('data/rules/residency.json');
 const owp = read('data/rules/oinp-owp.json');
 const oinpDraws = read('data/provinces/oinp-draws.json');
+const mpnp = read('data/rules/mpnp.json');
+const mpnpDraws = read('data/provinces/mpnp-draws.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -1115,6 +1117,111 @@ ${d.dropped.length ? `<p class="small">Ontario's page lists ${d.dropped.length =
   return page({ path: '/oinp-draws/', title: `OINP Draws ${y}: Ontario PNP Invitations and Score History`, description: `All ${d.rounds.length} OINP invitation rounds since 2021 by stream, with minimum scores and targets, and the status of the new Ontario Workforce Priority stream.`, body, crumbs: [['Home', '/'], ['OINP draws', '/oinp-draws/']] });
 }
 
+// ---------- Manitoba (MPNP) ----------
+function mpnpCalcPage() {
+  const r = mpnp;
+  const opt = (arr) => arr.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('');
+  const optV = (arr) => `<option value="0">None of these</option>` + arr.map(([l, p]) => `<option value="${p}">${esc(l)} (${p})</option>`).join('');
+  const ages = Array.from({ length: 33 }, (_, i) => 18 + i).map((a) => `<option value="${a}">${a === 50 ? '50 or older' : a}</option>`).join('');
+  // Manitoba's page names IELTS, CELPIP, TEF and TCF as the tests behind the CLB levels.
+  const enTests = Object.entries(lang.tests).filter(([id]) => ['ielts', 'celpip', 'tef', 'tcf'].includes(id)).map(([id, t]) => `<option value="${id}">${esc(t.name)}</option>`).join('');
+  const ageRows = Object.entries(r.age).filter(([k]) => k !== 'max').map(([k, v]) => `<tr><td>${k === '50+' ? '50 or older' : k.replace('-', ' to ')}</td><td class="n">${v}</td></tr>`).join('');
+  const t2 = (arr) => arr.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('');
+  const recent = mpnpDraws.draws.slice(0, 12);
+  const sw = recent.flatMap((d) => d.segments.filter((s) => s.minScore !== null).map((s) => ({ ...s, date: d.date, n: d.n })));
+  const body = `
+<section class="intro">
+  <h1>MPNP Points Calculator: Manitoba EOI Ranking Score (2026)</h1>
+  <p class="lede">Work out your Expression of Interest ranking score for the Manitoba Provincial Nominee Program, out of ${fmt(r.max)}, with every factor from Manitoba's official grid. It applies to the ${esc(r.applies)}.</p>
+  <p class="meta"><span>Grid checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">MPNP Expression of Interest</a>, updated ${longDate(r.sourceModified)}</span></p>
+</section>
+<div class="tool">
+<form id="mpnp-form" novalidate>
+  <fieldset><legend>Language (first official language)</legend>
+    <div class="field"><label for="test">Test</label><select id="test" name="test">${enTests}</select></div>
+    <div class="scores">${SK.map((s) => `<div class="field"><label for="${s}">${SKL[s]}</label><input type="number" inputmode="decimal" id="${s}" name="${s}"><span class="clb-tag" id="${s}-clb"></span></div>`).join('')}</div>
+    <div class="field check" style="margin-top:12px"><input type="checkbox" id="second" name="second"><label for="second">I have a valid test in the other official language at CLB 5 or higher (+${r.language.secondOverallClb5})</label></div>
+  </fieldset>
+  <fieldset><legend>Age, experience and education</legend>
+    <div class="row"><div class="field"><label for="age">Age when you submit the EOI</label><select id="age" name="age">${ages}</select></div>
+    <div class="field"><label for="exp">Full years of work experience, last 5 years</label><select id="exp" name="exp">${opt(r.experience.options)}</select></div></div>
+    <div class="field check"><input type="checkbox" id="licensed" name="licensed"><label for="licensed">Fully recognized by the Manitoba licensing body of my regulated profession or trade (+${r.experience.licensed})</label></div>
+    <div class="field"><label for="edu">Highest completed education</label><select id="edu" name="edu">${opt(r.education.options)}</select></div>
+  </fieldset>
+  <fieldset><legend>Connection to Manitoba (adaptability)</legend>
+    <div class="field"><label for="connection">Your strongest connection</label><select id="connection" name="connection">${optV(r.adaptability.connection)}</select></div>
+    <div class="field"><label for="demand">Manitoba Demand</label><select id="demand" name="demand">${optV(r.adaptability.demand)}</select></div>
+    <div class="field check"><input type="checkbox" id="regional" name="regional"><label for="regional">I plan to settle outside Winnipeg and have a connection to that region (+${r.adaptability.regional}, with a connection other than Manitoba Demand)</label></div>
+    <p class="callout small" id="adapt-warn" hidden>Manitoba requires every candidate to have at least one connection to the province.</p>
+  </fieldset>
+  <fieldset><legend>Connections to other provinces (risk)</legend>
+    <div class="field check"><input type="checkbox" id="riskWork" name="riskWork"><label for="riskWork">You or your spouse have work experience in another province (${r.risk.otherProvinceWork})</label></div>
+    <div class="field check"><input type="checkbox" id="riskStudy" name="riskStudy"><label for="riskStudy">You or your spouse have studied in another province (${r.risk.otherProvinceStudy})</label></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Your MPNP score">
+  <div class="total"><span><span class="score" id="total" aria-live="polite">0</span> <span class="of">/ ${fmt(r.max)}</span></span><span class="small">EOI ranking score</span></div>
+  <div class="table-scroll"><table><tbody id="breakdown"></tbody></table></div>
+  <p class="small">${sw.length ? `Recent lowest scores invited: ${sw.slice(0, 4).map((s) => `${s.minScore} (${esc(s.group || 'draw')} , ${s.date})`.replace(' ,', ',')).join('; ')}. Many recent selections target occupations or strategic initiatives without a published score; see the <a href="/mpnp-draws/">MPNP draws</a>.` : 'See the <a href="/mpnp-draws/">MPNP draws</a>.'}</p>
+</aside>
+</div>
+<article class="prose">
+<h2>The ranking grid</h2>
+<p>Manitoba ranks Expression of Interest profiles on six factors and invites the highest-scoring candidates with a Letter of Advice to Apply. The Business Investor Stream uses a separate process.</p>
+<h3>Language</h3>
+<p>Points for each of the four abilities of your first official language, by CLB level: ${r.language.firstPerBand.filter(([m]) => m > 0).map(([m, p]) => `CLB ${m}${m === 8 ? ' or higher' : ''}: ${p}`).join(', ')}, CLB 3 or lower: 0. A valid test in the other official language at CLB 5 or higher adds ${r.language.secondOverallClb5}. Maximum ${r.language.max}. Convert your scores with the <a href="/clb-converter/">CLB converter</a>.</p>
+<h3>Age</h3><div class="table-scroll"><table><tbody>${ageRows}</tbody></table></div>
+<h3>Work experience</h3><p>${esc(r.experience.note)}</p><div class="table-scroll"><table><tbody>${t2(r.experience.options)}<tr><td>Fully recognized by the provincial licensing body</td><td class="n">+${r.experience.licensed}</td></tr></tbody></table></div>
+<h3>Education</h3><div class="table-scroll"><table><tbody>${t2(r.education.options)}</tbody></table></div>
+<h3>Adaptability</h3><p>${esc(r.adaptability.note)} Maximum ${r.adaptability.max}.</p><div class="table-scroll"><table><tbody>${t2(r.adaptability.connection)}${t2(r.adaptability.demand)}<tr><td>Immigration destination in Manitoba outside Winnipeg</td><td class="n">${r.adaptability.regional}</td></tr></tbody></table></div>
+<h3>Risk assessment</h3><p>Work experience in another province: ${r.risk.otherProvinceWork}. Studies in another province: ${r.risk.otherProvinceStudy}. ${esc(r.risk.note)}</p>
+<p>A Manitoba nomination through Express Entry adds 600 CRS points; see the <a href="/">CRS calculator</a>.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Expression of Interest (EOI)</a>, Manitoba Provincial Nominee Program, updated ${longDate(r.sourceModified)}</li></ul>
+</article>`;
+  const scripts = `${jsonScript('mpnp-rules', r)}${jsonScript('lang-rules', lang)}<script type="module" src="/js/mpnp.js"></script>`;
+  return page({ path: '/mpnp-points-calculator/', title: 'MPNP Points Calculator 2026: Manitoba EOI Ranking Score', description: 'Calculate your Manitoba PNP Expression of Interest score out of 1,000: language, age, experience, education, adaptability and risk, from the official grid.', body, scripts, crumbs: [['Home', '/'], ['MPNP points calculator', '/mpnp-points-calculator/']] });
+}
+
+function mpnpDrawsPage() {
+  const d = mpnpDraws.draws;
+  const last = d[0];
+  const y = last.date.slice(0, 4);
+  const yr = d.filter((x) => x.date.startsWith(y));
+  const short = { 'Skilled Worker in Manitoba': 'SWM', 'Skilled Worker Overseas': 'SWO', 'International Education Stream': 'IES', 'Skilled Worker Stream': 'Strategic', 'Occupation-specific selections': 'Occupations', 'Completed post-secondary study in Manitoba': 'MB graduates', 'Francophone selection': 'Francophone' };
+  const scores = (x) => x.segments.filter((s) => s.minScore !== null).map((s) => `${s.minScore}${s.group ? ` ${short[s.group] || s.group}` : ''}`).join(', ');
+  const rows = d.map((x) => `<tr><td>${x.date}</td><td class="n"><a href="${x.url}" rel="noopener">#${x.n}</a></td><td class="n">${fmt(x.laas)}</td><td class="n">${x.expressEntry === null ? '' : fmt(x.expressEntry)}</td><td>${esc(scores(x))}</td></tr>`).join('');
+  const lastSegs = last.segments.map((s) => `<tr><td>${esc(s.group || '')}<div class="small">${esc(s.criteria || '')}</div></td><td class="n">${fmt(s.laas)}</td><td class="n">${s.minScore ?? '–'}</td></tr>`).join('');
+  const swm = d.flatMap((x) => x.segments.filter((s) => s.group === 'Skilled Worker in Manitoba' && s.minScore).map((s) => ({ date: x.date, crs: s.minScore }))).filter((x) => x.date >= `${Number(y) - 3}${last.date.slice(4)}`);
+  const missing = []; const have = new Set(d.map((x) => x.n)); for (let i = 1; i <= last.n; i++) if (!have.has(i)) missing.push(i);
+  const body = `
+<section class="intro">
+  <h1>MPNP Draws: Manitoba EOI Draw History and Scores</h1>
+  <p class="lede">Every Manitoba Provincial Nominee Program Expression of Interest draw published on Manitoba's website: ${fmt(d.length)} draws since 2015, with Letters of Advice to Apply and the lowest ranking scores invited.</p>
+  <p class="meta"><span>Updated automatically from Manitoba's posts</span><span>Latest: draw #${last.n} on ${longDate(last.date)}</span><span>Source: <a href="${mpnpDraws.source}" rel="noopener">MPNP EOI draws</a></span></p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">Latest draw</div><div class="v">#${last.n}</div><div class="small">${longDate(last.date)}</div></div>
+  <div class="card"><div class="k">Letters of Advice to Apply</div><div class="v">${fmt(last.laas)}</div>${last.expressEntry !== null ? `<div class="small">${fmt(last.expressEntry)} to Express Entry candidates</div>` : ''}</div>
+  <div class="card"><div class="k">Draws in ${y}</div><div class="v">${yr.length}</div><div class="small">${fmt(yr.reduce((a, x) => a + (x.laas || 0), 0))} letters</div></div>
+</div>
+<h2>Latest draw, by selection</h2>
+<div class="table-scroll"><table><thead><tr><th>Selection</th><th class="n">Letters</th><th class="n">Lowest score</th></tr></thead><tbody>${lastSegs}</tbody></table></div>
+<p class="small">Selections that target occupations or strategic recruitment initiatives often have no published score. <a href="${last.url}" rel="noopener">Manitoba's notice for draw #${last.n}</a> lists the occupations considered.</p>
+${swm.length >= 2 ? `<h2>Skilled Worker in Manitoba: lowest score invited</h2>${catChart(swm)}` : ''}
+<h2>All draws</h2>
+<div class="table-scroll"><table><thead><tr><th>Date</th><th class="n">Draw</th><th class="n">Letters</th><th class="n">To Express Entry candidates</th><th>Lowest scores published</th></tr></thead><tbody>${rows}</tbody></table></div>
+<article class="prose">
+<h2>How to read it</h2>
+<p>Scores are Manitoba's own EOI ranking points out of 1,000, not CRS points; estimate yours with the <a href="/mpnp-points-calculator/">MPNP points calculator</a>. SWM is Skilled Worker in Manitoba, SWO Skilled Worker Overseas, IES International Education Stream. Candidates nominated through Express Entry then receive 600 CRS points; federal rounds for nominees are on the <a href="/express-entry-draws/pnp/">PNP draws</a> page.</p>
+${missing.length ? `<p class="small">Manitoba's website has no notice for ${missing.length} of the draw numbers up to #${last.n} (${missing.join(', ')}), so they are not listed.</p>` : ''}
+<h2>Sources</h2>
+<ul><li><a href="${mpnpDraws.source}" rel="noopener">EOI draws</a>, Manitoba Provincial Nominee Program, one notice per draw</li></ul>
+</article>`;
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'Dataset', name: 'Manitoba PNP Expression of Interest draws', description: `${d.length} MPNP EOI draws with letters of advice to apply and lowest ranking scores.`, url: SITE.url + '/mpnp-draws/', isBasedOn: mpnpDraws.source, dateModified: last.date, spatialCoverage: 'Manitoba, Canada', creator: { '@type': 'Organization', name: SITE.name, url: SITE.url } }];
+  return page({ path: '/mpnp-draws/', title: `MPNP Draws ${y}: Manitoba EOI Draw History and Scores`, description: `Latest Manitoba PNP draw: #${last.n} on ${longDate(last.date)}, ${fmt(last.laas)} letters of advice to apply. All ${d.length} MPNP EOI draws with lowest scores.`, body, jsonld, crumbs: [['Home', '/'], ['MPNP draws', '/mpnp-draws/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -1157,7 +1264,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }
