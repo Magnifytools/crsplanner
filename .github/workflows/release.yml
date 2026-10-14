@@ -24,3 +24,12 @@ jobs:
           else
             git commit -m "Release scheduled pages $(date -u +%F)" && git pull --rebase -q && git push
           fi
+  watch-rules:
+    # Separate job so a rule change never blocks the release. A failure here emails the owner.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Check IRCC rule pages for changes (failure = review the rules)
+        run: node scripts/watch-rules.mjs
