@@ -1,0 +1,11 @@
+{
+ "id": "super-visa-mni",
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/parent-grandparent-super-visa/forms-documents/host-financial-support.html",
+ "sourceModified": "2026-07-06",
+ "insuranceSource": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/parent-grandparent-super-visa/forms-documents.html",
+ "checked": "2026-10-14",
+ "tableUpdated": "2025-07-29",
+ "amounts": { "1": 30526, "2": 38002, "3": 46720, "4": 56724, "5": 64336, "6": 72560, "7": 80784 },
+ "eachAdditional": 8224,
+ "option2Share": 0.75
+}

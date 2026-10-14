@@ -25,6 +25,8 @@ const aaip = read('data/rules/aaip.json');
 const aaipDraws = read('data/provinces/aaip-draws.json');
 const fsw = read('data/rules/fsw.json');
 const cec = read('data/rules/cec.json');
+const sv = read('data/rules/super-visa.json');
+const pgp = read('data/rules/pgp-income.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -1496,6 +1498,96 @@ function cecPage() {
   return page({ path: '/cec-eligibility-calculator/', title: 'CEC Eligibility Calculator: Canadian Experience Class (2026)', description: 'Check if you qualify for the Canadian Experience Class: 1,560 hours of Canadian skilled work in 3 years, CLB 7 or 5 by TEER, and recent CEC cut-offs.', body, scripts, crumbs: [['Home', '/'], ['CEC eligibility calculator', '/cec-eligibility-calculator/']] });
 }
 
+// ---------- Super visa and parents sponsorship income ----------
+const tableFor = (amounts, extra) => (n) => (n <= 7 ? amounts[n] : amounts[7] + (n - 7) * extra);
+function superVisaPage() {
+  const r = sv;
+  const rows = Object.entries(r.amounts).map(([n, v]) => `<tr><td>${n}</td><td class="n">$${fmt(v)}</td></tr>`).join('') + `<tr><td>Each additional person</td><td class="n">+$${fmt(r.eachAdditional)}</td></tr>`;
+  const num = (id, label, hint, v = 0) => `<div class="field"><label for="${id}">${label}</label><input type="number" id="${id}" name="${id}" min="0" max="20" step="1" value="${v}" inputmode="numeric">${hint ? `<span class="hint">${hint}</span>` : ''}</div>`;
+  const body = `
+<section class="intro">
+  <h1>Super Visa Income Requirement Calculator (Minimum Necessary Income)</h1>
+  <p class="lede">The minimum income your child or grandchild in Canada needs to invite you on a super visa, by family size, and whether their income meets it under either of IRCC's two options.</p>
+  <p class="meta"><span>Amounts updated by IRCC on ${longDate(r.tableUpdated)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC super visa: proof of financial support</a></span></p>
+</section>
+<div class="tool">
+<form id="sv-form" novalidate>
+  <fieldset><legend>Family size</legend>
+    <p class="hint">The host child or grandchild always counts as 1.</p>
+    ${num('invited', 'Parents or grandparents you are inviting now', '', 1)}
+    <div class="field check"><input type="checkbox" id="spouse" name="spouse"><label for="spouse">The host has a spouse or common-law partner (a separated spouse may also count)</label></div>
+    ${num('kids', 'Dependent children of the host or their partner', 'Count them whatever the custody arrangement.')}
+    ${num('hosted', 'Super visa holders already invited by the host or partner', 'In another letter of invitation that still applies, even if they are not in Canada now.')}
+    ${num('sponsored', 'People sponsored by the host or co-signer with an undertaking still in effect')}
+  </fieldset>
+  <fieldset><legend>Income (optional)</legend>
+    <div class="field"><label for="income">Host's total income, with a co-signing spouse or partner if any (CAD)</label><input type="number" id="income" name="income" min="0" step="100" inputmode="numeric"></div>
+    <div class="field"><label for="own">Your own income while in Canada (CAD, only used for option 2)</label><input type="number" id="own" name="own" min="0" step="100" inputmode="numeric"></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Minimum necessary income">
+  <div class="total"><span><span class="score" id="sv-out"></span> <span class="of">CAD</span></span><span class="small" id="sv-size"></span></div>
+  <div class="cmp" id="sv-checks"></div>
+</aside>
+</div>
+<article class="prose">
+<h2>Minimum necessary income by family size</h2>
+<div class="table-scroll"><table><thead><tr><th>Family members</th><th class="n">Minimum income (CAD)</th></tr></thead><tbody>${rows}</tbody></table></div>
+<h2>Two ways to prove it</h2>
+<ul>
+<li><strong>Option 1:</strong> the host's total income, with a co-signer's if any, meets or exceeds the minimum in either of the 2 tax years before the application, shown with the Canada Revenue Agency notice of assessment.</li>
+<li><strong>Option 2:</strong> the host's income in the year before the application is at least ${Math.round(r.option2Share * 100)}% of the minimum, and the invited parent's or grandparent's own income covers the rest. You must prove you will keep earning that income while in Canada.</li>
+</ul>
+<p>Only the host's spouse or common-law partner can co-sign, and only if they are a Canadian citizen, permanent resident or registered Indian; siblings cannot.</p>
+<h2>Health insurance</h2>
+<p>The super visa also needs a health insurance policy from a Canadian insurer, or a foreign insurer authorized by the Office of the Superintendent of Financial Institutions, valid for at least 1 year from entry, paid in full or in instalments with a deposit, covering health care, hospitalization and repatriation, with at least $100,000 of emergency coverage.</p>
+<p>Planning to sponsor them for permanent residence instead? See the <a href="/parents-grandparents-sponsorship-income/">income requirement for sponsoring parents and grandparents</a>, which uses higher amounts and three tax years.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Super visa: proof of financial support</a>, IRCC, modified ${longDate(r.sourceModified)}, amounts updated ${longDate(r.tableUpdated)}</li><li><a href="${r.insuranceSource}" rel="noopener">Super visa: forms and documents</a>, IRCC</li></ul>
+</article>
+<script>{const A=${JSON.stringify(r.amounts)},X=${r.eachAdditional},S=${r.option2Share},f=document.getElementById('sv-form'),$=(i)=>document.getElementById(i);const m=(n)=>n<=7?A[n]:A[7]+(n-7)*X;const c=(s)=>'$'+Math.round(s).toLocaleString('en-CA');function u(){const v=(k)=>Math.max(0,Math.floor(Number(f.elements[k].value)||0));const n=1+v('invited')+(f.elements.spouse.checked?1:0)+v('kids')+v('hosted')+v('sponsored');const need=m(n);$('sv-out').textContent=c(need);$('sv-size').textContent='Family size '+n;const inc=Number(f.elements.income.value)||0,own=Number(f.elements.own.value)||0;let h='';if(inc){const o1=inc>=need,o2=inc>=need*S&&inc+own>=need;h='<div class="cmp-row"><span>Option 1: host income meets the minimum</span><span class="tag '+(o1?'yes':'no')+'">'+(o1?'met':'not met')+'</span></div><div class="cmp-row"><span>Option 2: host has at least '+c(need*S)+' and the total with your income reaches '+c(need)+'</span><span class="tag '+(o2?'yes':'no')+'">'+(o2?'met':'not met')+'</span></div>';}$('sv-checks').innerHTML=h;}f.addEventListener('input',u);u();}</script>`;
+  return page({ path: '/super-visa-income-requirement/', title: 'Super Visa Income Requirement 2026: Minimum Necessary Income', description: `Super visa minimum necessary income: $${fmt(r.amounts[2])} for a family of 2, $${fmt(r.amounts[4])} for 4. Calculator for family size, both proof options and insurance rules.`, body, crumbs: [['Home', '/'], ['Super visa income requirement', '/super-visa-income-requirement/']] });
+}
+
+function pgpIncomePage() {
+  const r = pgp;
+  const rows = Object.entries(r.amounts).map(([n, v]) => `<tr><td>${n} people</td>${v.map((x) => `<td class="n">$${fmt(x)}</td>`).join('')}</tr>`).join('') + `<tr><td>Each additional person</td>${r.eachAdditional.map((x) => `<td class="n">+$${fmt(x)}</td>`).join('')}</tr>`;
+  const body = `
+<section class="intro">
+  <h1>Parents and Grandparents Sponsorship: Income Requirement Calculator</h1>
+  <p class="lede">The income you need in each of the 3 tax years before you apply to sponsor your parents or grandparents for permanent residence, by family size, as published by IRCC for the ${esc(r.intake)} intake.</p>
+  <p class="meta"><span>IRCC page modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC income requirements for the sponsor</a></span></p>
+</section>
+<div class="tool">
+<form id="pgp-form" novalidate>
+  <fieldset><legend>Family size and income, year by year</legend>
+    <p class="hint">Family size is counted for each year: include people from the year they became part of your family. Minimum 2 (you and one parent).</p>
+    ${r.years.map((y) => `<div class="row"><div class="field"><label for="n${y}">Family size in ${y}</label><input type="number" id="n${y}" name="n${y}" min="2" max="30" value="3" inputmode="numeric"></div><div class="field"><label for="i${y}">Your income in ${y} (with co-signer, CAD)</label><input type="number" id="i${y}" name="i${y}" min="0" step="100" inputmode="numeric"></div></div>`).join('')}
+  </fieldset>
+</form>
+<aside class="results" aria-label="Income needed">
+  <div class="cmp" id="pgp-out"></div>
+  <p class="small">You must meet the requirement in all 3 years. If you live in Quebec, Quebec's own income requirements apply instead.</p>
+</aside>
+</div>
+<article class="prose">
+<h2>Income required (${esc(r.intake)} intake)</h2>
+<div class="table-scroll"><table><thead><tr><th>Family size</th>${r.years.map((y) => `<th class="n">${y}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
+<p>This is the latest table IRCC has published, for applications in the ${esc(r.intake)} intake. If IRCC publishes amounts for a new intake, we update this page; our daily check of IRCC's page flags any change.</p>
+<h2>Who counts in your family size</h2>
+<ul>
+<li>You, your spouse or common-law partner (a co-signing partner counts for all 3 years), your dependent children and theirs.</li>
+<li>Anyone you or your co-signer sponsored before whose undertaking is still in effect, with their family members.</li>
+<li>The parents or grandparents you are sponsoring, their spouse or partner and their dependent children, even if they are not coming to Canada or are already citizens or permanent residents.</li>
+</ul>
+<p>Your spouse or common-law partner can co-sign to combine incomes. Inviting them on a visit instead? The <a href="/super-visa-income-requirement/">super visa income requirement</a> is lower and uses one year.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Income requirements for the sponsor</a>, IRCC, modified ${longDate(r.sourceModified)}</li></ul>
+</article>
+<script>{const A=${JSON.stringify(r.amounts)},X=${JSON.stringify(r.eachAdditional)},Y=${JSON.stringify(r.years)},f=document.getElementById('pgp-form');const need=(n,k)=>n<=7?A[Math.max(2,n)][k]:A[7][k]+(n-7)*X[k];const c=(s)=>'$'+s.toLocaleString('en-CA');function u(){document.getElementById('pgp-out').innerHTML=Y.map((y,k)=>{const n=Math.max(2,Math.floor(Number(f.elements['n'+y].value)||2));const q=need(n,k);const inc=f.elements['i'+y].value;const ok=inc!==''&&Number(inc)>=q;return '<div class="cmp-row"><span>'+y+': '+c(q)+' for '+n+' people</span>'+(inc===''?'':'<span class="tag '+(ok?'yes':'no')+'">'+(ok?'met':'not met')+'</span>')+'</div>';}).join('');}f.addEventListener('input',u);u();}</script>`;
+  return page({ path: '/parents-grandparents-sponsorship-income/', title: 'Parents and Grandparents Sponsorship Income Requirement 2026', description: `Income needed to sponsor parents or grandparents: the IRCC table for ${r.years.join(', ')} by family size, with a year-by-year calculator and who counts in your family.`, body, crumbs: [['Home', '/'], ['Parents and grandparents sponsorship income', '/parents-grandparents-sponsorship-income/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -1538,7 +1630,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage], ['super-visa-income-requirement', superVisaPage], ['parents-grandparents-sponsorship-income', pgpIncomePage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }

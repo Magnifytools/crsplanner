@@ -1,0 +1,13 @@
+{
+ "id": "pgp-income",
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/family-sponsorship/sponsor-parents-grandparents/eligibility/income.html",
+ "sourceModified": "2025-07-28",
+ "checked": "2026-10-14",
+ "intake": "2025",
+ "years": ["2024", "2023", "2022"],
+ "amounts": {
+  "2": [47549, 44530, 43082], "3": [58456, 54743, 52965], "4": [70972, 66466, 64306], "5": [80496, 75384, 72935],
+  "6": [90784, 85020, 82259], "7": [101075, 94658, 91582]
+ },
+ "eachAdditional": [10291, 9636, 9324]
+}
