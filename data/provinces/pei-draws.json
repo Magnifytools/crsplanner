@@ -1,0 +1,64 @@
+{
+ "source": "https://www.princeedwardisland.ca/en/information/office-of-immigration/expression-of-interest-draws",
+ "pagePublished": "2026-10-07",
+ "checked": "2026-10-14",
+ "manual": true,
+ "note": "princeedwardisland.ca blocks automated requests; this file is updated by hand from a browser.",
+ "draws": [
+  [
+   "2026-01-15",
+   26
+  ],
+  [
+   "2026-02-19",
+   109
+  ],
+  [
+   "2026-03-20",
+   101
+  ],
+  [
+   "2026-04-16",
+   127
+  ],
+  [
+   "2026-05-21",
+   113
+  ],
+  [
+   "2026-06-18",
+   182
+  ],
+  [
+   "2026-07-16",
+   195
+  ],
+  [
+   "2026-08-20",
+   181
+  ],
+  [
+   "2026-09-17",
+   195
+  ],
+  [
+   "2026-10-07",
+   90
+  ]
+ ],
+ "businessInvitations2026": 0,
+ "fee": 300,
+ "profileMonths": 6,
+ "pages": {
+  "sw": "https://www.princeedwardisland.ca/en/information/office-of-immigration/skilled-workers-in-pei",
+  "swOut": "https://www.princeedwardisland.ca/en/information/office-of-immigration/skilled-workers-outside-canada",
+  "ee": "https://www.princeedwardisland.ca/en/information/office-of-immigration/pei-express-entry",
+  "critical": "https://www.princeedwardisland.ca/en/information/office-of-immigration/critical-workers"
+ },
+ "pagesPublished": {
+  "sw": "2026-01-13",
+  "swOut": "2026-01-13",
+  "ee": "2026-01-13",
+  "critical": "2025-11-25"
+ }
+}

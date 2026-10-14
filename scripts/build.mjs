@@ -43,6 +43,7 @@ const nbpnp = read('data/rules/nbpnp.json');
 const nbDraws = read('data/provinces/nbpnp-draws.json');
 const citTest = read('data/rules/citizenship-test.json');
 const citQ = read('data/citizenship/questions.json');
+const peiDraws = read('data/provinces/pei-draws.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -1993,7 +1994,7 @@ function aipPage() {
 <p>Count yourself, your spouse and all dependent children, even if they are not coming. You don't need to show funds if you already live and work in Canada with a valid work permit.</p>
 <h2>Designated employers by province</h2>
 <ul>${r.provinces.map(([n, u]) => `<li><a href="${u}" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>
-<p>Provincial programs in the region: ${isLive('/nova-scotia-nominee-program/') ? '<a href="/nova-scotia-nominee-program/">Nova Scotia</a>' : 'Nova Scotia'}, ${isLive('/new-brunswick-pnp/') ? '<a href="/new-brunswick-pnp/">New Brunswick</a>' : 'New Brunswick'}.</p>
+<p>Provincial programs in the region: ${isLive('/nova-scotia-nominee-program/') ? '<a href="/nova-scotia-nominee-program/">Nova Scotia</a>' : 'Nova Scotia'}, ${isLive('/new-brunswick-pnp/') ? '<a href="/new-brunswick-pnp/">New Brunswick</a>' : 'New Brunswick'}, ${isLive('/pei-pnp/') ? '<a href="/pei-pnp/">Prince Edward Island</a>' : 'Prince Edward Island'}.</p>
 <h2>Sources</h2>
 <ul><li><a href="${r.source}" rel="noopener">Atlantic Immigration Program</a>, IRCC, modified ${longDate(r.sourceModified)}</li>${r.watchPages.map((w) => `<li><a href="${w.url}" rel="noopener">${esc(w.url.split('/').pop().replace('.html', '').replace(/-/g, ' '))}</a>, IRCC, modified ${longDate(w.modified)}</li>`).join('')}</ul>
 </article>`;
@@ -2201,6 +2202,43 @@ ${sum(ps) ? `<li>Invitations were ${sum(rs) >= sum(ps) ? 'up' : 'down'} ${Math.a
   return page({ path: `/express-entry-${Y}/`, title: `Express Entry ${Y} in Review: All Draws, Invitations and Cut-offs`, description: `Express Entry in ${Y}: ${fmt(sum(rs))} invitations in ${rs.length} rounds, by category with cut-off ranges, monthly totals and the comparison with ${PY}, from IRCC data.`, body, crumbs: [['Home', '/'], [`Express Entry ${Y}`, `/express-entry-${Y}/`]] });
 }
 
+function peiPage() {
+  const r = peiDraws, d = [...r.draws].reverse();
+  const y = d[0][0].slice(0, 4);
+  const total = d.reduce((t, [, n]) => t + n, 0);
+  const max = Math.max(...d.map(([, n]) => n));
+  const W = 760, H = 220, bw = (W - 40) / r.draws.length;
+  const bars = r.draws.map(([dt, n], i) => { const h = (n / max) * (H - 50); return `<rect class="bar-r" x="${(30 + i * bw + 6).toFixed(1)}" y="${(H - 26 - h).toFixed(1)}" width="${(bw - 12).toFixed(1)}" height="${h.toFixed(1)}" rx="3"/><text x="${(30 + i * bw + bw / 2).toFixed(1)}" y="${(H - 30 - h).toFixed(1)}" text-anchor="middle">${n}</text><text x="${(30 + i * bw + bw / 2).toFixed(1)}" y="${H - 8}" text-anchor="middle">${MONTHS[Number(dt.slice(5, 7)) - 1].slice(0, 3)}</text>`; }).join('');
+  const body = `
+<section class="intro">
+  <h1>PEI PNP ${y}: Prince Edward Island Draws and Streams</h1>
+  <p class="lede">Every Prince Edward Island Provincial Nominee Program expression of interest draw of ${y}, with ${fmt(total)} labour and Express Entry invitations so far, and the requirements of the Skilled Worker, Critical Worker and PEI Express Entry streams.</p>
+  <p class="meta"><span>PEI draws page published ${longDate(r.pagePublished)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">PEI Office of Immigration: EOI draws</a></span></p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">Latest draw</div><div class="v" style="font-size:1.2rem">${longDate(d[0][0])}</div><div class="small">${d[0][1]} invitations</div></div>
+  <div class="card"><div class="k">Invitations in ${y}</div><div class="v">${fmt(total)}</div><div class="small">${d.length} draws</div></div>
+  <div class="card"><div class="k">Business invitations</div><div class="v">${r.businessInvitations2026}</div><div class="small">in ${y}</div></div>
+</div>
+<h2>Labour and Express Entry invitations by draw</h2>
+<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="PEI PNP invitations by draw">${bars}</svg>
+<div class="table-scroll"><table><thead><tr><th>Draw date</th><th class="n">Labour and Express Entry invitations</th></tr></thead><tbody>${d.map(([dt, n]) => `<tr><td>${longDate(dt)}</td><td class="n">${n}</td></tr>`).join('')}</tbody></table></div>
+<p class="small">PEI no longer publishes a minimum score for labour and Express Entry invitations. It is prioritizing healthcare, trades, manufacturing and other sectors with shortages; people working in sales and service may not be invited. In January, international graduates of UPEI, Holland College and Collège de l'Île were prioritized.</p>
+<article class="prose">
+<h2>Streams and requirements</h2>
+<h3>Skilled Worker (in PEI or outside Canada)</h3>
+<ul><li>Full-time, non-seasonal job offer (permanent or at least 2 years) from a PEI employer in TEER 0, 1, 2 or 3</li><li>At least 2 years of full-time work experience in the last 5 years</li><li>A post-secondary degree or diploma of at least 2 years</li><li>Age 18 to 59</li><li>Language to do the job: CLB/NCLC 4 on an approved test, or the employer's confirmation on the job offer form</li><li>In PEI: a valid work permit. From outside Canada: the employer needs the Office of Immigration's authorization before the EOI</li></ul>
+<h3>Critical Worker</h3>
+<ul><li>Full-time, non-seasonal job offer in TEER 4 or 5 and at least 6 months of continuous full-time work with that PEI employer</li><li>Valid work permit, secondary school diploma, age 18 to 59</li><li>2 years of full-time work experience or relevant education in the last 5 years</li><li>CLB/NCLC 4 on an approved test</li><li>Truck drivers (NOC 73300) need 12 months of long-haul experience</li></ul>
+<h3>PEI Express Entry</h3>
+<p>You must qualify for the Federal Skilled Worker, Federal Skilled Trades or Canadian Experience Class and have a profile in the Express Entry pool. PEI prioritizes people living and working in the province for an eligible employer. PGWP holders who graduated outside PEI need 9 months of continuous full-time work with the PEI employer and at least 4 months left on their permit. A nomination adds 600 <a href="/">CRS</a> points.</p>
+<p>The expression of interest is free and stays active ${r.profileMonths} months; if invited, the nomination application costs a non-refundable $${r.fee}. PEI also takes part in the ${isLive('/atlantic-immigration-program/') ? '<a href="/atlantic-immigration-program/">Atlantic Immigration Program</a>' : 'Atlantic Immigration Program'}.</p>
+<h2>Sources</h2>
+<ul><li><a href="${r.source}" rel="noopener">Expression of Interest Draws</a>, Government of PEI, published ${longDate(r.pagePublished)}</li><li><a href="${r.pages.sw}" rel="noopener">Skilled Workers in PEI</a>, <a href="${r.pages.swOut}" rel="noopener">Skilled Workers Outside Canada</a> and <a href="${r.pages.ee}" rel="noopener">PEI Express Entry</a>, published ${longDate(r.pagesPublished.sw)}; <a href="${r.pages.critical}" rel="noopener">Critical Workers</a>, published ${longDate(r.pagesPublished.critical)}</li></ul>
+</article>`;
+  return page({ path: '/pei-pnp/', title: `PEI PNP ${y}: Prince Edward Island Draws and Requirements`, description: `All ${y} PEI PNP draws (${fmt(total)} invitations so far, latest ${longDate(d[0][0])}) and the Skilled Worker, Critical Worker and PEI Express Entry requirements.`, body, crumbs: [['Home', '/'], ['PEI PNP', '/pei-pnp/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -2243,7 +2281,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage], ['super-visa-income-requirement', superVisaPage], ['parents-grandparents-sponsorship-income', pgpIncomePage], ['bc-pnp-points-calculator', bcCalcPage], ['bc-pnp-draws', bcDrawsPage], ['noc-code-finder', nocPage], ['spousal-open-work-permit', sowpPage], ['bridging-open-work-permit', bowpPage], ['pgwp-calculator', pgwpPage], ['express-entry-2026', eeYearPage], ['canada-pr-fees', feesPage], ['atlantic-immigration-program', aipPage], ['nova-scotia-nominee-program', nsnpPage], ['new-brunswick-pnp', nbpnpPage], ['rural-community-immigration-pilot', rcipPage], ['canadian-citizenship-test-practice', citizenshipTestPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage], ['super-visa-income-requirement', superVisaPage], ['parents-grandparents-sponsorship-income', pgpIncomePage], ['bc-pnp-points-calculator', bcCalcPage], ['bc-pnp-draws', bcDrawsPage], ['noc-code-finder', nocPage], ['spousal-open-work-permit', sowpPage], ['bridging-open-work-permit', bowpPage], ['pgwp-calculator', pgwpPage], ['express-entry-2026', eeYearPage], ['canada-pr-fees', feesPage], ['atlantic-immigration-program', aipPage], ['nova-scotia-nominee-program', nsnpPage], ['new-brunswick-pnp', nbpnpPage], ['pei-pnp', peiPage], ['rural-community-immigration-pilot', rcipPage], ['canadian-citizenship-test-practice', citizenshipTestPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }
