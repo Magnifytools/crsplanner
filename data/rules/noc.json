@@ -1,0 +1,21 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/find-national-occupation-code.html",
+ "sourceModified": "2025-06-27",
+ "checked": "2026-10-14",
+ "dataset": "https://open.canada.ca/data/en/dataset/1feee3b5-8068-4dbb-b361-180875837593",
+ "datasetModified": "2026-04-10",
+ "nocSite": "https://noc.esdc.gc.ca/?GoCTemplateCulture=en-CA",
+ "switchDate": "2022-11-16",
+ "teer": [
+  [0, "Management occupations", "Advertising, marketing and public relations managers; Financial managers"],
+  [1, "Occupations that usually require a university degree", "Financial advisors; Software engineers"],
+  [2, "Occupations that usually require a college diploma, apprenticeship training of 2 or more years, or supervisory occupations", "Computer network and web technicians; Medical laboratory technologists"],
+  [3, "Occupations that usually require a college diploma, apprenticeship training of less than 2 years, or more than 6 months of on-the-job training", "Bakers; Dental assistants and dental laboratory assistants"],
+  [4, "Occupations that usually require a high school diploma, or several weeks of on-the-job training", "Home child care providers; Retail salespersons and visual merchandisers"],
+  [5, "Occupations that usually need short-term work demonstration and no formal education", "Landscaping and grounds maintenance labourers; Delivery service drivers and door-to-door distributors"]
+ ],
+ "extraWatch": [
+  {"url": "https://www.statcan.gc.ca/en/subjects/standard/noc/2021/indexV1/noc-2021-v1.0-classification-structure.csv", "sha256": "9d97fb39b9fceaeef3a10fe1ec719ad58f2af15810f80e004422dce3dd62bad6", "what": "NOC 2021 V1.0 classification structure CSV"},
+  {"url": "https://www.statcan.gc.ca/en/subjects/standard/noc/2021/indexV1/noc-2021-v1.0-elements.csv", "sha256": "50c3e31a90b0150cc5b8efd29ec020c2fd9ea5fc5b0a171ed65d3cd9a0abf32f", "what": "NOC 2021 V1.0 elements CSV"}
+ ]
+}

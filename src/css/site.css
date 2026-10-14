@@ -151,3 +151,18 @@ tr.section td { font-weight: 600; background: var(--surface-2); }
 .foot-grid a { color: var(--muted); }
 .foot-h { font-weight: 600; color: var(--ink); margin: 0 0 6px; }
 .levels { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .95rem; margin: 8px 0 0; }
+/* NOC finder */
+.noc-search { display: flex; gap: 8px; margin: 8px 0 6px; }
+.noc-search input { flex: 1; min-width: 0; font-size: 1.05rem; padding: 10px 12px; }
+#noc-results { list-style: none; padding: 0; margin: 12px 0 24px; display: grid; gap: 10px; }
+.noc-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; }
+.noc-card p { margin: 6px 0; }
+.noc-head { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; }
+.noc-code { font-family: var(--mono); font-weight: 700; color: var(--brand); }
+.badge { font-size: .8rem; padding: 1px 8px; border-radius: 999px; background: var(--surface-2); color: var(--ink); white-space: nowrap; }
+.linkish { background: none; border: 0; padding: 0; color: var(--link); text-decoration: underline; cursor: pointer; font: inherit; font-size: .9rem; }
+.noc-more { margin-top: 6px; }
+.noc-list summary { cursor: pointer; font-weight: 600; padding: 6px 0; }
+.noc-list ul { columns: 2 260px; margin: 6px 0 12px; padding-left: 18px; }
+.noc-list li { break-inside: avoid; margin-bottom: 2px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

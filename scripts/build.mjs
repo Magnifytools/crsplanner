@@ -29,6 +29,8 @@ const sv = read('data/rules/super-visa.json');
 const pgp = read('data/rules/pgp-income.json');
 const bcsirs = read('data/rules/bc-sirs.json');
 const bcDraws = read('data/provinces/bcpnp-draws.json');
+const noc = read('data/noc/noc-2021.json');
+const nocRules = read('data/rules/noc.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -642,6 +644,7 @@ function categoriesPage() {
 <p>Your occupation is matched by its NOC 2021 code. The 12 months of experience have to be in the last 3 years and in one listed occupation, but they do not need to be continuous. IRCC can also skip a category for a while if enough of its candidates are already being invited in general or program rounds.</p>
 <p>Compare your own score with each category's cut-offs on the <a href="/">CRS calculator</a>.</p>
 ${sections}
+${isLive('/noc-code-finder/') ? '<p>Not sure which NOC code is yours? Search your job title in the <a href="/noc-code-finder/">NOC code finder</a>.</p>' : ''}
 ${retired.length ? `<h2>Categories no longer on the list</h2><p>${retired.map((c) => `<a href="/express-entry-draws/${CAT_PAGES[c.id].slug}/">${esc(CAT_PAGES[c.id].short)}</a>`).join(' and ')} had their own rounds in earlier years but are not among IRCC's current categories. Their history stays on our draws pages.</p>` : ''}
 <h2>Sources</h2>
 <ul><li><a href="${cats.source}" rel="noopener">Express Entry: Category-based selection</a>, IRCC, modified ${longDate(cats.sourceModified)}</li><li><a href="${draws.page}" rel="noopener">Express Entry rounds of invitations</a>, IRCC</li></ul>
@@ -1696,6 +1699,46 @@ ${health.length >= 2 ? `<h2>Care: Health, minimum score</h2>${catChart(health)}`
   return page({ path: '/bc-pnp-draws/', title: `BC PNP Draws ${y}: Latest Skills Immigration Invitations`, description: `Latest BC PNP draw: ${longDate(last)}. All ${y} Skills Immigration invitations by type with minimum scores, and the ${fmt(b.pool.total)} registrations in the pool by score.`, body, crumbs: [['Home', '/'], ['BC PNP draws', '/bc-pnp-draws/']] });
 }
 
+// ---------- NOC code finder ----------
+function nocPage() {
+  const n = noc, r = nocRules;
+  const catByCode = {};
+  for (const c of cats.categories) for (const o of c.occupations || []) (catByCode[o.noc] ||= []).push([c.id, c.name]);
+  const meta = { teer: Object.fromEntries(r.teer.map(([t, d, e]) => [t, [t, d, e]])), cec: cec.languageMin, cats: catByCode };
+  const counts = [0, 1, 2, 3, 4, 5].map((t) => n.units.filter((u) => u.teer === t).length);
+  const catCount = Object.keys(catByCode).length;
+  const groups = Object.entries(n.broad).map(([b, title]) => { const us = n.units.filter((u) => String(u.b) === b); return `<details><summary>${b}. ${esc(title)} (${us.length})</summary><ul>${us.map((u) => `<li><a href="?q=${u.c}">${u.c}</a> ${esc(u.t)} <span class="small">TEER ${u.teer}</span></li>`).join('')}</ul></details>`; }).join('');
+  const fsw = isLive('/fsw-67-points-calculator/') ? '<a href="/fsw-67-points-calculator/">FSW 67 points calculator</a>' : 'FSW 67-point grid';
+  const cecL = isLive('/cec-eligibility-calculator/') ? '<a href="/cec-eligibility-calculator/">CEC eligibility calculator</a>' : 'CEC requirements';
+  const body = `
+<section class="intro">
+  <h1>NOC Code Finder: Find Your NOC 2021 Code and TEER</h1>
+  <p class="lede">Search ${fmt(n.units.reduce((t, u) => t + u.ex.length, 0))} job titles from the official NOC 2021 Version 1.0 to find your five-digit code, its TEER category, what it means for Express Entry and whether it is in one of IRCC's ${cats.checked.slice(0, 4)} categories.</p>
+  <p class="meta"><span>${n.units.length} occupations</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.dataset}" rel="noopener">Statistics Canada, NOC 2021 Version 1.0</a></span></p>
+</section>
+<form id="noc-form" class="noc-search" role="search"><label class="visually-hidden" for="noc-q">Job title or NOC code</label><input id="noc-q" type="search" autocomplete="off" placeholder="e.g. software developer, nurse, 72310"><button type="submit">Search</button></form>
+<p class="small" id="noc-status" aria-live="polite">Type a job title or a code.</p>
+<ul id="noc-results"></ul>
+<p class="small">Pick the code whose main duties match what you actually did, not just the title: IRCC asks you to check the duties on the <a href="${r.nocSite}" rel="noopener">ESDC NOC website</a> (version NOC 2021 Version 1.0).</p>
+<article class="prose">
+<h2>TEER categories</h2>
+<p>The second digit of a NOC 2021 code is its TEER category (training, education, experience and responsibilities). IRCC switched to NOC 2021 on ${longDate(r.switchDate)}.</p>
+<div class="table-scroll"><table><thead><tr><th>TEER</th><th>Occupation types</th><th>IRCC examples</th><th class="n">Occupations</th></tr></thead><tbody>${r.teer.map(([t, d, e]) => `<tr><td>${t}</td><td>${esc(d)}</td><td>${esc(e)}</td><td class="n">${counts[t]}</td></tr>`).join('')}</tbody></table></div>
+<h2>What your TEER means for Express Entry</h2>
+<ul><li>Work in TEER 0, 1, 2 or 3 counts as skilled work for the Federal Skilled Worker Program and the Canadian Experience Class (see the ${fsw} and the ${cecL}).</li>
+<li>For the CEC, the language minimum depends on the TEER of your job: CLB ${cec.languageMin.teer01} for TEER 0 and 1, CLB ${cec.languageMin.teer23} for TEER 2 and 3.</li>
+<li>Category-based rounds only consider listed occupations. ${catCount} NOC codes are on IRCC's current lists; the finder flags them, and the full lists are on the <a href="/express-entry-categories/">Express Entry categories</a> page.</li>
+<li>The occupation also decides several provincial streams, such as the <a href="/oinp-points-calculator/">OINP</a> and <a href="/bc-pnp-points-calculator/">BC PNP</a> scores.</li></ul>
+<h2>All NOC 2021 occupations</h2>
+<div class="noc-list">${groups}</div>
+<h2>Sources</h2>
+<ul><li><a href="${r.dataset}" rel="noopener">National Occupational Classification (NOC) 2021 Version 1.0</a>, Statistics Canada, Open Government Licence - Canada (dataset updated ${longDate(r.datasetModified)})</li>
+<li><a href="${r.source}" rel="noopener">Find your National Occupational Classification</a>, IRCC, modified ${longDate(r.sourceModified)}</li></ul>
+</article>`;
+  const scripts = `${jsonScript('noc-meta', meta)}<script type="module" src="/js/noc.js"></script>`;
+  return page({ path: '/noc-code-finder/', title: 'NOC Code Finder 2021: Search Your Job Title, NOC Code and TEER', description: `Find your NOC 2021 code and TEER from ${fmt(n.units.reduce((t, u) => t + u.ex.length, 0))} official job titles, with what it means for Express Entry, the CEC and the 2026 category lists.`, body, scripts, crumbs: [['Home', '/'], ['NOC code finder', '/noc-code-finder/']] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -1738,7 +1781,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
-for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage], ['super-visa-income-requirement', superVisaPage], ['parents-grandparents-sponsorship-income', pgpIncomePage], ['bc-pnp-points-calculator', bcCalcPage], ['bc-pnp-draws', bcDrawsPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
+for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage], ['super-visa-income-requirement', superVisaPage], ['parents-grandparents-sponsorship-income', pgpIncomePage], ['bc-pnp-points-calculator', bcCalcPage], ['bc-pnp-draws', bcDrawsPage], ['noc-code-finder', nocPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }
@@ -1749,6 +1792,11 @@ out('changelog', changelogPage());
 writeFileSync(join(DIST, 'favicon.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#111827"/><text x="16" y="21" font-family="monospace" font-size="12" font-weight="700" text-anchor="middle" fill="#ff6b6b">CRS</text></svg>');
 cpSync(join(ROOT, 'src/css'), join(DIST, 'css'), { recursive: true });
 cpSync(join(ROOT, 'src/js'), join(DIST, 'js'), { recursive: true });
+if (isLive('/noc-code-finder/')) {
+  mkdirSync(join(DIST, 'data'), { recursive: true });
+  writeFileSync(join(DIST, 'data/noc-index.json'), JSON.stringify(noc.units.map((u) => [u.c, u.t, u.ex.join('|')])));
+  writeFileSync(join(DIST, 'data/noc-details.json'), JSON.stringify(Object.fromEntries(noc.units.map((u) => [u.c, [u.d, u.du, u.rq]]))));
+}
 writeFileSync(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${written.map(([u, d]) => `<url><loc>${SITE.url}${u}</loc><lastmod>${d}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 writeFileSync(join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE.url}/sitemap.xml\n`);
 writeFileSync(join(DIST, '404.html'), page({ path: '/404', title: 'Page not found | CRS Planner', description: 'Page not found.', body: '<section class="intro"><h1>Page not found</h1><p>Try the <a href="/">CRS calculator</a> or the <a href="/express-entry-draws/">draws history</a>.</p></section>' }));
