@@ -1,0 +1,52 @@
+{
+  "id": "language-tests",
+  "version": "2026-06-22",
+  "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/language-test.html",
+  "sourceModified": "2026-06-22",
+  "checked": "2026-10-14",
+  "notes": [
+    "Each array gives the minimum score for CLB/NCLC 4, 5, 6, 7, 8, 9, 10 in that order.",
+    "A score below the first value is below CLB/NCLC 4.",
+    "IELTS: General Training only; One Skill Retake not accepted for Express Entry. CELPIP: CELPIP-General. PTE: PTE Core."
+  ],
+  "levels": [4, 5, 6, 7, 8, 9, 10],
+  "tests": {
+    "celpip": {
+      "name": "CELPIP-General", "language": "en", "step": 1, "min": 0, "max": 12,
+      "speaking": [4, 5, 6, 7, 8, 9, 10],
+      "listening": [4, 5, 6, 7, 8, 9, 10],
+      "reading": [4, 5, 6, 7, 8, 9, 10],
+      "writing": [4, 5, 6, 7, 8, 9, 10]
+    },
+    "ielts": {
+      "name": "IELTS General Training", "language": "en", "step": 0.5, "min": 0, "max": 9,
+      "speaking": [4.0, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5],
+      "listening": [4.5, 5.0, 5.5, 6.0, 7.5, 8.0, 8.5],
+      "reading": [3.5, 4.0, 5.0, 6.0, 6.5, 7.0, 8.0],
+      "writing": [4.0, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5]
+    },
+    "pte": {
+      "name": "PTE Core", "language": "en", "step": 1, "min": 10, "max": 90,
+      "speaking": [42, 51, 59, 68, 76, 84, 89],
+      "listening": [28, 39, 50, 60, 71, 82, 89],
+      "reading": [33, 42, 51, 60, 69, 78, 88],
+      "writing": [41, 51, 60, 69, 79, 88, 90]
+    },
+    "tef": {
+      "name": "TEF Canada", "language": "fr", "step": 1, "min": 0, "max": 699,
+      "maxBySkill": { "speaking": 450, "listening": 360, "reading": 300, "writing": 450 },
+      "speaking": [181, 226, 271, 310, 349, 371, 393],
+      "listening": [145, 181, 217, 249, 280, 298, 316],
+      "reading": [121, 151, 181, 207, 233, 248, 263],
+      "writing": [181, 226, 271, 310, 349, 371, 393]
+    },
+    "tcf": {
+      "name": "TCF Canada", "language": "fr", "step": 1, "min": 0, "max": 699,
+      "maxBySkill": { "speaking": 20, "listening": 699, "reading": 699, "writing": 20 },
+      "speaking": [4, 6, 7, 10, 12, 14, 16],
+      "listening": [331, 369, 398, 458, 503, 523, 549],
+      "reading": [342, 375, 406, 453, 499, 524, 549],
+      "writing": [4, 6, 7, 10, 12, 14, 16]
+    }
+  }
+}

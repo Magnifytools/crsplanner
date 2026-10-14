@@ -1,0 +1,6 @@
+{
+  "name": "crsplanner",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test test/*.test.mjs", "build": "node scripts/build.mjs", "draws": "node scripts/draws.mjs --fetch" }
+}

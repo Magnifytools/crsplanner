@@ -1,0 +1,26 @@
+name: Update Express Entry draws
+on:
+  schedule:
+    - cron: "17 */3 * * *"   # every 3 hours; IRCC publishes rounds on weekdays
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node scripts/draws.mjs --fetch
+      - run: npm test
+      - name: Commit if the data changed
+        run: |
+          git config user.name "crsplanner-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/draws.json data/archive
+          if git diff --cached --quiet -- data/draws.json; then
+            echo "No new round or distribution"; git reset -q
+          else
+            git commit -m "Draws: update from IRCC $(date -u +%F)" && git push
+          fi
