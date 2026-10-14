@@ -53,8 +53,17 @@ const isLive = (path) => !(path in schedule.pages) || released.has(path) || proc
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const fmt = (n) => (n === null || n === undefined ? '' : Number(n).toLocaleString('en-CA'));
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const shortDate = (iso) => `${MONTHS[Number(iso.slice(5, 7)) - 1].slice(0, 3)} ${Number(iso.slice(8, 10))}, ${iso.slice(0, 4)}`;
 const longDate = (iso) => `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${Number(iso.slice(8, 10))}, ${iso.slice(0, 4)}`;
 const jsonScript = (id, obj) => `<script type="application/json" id="${id}">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
+const LOGO_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#12352E"/><rect x="6" y="18" width="20" height="3" rx="1.5" fill="#fff"/><rect x="6" y="12" width="4" height="9" rx="1.5" fill="#fff" opacity=".55"/><rect x="12" y="9" width="4" height="12" rx="1.5" fill="#fff" opacity=".55"/><rect x="19" y="5" width="3.6" height="22" rx="1.8" fill="#E5484D"/></svg>';
+const FOOT = [
+  ['Express Entry', [['/', 'CRS calculator'], ['/express-entry-draws/', 'Latest draws'], ['/next-express-entry-draw/', 'Next draw'], ['/express-entry-categories/', 'Categories'], ['/crs-score-distribution/', 'Score distribution'], ['/how-to-increase-crs-score/', 'Raise your score'], ['/fsw-67-points-calculator/', 'FSW 67 points'], ['/cec-eligibility-calculator/', 'CEC eligibility'], ['/proof-of-funds-express-entry/', 'Proof of funds'], ['/canada-pr-fees/', 'PR fees'], ['/noc-code-finder/', 'NOC code finder']]],
+  ['Language tests', [['/clb-converter/', 'CLB converter'], ['/ielts-score-chart/', 'IELTS chart'], ['/celpip-score-chart/', 'CELPIP chart'], ['/pte-core-score-chart/', 'PTE Core chart'], ['/tef-canada-score-chart/', 'TEF Canada chart'], ['/tcf-canada-score-chart/', 'TCF Canada chart'], ['/celpip-to-ielts/', 'CELPIP to IELTS']]],
+  ['Provinces', [['/oinp-points-calculator/', 'Ontario points'], ['/oinp-draws/', 'Ontario draws'], ['/bc-pnp-points-calculator/', 'BC points'], ['/bc-pnp-draws/', 'BC draws'], ['/aaip-points-calculator/', 'Alberta points'], ['/aaip-draws/', 'Alberta draws'], ['/sinp-points-calculator/', 'Saskatchewan points'], ['/mpnp-points-calculator/', 'Manitoba points'], ['/nova-scotia-nominee-program/', 'Nova Scotia'], ['/new-brunswick-pnp/', 'New Brunswick'], ['/pei-pnp/', 'Prince Edward Island'], ['/atlantic-immigration-program/', 'Atlantic program'], ['/rural-community-immigration-pilot/', 'Rural pilot']]],
+  ['Work and study', [['/pgwp-calculator/', 'PGWP length'], ['/spousal-open-work-permit/', 'Spousal work permit'], ['/bridging-open-work-permit/', 'Bridging work permit']]],
+  ['Citizenship and family', [['/physical-presence-calculator/', 'Physical presence'], ['/canadian-citizenship-test-practice/', 'Citizenship test'], ['/pr-residency-obligation-calculator/', 'PR residency obligation'], ['/super-visa-income-requirement/', 'Super visa income'], ['/parents-grandparents-sponsorship-income/', 'Parents sponsorship income']]],
+];
 const NAV = [['/', 'CRS calculator'], ['/clb-converter/', 'CLB converter'], ['/express-entry-draws/', 'Draws'], ['/express-entry-categories/', 'Categories'], ['/crs-score-distribution/', 'Score distribution']];
 const LEVELS = [4, 5, 6, 7, 8, 9, 10];
 const footerTools = [['/', 'CRS calculator'], ['/clb-converter/', 'CLB converter'], ['/express-entry-draws/', 'Express Entry draws'], ['/express-entry-categories/', 'Express Entry categories'], ['/crs-score-distribution/', 'CRS score distribution']];
@@ -80,28 +89,26 @@ function page({ path, title, description, body, scripts = '', jsonld = [], crumb
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${url}">
 <meta property="og:site_name" content="${SITE.name}">
-<meta name="theme-color" content="#111827">
+<meta name="theme-color" content="#12352e">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,600..800&family=Figtree:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="/css/site.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 ${ld.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n')}
 </head>
 <body>
-<header class="site-head"><div class="wrap"><a class="mark" href="/"><b>CRS</b> Planner</a><nav class="nav" aria-label="Main">${nav}</nav></div></header>
+<header class="site-head"><div class="wrap"><a class="mark" href="/" aria-label="CRS Planner, home">${LOGO_SVG.replace('<svg ', '<svg aria-hidden="true" ')}<span><b>CRS</b> Planner</span></a><nav class="nav" aria-label="Main">${nav}</nav></div></header>
 <main class="wrap">${crumbHtml}
 ${body}
 </main>
 <footer class="site-foot"><div class="wrap">
 <p>CRS Planner is an independent site. It is not affiliated with Immigration, Refugees and Citizenship Canada (IRCC) or the Government of Canada, and it is not immigration or legal advice. Rules last checked ${longDate(SITE.checked)}.</p>
-<div class="foot-grid">
-<div><p class="foot-h">Tools</p><ul>${footerTools.map(([h, l]) => `<li><a href="${h}">${l}</a></li>`).join('')}</ul></div>
+<div class="foot-grid">${FOOT.map(([h, links]) => { const live = links.filter(([u]) => isLive(u)); return live.length ? `<div><p class="foot-h">${h}</p><ul>${live.map(([u, l]) => `<li><a href="${u}">${l}</a></li>`).join('')}</ul></div>` : ''; }).join('')}
 <div><p class="foot-h">Draws by category</p><ul>${catPagesList().map((c) => `<li><a href="/express-entry-draws/${CAT_PAGES[c.id].slug}/">${esc(CAT_PAGES[c.id].short)}</a></li>`).join('')}</ul></div>
-<div><p class="foot-h">English: CLB levels</p><ul>${LEVELS.map((l) => `<li><a href="/clb-${l}/">CLB ${l}${l === 10 ? '+' : ''}</a></li>`).join('')}</ul></div>
-<div><p class="foot-h">French: NCLC levels</p><ul>${LEVELS.map((l) => `<li><a href="/nclc-${l}/">NCLC ${l}${l === 10 ? '+' : ''}</a></li>`).join('')}</ul></div>
 <div><p class="foot-h">CRS Planner</p><ul><li><a href="/about/">About and method</a></li><li><a href="/changelog/">Changelog</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/terms/">Terms</a></li></ul></div>
 </div>
+<p class="levels small">English levels: ${LEVELS.map((l) => `<a href="/clb-${l}/">CLB ${l}${l === 10 ? '+' : ''}</a>`).join(' ')} · French levels: ${LEVELS.map((l) => `<a href="/nclc-${l}/">NCLC ${l}${l === 10 ? '+' : ''}</a>`).join(' ')}</p>
 </div></footer>
 ${scripts}
 </body>
@@ -157,8 +164,8 @@ function cwTable() {
 function home() {
   const body = `
 <section class="intro">
-  <h1>CRS Score Calculator for Express Entry (2026)</h1>
-  <p class="lede">Work out your Comprehensive Ranking System score, see where every point comes from, and compare it with the cut-offs of the last 12 months of Express Entry draws, category by category.</p>
+  <h1>CRS calculator for Express Entry</h1>
+  <p class="lede">Answer a few questions about your age, studies, languages and work, and you get the CRS score IRCC would give you. The results panel shows where each point comes from and how your score sits against this year's cut-offs.</p>
   <p class="meta"><span>Rules checked ${longDate(SITE.checked)}</span><span>Source: <a href="${crs.source}" rel="noopener">IRCC CRS criteria</a>, modified ${longDate(crs.sourceModified)}</span><span>Draw data to ${longDate(latestDate)}</span></p>
 </section>
 
@@ -223,6 +230,7 @@ function home() {
   <p class="callout small" id="tcf-note" hidden></p>
   <details class="breakdown"><summary>Every point, line by line</summary>
     <div class="table-scroll"><table><tbody id="breakdown-body"></tbody></table></div><p class="small" id="cap-notes"></p></details>
+  <div class="stand" id="stand" hidden></div>
   <div><h2 class="panel-h">Against the last 12 months of draws</h2><div class="cmp" id="compare"></div>
     <p class="small">Each draw only invites candidates eligible for its program or category. Clearing a cut-off does not mean you would have been invited.</p></div>
   <div><h2 class="panel-h">How your score could change</h2><ul class="whatif" id="whatif"></ul></div>
@@ -260,7 +268,7 @@ ${langTable()}
 <h3>Is this the official calculator?</h3>
 <p>No. IRCC publishes its own tool. CRS Planner uses the same published rules and we test it against IRCC's calculator with sample profiles; the score in your Express Entry profile is the one that counts.</p>
 <h3>How often are the rules checked?</h3>
-<p>Every week, and on the day IRCC announces a change. Each change is listed in the <a href="/changelog/">changelog</a> with its date.</p>
+<p>Every day: a script compares IRCC's pages with the versions we built from and flags any change for review. Each change is listed in the <a href="/changelog/">changelog</a> with its date.</p>
 <h3>Do you store my answers?</h3>
 <p>Your answers stay in your browser so the form is filled in when you come back. Nothing is sent to us. See the <a href="/privacy/">privacy page</a>.</p>
 
@@ -278,7 +286,7 @@ ${langTable()}
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' }, dateModified: SITE.checked,
     description: 'Comprehensive Ranking System score calculator for Express Entry with a full breakdown and a comparison with recent draws.',
   }];
-  return page({ path: '/', title: 'CRS Calculator 2026: Check Your Express Entry CRS Score', description: 'Free CRS calculator for Express Entry. See every point of your score, what would raise it, and how it compares with each draw category in the last 12 months.', body, scripts, jsonld });
+  return page({ path: '/', title: 'CRS Calculator 2026: Check Your CRS Score for Express Entry', description: 'Free CRS calculator for Express Entry. See every point of your score, what would raise it, and how it compares with each draw category in the last 12 months.', body, scripts, jsonld });
 }
 
 // ---------- CLB converter ----------
@@ -294,8 +302,8 @@ function clbPage() {
   }).join('');
   const body = `
 <section class="intro">
-  <h1>CLB Converter: IELTS, CELPIP, PTE Core, TEF and TCF</h1>
-  <p class="lede">Turn your test results into Canadian Language Benchmark (CLB) or NCLC levels for Express Entry, ability by ability, and check them against each program's minimum.</p>
+  <h1>CLB converter for IELTS, CELPIP, PTE, TEF and TCF</h1>
+  <p class="lede">IRCC doesn't look at your raw test scores. It converts each of the four abilities to a CLB level (NCLC in French). Type your results and see your levels, and whether they clear the minimum for each program.</p>
   <p class="meta"><span>Equivalences checked ${longDate(SITE.checked)}</span><span>Source: <a href="${lang.source}" rel="noopener">IRCC language test results</a></span></p>
 </section>
 <div class="tool">
@@ -334,7 +342,7 @@ function drawsPage() {
   const counts = Object.fromEntries(draws.categories.map((c) => [c.id, draws.rounds.filter((r) => r.category === c.id).length]));
   const chipsHtml = `<button type="button" data-cat="all" aria-pressed="true">All (${draws.rounds.length})</button>` +
     draws.categories.map((c) => `<button type="button" data-cat="${c.id}" aria-pressed="false">${esc(c.label)} (${counts[c.id]})</button>`).join('');
-  const rows = draws.rounds.map((r) => `<tr data-cat="${r.category}"><td>${r.date}</td><td class="n">${esc(r.n)}</td><td>${esc(r.name)}</td><td class="n">${fmt(r.size)}</td><td class="n">${fmt(r.crs)}</td></tr>`).join('');
+  const rows = draws.rounds.map((r) => `<tr data-cat="${r.category}"><td data-sort="${r.date}">${shortDate(r.date)}</td><td class="n">${esc(r.n)}</td><td>${esc(r.name)}</td><td class="n">${fmt(r.size)}</td><td class="n">${fmt(r.crs)}</td></tr>`).join('');
   const main = draws.distribution.buckets.filter((b) => !b.sub);
   const maxB = Math.max(...main.map((b) => b.count));
   const distRows = draws.distribution.buckets.map((b) => `<tr${b.sub ? '' : ' class="section"'}><td>${b.sub ? '&nbsp;&nbsp;' : ''}${b.range}</td><td class="n">${fmt(b.count)}</td><td class="n">${((b.count / draws.distribution.total) * 100).toFixed(1)}%</td></tr>`).join('');
@@ -345,8 +353,8 @@ function drawsPage() {
   const thisYear = draws.rounds.filter((r) => r.date.startsWith(year));
   const body = `
 <section class="intro">
-  <h1>Express Entry Draws: Latest Draw and Every Round Since 2015</h1>
-  <p class="lede">All ${fmt(draws.rounds.length)} rounds of invitations with their cut-off scores and invitations, filterable by program and category, plus the current score distribution of the pool.</p>
+  <h1>Express Entry draws</h1>
+  <p class="lede">${fmt(draws.rounds.length)} rounds of invitations since January 2015, newest first. Filter by program or category to see how cut-offs have moved, and check the latest round before anything else.</p>
   <p class="meta"><span>Updated daily from IRCC data</span><span>Latest round: #${esc(L.n)} on ${longDate(L.date)}</span><span>Source: <a href="${draws.page}" rel="noopener">IRCC rounds of invitations</a></span></p>
 </section>
 
@@ -436,7 +444,7 @@ function levelPage(language, L) {
   const body = `
 <section class="intro">
   <h1>${fr ? `NCLC ${L}${plus} in French: TEF Canada and TCF Canada scores` : `CLB ${L}${plus}: the IELTS, CELPIP and PTE Core scores you need`}</h1>
-  <p class="lede">${fr ? `NCLC ${L} is the French equivalent of CLB ${L}.` : ''} These are the ${listNames} results that count as ${name} ${L}${plus} for Express Entry, ability by ability, and what that level is worth in CRS points.</p>
+  <p class="lede">${fr ? `NCLC ${L} is the French equivalent of CLB ${L}.` : ''} These are the ${listNames} results you need for ${name} ${L}${plus} in speaking, listening, reading and writing, and what that level is worth in CRS points.</p>
   <p class="meta"><span>Equivalences checked ${longDate(SITE.checked)}</span><span>Source: <a href="${lang.source}" rel="noopener">IRCC language test results</a></span></p>
 </section>
 ${nav}
@@ -498,8 +506,8 @@ function distributionPage() {
   }
   const body = `
 <section class="intro">
-  <h1>CRS Score Distribution of the Express Entry Pool</h1>
-  <p class="lede">How many profiles sit in each CRS score range, from IRCC's latest snapshot of the pool, and how the pool has changed.</p>
+  <h1>CRS score distribution of the Express Entry pool</h1>
+  <p class="lede">How many people are in the pool at each score, from IRCC's latest count. Useful for one question: how many candidates are ahead of you.</p>
   <p class="meta"><span>Snapshot of ${esc(d.asOf)}</span><span>Updated with every round</span><span>Source: <a href="${draws.page}" rel="noopener">IRCC rounds of invitations</a></span></p>
 </section>
 <div class="cards">
@@ -522,19 +530,19 @@ ${histHtml}
 
 // ---------- Draws by program or category ----------
 const CAT_PAGES = {
-  cec: { slug: 'cec', short: 'CEC', kw: 'CEC Draw', h1: 'CEC Draws: Canadian Experience Class Cut-off Scores', about: 'Canadian Experience Class rounds invite only candidates eligible for the CEC, which requires at least one year of skilled work experience in Canada in the last three years.' },
-  pnp: { slug: 'pnp', short: 'PNP', kw: 'PNP Draw', h1: 'PNP Draws: Provincial Nominee Program Cut-off Scores', about: 'Provincial Nominee Program rounds invite only candidates with a provincial or territorial nomination. The nomination adds 600 points, which is why these cut-offs sit above 600.' },
-  french: { slug: 'french', short: 'French', kw: 'French Draw', h1: 'French-Language Proficiency Draws: Cut-off Scores', about: 'French-language proficiency rounds invite candidates with strong French results. IRCC sets the exact requirement for each year’s version of the category.' },
-  health: { slug: 'healthcare', short: 'Healthcare', kw: 'Healthcare Draw', h1: 'Healthcare Draws: Healthcare and Social Services Cut-off Scores', about: 'Healthcare and social services rounds invite candidates with recent work experience in the eligible occupations listed by IRCC for each version of the category.' },
-  trades: { slug: 'trades', short: 'Trades', kw: 'Trades Draw', h1: 'Trades Draws: Trade Occupations Cut-off Scores', about: 'Trade occupation rounds invite candidates with recent work experience in the trades listed by IRCC for each version of the category.' },
-  stem: { slug: 'stem', short: 'STEM', kw: 'STEM Draw', h1: 'STEM Draws: STEM Occupations Cut-off Scores', about: 'STEM rounds invited candidates with recent work experience in eligible science, technology, engineering and math occupations.' },
-  transport: { slug: 'transport', short: 'Transport', kw: 'Transport Draw', h1: 'Transport Draws: Transport Occupations Cut-off Scores', about: 'Transport occupation rounds invite candidates with recent work experience in the transport occupations listed by IRCC.' },
-  education: { slug: 'education', short: 'Education', kw: 'Education Draw', h1: 'Education Draws: Education Occupations Cut-off Scores', about: 'Education occupation rounds invite candidates with recent work experience in the education occupations listed by IRCC.' },
-  agriculture: { slug: 'agriculture', short: 'Agriculture', kw: 'Agriculture Draw', h1: 'Agriculture Draws: Agriculture and Agri-Food Cut-off Scores', about: 'Agriculture and agri-food rounds invited candidates with recent work experience in the eligible occupations.' },
-  managers: { slug: 'senior-managers', short: 'Senior managers', kw: 'Senior Managers Draw', h1: 'Senior Managers Draws: Cut-off Scores', about: 'This category invites senior managers with Canadian work experience, as defined by IRCC for the 2026 version of the category.' },
-  physicians: { slug: 'physicians', short: 'Physicians', kw: 'Physicians Draw', h1: 'Physicians Draws: Physicians with Canadian Work Experience', about: 'This category invites physicians with Canadian work experience, as defined by IRCC for the 2026 version of the category.' },
-  researchers: { slug: 'researchers', short: 'Researchers', kw: 'Researchers Draw', h1: 'Researchers Draws: Researchers with Canadian Work Experience', about: 'This category invites researchers with Canadian work experience, as defined by IRCC for the 2026 version of the category.' },
-  general: { slug: 'general', short: 'General', kw: 'General Draw', h1: 'General (All-Program) Draws: Cut-off Scores', about: 'General rounds invite the top-ranked candidates from all three federal programs. They were the main type of round until category and program rounds took over.' },
+  cec: { slug: 'cec', short: 'CEC', kw: 'CEC Draw', h1: 'CEC draws and cut-off scores', about: 'Canadian Experience Class rounds invite only candidates eligible for the CEC, which requires at least one year of skilled work experience in Canada in the last three years.' },
+  pnp: { slug: 'pnp', short: 'PNP', kw: 'PNP Draw', h1: 'PNP draws and cut-off scores', about: 'Provincial Nominee Program rounds invite only candidates with a provincial or territorial nomination. The nomination adds 600 points, which is why these cut-offs sit above 600.' },
+  french: { slug: 'french', short: 'French', kw: 'French Draw', h1: 'French-language draws and cut-off scores', about: 'French-language proficiency rounds invite candidates with strong French results. IRCC sets the exact requirement for each year’s version of the category.' },
+  health: { slug: 'healthcare', short: 'Healthcare', kw: 'Healthcare Draw', h1: 'Healthcare draws and cut-off scores', about: 'Healthcare and social services rounds invite candidates with recent work experience in the eligible occupations listed by IRCC for each version of the category.' },
+  trades: { slug: 'trades', short: 'Trades', kw: 'Trades Draw', h1: 'Trades draws and cut-off scores', about: 'Trade occupation rounds invite candidates with recent work experience in the trades listed by IRCC for each version of the category.' },
+  stem: { slug: 'stem', short: 'STEM', kw: 'STEM Draw', h1: 'STEM draws and cut-off scores', about: 'STEM rounds invited candidates with recent work experience in eligible science, technology, engineering and math occupations.' },
+  transport: { slug: 'transport', short: 'Transport', kw: 'Transport Draw', h1: 'Transport draws and cut-off scores', about: 'Transport occupation rounds invite candidates with recent work experience in the transport occupations listed by IRCC.' },
+  education: { slug: 'education', short: 'Education', kw: 'Education Draw', h1: 'Education draws and cut-off scores', about: 'Education occupation rounds invite candidates with recent work experience in the education occupations listed by IRCC.' },
+  agriculture: { slug: 'agriculture', short: 'Agriculture', kw: 'Agriculture Draw', h1: 'Agriculture and agri-food draws', about: 'Agriculture and agri-food rounds invited candidates with recent work experience in the eligible occupations.' },
+  managers: { slug: 'senior-managers', short: 'Senior managers', kw: 'Senior Managers Draw', h1: 'Senior managers draws and cut-off scores', about: 'This category invites senior managers with Canadian work experience, as defined by IRCC for the 2026 version of the category.' },
+  physicians: { slug: 'physicians', short: 'Physicians', kw: 'Physicians Draw', h1: 'Physicians draws and cut-off scores', about: 'This category invites physicians with Canadian work experience, as defined by IRCC for the 2026 version of the category.' },
+  researchers: { slug: 'researchers', short: 'Researchers', kw: 'Researchers Draw', h1: 'Researchers draws and cut-off scores', about: 'This category invites researchers with Canadian work experience, as defined by IRCC for the 2026 version of the category.' },
+  general: { slug: 'general', short: 'General', kw: 'General Draw', h1: 'General (all-program) draws', about: 'General rounds invite the top-ranked candidates from all three federal programs. They were the main type of round until category and program rounds took over.' },
 };
 const median = (a) => { const s = [...a].sort((x, y) => x - y); const m = s.length >> 1; return s.length ? (s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2)) : null; };
 const dayDiff = (a, b) => Math.round((Date.parse(a) - Date.parse(b)) / 864e5);
@@ -571,7 +579,7 @@ function categoryPage(c) {
   const year = latestDate.slice(0, 4);
   const thisYear = all.filter((r) => r.date.startsWith(year));
   const names = [...new Set(all.map((r) => r.name))];
-  const rows = all.map((r) => `<tr><td>${r.date}</td><td class="n">${esc(r.n)}</td><td>${esc(r.name)}</td><td class="n">${fmt(r.size)}</td><td class="n">${fmt(r.crs)}</td></tr>`).join('');
+  const rows = all.map((r) => `<tr><td data-sort="${r.date}">${shortDate(r.date)}</td><td class="n">${esc(r.n)}</td><td>${esc(r.name)}</td><td class="n">${fmt(r.size)}</td><td class="n">${fmt(r.crs)}</td></tr>`).join('');
   const others = catPagesList().filter((o) => o.id !== c.id).map((o) => `<a href="/express-entry-draws/${CAT_PAGES[o.id].slug}/">${esc(CAT_PAGES[o.id].short)}</a>`).join(', ');
   const stats = recent.length
     ? `<div class="cards">
@@ -585,7 +593,7 @@ function categoryPage(c) {
   const body = `
 <section class="intro">
   <h1>${esc(meta.h1)}</h1>
-  <p class="lede">The latest ${esc(meta.short)} round was #${esc(last.n)} on ${longDate(last.date)}: ${fmt(last.size)} invitations with a cut-off of ${fmt(last.crs)} points. Below are all ${fmt(all.length)} ${esc(meta.short)} rounds since ${all.at(-1).date.slice(0, 4)}, with the trend and how often they happen.</p>
+  <p class="lede">The last ${esc(meta.short)} round was #${esc(last.n)} on ${longDate(last.date)}: ${fmt(last.size)} invitations, and the lowest score invited was ${fmt(last.crs)}. There have been ${fmt(all.length)} of them since ${all.at(-1).date.slice(0, 4)}; the chart shows how the cut-off has moved and the table has every round.</p>
   <p class="meta"><span>Updated daily from IRCC data</span><span>Source: <a href="${draws.page}" rel="noopener">IRCC rounds of invitations</a></span></p>
 </section>
 ${stats}
@@ -645,8 +653,8 @@ function categoriesPage() {
     ? ` In the last 12 months every round for ${esc(lowCat.name[0].toLowerCase() + lowCat.name.slice(1))} closed at ${lowCat.max} points or less, while no Canadian Experience Class round went below ${Math.min(...cecRecent.map((r) => r.crs))}.` : '';
   const body = `
 <section class="intro">
-  <h1>Express Entry Categories 2026: Who Qualifies and Recent Cut-offs</h1>
-  <p class="lede">IRCC runs category-based rounds for ${C.length} categories in 2026. Here is what each one asks for, the eligible occupations with their NOC codes, and the cut-off scores of its recent rounds.</p>
+  <h1>Express Entry categories in 2026</h1>
+  <p class="lede">IRCC hasn't held a general round since 2024: invitations now go out through program rounds such as the CEC, or through categories. For each of the ${C.length} categories you'll find who qualifies, the occupations that count (with NOC codes) and the scores of its recent rounds.</p>
   <p class="meta"><span>IRCC page modified ${longDate(cats.sourceModified)}</span><span>Checked ${longDate(cats.checked)}</span><span>Source: <a href="${cats.source}" rel="noopener">IRCC category-based selection</a></span></p>
 </section>
 <div class="table-scroll"><table><thead><tr><th>Category</th><th class="n">Occupations</th><th>Latest round</th><th class="n">Cut-offs, last 12 months</th></tr></thead><tbody>${summary}</tbody></table></div>
@@ -667,11 +675,11 @@ ${retired.length ? `<h2>Categories no longer on the list</h2><p>${retired.map((c
 
 // ---------- Score chart pages, one per test ----------
 const CHART_PAGES = {
-  celpip: { slug: 'celpip-score-chart', short: 'CELPIP', title: 'CELPIP Score Chart and CLB Calculator for Express Entry (2026)', h1: 'CELPIP Score Chart for Express Entry', extra: 'For CLB 4 to 10, each CELPIP-General level is the same number as the CLB level: a 9 in an ability is CLB 9. Levels 11 and 12 count as CLB 10. CELPIP-General LS, the speaking and listening version, is not accepted for Express Entry.' },
-  ielts: { slug: 'ielts-score-chart', short: 'IELTS', title: 'IELTS to CLB Chart and Calculator for Canada PR (2026)', h1: 'IELTS to CLB: Score Chart for Canada PR (Express Entry)', extra: 'Only IELTS General Training is accepted for Express Entry; IELTS Academic is not, and neither are IELTS One Skill Retake results. Listening asks for more than the other abilities from CLB 8 up: CLB 9 is 8.0 in listening but 7.0 in speaking, reading and writing.' },
-  tef: { slug: 'tef-canada-score-chart', short: 'TEF Canada', title: 'TEF Canada Score Chart: TEF to CLB and NCLC Calculator (2026)', h1: 'TEF Canada Score Chart for Express Entry', extra: 'Each ability has its own scale: speaking and writing are scored out of 450, listening out of 360 and reading out of 300. NCLC is the French name for the CLB levels; NCLC 7 is CLB 7.' },
-  tcf: { slug: 'tcf-canada-score-chart', short: 'TCF Canada', title: 'TCF Canada Score Chart: TCF to CLB and NCLC Calculator (2026)', h1: 'TCF Canada Score Chart for Express Entry', extra: 'Speaking and writing are scored out of 20; listening and reading out of 699. NCLC is the French name for the CLB levels; NCLC 7 is CLB 7.' },
-  pte: { slug: 'pte-core-score-chart', short: 'PTE Core', title: 'PTE Core Score Chart and PTE to CLB Calculator (2026)', h1: 'PTE Core Score Chart for Express Entry', extra: 'Only PTE Core is accepted for Express Entry; PTE Academic results are not. Each ability has its own thresholds, so the same score can give different CLB levels in speaking and in listening.' },
+  celpip: { slug: 'celpip-score-chart', short: 'CELPIP', title: 'CELPIP Score Chart and CLB Calculator for Express Entry (2026)', h1: 'CELPIP score chart and CLB converter', extra: 'For CLB 4 to 10, each CELPIP-General level is the same number as the CLB level: a 9 in an ability is CLB 9. Levels 11 and 12 count as CLB 10. CELPIP-General LS, the speaking and listening version, is not accepted for Express Entry.' },
+  ielts: { slug: 'ielts-score-chart', short: 'IELTS', title: 'IELTS to CLB Chart 2026 (and CLB to IELTS) for Canada PR', h1: 'IELTS to CLB chart for Canada PR', extra: 'Only IELTS General Training is accepted for Express Entry; IELTS Academic is not, and neither are IELTS One Skill Retake results. Listening asks for more than the other abilities from CLB 8 up: CLB 9 is 8.0 in listening but 7.0 in speaking, reading and writing.' },
+  tef: { slug: 'tef-canada-score-chart', short: 'TEF Canada', title: 'TEF Canada Score Chart: TEF to CLB and NCLC Calculator (2026)', h1: 'TEF Canada score chart and NCLC converter', extra: 'Each ability has its own scale: speaking and writing are scored out of 450, listening out of 360 and reading out of 300. NCLC is the French name for the CLB levels; NCLC 7 is CLB 7.' },
+  tcf: { slug: 'tcf-canada-score-chart', short: 'TCF Canada', title: 'TCF Canada Score Chart: TCF to CLB and NCLC Calculator (2026)', h1: 'TCF Canada score chart and NCLC converter', extra: 'Speaking and writing are scored out of 20; listening and reading out of 699. NCLC is the French name for the CLB levels; NCLC 7 is CLB 7.' },
+  pte: { slug: 'pte-core-score-chart', short: 'PTE Core', title: 'PTE Core Score Chart and PTE to CLB Calculator (2026)', h1: 'PTE Core score chart and CLB converter', extra: 'Only PTE Core is accepted for Express Entry; PTE Academic results are not. Each ability has its own thresholds, so the same score can give different CLB levels in speaking and in listening.' },
 };
 function scoreChartPage(id) {
   const t = lang.tests[id];
@@ -696,7 +704,7 @@ function scoreChartPage(id) {
   const body = `
 <section class="intro">
   <h1>${esc(meta.h1)}</h1>
-  <p class="lede">The ${esc(t.name)} scores that give each ${name} level for Express Entry, ability by ability, the minimum scores for each program and what they are worth in CRS points. Enter your results to see your levels.</p>
+  <p class="lede">IRCC turns each ${esc(t.name)} ability into a ${name} level, and the level is what gets scored. The chart shows the result you need for each level; type yours to see your levels, whether they meet each program's minimum and the CRS points they're worth.</p>
   <p class="meta"><span>Equivalences checked ${longDate(SITE.checked)}</span><span>Source: <a href="${lang.source}" rel="noopener">IRCC language test results</a>, modified ${longDate(lang.sourceModified)}</span></p>
 </section>
 <div class="tool">
@@ -745,8 +753,8 @@ function convertPage() {
   const i9 = lang.levels.indexOf(9);
   const body = `
 <section class="intro">
-  <h1>CELPIP to IELTS Converter (and IELTS to CELPIP)</h1>
-  <p class="lede">Turn a CELPIP-General score into the IELTS General Training score that gives the same CLB level for Canadian immigration, or the other way round. PTE Core is included too.</p>
+  <h1>CELPIP to IELTS converter</h1>
+  <p class="lede">Have a CELPIP result and want the IELTS General Training equivalent, or the other way round? Both tests map to the same CLB levels, so the comparison is exact level by level. PTE Core is in the table too.</p>
   <p class="meta"><span>Equivalences checked ${longDate(SITE.checked)}</span><span>Source: <a href="${lang.source}" rel="noopener">IRCC language test results</a>, modified ${longDate(lang.sourceModified)}</span></p>
 </section>
 <div class="tool">
@@ -798,8 +806,8 @@ function nextDrawPage() {
   const weeks = new Set(dates.map((d) => { const t = new Date(`${d}T12:00:00Z`); const day = (t.getUTCDay() + 6) % 7; return new Date(t - day * 864e5).toISOString().slice(0, 10); }));
   const body = `
 <section class="intro">
-  <h1>Next Express Entry Draw: When Rounds Happen, by Category</h1>
-  <p class="lede">IRCC does not publish a calendar of rounds of invitations. What it does publish is every past round, so here is how often each program and category has had a round in the last 12 months, how long ago the last one was and its cut-off.</p>
+  <h1>When is the next Express Entry draw?</h1>
+  <p class="lede">IRCC never announces rounds in advance. What it does publish is every past round, so this page tells you how often each program and category has been drawn in the last 12 months and how long it has been since the last one.</p>
   <p class="meta"><span>Updated daily from IRCC data</span><span>Latest round: #${esc(draws.latestRound.n)} on ${longDate(latestDate)}</span><span>Source: <a href="${draws.page}" rel="noopener">IRCC rounds of invitations</a></span></p>
 </section>
 <div class="cards">
@@ -835,8 +843,8 @@ function increasePage() {
   const te = crs.transferability.education.withLanguage;
   const body = `
 <section class="intro">
-  <h1>How to Increase Your CRS Score: Every Lever, in Points</h1>
-  <p class="lede">The ways to raise a Comprehensive Ranking System score, with the exact points each one adds under IRCC's current criteria. Run your own profile through the <a href="/">CRS calculator</a>: its "How your score could change" panel applies these to your answers.</p>
+  <h1>How to increase your CRS score</h1>
+  <p class="lede">Some changes add a handful of points, others add hundreds. Each option below comes with the exact points it gives under IRCC's current rules. To try them on your own profile, use the "How your score could change" panel in the <a href="/">CRS calculator</a>.</p>
   <p class="meta"><span>Rules checked ${longDate(SITE.checked)}</span><span>Source: <a href="${crs.source}" rel="noopener">IRCC CRS criteria</a>, modified ${longDate(crs.sourceModified)}</span></p>
 </section>
 <article class="prose">
@@ -883,8 +891,8 @@ function agePage() {
   const s = (a) => crs.core.age.byAge[a][1];
   const body = `
 <section class="intro">
-  <h1>CRS Points by Age: Express Entry Age Points Year by Year</h1>
-  <p class="lede">How many Comprehensive Ranking System points each age gives, for single applicants and for applicants whose partner comes with them, and how many you lose with each birthday.</p>
+  <h1>CRS points by age</h1>
+  <p class="lede">Age points peak between 20 and 29 and then drop every birthday until they reach zero at 45. The table shows the points for each age, single or with a partner coming with you.</p>
   <p class="meta"><span>Rules checked ${longDate(SITE.checked)}</span><span>Source: <a href="${crs.source}" rel="noopener">IRCC CRS criteria</a>, modified ${longDate(crs.sourceModified)}</span></p>
 </section>
 <div class="cards">
@@ -910,8 +918,8 @@ function presencePage() {
   const c = citz;
   const body = `
 <section class="intro">
-  <h1>Physical Presence Calculator for Canadian Citizenship</h1>
-  <p class="lede">Count your days in Canada for a citizenship application: ${fmt(c.requiredDays)} days in the ${c.periodYears} years before you apply, with half-day credit for time before you became a permanent resident. Add your trips and see whether you meet the minimum, and if not, the first date you would.</p>
+  <h1>Physical presence calculator for Canadian citizenship</h1>
+  <p class="lede">You need ${fmt(c.requiredDays)} days in Canada in the ${c.periodYears} years before you apply, and time spent here before you became a permanent resident counts at half. Add your trips and the calculator tells you whether you're there yet, or the first date you will be.</p>
   <p class="meta"><span>Rules checked ${longDate(c.checked)}</span><span>Source: <a href="${c.source}" rel="noopener">IRCC citizenship eligibility</a>, modified ${longDate(c.sourceModified)}</span></p>
 </section>
 <div class="tool">
@@ -957,8 +965,8 @@ function fundsPage() {
   const rows = Object.entries(f.amounts).map(([n, v]) => `<tr><td>${n}</td><td class="n">$${fmt(v)}</td></tr>`).join('') + `<tr><td>Each additional family member</td><td class="n">+$${fmt(f.eachAdditional)}</td></tr>`;
   const body = `
 <section class="intro">
-  <h1>Proof of Funds for Express Entry: How Much Money You Need</h1>
-  <p class="lede">The minimum settlement funds IRCC asks for, by family size, who has to show them and what counts as proof. Enter your family size to see your amount.</p>
+  <h1>Proof of funds for Express Entry</h1>
+  <p class="lede">IRCC wants to see that you can support yourself and your family when you land. The amount depends on family size; enter yours to see it, and check whether you even need to show it.</p>
   <p class="meta"><span>Amounts updated by IRCC on ${longDate(f.tableUpdated)}</span><span>Checked ${longDate(f.checked)}</span><span>Source: <a href="${f.source}" rel="noopener">IRCC proof of funds</a></span></p>
 </section>
 <div class="tool">
@@ -1001,8 +1009,8 @@ function residencyPage() {
   const r = resid;
   const body = `
 <section class="intro">
-  <h1>PR Residency Obligation Calculator: 730 Days in 5 Years</h1>
-  <p class="lede">Check whether you meet the residency obligation to keep your permanent resident status, for example before renewing your PR card: at least ${r.requiredDays} days in a five-year period, counting your trips and the time abroad that counts as time in Canada.</p>
+  <h1>PR residency obligation calculator</h1>
+  <p class="lede">To keep permanent resident status you need 730 days in Canada in every five-year period. Add your trips before renewing your PR card and see where you stand, including time abroad that still counts.</p>
   <p class="meta"><span>Rules checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC PR status</a>, modified ${longDate(r.sourceModified)}</span></p>
 </section>
 <div class="tool">
@@ -1063,8 +1071,8 @@ function oinpCalcPage() {
   const owpRounds = oinpDraws.rounds.filter((x) => x.stream === 'owp');
   const body = `
 <section class="intro">
-  <h1>OINP Points Calculator: Ontario Workforce Priority Stream (2026)</h1>
-  <p class="lede">Score your expression of interest for the Ontario Immigrant Nominee Program under the new Ontario Workforce Priority stream, the only OINP stream open since July 2026. Every factor and point value comes from Ontario's stream page.</p>
+  <h1>OINP points calculator for the Ontario Workforce Priority stream</h1>
+  <p class="lede">Since July 2026 this is the only OINP stream taking expressions of interest. Score your profile with the same factors and point values Ontario publishes.</p>
   <p class="meta"><span>Scoring checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">Ontario Workforce Priority stream</a>, updated ${longDate(r.sourceModified)}</span></p>
 </section>
 <div class="tool">
@@ -1108,7 +1116,7 @@ function oinpDrawsPage() {
     const yrs = [...new Set(rs.map((x) => x.date.slice(0, 4)))];
     return `<tr><td>${esc(name(s))}</td><td class="n">${rs.length}</td><td class="n">${fmt(rs.reduce((a, x) => a + (x.invitations || 0), 0))}</td><td>${rs[0].date}</td><td class="n">${yrs.at(-1)}–${yrs[0]}</td></tr>`;
   }).join('');
-  const rows = d.rounds.map((x) => `<tr data-s="${x.stream}"><td>${x.date}</td><td>${esc(x.streamName)}</td><td class="n">${fmt(x.invitations)}</td><td class="n">${esc(x.scoreText || '')}</td><td>${esc(x.notes || '')}</td></tr>`).join('');
+  const rows = d.rounds.map((x) => `<tr data-s="${x.stream}"><td data-sort="${x.date}">${shortDate(x.date)}</td><td>${esc(x.streamName)}</td><td class="n">${fmt(x.invitations)}</td><td class="n">${esc(x.scoreText || '')}</td><td>${esc(x.notes || '')}</td></tr>`).join('');
   const chips = `<button type="button" data-s="all" aria-pressed="true">All (${d.rounds.length})</button>` + streams.map((s) => `<button type="button" data-s="${s}" aria-pressed="false">${esc(name(s).replace('Employer Job Offer: ', ''))}</button>`).join('');
   const last = d.rounds[0];
   const owpN = d.rounds.filter((x) => x.stream === 'owp').length;
@@ -1116,8 +1124,8 @@ function oinpDrawsPage() {
   const yr = d.rounds.filter((x) => x.date.startsWith(y));
   const body = `
 <section class="intro">
-  <h1>OINP Draws: Ontario PNP Invitations and Score History</h1>
-  <p class="lede">Every invitation round Ontario has published for the Ontario Immigrant Nominee Program since 2021: ${fmt(d.rounds.length)} rounds by stream, with invitations, minimum scores and targets.</p>
+  <h1>OINP draws</h1>
+  <p class="lede">Every invitation round Ontario has published since 2021, ${fmt(d.rounds.length)} in total, by stream, with the number invited and the lowest score that made it.</p>
   <p class="meta"><span>Ontario's page updated ${longDate(d.sourceUpdated)}</span><span>Checked ${longDate(d.fetchedAt)}</span><span>Source: <a href="${d.source}" rel="noopener">Invitations to apply to the OINP</a></span></p>
 </section>
 <div class="cards">
@@ -1157,8 +1165,8 @@ function mpnpCalcPage() {
   const sw = recent.flatMap((d) => d.segments.filter((s) => s.minScore !== null).map((s) => ({ ...s, date: d.date, n: d.n })));
   const body = `
 <section class="intro">
-  <h1>MPNP Points Calculator: Manitoba EOI Ranking Score (2026)</h1>
-  <p class="lede">Work out your Expression of Interest ranking score for the Manitoba Provincial Nominee Program, out of ${fmt(r.max)}, with every factor from Manitoba's official grid. It applies to the ${esc(r.applies)}.</p>
+  <h1>MPNP points calculator</h1>
+  <p class="lede">Manitoba ranks expressions of interest out of ${fmt(r.max)}. Score yours with the official grid. It applies to the ${esc(r.applies)}.</p>
   <p class="meta"><span>Grid checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">MPNP Expression of Interest</a>, updated ${longDate(r.sourceModified)}</span></p>
 </section>
 <div class="tool">
@@ -1216,14 +1224,14 @@ function mpnpDrawsPage() {
   const yr = d.filter((x) => x.date.startsWith(y));
   const short = { 'Skilled Worker in Manitoba': 'SWM', 'Skilled Worker Overseas': 'SWO', 'International Education Stream': 'IES', 'Skilled Worker Stream': 'Strategic', 'Occupation-specific selections': 'Occupations', 'Completed post-secondary study in Manitoba': 'MB graduates', 'Francophone selection': 'Francophone' };
   const scores = (x) => x.segments.filter((s) => s.minScore !== null).map((s) => `${s.minScore}${s.group ? ` ${short[s.group] || s.group}` : ''}`).join(', ');
-  const rows = d.map((x) => `<tr><td>${x.date}</td><td class="n"><a href="${x.url}" rel="noopener">#${x.n}</a></td><td class="n">${fmt(x.laas)}</td><td class="n">${x.expressEntry === null ? '' : fmt(x.expressEntry)}</td><td>${esc(scores(x))}</td></tr>`).join('');
+  const rows = d.map((x) => `<tr><td data-sort="${x.date}">${shortDate(x.date)}</td><td class="n"><a href="${x.url}" rel="noopener">#${x.n}</a></td><td class="n">${fmt(x.laas)}</td><td class="n">${x.expressEntry === null ? '' : fmt(x.expressEntry)}</td><td>${esc(scores(x))}</td></tr>`).join('');
   const lastSegs = last.segments.map((s) => `<tr><td>${esc(s.group || '')}<div class="small">${esc(s.criteria || '')}</div></td><td class="n">${fmt(s.laas)}</td><td class="n">${s.minScore ?? '–'}</td></tr>`).join('');
   const swm = d.flatMap((x) => x.segments.filter((s) => s.group === 'Skilled Worker in Manitoba' && s.minScore).map((s) => ({ date: x.date, crs: s.minScore }))).filter((x) => x.date >= `${Number(y) - 3}${last.date.slice(4)}`);
   const missing = []; const have = new Set(d.map((x) => x.n)); for (let i = 1; i <= last.n; i++) if (!have.has(i)) missing.push(i);
   const body = `
 <section class="intro">
-  <h1>MPNP Draws: Manitoba EOI Draw History and Scores</h1>
-  <p class="lede">Every Manitoba Provincial Nominee Program Expression of Interest draw published on Manitoba's website: ${fmt(d.length)} draws since 2015, with Letters of Advice to Apply and the lowest ranking scores invited.</p>
+  <h1>MPNP draws</h1>
+  <p class="lede">All ${fmt(d.length)} Manitoba expression of interest draws published since 2015, with how many Letters of Advice to Apply went out and the lowest score invited.</p>
   <p class="meta"><span>Updated automatically from Manitoba's posts</span><span>Latest: draw #${last.n} on ${longDate(last.date)}</span><span>Source: <a href="${mpnpDraws.source}" rel="noopener">MPNP EOI draws</a></span></p>
 </section>
 <div class="cards">
@@ -1258,8 +1266,8 @@ function sinpCalcPage() {
   const last = sinpDraws.selections[0];
   const body = `
 <section class="intro">
-  <h1>SINP Points Calculator: Saskatchewan International Skilled Worker Grid</h1>
-  <p class="lede">Score yourself on the Saskatchewan Immigrant Nominee Program points grid for International Skilled Workers, out of ${r.max}. Saskatchewan Express Entry, Occupations In-Demand and Employment Offer candidates need at least ${r.minimumToApply} points to apply.</p>
+  <h1>SINP points calculator</h1>
+  <p class="lede">Saskatchewan scores International Skilled Worker candidates out of ${r.max}, and you need at least ${r.minimumToApply} to submit an expression of interest under Saskatchewan Express Entry, Occupations In-Demand or Employment Offer.</p>
   <p class="meta"><span>Grid checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">SINP: Assess your eligibility</a></span></p>
 </section>
 <div class="tool">
@@ -1300,14 +1308,14 @@ function sinpDrawsPage() {
   const d = sinpDraws;
   const s = d.selections;
   const last = s[0];
-  const rows = s.map((x) => `<tr><td>${x.date}</td><td>${esc(x.subcategory)}</td><td class="n">${x.minScore}</td><td class="n">${fmt(x.invited)}</td><td>${esc(x.target)}</td></tr>`).join('');
+  const rows = s.map((x) => `<tr><td data-sort="${x.date}">${shortDate(x.date)}</td><td>${esc(x.subcategory)}</td><td class="n">${x.minScore}</td><td class="n">${fmt(x.invited)}</td><td>${esc(x.target)}</td></tr>`).join('');
   const byYear = [...new Set(s.map((x) => x.date.slice(0, 4)))].map((y) => { const r = s.filter((x) => x.date.startsWith(y)); return `<tr><td>${y}</td><td class="n">${r.length}</td><td class="n">${fmt(r.reduce((a, x) => a + x.invited, 0))}</td><td class="n">${Math.min(...r.map((x) => x.minScore))}–${Math.max(...r.map((x) => x.minScore))}</td></tr>`; }).join('');
   const ee = s.filter((x) => x.subcategory === 'Express Entry').map((x) => ({ date: x.date, crs: x.minScore }));
   const lastYear = last.date.slice(0, 4);
   const body = `
 <section class="intro">
-  <h1>SINP Draws: Saskatchewan EOI Selection Results</h1>
-  <p class="lede">Every International Skilled Worker Expression of Interest selection in Saskatchewan's published results: ${s.length} selections since ${s.at(-1).date.slice(0, 4)} for the Saskatchewan Express Entry and Occupations In-Demand subcategories, with the lowest score invited out of 110.</p>
+  <h1>SINP draws</h1>
+  <p class="lede">Saskatchewan's published International Skilled Worker selections: ${s.length} since ${s.at(-1).date.slice(0, 4)}, with the lowest score invited out of 110.</p>
   <p class="meta"><span>Saskatchewan's results document updated ${longDate(d.documentUpdated)}</span><span>Checked ${longDate(d.checked)}</span><span>Source: <a href="${d.source}" rel="noopener">SINP ISW EOI selection results (PDF)</a></span></p>
 </section>
 <div class="cards">
@@ -1338,11 +1346,11 @@ function aaipCalcPage() {
   const fields = groups.map((g) => `<fieldset><legend>${esc(g)}</legend>${r.factors.filter((f) => f.group === g).map((f) => `<div class="field"><label for="${f.id}">${esc(f.label)}</label><select id="${f.id}" name="${f.id}">${f.options.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('')}</select></div>`).join('')}${g.endsWith('language') ? `<p class="hint">${esc(r.languageRule)}</p><p class="callout small" id="lang-warn" hidden>${esc(r.minimumLanguage)}.</p>` : ''}</fieldset>`).join('');
   const tables = r.factors.map((f) => `<h3>${esc(f.label)}</h3><div class="table-scroll"><table><tbody>${f.options.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('')}</tbody></table></div>`).join('');
   const d = aaipDraws.draws;
-  const recent = AAIP_STREAMS && Object.keys(AAIP_STREAMS).filter((s) => d.some((x) => x.stream === s)).map((s) => { const x = d.find((y) => y.stream === s); return `${esc(AAIP_STREAMS[s])}: ${x.minScore} on ${x.date}`; });
+  const recent = AAIP_STREAMS && Object.keys(AAIP_STREAMS).filter((s) => d.some((x) => x.stream === s)).map((s) => { const x = d.find((y) => y.stream === s); return `${esc(AAIP_STREAMS[s])}: ${x.minScore} on ${shortDate(x.date)}`; });
   const body = `
 <section class="intro">
-  <h1>AAIP Points Calculator: Alberta Worker EOI Score (2026)</h1>
-  <p class="lede">Score your Worker Expression of Interest for the Alberta Advantage Immigration Program out of ${r.max}, with every factor from Alberta's points grid dated ${longDate(r.gridDate)}.</p>
+  <h1>AAIP points calculator</h1>
+  <p class="lede">Alberta scores Worker expressions of interest out of ${r.max}. This calculator uses the points grid Alberta published on ${longDate(r.gridDate)}.</p>
   <p class="meta"><span>Grid checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">AAIP Worker EOI points grid (PDF)</a></span></p>
 </section>
 <div class="tool">
@@ -1372,15 +1380,15 @@ function aaipDrawsPage() {
   const last = d[0];
   const streams = Object.keys(AAIP_STREAMS).filter((s) => d.some((x) => x.stream === s));
   const stat = streams.map((s) => { const r = d.filter((x) => x.stream === s); const sc = r.map((x) => x.minScore).filter((x) => x !== null); return `<tr><td>${esc(AAIP_STREAMS[s])}</td><td class="n">${r.length}</td><td class="n">${fmt(r.reduce((t, x) => t + (x.invitations || 0), 0))}</td><td class="n">${Math.min(...sc)}–${Math.max(...sc)}</td><td>${r[0].date}, ${r[0].minScore}</td></tr>`; }).join('');
-  const rows = d.map((x) => `<tr data-s="${x.stream}"><td>${x.date}</td><td>${esc(x.focus)}</td><td class="n">${x.minScore ?? ''}</td><td class="n">${esc(x.invitationsText)}</td></tr>`).join('');
+  const rows = d.map((x) => `<tr data-s="${x.stream}"><td data-sort="${x.date}">${shortDate(x.date)}</td><td>${esc(x.focus)}</td><td class="n">${x.minScore ?? ''}</td><td class="n">${esc(x.invitationsText)}</td></tr>`).join('');
   const chips = `<button type="button" data-s="all" aria-pressed="true">All (${d.length})</button>` + streams.map((s) => `<button type="button" data-s="${s}" aria-pressed="false">${esc(AAIP_STREAMS[s])}</button>`).join('');
   const aos = d.filter((x) => x.stream === 'aos' && x.minScore).map((x) => ({ date: x.date, crs: x.minScore }));
   const poolRows = Object.entries(a.pool).map(([k, v]) => `<tr${k === 'Total' ? ' class="section"' : ''}><td>${esc(k)}</td><td class="n">${fmt(v)}</td></tr>`).join('');
   const y = last.date.slice(0, 4);
   const body = `
 <section class="intro">
-  <h1>AAIP Draws: Alberta Advantage Immigration Program Draws (${y})</h1>
-  <p class="lede">Every Alberta Advantage Immigration Program draw of ${y} with its stream, minimum score and invitations: ${d.length} draws so far, plus the size of the Worker Expression of Interest pool.</p>
+  <h1>AAIP draws in ${y}</h1>
+  <p class="lede">${d.length} Alberta draws so far this year, by stream, with the minimum score and the number of invitations, plus how many expressions of interest are waiting in the pool.</p>
   <p class="meta"><span>Alberta's page updated ${longDate(a.pageUpdated)}</span><span>Updated automatically</span><span>Source: <a href="${a.source}" rel="noopener">AAIP processing information</a></span></p>
 </section>
 <div class="cards">
@@ -1417,8 +1425,8 @@ function fswPage() {
   const ageRows = Object.entries(r.age).map(([k, v]) => `<tr><td>${k === 'under18' ? 'Under 18' : k === '47+' ? '47 or older' : k.replace('-', ' to ')}</td><td class="n">${v}</td></tr>`).join('');
   const body = `
 <section class="intro">
-  <h1>FSW Points Calculator: the 67-Point Federal Skilled Worker Grid</h1>
-  <p class="lede">Check whether you reach the 67 points out of 100 needed for the Federal Skilled Worker Program, the first step before entering the Express Entry pool. These are not CRS points.</p>
+  <h1>FSW 67 points calculator</h1>
+  <p class="lede">Before you can enter the Express Entry pool as a Federal Skilled Worker, you need 67 points out of 100 on a separate grid. This is that grid, not the CRS.</p>
   <p class="meta"><span>Rules checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC Federal Skilled Worker Program</a>, modified ${longDate(r.sourceModified)}</span></p>
 </section>
 <div class="tool">
@@ -1465,7 +1473,7 @@ function fswPage() {
 <ul><li><a href="${r.source}" rel="noopener">Federal Skilled Worker Program</a>, IRCC, modified ${longDate(r.sourceModified)}</li><li><a href="${r.educationSource}" rel="noopener">Education credential assessment</a>, IRCC</li></ul>
 </article>`;
   const scripts = `${jsonScript('fsw-rules', r)}${jsonScript('lang-rules', lang)}<script type="module" src="/js/fsw.js"></script>`;
-  return page({ path: '/fsw-67-points-calculator/', title: 'FSW 67 Points Calculator: Federal Skilled Worker Eligibility', description: 'Check if you reach 67 of 100 points for the Federal Skilled Worker Program: language, education, experience, age, job offer and adaptability, from IRCC rules.', body, scripts, crumbs: [['Home', '/'], ['FSW 67 points calculator', '/fsw-67-points-calculator/']] });
+  return page({ path: '/fsw-67-points-calculator/', title: 'FSW 67 Points Calculator: Canada PR Points Check (2026)', description: 'Check if you reach 67 of 100 points for the Federal Skilled Worker Program: language, education, experience, age, job offer and adaptability, from IRCC rules.', body, scripts, crumbs: [['Home', '/'], ['FSW 67 points calculator', '/fsw-67-points-calculator/']] });
 }
 
 function cecPage() {
@@ -1474,8 +1482,8 @@ function cecPage() {
   const last = all[0];
   const body = `
 <section class="intro">
-  <h1>CEC Eligibility Calculator: Canadian Experience Class Check</h1>
-  <p class="lede">Check the minimum requirements of the Canadian Experience Class: ${r.hours.toLocaleString('en-CA')} hours of skilled Canadian work in the last ${r.years} years, the language level for your job's TEER category and the rest. Then compare your score with recent CEC cut-offs.</p>
+  <h1>Canadian Experience Class requirements</h1>
+  <p class="lede">You qualify for the CEC with one year of skilled work in Canada in the last three years and the right language level for your job. Check each requirement here, then see how your score compares with recent CEC rounds.</p>
   <p class="meta"><span>Rules checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC Canadian Experience Class</a>, modified ${longDate(r.sourceModified)}</span></p>
 </section>
 <div class="tool">
@@ -1513,7 +1521,7 @@ function cecPage() {
 <ul><li><a href="${r.source}" rel="noopener">Canadian Experience Class</a>, IRCC, modified ${longDate(r.sourceModified)}</li><li><a href="${lang.source}" rel="noopener">Language test results for Express Entry</a>, IRCC</li><li><a href="${funds.source}" rel="noopener">Proof of funds</a>, IRCC</li></ul>
 </article>`;
   const scripts = `${jsonScript('cec-rules', r)}${jsonScript('lang-rules', lang)}<script type="module" src="/js/cec.js"></script>`;
-  return page({ path: '/cec-eligibility-calculator/', title: 'CEC Eligibility Calculator: Canadian Experience Class (2026)', description: 'Check if you qualify for the Canadian Experience Class: 1,560 hours of Canadian skilled work in 3 years, CLB 7 or 5 by TEER, and recent CEC cut-offs.', body, scripts, crumbs: [['Home', '/'], ['CEC eligibility calculator', '/cec-eligibility-calculator/']] });
+  return page({ path: '/cec-eligibility-calculator/', title: 'CEC Requirements 2026: Canadian Experience Class Eligibility Check', description: 'Check if you qualify for the Canadian Experience Class: 1,560 hours of Canadian skilled work in 3 years, CLB 7 or 5 by TEER, and recent CEC cut-offs.', body, scripts, crumbs: [['Home', '/'], ['CEC eligibility calculator', '/cec-eligibility-calculator/']] });
 }
 
 // ---------- Super visa and parents sponsorship income ----------
@@ -1524,8 +1532,8 @@ function superVisaPage() {
   const num = (id, label, hint, v = 0) => `<div class="field"><label for="${id}">${label}</label><input type="number" id="${id}" name="${id}" min="0" max="20" step="1" value="${v}" inputmode="numeric">${hint ? `<span class="hint">${hint}</span>` : ''}</div>`;
   const body = `
 <section class="intro">
-  <h1>Super Visa Income Requirement Calculator (Minimum Necessary Income)</h1>
-  <p class="lede">The minimum income your child or grandchild in Canada needs to invite you on a super visa, by family size, and whether their income meets it under either of IRCC's two options.</p>
+  <h1>Super visa income requirement</h1>
+  <p class="lede">Before parents or grandparents can come on a super visa, the child or grandchild inviting them has to earn a minimum income set by family size. Check the amount and whether the income clears it.</p>
   <p class="meta"><span>Amounts updated by IRCC on ${longDate(r.tableUpdated)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC super visa: proof of financial support</a></span></p>
 </section>
 <div class="tool">
@@ -1572,8 +1580,8 @@ function pgpIncomePage() {
   const rows = Object.entries(r.amounts).map(([n, v]) => `<tr><td>${n} people</td>${v.map((x) => `<td class="n">$${fmt(x)}</td>`).join('')}</tr>`).join('') + `<tr><td>Each additional person</td>${r.eachAdditional.map((x) => `<td class="n">+$${fmt(x)}</td>`).join('')}</tr>`;
   const body = `
 <section class="intro">
-  <h1>Parents and Grandparents Sponsorship: Income Requirement Calculator</h1>
-  <p class="lede">The income you need in each of the 3 tax years before you apply to sponsor your parents or grandparents for permanent residence, by family size, as published by IRCC for the ${esc(r.intake)} intake.</p>
+  <h1>Income needed to sponsor parents and grandparents</h1>
+  <p class="lede">You have to meet the income threshold in each of the 3 tax years before you apply, for your family size. These are IRCC's figures for the ${esc(r.intake)} intake.</p>
   <p class="meta"><span>IRCC page modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC income requirements for the sponsor</a></span></p>
 </section>
 <div class="tool">
@@ -1617,8 +1625,8 @@ function bcCalcPage() {
   const wageRows = [[70, 55], [60, 45], [50, 35], [40, 25], [30, 15], [20, 5], [16, 1]].map(([w, p]) => `<tr><td>$${w}.00${w === 70 ? ' or more' : ` to $${w}.99`}</td><td class="n">${p}</td></tr>`).join('') + '<tr><td>Less than $16.00</td><td class="n">0</td></tr>';
   const body = `
 <section class="intro">
-  <h1>BC PNP Points Calculator: Skills Immigration Registration Score</h1>
-  <p class="lede">Work out your BC Provincial Nominee Program Skills Immigration registration score out of ${r.max}, with every factor from the official program guide, and compare it with the minimum scores of the latest invitations.</p>
+  <h1>BC PNP points calculator</h1>
+  <p class="lede">B.C. ranks Skills Immigration registrations out of ${r.max}. Score yours with the factors in the official program guide and compare it with the latest invitations.</p>
   <p class="meta"><span>Program guide effective ${longDate(r.guideEffective)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">BC PNP Skills Immigration Program Guide (PDF)</a></span></p>
 </section>
 <div class="tool">
@@ -1676,7 +1684,7 @@ function bcDrawsPage() {
   const y = last.slice(0, 4);
   const types = [...new Set(d.map((x) => x.type))];
   const stat = types.map((t) => { const r = d.filter((x) => x.type === t); const sc = r.map((x) => x.minScore).filter((x) => x !== null); return `<tr><td>${esc(t)}</td><td class="n">${new Set(r.map((x) => x.date)).size}</td><td class="n">${sc.length ? `${Math.min(...sc)}–${Math.max(...sc)}` : '–'}</td><td>${r[0].date}${r[0].minScore !== null ? `, ${r[0].minScore}` : ''}</td></tr>`; }).join('');
-  const rows = d.map((x) => `<tr><td>${x.date}</td><td>${esc(x.type)}</td><td>${esc(x.factors)}${x.note ? `<div class="small">${esc(x.note)}</div>` : ''}</td><td class="n">${x.minScore ?? 'N/A'}</td><td class="n">${esc(x.invitationsText)}</td></tr>`).join('');
+  const rows = d.map((x) => `<tr><td data-sort="${x.date}">${shortDate(x.date)}</td><td>${esc(x.type)}</td><td>${esc(x.factors)}${x.note ? `<div class="small">${esc(x.note)}</div>` : ''}</td><td class="n">${x.minScore ?? 'N/A'}</td><td class="n">${esc(x.invitationsText)}</td></tr>`).join('');
   const lastRows = d.filter((x) => x.date === last);
   const max = Math.max(...b.pool.ranges.map((r) => r.count));
   const W = 760, rowH = 28, H = b.pool.ranges.length * rowH + 10;
@@ -1684,8 +1692,8 @@ function bcDrawsPage() {
   const health = d.filter((x) => x.type === 'Care: Health' && x.minScore).map((x) => ({ date: x.date, crs: x.minScore }));
   const body = `
 <section class="intro">
-  <h1>BC PNP Draws ${y}: Skills Immigration Invitations and Scores</h1>
-  <p class="lede">Every BC Provincial Nominee Program Skills Immigration invitation of ${y} on WelcomeBC, by type, with minimum scores and invitations, plus the scores of the ${fmt(b.pool.total)} registrations in the pool.</p>
+  <h1>BC PNP draws in ${y}</h1>
+  <p class="lede">Every Skills Immigration invitation round B.C. has published this year, by type, with minimum scores, plus how the ${fmt(b.pool.total)} registrations in the pool are spread by score.</p>
   <p class="meta"><span>WelcomeBC page updated ${longDate(b.pageUpdated)}</span><span>Updated automatically</span><span>Source: <a href="${b.source}" rel="noopener">BC PNP invitations to apply</a></span></p>
 </section>
 <div class="cards">
@@ -1725,8 +1733,8 @@ function nocPage() {
   const cecL = isLive('/cec-eligibility-calculator/') ? '<a href="/cec-eligibility-calculator/">CEC eligibility calculator</a>' : 'CEC requirements';
   const body = `
 <section class="intro">
-  <h1>NOC Code Finder: Find Your NOC 2021 Code and TEER</h1>
-  <p class="lede">Search ${fmt(n.units.reduce((t, u) => t + u.ex.length, 0))} job titles from the official NOC 2021 Version 1.0 to find your five-digit code, its TEER category, what it means for Express Entry and whether it is in one of IRCC's ${cats.checked.slice(0, 4)} categories.</p>
+  <h1>NOC code finder</h1>
+  <p class="lede">Type your job title and get your NOC 2021 code and TEER. You'll also see what that TEER means for Express Entry and whether your job is on one of IRCC's ${cats.checked.slice(0, 4)} category lists.</p>
   <p class="meta"><span>${n.units.length} occupations</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.dataset}" rel="noopener">Statistics Canada, NOC 2021 Version 1.0</a></span></p>
 </section>
 <form id="noc-form" class="noc-search" role="search"><label class="visually-hidden" for="noc-q">Job title or NOC code</label><input id="noc-q" type="search" autocomplete="off" placeholder="e.g. software developer, nurse, 72310"><button type="submit">Search</button></form>
@@ -1761,8 +1769,8 @@ function sowpPage() {
   const n2 = r.selectNoc.filter((c) => c[1] === '2').length, n3 = r.selectNoc.filter((c) => c[1] === '3').length;
   const body = `
 <section class="intro">
-  <h1>Spousal Open Work Permit (SOWP) Eligibility Checker</h1>
-  <p class="lede">Check whether your spouse or common-law partner, or your dependent child, can get an open work permit based on your job in Canada, under IRCC's rules in force since ${longDate(r.rulesSince)}, with the full list of the ${r.selectNoc.length} eligible TEER 2 and 3 occupations.</p>
+  <h1>Spousal open work permit checker</h1>
+  <p class="lede">Since ${longDate(r.rulesSince)} only some workers can bring a spouse on an open work permit. Enter your job's NOC code and situation to check, and see the ${r.selectNoc.length} TEER 2 and 3 jobs that still qualify.</p>
   <p class="meta"><span>IRCC page modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: open work permits for family members of foreign workers</a></span></p>
 </section>
 <div class="tool">
@@ -1820,8 +1828,8 @@ function bowpPage() {
   ];
   const body = `
 <section class="intro">
-  <h1>Bridging Open Work Permit (BOWP): Eligibility Checker</h1>
-  <p class="lede">A bridging open work permit lets you keep working in Canada while IRCC processes your permanent residence application. Pick your program and tick off IRCC's requirements to see if you can apply.</p>
+  <h1>Bridging open work permit checker</h1>
+  <p class="lede">A BOWP lets you keep working while IRCC processes your permanent residence application. Pick your program and tick the requirements you meet.</p>
   <p class="meta"><span>IRCC page modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: bridging open work permit</a></span></p>
 </section>
 <div class="tool">
@@ -1855,8 +1863,8 @@ function pgwpPage() {
   const r = pgwp;
   const body = `
 <section class="intro">
-  <h1>PGWP Calculator: Post-Graduation Work Permit Length and Eligibility</h1>
-  <p class="lede">Work out how long your post-graduation work permit can be, the language level you need and the last day to apply, from IRCC's current rules.</p>
+  <h1>PGWP calculator</h1>
+  <p class="lede">How long your post-graduation work permit can be, the language level you need and the last day you can apply, worked out from your program and dates.</p>
   <p class="meta"><span>IRCC page modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: PGWP, who can apply</a></span></p>
 </section>
 <div class="tool">
@@ -1909,8 +1917,8 @@ function feesPage() {
   const rows = Object.values(r.programs).map((p) => `<tr><td>${esc(p.name)}</td><td class="n">$${fmt(p.pa)}</td><td class="n">$${fmt(p.spouse)}</td><td class="n">$${fmt(p.child)}</td></tr>`).join('');
   const body = `
 <section class="intro">
-  <h1>Canada PR Fees Calculator: IRCC Permanent Residence Fees</h1>
-  <p class="lede">Add up the IRCC fees for your permanent residence application by program and family size, with the right of permanent residence fee and biometrics, using the fee list IRCC raised on ${longDate(r.lastIncrease)}.</p>
+  <h1>Canada PR fees calculator</h1>
+  <p class="lede">What you'll pay IRCC for a permanent residence application, by program and family size, with the right of permanent residence fee and biometrics. Amounts as raised on ${longDate(r.lastIncrease)}.</p>
   <p class="meta"><span>IRCC fee list modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC fee list</a></span></p>
 </section>
 <div class="tool">
@@ -1951,8 +1959,8 @@ function aipPage() {
   const r = aip;
   const body = `
 <section class="intro">
-  <h1>Atlantic Immigration Program (AIP): Eligibility Checker</h1>
-  <p class="lede">Check if you meet the Atlantic Immigration Program requirements for a job offer in New Brunswick, Nova Scotia, Prince Edward Island or Newfoundland and Labrador: work experience by TEER, language, education and settlement funds, from IRCC's pages.</p>
+  <h1>Atlantic Immigration Program eligibility</h1>
+  <p class="lede">The AIP needs a job offer from a designated employer in New Brunswick, Nova Scotia, Prince Edward Island or Newfoundland and Labrador. Check the rest of the requirements here: experience, language, education and funds.</p>
   <p class="meta"><span>IRCC pages modified up to ${longDate([r.sourceModified, ...r.watchPages.map((w) => w.modified)].sort().at(-1))}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: Atlantic Immigration Program</a></span></p>
 </section>
 <div class="tool">
@@ -2006,8 +2014,8 @@ function rcipPage() {
   const r = rcip;
   const body = `
 <section class="intro">
-  <h1>Rural Community Immigration Pilot (RCIP): Communities and Eligibility</h1>
-  <p class="lede">The ${r.communities.length} participating communities of the Rural Community Immigration Pilot and a checker for IRCC's requirements: a job offer from a designated employer, work experience by TEER, language, education and settlement funds.</p>
+  <h1>Rural Community Immigration Pilot</h1>
+  <p class="lede">${r.communities.length} communities can recommend workers for permanent residence through this pilot. See which ones take part and check IRCC's requirements against your profile.</p>
   <p class="meta"><span>IRCC pages modified up to ${longDate([r.sourceModified, ...r.watchPages.map((w) => w.modified)].sort().at(-1))}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: Rural Community Immigration Pilot</a></span></p>
 </section>
 <div class="tool">
@@ -2066,8 +2074,8 @@ function nsnpPage() {
   const bars = done.map((m, i) => { const h = (m.selected / max) * (H - 50); return `<rect class="bar-r" x="${(30 + i * bw + 6).toFixed(1)}" y="${(H - 26 - h).toFixed(1)}" width="${(bw - 12).toFixed(1)}" height="${h.toFixed(1)}" rx="3"/><text x="${(30 + i * bw + bw / 2).toFixed(1)}" y="${(H - 30 - h).toFixed(1)}" text-anchor="middle">${m.selected}</text><text x="${(30 + i * bw + bw / 2).toFixed(1)}" y="${H - 8}" text-anchor="middle">${MONTHS[Number(m.month.slice(5)) - 1].slice(0, 3)}</text>`; }).join('');
   const body = `
 <section class="intro">
-  <h1>Nova Scotia Nominee Program (NSNP) ${done[0].month.slice(0, 4)}: Streams, Selections and Fees</h1>
-  <p class="lede">The Nova Scotia Nominee Program's worker streams and requirements, the ${fmt(total)} candidates selected from the expression of interest pool so far in ${done[0].month.slice(0, 4)}, current priorities and the application fee in force since ${longDate(r.fee.since)}.</p>
+  <h1>Nova Scotia Nominee Program in ${done[0].month.slice(0, 4)}</h1>
+  <p class="lede">Nova Scotia has selected ${fmt(total)} candidates from its expression of interest pool so far this year. Here's who qualifies for each worker stream, what the province is prioritizing and what it costs since ${longDate(r.fee.since)}.</p>
   <p class="meta"><span>Selections page updated ${longDate(s.pageUpdated)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">Live in Nova Scotia: NSNP</a></span></p>
 </section>
 <div class="cards">
@@ -2108,8 +2116,8 @@ function nbpnpPage() {
   const rows = d.map((x) => `<tr><td>${esc(x.dateText)}</td><td>${esc(x.stream)}</td><td>${esc(x.pathways || '–')}</td><td>${esc(x.categories)}${x.note ? `<div class="small">${esc(x.note)}</div>` : ''}</td><td class="n">${x.count ?? '–'}${x.partial ? ' ◊' : ''}</td></tr>`).join('');
   const body = `
 <section class="intro">
-  <h1>New Brunswick PNP ${y}: NBPNP Draws and Streams</h1>
-  <p class="lede">Every New Brunswick Provincial Nominee Program and Atlantic Immigration Program round published by Immigration New Brunswick, with ${fmt(pnpTotal)} NBPNP invitations so far in ${y}, and the requirements of each stream.</p>
+  <h1>New Brunswick PNP draws in ${y}</h1>
+  <p class="lede">Every NBPNP and AIP round New Brunswick has published, ${fmt(pnpTotal)} NBPNP invitations so far this year, and what each stream asks for.</p>
   <p class="meta"><span>Latest round ${esc(d[0].dateText)}</span><span>Updated automatically</span><span>Source: <a href="${nbDraws.source}" rel="noopener">GNB: invitation and selection rounds</a></span></p>
 </section>
 <h2>${y} by stream</h2>
@@ -2138,8 +2146,8 @@ function citizenshipTestPage() {
   const qs = Q.map((q, i) => `<li class="quiz-q" data-a="${q.a}" id="q${i + 1}"><p class="quiz-p"><strong>${i + 1}.</strong> ${esc(q.q)}</p><ol type="A" class="quiz-o">${q.o.map((o, j) => `<li><button type="button" data-o="${j}">${esc(o)}</button></li>`).join('')}</ol><details><summary>Answer</summary><p><strong>${'ABCD'[q.a]}.</strong> ${esc(q.e)} <span class="small">(Discover Canada: ${esc(q.ch)})</span></p></details></li>`).join('');
   const body = `
 <section class="intro">
-  <h1>Canadian Citizenship Test Practice: ${Q.length} Free Questions</h1>
-  <p class="lede">Practise for the Canadian citizenship test with ${Q.length} multiple-choice questions written from the official study guide, Discover Canada. The real test has ${r.questions} questions and you need ${r.passMark} right to pass.</p>
+  <h1>Canadian citizenship practice test</h1>
+  <p class="lede">${Q.length} questions written from Discover Canada, the official study guide. The real test has ${r.questions} questions and you need ${r.passMark} right to pass, so try a ${r.questions}-question round and see where you are.</p>
   <p class="meta"><span>Test rules: IRCC page modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC: study for the test</a></span></p>
 </section>
 <div class="quiz-bar"><span id="quiz-score" aria-live="polite">Answer the questions below.</span> <button type="button" id="quiz-new">New ${r.questions}-question test</button> <button type="button" id="quiz-all">Show all ${Q.length}</button></div>
@@ -2175,8 +2183,8 @@ function eeYearPage() {
   const last = rs[0];
   const body = `
 <section class="intro">
-  <h1>Express Entry in ${Y}: Draws, Invitations and Cut-offs of the Year</h1>
-  <p class="lede">All ${rs.length} Express Entry rounds of ${Y} in one place: ${fmt(sum(rs))} invitations to apply, how they split by category and program, the lowest and highest cut-offs, and how the year compares with ${PY}.</p>
+  <h1>Express Entry in ${Y}</h1>
+  <p class="lede">${fmt(sum(rs))} invitations in ${rs.length} rounds: how they split by category, the lowest and highest cut-offs, and how the year compares with ${PY}.</p>
   <p class="meta"><span>Last round ${longDate(last.date)}</span><span>Updated automatically from IRCC</span><span>Source: <a href="${draws.page}" rel="noopener">IRCC rounds of invitations</a></span></p>
 </section>
 <div class="cards">
@@ -2211,8 +2219,8 @@ function peiPage() {
   const bars = r.draws.map(([dt, n], i) => { const h = (n / max) * (H - 50); return `<rect class="bar-r" x="${(30 + i * bw + 6).toFixed(1)}" y="${(H - 26 - h).toFixed(1)}" width="${(bw - 12).toFixed(1)}" height="${h.toFixed(1)}" rx="3"/><text x="${(30 + i * bw + bw / 2).toFixed(1)}" y="${(H - 30 - h).toFixed(1)}" text-anchor="middle">${n}</text><text x="${(30 + i * bw + bw / 2).toFixed(1)}" y="${H - 8}" text-anchor="middle">${MONTHS[Number(dt.slice(5, 7)) - 1].slice(0, 3)}</text>`; }).join('');
   const body = `
 <section class="intro">
-  <h1>PEI PNP ${y}: Prince Edward Island Draws and Streams</h1>
-  <p class="lede">Every Prince Edward Island Provincial Nominee Program expression of interest draw of ${y}, with ${fmt(total)} labour and Express Entry invitations so far, and the requirements of the Skilled Worker, Critical Worker and PEI Express Entry streams.</p>
+  <h1>PEI PNP draws in ${y}</h1>
+  <p class="lede">Prince Edward Island has sent ${fmt(total)} labour and Express Entry invitations so far this year. See every draw and what each stream asks for.</p>
   <p class="meta"><span>PEI draws page published ${longDate(r.pagePublished)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">PEI Office of Immigration: EOI draws</a></span></p>
 </section>
 <div class="cards">
@@ -2267,7 +2275,7 @@ const termsHtml = `
 <p>CRS Planner is not affiliated with IRCC or the Government of Canada and does not give immigration or legal advice. We are not responsible for decisions taken on the basis of these estimates.</p>
 <p>Data about rounds of invitations comes from IRCC and is shown with a link to its source.</p>`;
 function changelogPage() {
-  const rows = changelog.map((c) => `<tr><td>${c.date}</td><td>${esc(c.what)}</td></tr>`).join('');
+  const rows = changelog.map((c) => `<tr><td data-sort="${c.date}">${shortDate(c.date)}</td><td>${esc(c.what)}</td></tr>`).join('');
   return simple('/changelog/', 'Changelog: Rule Updates and Changes | CRS Planner', 'Every change to the rules and data used by CRS Planner, with its date and source.', 'Changelog',
     `<p>Every change to the rules or data behind our tools, newest first.</p><div class="table-scroll"><table><thead><tr><th>Date</th><th>Change</th></tr></thead><tbody>${rows}</tbody></table></div>`);
 }
@@ -2289,7 +2297,7 @@ out('about', simple('/about/', 'About CRS Planner and How We Check the Rules', '
 out('privacy', simple('/privacy/', 'Privacy | CRS Planner', 'What CRS Planner stores in your browser, what it does not collect, and who processes connection data. Contact for data requests.', 'Privacy', privacyHtml));
 out('terms', simple('/terms/', 'Terms of Use | CRS Planner', 'Terms of use and disclaimer for CRS Planner: estimates based on IRCC rules, not immigration or legal advice.', 'Terms of use', termsHtml));
 out('changelog', changelogPage());
-writeFileSync(join(DIST, 'favicon.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#111827"/><text x="16" y="21" font-family="monospace" font-size="12" font-weight="700" text-anchor="middle" fill="#ff6b6b">CRS</text></svg>');
+writeFileSync(join(DIST, 'favicon.svg'), LOGO_SVG);
 cpSync(join(ROOT, 'src/css'), join(DIST, 'css'), { recursive: true });
 cpSync(join(ROOT, 'src/js'), join(DIST, 'js'), { recursive: true });
 if (isLive('/noc-code-finder/')) {

@@ -1,3 +1,4 @@
+const nice = (iso) => new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 const data = JSON.parse(document.getElementById('draws-data').textContent);
 const chips = document.getElementById('chips');
 const rows = [...document.querySelectorAll('#draws-table tbody tr')];
@@ -23,10 +24,10 @@ function drawChart(cat) {
   const y1 = new Date(x1).getUTCFullYear();
   for (let y = y0 + 1; y <= y1; y++) { const d = `${y}-01-01`; g += `<text x="${X(d)}" y="${H - 8}" text-anchor="middle">${y}</text>`; }
   const path = list.map((r, i) => `${i ? 'L' : 'M'}${X(r.date).toFixed(1)} ${Y(r.crs).toFixed(1)}`).join('');
-  const dots = list.map((r) => `<circle class="dot" cx="${X(r.date).toFixed(1)}" cy="${Y(r.crs).toFixed(1)}" r="2.5"><title>${r.date}: ${r.crs} (${r.name})</title></circle>`).join('');
+  const dots = list.map((r) => `<circle class="dot" cx="${X(r.date).toFixed(1)}" cy="${Y(r.crs).toFixed(1)}" r="2.5"><title>${nice(r.date)}: ${r.crs} (${r.name})</title></circle>`).join('');
   chart.innerHTML = cat === 'all' ? `${g}${dots}` : `${g}<path class="line" d="${path}"/>${dots}`;
   const last = list[list.length - 1];
-  summary.textContent = `${list.length} draws since ${data.chartFrom}; cut-offs from ${Math.min(...ys)} to ${Math.max(...ys)}; latest ${last.crs} on ${last.date}.`;
+  summary.textContent = `${list.length} draws since ${nice(data.chartFrom)}; cut-offs from ${Math.min(...ys)} to ${Math.max(...ys)}; latest ${last.crs} on ${nice(last.date)}.`;
 }
 
 function select(cat) {

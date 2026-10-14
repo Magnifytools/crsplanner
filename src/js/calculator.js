@@ -150,6 +150,7 @@ function render(result, profile) {
   renderComparison(result.total);
 }
 
+const niceDate = (iso) => new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 function renderComparison(score) {
   const rows = recent.categories.map((c) => {
     const draws = recent.rounds.filter((r) => r.category === c.id);
@@ -160,9 +161,27 @@ function renderComparison(score) {
     const pnp = c.id === 'pnp' ? ' Cut-offs include the 600 nomination points.' : '';
     const name = c.slug ? `<a href="/express-entry-draws/${c.slug}/">${c.label}</a>` : c.label;
     return `<div class="cmp-row"><span>${name}</span><span class="tag ${yes ? 'yes' : 'no'}">${cleared} of ${draws.length} draws</span>
-      <span class="sub">Cut-offs ${Math.min(...crs)} to ${Math.max(...crs)}; latest ${last.crs} on ${last.date}.${pnp}</span></div>`;
+      <span class="sub">Cut-offs ${Math.min(...crs)} to ${Math.max(...crs)}; latest ${last.crs} on ${niceDate(last.date)}.${pnp}</span></div>`;
   });
   $('#compare').innerHTML = rows.join('');
+  renderStand(score);
+}
+
+// Where you stand: your score as a red mark on a line, with each category's latest cut-off as a tick.
+const SHORT = { cec: 'CEC', fsw: 'FSW', fst: 'FST', french: 'French', health: 'Health', trades: 'Trades', stem: 'STEM', transport: 'Transport', education: 'Education', agriculture: 'Agri-food', managers: 'Managers', physicians: 'Physicians', researchers: 'Researchers', military: 'Military', general: 'All programs' };
+function renderStand(score) {
+  const box = $('#stand'); if (!box) return;
+  const latest = recent.categories.filter((c) => c.id !== 'pnp').map((c) => { const d = recent.rounds.find((r) => r.category === c.id); return d ? { name: SHORT[c.id] || c.label, crs: d.crs, date: d.date } : null; }).filter((x) => x && x.crs >= 300);
+  if (!latest.length) { box.hidden = true; return; }
+  const vals = [...latest.map((x) => x.crs), score];
+  const lo = Math.floor((Math.min(...vals) - 15) / 10) * 10, hi = Math.ceil((Math.max(...vals) + 15) / 10) * 10;
+  const pos = (v) => `${(((v - lo) / (hi - lo)) * 100).toFixed(2)}%`;
+  const sorted = [...latest].sort((a, b) => a.crs - b.crs);
+  let lastPct = -100;
+  const ticks = sorted.map((x) => { const p = ((x.crs - lo) / (hi - lo)) * 100; const show = p - lastPct >= 18; if (show) lastPct = p; return `<span class="stand-tick" style="left:${pos(x.crs)}" title="${x.name}: ${x.crs} (${niceDate(x.date)})">${show ? `<span>${x.name} ${x.crs}</span>` : ''}</span>`; }).join('');
+  const above = latest.filter((x) => score >= x.crs).length;
+  box.hidden = false;
+  box.innerHTML = `<h2 class="panel-h">Where you stand</h2><div class="stand-track" role="img" aria-label="Your score ${score} against the latest cut-off of ${latest.length} round types"><span class="stand-axis"></span>${ticks}<span class="stand-you" style="left:${pos(score)}"><b>You ${score}</b></span></div><p class="stand-legend">${above ? `You are at or above the latest cut-off in ${above} of ${latest.length} round types.` : `You are below the latest cut-off in all ${latest.length} round types.`} Provincial nominee rounds are left out because their cut-offs include the 600 nomination points.</p>`;
 }
 
 function update(save = true) {
