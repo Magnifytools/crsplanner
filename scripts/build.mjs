@@ -351,7 +351,7 @@ function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
 }
 const aboutHtml = `
-<p>CRS Planner is an independent site with free tools for people preparing an Express Entry profile. It is not affiliated with IRCC or the Government of Canada, and nothing here is immigration or legal advice. For advice on your case, talk to a licensed immigration consultant (RCIC) or a lawyer.</p>
+<p>CRS Planner is an independent site with free tools for people preparing an Express Entry profile. It is published by Magnify Digital S.L. (Spain); contact: <a href="mailto:hola@magnify.ing">hola@magnify.ing</a>. It is not affiliated with IRCC or the Government of Canada, and nothing here is immigration or legal advice. For advice on your case, talk to a licensed immigration consultant (RCIC) or a lawyer.</p>
 <h2>Method</h2>
 <ul>
 <li>Every rule comes from an IRCC page, linked next to the tool that uses it, with the date that page was last modified and the date we last checked it.</li>
@@ -360,12 +360,14 @@ const aboutHtml = `
 <li>When a rule changes, we update the tool, note it in the <a href="/changelog/">changelog</a> and show the new revision date on the page.</li>
 </ul>
 <h2>Corrections</h2>
-<p>If you find a difference with IRCC's calculator or an outdated rule, tell us and we will check it against the official source.</p>`;
+<p>If you find a difference with IRCC's calculator or an outdated rule, write to <a href="mailto:hola@magnify.ing">hola@magnify.ing</a> with the page and, if you have it, the IRCC source. We check it against the official source and update the page and its revision date.</p>`;
 const privacyHtml = `
 <p>Last updated ${longDate(SITE.checked)}.</p>
 <p>The calculators run in your browser. The answers you enter are saved in your browser's local storage so the form is filled in when you come back; they are not sent to us. You can clear them at any time by clearing this site's data in your browser.</p>
 <p>This site does not set cookies of its own and does not use analytics or advertising yet. If that changes, this page will say which services are used, what they collect and how to opt out, before they are switched on.</p>
-<p>The fonts are loaded from Google Fonts, which receives your IP address when the font files are requested.</p>`;
+<p>The fonts are loaded from Google Fonts, which receives your IP address when the font files are requested.</p>
+<p>The site is served through Cloudflare, which processes your IP address and technical connection data to deliver the pages and protect them from attacks.</p>
+<p>The controller is Magnify Digital S.L. (Spain). For any question about your data, or to exercise your rights of access, rectification, erasure or objection, write to <a href="mailto:hola@magnify.ing">hola@magnify.ing</a>.</p>`;
 const termsHtml = `
 <p>Last updated ${longDate(SITE.checked)}.</p>
 <p>The tools on CRS Planner give estimates based on the rules IRCC publishes. Your official score is the one calculated in your Express Entry profile. Rules can change without notice; check the source linked on each page before you make a decision.</p>
@@ -394,4 +396,5 @@ const urls = ['/', '/clb-converter/', '/express-entry-draws/', '/about/', '/chan
 writeFileSync(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${SITE.url}${u}</loc><lastmod>${u === '/express-entry-draws/' ? latestDate : SITE.checked}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 writeFileSync(join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE.url}/sitemap.xml\n`);
 writeFileSync(join(DIST, '404.html'), page({ path: '/404', title: 'Page not found | CRS Planner', description: 'Page not found.', body: '<section class="intro"><h1>Page not found</h1><p>Try the <a href="/">CRS calculator</a> or the <a href="/express-entry-draws/">draws history</a>.</p></section>' }));
+cpSync(join(ROOT, 'extras/_worker.js'), join(DIST, '_worker.js'));
 console.log(`Built ${urls.length} pages into dist/`);
