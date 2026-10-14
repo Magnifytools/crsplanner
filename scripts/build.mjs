@@ -59,6 +59,7 @@ ${body}
 <p>CRS Planner is an independent site. It is not affiliated with Immigration, Refugees and Citizenship Canada (IRCC) or the Government of Canada, and it is not immigration or legal advice. Rules last checked ${longDate(SITE.checked)}.</p>
 <div class="foot-grid">
 <div><p class="foot-h">Tools</p><ul>${footerTools.map(([h, l]) => `<li><a href="${h}">${l}</a></li>`).join('')}</ul></div>
+<div><p class="foot-h">Draws by category</p><ul>${catPagesList().map((c) => `<li><a href="/express-entry-draws/${CAT_PAGES[c.id].slug}/">${esc(CAT_PAGES[c.id].short)}</a></li>`).join('')}</ul></div>
 <div><p class="foot-h">English: CLB levels</p><ul>${LEVELS.map((l) => `<li><a href="/clb-${l}/">CLB ${l}${l === 10 ? '+' : ''}</a></li>`).join('')}</ul></div>
 <div><p class="foot-h">French: NCLC levels</p><ul>${LEVELS.map((l) => `<li><a href="/nclc-${l}/">NCLC ${l}${l === 10 ? '+' : ''}</a></li>`).join('')}</ul></div>
 <div><p class="foot-h">CRS Planner</p><ul><li><a href="/about/">About and method</a></li><li><a href="/changelog/">Changelog</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/terms/">Terms</a></li></ul></div>
@@ -232,7 +233,7 @@ ${langTable()}
 <li><a href="${draws.page}" rel="noopener">Express Entry rounds of invitations</a>, IRCC</li>
 </ul>
 </article>`;
-  const scripts = `${jsonScript('crs-rules', crs)}${jsonScript('lang-rules', lang)}${jsonScript('recent-draws', { categories: recentCats, rounds: recentRounds })}<script type="module" src="/js/calculator.js"></script>`;
+  const scripts = `${jsonScript('crs-rules', crs)}${jsonScript('lang-rules', lang)}${jsonScript('recent-draws', { categories: recentCats.map((c) => ({ ...c, slug: CAT_PAGES[c.id] && catPagesList().some((x) => x.id === c.id) ? CAT_PAGES[c.id].slug : null })), rounds: recentRounds })}<script type="module" src="/js/calculator.js"></script>`;
   const jsonld = [{
     '@context': 'https://schema.org', '@type': 'WebApplication', name: 'CRS Calculator', url: SITE.url + '/',
     applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any', isAccessibleForFree: true,
@@ -317,6 +318,9 @@ function drawsPage() {
   <div class="card"><div class="k">Lowest score invited</div><div class="v">${fmt(L.crs)}</div></div>
 </div>
 <p class="small">${fmt(thisYear.length)} rounds so far in ${year}, with ${fmt(thisYear.reduce((s, r) => s + (r.size || 0), 0))} invitations in total.</p>
+
+<h2>Draws by category</h2>
+<p class="levels">${catPagesList().map((c) => `<a href="/express-entry-draws/${CAT_PAGES[c.id].slug}/">${esc(CAT_PAGES[c.id].short)}</a>`).join(' ')}</p>
 
 <h2>Cut-off scores, last three years</h2>
 <div class="chips" id="chips" role="group" aria-label="Filter by program or category">${chipsHtml}</div>
@@ -475,6 +479,90 @@ ${histHtml}
   return page({ path: '/crs-score-distribution/', title: `CRS Score Distribution ${latestDate.slice(0, 4)}: Express Entry Pool by Score`, description: `${fmt(d.total)} profiles in the Express Entry pool on ${d.asOf}, by CRS score range, with the share above 450 and 500 points and the pool size over time.`, body, jsonld, crumbs: [['Home', '/'], ['CRS score distribution', '/crs-score-distribution/']] });
 }
 
+// ---------- Draws by program or category ----------
+const CAT_PAGES = {
+  cec: { slug: 'cec', short: 'CEC', kw: 'CEC Draw', h1: 'CEC Draws: Canadian Experience Class Cut-off Scores', about: 'Canadian Experience Class rounds invite only candidates eligible for the CEC, which requires at least one year of skilled work experience in Canada in the last three years.' },
+  pnp: { slug: 'pnp', short: 'PNP', kw: 'PNP Draw', h1: 'PNP Draws: Provincial Nominee Program Cut-off Scores', about: 'Provincial Nominee Program rounds invite only candidates with a provincial or territorial nomination. The nomination adds 600 points, which is why these cut-offs sit above 600.' },
+  french: { slug: 'french', short: 'French', kw: 'French Draw', h1: 'French-Language Proficiency Draws: Cut-off Scores', about: 'French-language proficiency rounds invite candidates with strong French results. IRCC sets the exact requirement for each year’s version of the category.' },
+  health: { slug: 'healthcare', short: 'Healthcare', kw: 'Healthcare Draw', h1: 'Healthcare Draws: Healthcare and Social Services Cut-off Scores', about: 'Healthcare and social services rounds invite candidates with recent work experience in the eligible occupations listed by IRCC for each version of the category.' },
+  trades: { slug: 'trades', short: 'Trades', kw: 'Trades Draw', h1: 'Trades Draws: Trade Occupations Cut-off Scores', about: 'Trade occupation rounds invite candidates with recent work experience in the trades listed by IRCC for each version of the category.' },
+  stem: { slug: 'stem', short: 'STEM', kw: 'STEM Draw', h1: 'STEM Draws: STEM Occupations Cut-off Scores', about: 'STEM rounds invited candidates with recent work experience in eligible science, technology, engineering and math occupations.' },
+  transport: { slug: 'transport', short: 'Transport', kw: 'Transport Draw', h1: 'Transport Draws: Transport Occupations Cut-off Scores', about: 'Transport occupation rounds invite candidates with recent work experience in the transport occupations listed by IRCC.' },
+  education: { slug: 'education', short: 'Education', kw: 'Education Draw', h1: 'Education Draws: Education Occupations Cut-off Scores', about: 'Education occupation rounds invite candidates with recent work experience in the education occupations listed by IRCC.' },
+  agriculture: { slug: 'agriculture', short: 'Agriculture', kw: 'Agriculture Draw', h1: 'Agriculture Draws: Agriculture and Agri-Food Cut-off Scores', about: 'Agriculture and agri-food rounds invited candidates with recent work experience in the eligible occupations.' },
+  managers: { slug: 'senior-managers', short: 'Senior managers', kw: 'Senior Managers Draw', h1: 'Senior Managers Draws: Cut-off Scores', about: 'This category invites senior managers with Canadian work experience, as defined by IRCC for the 2026 version of the category.' },
+  physicians: { slug: 'physicians', short: 'Physicians', kw: 'Physicians Draw', h1: 'Physicians Draws: Physicians with Canadian Work Experience', about: 'This category invites physicians with Canadian work experience, as defined by IRCC for the 2026 version of the category.' },
+  general: { slug: 'general', short: 'General', kw: 'General Draw', h1: 'General (All-Program) Draws: Cut-off Scores', about: 'General rounds invite the top-ranked candidates from all three federal programs. They were the main type of round until category and program rounds took over.' },
+};
+const median = (a) => { const s = [...a].sort((x, y) => x - y); const m = s.length >> 1; return s.length ? (s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2)) : null; };
+const dayDiff = (a, b) => Math.round((Date.parse(a) - Date.parse(b)) / 864e5);
+function catChart(list) {
+  const W = 760, H = 240, L = 44, R = 12, T = 12, B = 28;
+  if (list.length < 2) return '';
+  const pts = [...list].reverse();
+  const t = (d) => Date.parse(d);
+  const x0 = t(pts[0].date), x1 = t(pts.at(-1).date);
+  const ys = pts.map((r) => r.crs);
+  const span = Math.max(...ys) - Math.min(...ys);
+  const step = span <= 60 ? 10 : span <= 150 ? 25 : span <= 300 ? 50 : 100;
+  const lo = Math.floor(Math.min(...ys) / step) * step, hi = Math.max(lo + step, Math.ceil(Math.max(...ys) / step) * step);
+  const X = (d) => L + ((t(d) - x0) / Math.max(1, x1 - x0)) * (W - L - R);
+  const Y = (v) => T + (1 - (v - lo) / (hi - lo)) * (H - T - B);
+  let g = '';
+  for (let v = lo; v <= hi; v += step) g += `<line class="grid" x1="${L}" x2="${W - R}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text x="${L - 6}" y="${(Y(v) + 4).toFixed(1)}" text-anchor="end">${v}</text>`;
+  const y0 = new Date(x0).getUTCFullYear(), y1 = new Date(x1).getUTCFullYear();
+  for (let y = y0 + 1; y <= y1; y++) g += `<text x="${X(`${y}-01-01`).toFixed(1)}" y="${H - 8}" text-anchor="middle">${y}</text>`;
+  const path = pts.map((r, i) => `${i ? 'L' : 'M'}${X(r.date).toFixed(1)} ${Y(r.crs).toFixed(1)}`).join('');
+  const dots = pts.map((r) => `<circle class="dot" cx="${X(r.date).toFixed(1)}" cy="${Y(r.crs).toFixed(1)}" r="2.5"><title>${r.date}: ${r.crs}</title></circle>`).join('');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Cut-off score of each draw">${g}<path class="line" d="${path}"/>${dots}</svg>`;
+}
+const catPagesList = () => draws.categories.filter((c) => CAT_PAGES[c.id] && draws.rounds.filter((r) => r.category === c.id).length >= 3);
+function categoryPage(c) {
+  const meta = CAT_PAGES[c.id];
+  const all = draws.rounds.filter((r) => r.category === c.id && r.crs !== null);
+  const last = all[0];
+  const yearAgoC = `${Number(latestDate.slice(0, 4)) - 1}${latestDate.slice(4)}`;
+  const recent = all.filter((r) => r.date > yearAgoC);
+  const gaps = recent.slice(0, -1).map((r, i) => dayDiff(r.date, recent[i + 1].date));
+  const chartFromC = `${Number(latestDate.slice(0, 4)) - 3}${latestDate.slice(4)}`;
+  const chartList = all.filter((r) => r.date >= chartFromC);
+  const year = latestDate.slice(0, 4);
+  const thisYear = all.filter((r) => r.date.startsWith(year));
+  const names = [...new Set(all.map((r) => r.name))];
+  const rows = all.map((r) => `<tr><td>${r.date}</td><td class="n">${esc(r.n)}</td><td>${esc(r.name)}</td><td class="n">${fmt(r.size)}</td><td class="n">${fmt(r.crs)}</td></tr>`).join('');
+  const others = catPagesList().filter((o) => o.id !== c.id).map((o) => `<a href="/express-entry-draws/${CAT_PAGES[o.id].slug}/">${esc(CAT_PAGES[o.id].short)}</a>`).join(', ');
+  const stats = recent.length
+    ? `<div class="cards">
+  <div class="card"><div class="k">Draws in the last 12 months</div><div class="v">${recent.length}</div></div>
+  <div class="card"><div class="k">Cut-off range, last 12 months</div><div class="v">${Math.min(...recent.map((r) => r.crs))}–${Math.max(...recent.map((r) => r.crs))}</div></div>
+  <div class="card"><div class="k">Median cut-off, last 12 months</div><div class="v">${median(recent.map((r) => r.crs))}</div></div>
+  <div class="card"><div class="k">Median days between draws</div><div class="v">${gaps.length ? median(gaps) : '–'}</div></div>
+</div>`
+    : `<p>There have been no ${esc(meta.short)} draws in the last 12 months. The most recent one was on ${longDate(last.date)}.</p>`;
+  const path = `/express-entry-draws/${meta.slug}/`;
+  const body = `
+<section class="intro">
+  <h1>${esc(meta.h1)}</h1>
+  <p class="lede">The latest ${esc(meta.short)} round was #${esc(last.n)} on ${longDate(last.date)}: ${fmt(last.size)} invitations with a cut-off of ${fmt(last.crs)} points. Below are all ${fmt(all.length)} ${esc(meta.short)} rounds since ${all.at(-1).date.slice(0, 4)}, with the trend and how often they happen.</p>
+  <p class="meta"><span>Updated daily from IRCC data</span><span>Source: <a href="${draws.page}" rel="noopener">IRCC rounds of invitations</a></span></p>
+</section>
+${stats}
+<p class="small">${fmt(thisYear.length)} ${esc(meta.short)} rounds in ${year} so far, with ${fmt(thisYear.reduce((s, r) => s + (r.size || 0), 0))} invitations.</p>
+${chartList.length >= 2 ? `<h2>Cut-off scores since ${chartFromC.slice(0, 4)}</h2>${catChart(chartList)}` : ''}
+<h2>All ${esc(meta.short)} rounds</h2>
+<div class="table-scroll"><table><thead><tr><th>Date</th><th class="n">Round</th><th>Name used by IRCC</th><th class="n">Invitations</th><th class="n">Lowest score</th></tr></thead><tbody>${rows}</tbody></table></div>
+<article class="prose">
+<h2>Who these rounds invite</h2>
+<p>${esc(meta.about)} Being above a cut-off only matters if you are eligible for the round.</p>
+${names.length > 1 ? `<p>IRCC has used ${names.length} names for these rounds over time: ${names.map(esc).join('; ')}. We group them here so the trend can be compared.</p>` : ''}
+<p>Check your own score with the <a href="/">CRS calculator</a>, which compares it with every category's cut-offs of the last 12 months. Other categories: ${others}. All rounds together are on the <a href="/express-entry-draws/">Express Entry draws</a> page.</p>
+</article>`;
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'Dataset', name: `Express Entry ${meta.short} rounds of invitations`, description: `All ${all.length} Express Entry ${meta.short} rounds with date, invitations and lowest CRS score invited.`, url: SITE.url + path, isBasedOn: draws.page, dateModified: last.date, spatialCoverage: 'Canada', creator: { '@type': 'Organization', name: SITE.name, url: SITE.url } }];
+  const longT = `${meta.kw} ${year}: Latest Express Entry ${meta.short} Cut-off and History`;
+  const title = !recent.length ? `${meta.kw}s: Express Entry Cut-off History ${all.at(-1).date.slice(0, 4)}–${last.date.slice(0, 4)}` : longT.length <= 65 ? longT : `${meta.kw} ${year}: Latest Cut-off and History`;
+  return page({ path, title, description: `Latest ${meta.short} Express Entry draw: #${last.n} on ${longDate(last.date)}, ${fmt(last.size)} invitations, cut-off ${last.crs}. All ${all.length} rounds, trend and frequency.`, body, jsonld, crumbs: [['Home', '/'], ['Express Entry draws', '/express-entry-draws/'], [meta.short, path]] });
+}
+
 // ---------- Simple pages ----------
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
@@ -516,6 +604,7 @@ out('', home());
 out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
+for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);
 for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, levelPage('fr', l)); }
 out('about', simple('/about/', 'About CRS Planner and How We Check the Rules', 'Who runs CRS Planner, where the rules come from and how the calculators are tested against IRCC.', 'About CRS Planner', aboutHtml));
 out('privacy', simple('/privacy/', 'Privacy | CRS Planner', 'What CRS Planner stores in your browser, what it does not collect, and who processes connection data. Contact for data requests.', 'Privacy', privacyHtml));

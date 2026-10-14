@@ -158,7 +158,8 @@ function renderComparison(score) {
     const last = draws[0];
     const yes = cleared > 0;
     const pnp = c.id === 'pnp' ? ' Cut-offs include the 600 nomination points.' : '';
-    return `<div class="cmp-row"><span>${c.label}</span><span class="tag ${yes ? 'yes' : 'no'}">${cleared} of ${draws.length} draws</span>
+    const name = c.slug ? `<a href="/express-entry-draws/${c.slug}/">${c.label}</a>` : c.label;
+    return `<div class="cmp-row"><span>${name}</span><span class="tag ${yes ? 'yes' : 'no'}">${cleared} of ${draws.length} draws</span>
       <span class="sub">Cut-offs ${Math.min(...crs)} to ${Math.max(...crs)}; latest ${last.crs} on ${last.date}.${pnp}</span></div>`;
   });
   $('#compare').innerHTML = rows.join('');
