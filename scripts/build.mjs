@@ -394,7 +394,7 @@ function drawsPage() {
   const jsonld = [{
     '@context': 'https://schema.org', '@type': 'Dataset', name: 'Express Entry rounds of invitations, 2015 to present',
     description: `All ${draws.rounds.length} Express Entry rounds of invitations with date, program or category, invitations issued and lowest CRS score invited.`,
-    url: SITE.url + '/express-entry-draws/', isBasedOn: draws.page, dateModified: latestDate,
+    url: SITE.url + '/express-entry-draws/', isBasedOn: draws.page, license: 'https://www.canada.ca/en/transparency/terms.html', dateModified: latestDate,
     temporalCoverage: `2015-01-31/${latestDate}`, spatialCoverage: 'Canada',
     creator: { '@type': 'Organization', name: SITE.name, url: SITE.url },
   }];
@@ -524,7 +524,7 @@ ${histHtml}
 <p>Find your score with the <a href="/">CRS calculator</a> and look at how many profiles are above you. A general round only invites from the top of the whole pool, but most rounds now target one program or category, so the profiles that matter are the ones competing in the same round as you. Compare with each category's recent cut-offs on the <a href="/express-entry-draws/">draws page</a>.</p>
 <p>IRCC publishes this snapshot with each round of invitations. The 451 to 500 and 401 to 450 ranges are also broken down in ten-point steps.</p>
 </article>`;
-  const jsonld = [{ '@context': 'https://schema.org', '@type': 'Dataset', name: 'CRS score distribution of the Express Entry pool', description: 'Number of Express Entry profiles by CRS score range, as published by IRCC with each round of invitations.', url: SITE.url + '/crs-score-distribution/', isBasedOn: draws.page, dateModified: d.asOfIso || latestDate, spatialCoverage: 'Canada', creator: { '@type': 'Organization', name: SITE.name, url: SITE.url } }];
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'Dataset', name: 'CRS score distribution of the Express Entry pool', description: 'Number of Express Entry profiles by CRS score range, as published by IRCC with each round of invitations.', url: SITE.url + '/crs-score-distribution/', isBasedOn: draws.page, license: 'https://www.canada.ca/en/transparency/terms.html', dateModified: d.asOfIso || latestDate, spatialCoverage: 'Canada', creator: { '@type': 'Organization', name: SITE.name, url: SITE.url } }];
   return page({ path: '/crs-score-distribution/', title: `CRS Score Distribution ${latestDate.slice(0, 4)}: Express Entry Pool by Score`, description: `${fmt(d.total)} profiles in the Express Entry pool on ${d.asOf}, by CRS score range, with the share above 450 and 500 points and the pool size over time.`, body, jsonld, crumbs: [['Home', '/'], ['CRS score distribution', '/crs-score-distribution/']] });
 }
 
@@ -608,7 +608,7 @@ ${(() => { const k = cats.categories.find((x) => x.drawId === c.id); return k ? 
 ${names.length > 1 ? `<p>IRCC has used ${names.length} names for these rounds over time: ${names.map(esc).join('; ')}. We group them here so the trend can be compared.</p>` : ''}
 <p>Check your own score with the <a href="/">CRS calculator</a>, which compares it with every category's cut-offs of the last 12 months. Other categories: ${others}. All rounds together are on the <a href="/express-entry-draws/">Express Entry draws</a> page.</p>
 </article>`;
-  const jsonld = [{ '@context': 'https://schema.org', '@type': 'Dataset', name: `Express Entry ${meta.short} rounds of invitations`, description: `All ${all.length} Express Entry ${meta.short} rounds with date, invitations and lowest CRS score invited.`, url: SITE.url + path, isBasedOn: draws.page, dateModified: last.date, spatialCoverage: 'Canada', creator: { '@type': 'Organization', name: SITE.name, url: SITE.url } }];
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'Dataset', name: `Express Entry ${meta.short} rounds of invitations`, description: `All ${all.length} Express Entry ${meta.short} rounds with date, invitations and lowest CRS score invited.`, url: SITE.url + path, isBasedOn: draws.page, license: 'https://www.canada.ca/en/transparency/terms.html', dateModified: last.date, spatialCoverage: 'Canada', creator: { '@type': 'Organization', name: SITE.name, url: SITE.url } }];
   const longT = `${meta.kw} ${year}: Latest Express Entry ${meta.short} Cut-off and History`;
   const title = !recent.length ? `${meta.kw}s: Express Entry Cut-off History ${all.at(-1).date.slice(0, 4)}–${last.date.slice(0, 4)}` : longT.length <= 65 ? longT : `${meta.kw} ${year}: Latest Cut-off and History`;
   return page({ path, title, description: `Latest ${meta.short} Express Entry draw: #${last.n} on ${longDate(last.date)}, ${fmt(last.size)} invitations, cut-off ${last.crs}. All ${all.length} rounds, trend and frequency.`, body, jsonld, crumbs: [['Home', '/'], ['Express Entry draws', '/express-entry-draws/'], [meta.short, path]] });
@@ -1252,7 +1252,7 @@ ${missing.length ? `<p class="small">Manitoba's website has no notice for ${miss
 <h2>Sources</h2>
 <ul><li><a href="${mpnpDraws.source}" rel="noopener">EOI draws</a>, Manitoba Provincial Nominee Program, one notice per draw</li></ul>
 </article>`;
-  const jsonld = [{ '@context': 'https://schema.org', '@type': 'Dataset', name: 'Manitoba PNP Expression of Interest draws', description: `${d.length} MPNP EOI draws with letters of advice to apply and lowest ranking scores.`, url: SITE.url + '/mpnp-draws/', isBasedOn: mpnpDraws.source, dateModified: last.date, spatialCoverage: 'Manitoba, Canada', creator: { '@type': 'Organization', name: SITE.name, url: SITE.url } }];
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'Dataset', name: 'Manitoba PNP Expression of Interest draws', description: `${d.length} MPNP EOI draws with letters of advice to apply and lowest ranking scores.`, url: SITE.url + '/mpnp-draws/', isBasedOn: mpnpDraws.source, license: 'https://www.gov.mb.ca/legal/copyright.html', dateModified: last.date, spatialCoverage: 'Manitoba, Canada', creator: { '@type': 'Organization', name: SITE.name, url: SITE.url } }];
   return page({ path: '/mpnp-draws/', title: `MPNP Draws ${y}: Manitoba EOI Draw History and Scores`, description: `Latest Manitoba PNP draw: #${last.n} on ${longDate(last.date)}, ${fmt(last.laas)} letters of advice to apply. All ${d.length} MPNP EOI draws with lowest scores.`, body, jsonld, crumbs: [['Home', '/'], ['MPNP draws', '/mpnp-draws/']] });
 }
 
