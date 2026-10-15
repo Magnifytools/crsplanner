@@ -1,8 +1,16 @@
 {
  "source": "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program/invitations-to-apply",
  "archive": "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program/archives#Invitations_to_apply",
- "pageUpdated": "2026-10-08",
+ "pageUpdated": "2026-10-15",
  "draws": [
+  {
+   "date": "2026-10-15",
+   "type": "Temporary Rural/Remote Health Support Initiative",
+   "factors": "Points",
+   "minScore": 54,
+   "invitations": 16,
+   "invitationsText": "16"
+  },
   {
    "date": "2026-10-08",
    "type": "Care: Childcare",
