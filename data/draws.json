@@ -1,16 +1,16 @@
 {
  "source": "https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json",
  "page": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations.html",
- "fetchedAt": "2026-10-15T17:08:15.864Z",
+ "fetchedAt": "2026-10-16T16:45:24.018Z",
  "latestRound": {
-  "n": "449",
-  "date": "2026-10-15",
-  "name": "Canadian Experience Class",
-  "category": "cec",
-  "size": 2500,
-  "crs": 519,
-  "tieBreak": "September 21, 2026 at 19:00:47 UTC",
-  "time": "October 15, 2026 at 10:02:33 UTC"
+  "n": "450",
+  "date": "2026-10-16",
+  "name": "French-Language proficiency 2026-Version 2",
+  "category": "french",
+  "size": 5000,
+  "crs": 435,
+  "tieBreak": "October 06, 2026 at 21:31:22 UTC",
+  "time": "October 16, 2026 at 10:25:13 UTC"
  },
  "distribution": {
   "asOf": "October 12, 2026",
@@ -1831,6 +1831,16 @@
   }
  ],
  "rounds": [
+  {
+   "n": "450",
+   "date": "2026-10-16",
+   "name": "French-Language proficiency 2026-Version 2",
+   "category": "french",
+   "size": 5000,
+   "crs": 435,
+   "tieBreak": "October 06, 2026 at 21:31:22 UTC",
+   "time": "October 16, 2026 at 10:25:13 UTC"
+  },
   {
    "n": "449",
    "date": "2026-10-15",
