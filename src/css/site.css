@@ -194,3 +194,4 @@ tr.section td { font-weight: 600; background: var(--surface-2); }
 .stand-you b { position: absolute; top: -2px; left: 8px; font-size: .8rem; color: var(--accent); white-space: nowrap; }
 .stand-legend { font-size: .82rem; color: var(--muted); margin: 18px 0 0; }
 .site-foot .levels a { color: var(--muted); }
+[hidden] { display: none !important; }

@@ -91,3 +91,53 @@ test('TCF Canada at NCLC 4 scores 6 per ability, as in the published criteria (I
   const r = calculate(rules, lang, { ...base, firstLanguage: { test: 'tcf', scores: { speaking: 4, listening: 331, reading: 342, writing: 4 } } });
   assert.equal(r.items.find((i) => i.key === 'firstLanguage').points, 24);
 });
+
+// Labour Market Integration factor (IRCC changes page, modified 2026-10-16, in force 2026-11-03).
+const profileB = {
+  ...base, age: 33, spouseCounts: true, education: 'bachelor',
+  firstLanguage: { test: 'celpip', scores: { speaking: 8, listening: 8, reading: 8, writing: 8 } },
+  canadianWorkYears: 1, foreignWorkYears: 2, sibling: true,
+  spouse: { education: 'bachelor', language: ielts(6, 6, 6, 6), canadianWorkYears: 0 },
+};
+
+test('LMI: switches on from the effective date only', async () => {
+  const { lmiActive } = await import('../src/js/crs.js');
+  assert.equal(lmiActive(rules, '2026-11-02'), false);
+  assert.equal(lmiActive(rules, '2026-11-03'), true);
+});
+
+test('LMI: without high-wage work or offer the score is unchanged (A = 469, B = 402)', () => {
+  const a = calculate(rules, lang, { ...base, education: 'master', firstLanguage: ielts(7, 8, 7, 7), foreignWorkYears: 3 }, { lmi: true });
+  assert.equal(a.total, 469);
+  const b = calculate(rules, lang, { ...profileB, highWageLevel: 'none', jobOfferLevel: 'none' }, { lmi: true });
+  assert.deepEqual(b.sections, { core: 280, lmi: 35, spouse: 20, transferability: 52, additional: 15 });
+  assert.equal(b.total, 402);
+});
+
+test('LMI: 1 year in a 1.5x high-wage occupation adds 40 to work-length points (B = 442)', () => {
+  const r = calculate(rules, lang, { ...profileB, highWageLevel: 'x1_5' }, { lmi: true });
+  assert.equal(r.sections.lmi, 75);
+  assert.equal(r.total, 442);
+});
+
+test('LMI: a 2x job offer (100) beats 75 points of experience, never both (B = 467)', () => {
+  const r = calculate(rules, lang, { ...profileB, highWageLevel: 'x1_5', jobOfferLevel: 'x2' }, { lmi: true });
+  assert.equal(r.sections.lmi, 100);
+  assert.equal(r.items.find((i) => i.key === 'workLength').points, 0);
+  assert.equal(r.total, 467);
+});
+
+test('LMI: single with 5+ years in a 2x occupation reaches the 150 maximum', () => {
+  const r = calculate(rules, lang, { ...base, canadianWorkYears: 5, highWageLevel: 'x2', jobOfferLevel: 'x2' }, { lmi: true });
+  assert.equal(r.sections.lmi, 150);
+});
+
+test('LMI: high-wage points need at least 1 year of Canadian work', () => {
+  const r = calculate(rules, lang, { ...base, canadianWorkYears: 0, highWageLevel: 'x2' }, { lmi: true });
+  assert.equal(r.sections.lmi, 0);
+});
+
+test('Current rules ignore job offers', () => {
+  const r = calculate(rules, lang, { ...profileB, jobOfferLevel: 'x2', highWageLevel: 'x2' });
+  assert.equal(r.total, 402);
+});

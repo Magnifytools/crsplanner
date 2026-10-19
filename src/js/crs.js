@@ -12,8 +12,11 @@
 //   spouse: { education, language: {test, scores} | null, canadianWorkYears } | null,
 //   sibling: boolean,
 //   canadianEducation: 'none'|'oneOrTwoYears'|'threePlusYears',
-//   provincialNomination: boolean
+//   provincialNomination: boolean,
+//   highWageLevel: 'none'|'x1_3'|'x1_5'|'x2',   // from 2026-11-03: 12+ months of Canadian work in high-wage occupations at that level or higher
+//   jobOfferLevel: 'none'|'x1_3'|'x1_5'|'x2'    // from 2026-11-03: valid job offer in a high-wage occupation of that level
 // }
+// opts.lmi: true scores with the Labour Market Integration factor that IRCC applies from rules.labourMarketIntegration.effective.
 
 export const SKILLS = ['speaking', 'listening', 'reading', 'writing'];
 
@@ -51,7 +54,11 @@ function langOf(langRules, entry) {
   return entry && entry.test ? langRules.tests[entry.test].language : null;
 }
 
-export function calculate(rules, langRules, p) {
+export function lmiActive(rules, isoDate) {
+  return !!rules.labourMarketIntegration && isoDate >= rules.labourMarketIntegration.effective;
+}
+
+export function calculate(rules, langRules, p, opts = {}) {
   const c = col(p.spouseCounts);
   const items = [];
   const add = (section, key, label, points, max) => items.push({ section, key, label, points, max });
@@ -81,7 +88,19 @@ export function calculate(rules, langRules, p) {
   add('core', 'secondLanguage', 'Second official language', secondPts, rules.core.secondLanguage.max[c]);
 
   const cwy = yearsKey(p.canadianWorkYears, 5);
-  add('core', 'canadianWork', 'Canadian work experience', rules.core.canadianWork.byYears[cwy][c], rules.core.canadianWork.max[c]);
+  const L = opts.lmi ? rules.labourMarketIntegration : null;
+  if (!L) {
+    add('core', 'canadianWork', 'Canadian work experience', rules.core.canadianWork.byYears[cwy][c], rules.core.canadianWork.max[c]);
+  } else {
+    // Labour Market Integration: the higher of work experience (length + high-wage) or a job offer, never both.
+    const length = L.workLength.byYears[cwy][c];
+    const highWage = Number(cwy) >= 1 ? (L.highWageExperience.byLevel[p.highWageLevel] || 0) : 0;
+    const offer = L.jobOffer.byLevel[p.jobOfferLevel] || 0;
+    const useOffer = offer > length + highWage;
+    add('lmi', 'workLength', 'Canadian work experience (length)', useOffer ? 0 : length, L.workLength.max[c]);
+    add('lmi', 'highWage', 'Work in a high-wage occupation', useOffer ? 0 : highWage, L.highWageExperience.byLevel.x2);
+    add('lmi', 'jobOffer', 'Job offer in a high-wage occupation', useOffer ? offer : 0, L.jobOffer.byLevel.x2);
+  }
 
   // B. Spouse
   if (p.spouseCounts && p.spouse) {
@@ -142,12 +161,13 @@ export function calculate(rules, langRules, p) {
   };
   const sections = {
     core: sum('core'),
+    ...(L ? { lmi: Math.min(L.max[c], sum('lmi')) } : {}),
     spouse: sum('spouse'),
     transferability: Math.min(t.max, transferRaw.education + transferRaw.foreignWork + transferRaw.certificate),
     additional: Math.min(a.max, sum('additional')),
   };
-  const total = sections.core + sections.spouse + sections.transferability + sections.additional;
-  return { total, sections, transferRaw, items, clb: { first, second }, spouseCounts: !!p.spouseCounts };
+  const total = Object.values(sections).reduce((n, v) => n + v, 0);
+  return { total, sections, transferRaw, items, clb: { first, second }, spouseCounts: !!p.spouseCounts, lmi: !!L };
 }
 
 // What-if scenarios: each returns a modified copy of the profile, or null if it does not apply.
@@ -184,6 +204,11 @@ export const SCENARIOS = [
     apply: (p) => (p.canadianEducation === 'threePlusYears' ? null : { ...p, canadianEducation: 'threePlusYears' }),
   },
   {
+    id: 'jobOfferHighWage',
+    label: 'A job offer in a top-level high-wage occupation (from Nov 3, 2026)',
+    apply: (p) => (p.jobOfferLevel === 'x2' ? null : { ...p, jobOfferLevel: 'x2' }),
+  },
+  {
     id: 'nomination',
     label: 'Provincial nomination',
     apply: (p) => (p.provincialNomination ? null : { ...p, provincialNomination: true }),
@@ -208,12 +233,12 @@ function bumpLanguage(p, key, langRules) {
   return changed ? { ...p, [key]: { ...e, scores } } : null;
 }
 
-export function whatIf(rules, langRules, profile) {
-  const base = calculate(rules, langRules, profile).total;
+export function whatIf(rules, langRules, profile, opts = {}) {
+  const base = calculate(rules, langRules, profile, opts).total;
   return SCENARIOS.map((sc) => {
     const next = sc.apply(profile, langRules);
     if (!next) return null;
-    const total = calculate(rules, langRules, next).total;
+    const total = calculate(rules, langRules, next, opts).total;
     return { id: sc.id, label: sc.label, total, delta: total - base };
   }).filter(Boolean);
 }

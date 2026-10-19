@@ -5,9 +5,14 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(ROOT, 'dist');
-const SITE = { name: 'CRS Planner', url: 'https://crsplanner.com', checked: '2026-10-14' };
+const SITE = { name: 'CRS Planner', url: 'https://crsplanner.com', checked: '2026-10-19' };
 const read = (p) => JSON.parse(readFileSync(join(ROOT, p), 'utf8'));
 const crs = read('data/rules/crs.json');
+const highWage = read('data/rules/high-wage.json');
+const LMI = crs.labourMarketIntegration;
+const HW_LABEL = { x2: 'at least 2 times the average median wage', x1_5: '1.5 to 2 times the average median wage', x1_3: '1.3 to 1.5 times the average median wage' };
+const HW_SHORT = { x2: '2x median wage', x1_5: '1.5x median wage', x1_3: '1.3x median wage' };
+const hwMap = () => Object.fromEntries(Object.entries(highWage.occupations).flatMap(([lv, list]) => list.map((o) => [o.noc, lv])));
 const lang = read('data/rules/language-tests.json');
 const draws = read('data/draws.json');
 const changelog = read('data/changelog.json');
@@ -58,7 +63,7 @@ const longDate = (iso) => `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${Number(iso.s
 const jsonScript = (id, obj) => `<script type="application/json" id="${id}">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
 const LOGO_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#12352E"/><rect x="6" y="18" width="20" height="3" rx="1.5" fill="#fff"/><rect x="6" y="12" width="4" height="9" rx="1.5" fill="#fff" opacity=".55"/><rect x="12" y="9" width="4" height="12" rx="1.5" fill="#fff" opacity=".55"/><rect x="19" y="5" width="3.6" height="22" rx="1.8" fill="#E5484D"/></svg>';
 const FOOT = [
-  ['Express Entry', [['/', 'CRS calculator'], ['/express-entry-draws/', 'Latest draws'], ['/next-express-entry-draw/', 'Next draw'], ['/express-entry-categories/', 'Categories'], ['/crs-score-distribution/', 'Score distribution'], ['/how-to-increase-crs-score/', 'Raise your score'], ['/fsw-67-points-calculator/', 'FSW 67 points'], ['/cec-eligibility-calculator/', 'CEC eligibility'], ['/proof-of-funds-express-entry/', 'Proof of funds'], ['/canada-pr-fees/', 'PR fees'], ['/noc-code-finder/', 'NOC code finder']]],
+  ['Express Entry', [['/', 'CRS calculator'], ['/express-entry-draws/', 'Latest draws'], ['/next-express-entry-draw/', 'Next draw'], ['/express-entry-categories/', 'Categories'], ['/high-wage-occupations/', 'High-wage occupations'], ['/crs-score-distribution/', 'Score distribution'], ['/how-to-increase-crs-score/', 'Raise your score'], ['/fsw-67-points-calculator/', 'FSW 67 points'], ['/cec-eligibility-calculator/', 'CEC eligibility'], ['/proof-of-funds-express-entry/', 'Proof of funds'], ['/canada-pr-fees/', 'PR fees'], ['/noc-code-finder/', 'NOC code finder']]],
   ['Language tests', [['/clb-converter/', 'CLB converter'], ['/ielts-score-chart/', 'IELTS chart'], ['/celpip-score-chart/', 'CELPIP chart'], ['/pte-core-score-chart/', 'PTE Core chart'], ['/tef-canada-score-chart/', 'TEF Canada chart'], ['/tcf-canada-score-chart/', 'TCF Canada chart'], ['/celpip-to-ielts/', 'CELPIP to IELTS']]],
   ['Provinces', [['/oinp-points-calculator/', 'Ontario points'], ['/oinp-draws/', 'Ontario draws'], ['/bc-pnp-points-calculator/', 'BC points'], ['/bc-pnp-draws/', 'BC draws'], ['/aaip-points-calculator/', 'Alberta points'], ['/aaip-draws/', 'Alberta draws'], ['/sinp-points-calculator/', 'Saskatchewan points'], ['/mpnp-points-calculator/', 'Manitoba points'], ['/nova-scotia-nominee-program/', 'Nova Scotia'], ['/new-brunswick-pnp/', 'New Brunswick'], ['/pei-pnp/', 'Prince Edward Island'], ['/atlantic-immigration-program/', 'Atlantic program'], ['/rural-community-immigration-pilot/', 'Rural pilot']]],
   ['Work and study', [['/pgwp-calculator/', 'PGWP length'], ['/spousal-open-work-permit/', 'Spousal work permit'], ['/bridging-open-work-permit/', 'Bridging work permit']]],
@@ -172,6 +177,9 @@ function home() {
 <div class="tool">
 <form id="crs-form" novalidate>
   <p class="example-note" id="example-note"><span>Showing an example profile. Change any answer to get your own score.</span><button type="button" id="clear-example">Start from blank</button></p>
+  <div class="field" id="regime-field"><label for="regime">Rules to apply</label>
+    <select id="regime" name="regime"><option value="current">Current rules</option><option value="lmi">Rules from ${longDate(LMI.effective)} (high-wage work and job offers)</option></select>
+    <span class="hint">IRCC changes how Canadian work experience and job offers are scored on ${longDate(LMI.effective)}. See <a href="/high-wage-occupations/">what changes and the high-wage occupations list</a>.</span></div>
 
   <fieldset><legend>You and your partner</legend>
     <div class="field"><label for="marital">Marital status</label>
@@ -207,13 +215,20 @@ function home() {
       <div class="field"><label for="foreignWorkYears">Skilled work outside Canada (last 10 years)</label><select id="foreignWorkYears" name="foreignWorkYears">${years(3, '3 years or more')}</select></div>
     </div>
     <span class="hint">Skilled means TEER 0, 1, 2 or 3 of the National Occupational Classification, full time or the part-time equivalent.</span>
+    <div id="lmi-fields" style="margin-top:14px" hidden>
+      <div class="row">
+        <div class="field"><label for="highWageLevel">Of your Canadian work, at least 12 months in high-wage occupations paying</label><select id="highWageLevel" name="highWageLevel"><option value="none">None, or less than 12 months</option><option value="x1_3">1.3 times the average median wage or more</option><option value="x1_5">1.5 times the average median wage or more</option><option value="x2">2 times the average median wage or more</option></select></div>
+        <div class="field"><label for="jobOfferLevel">Valid job offer</label><select id="jobOfferLevel" name="jobOfferLevel"><option value="none">None, or not in a high-wage occupation</option><option value="x1_3">In a high-wage occupation at 1.3 to 1.5 times</option><option value="x1_5">In a high-wage occupation at 1.5 to 2 times</option><option value="x2">In a high-wage occupation at 2 times or more</option></select></div>
+      </div>
+      <div class="field"><label for="nocCheck">Check the level of a NOC code</label><input type="text" id="nocCheck" inputmode="numeric" maxlength="5" placeholder="e.g. 21231" autocomplete="off"><span class="hint" id="nocCheck-out">The level is set by IRCC for each NOC code, not by your own salary.</span></div>
+    </div>
   </fieldset>
 
   <fieldset><legend>Other factors</legend>
     <div class="field check"><input type="checkbox" id="certificate" name="certificate"><label for="certificate">I have a certificate of qualification in a trade from a Canadian province or territory</label></div>
     <div class="field check"><input type="checkbox" id="sibling" name="sibling"><label for="sibling">I or my partner have a brother or sister in Canada who is 18 or older and a citizen or permanent resident</label></div>
     <div class="field check"><input type="checkbox" id="nomination" name="nomination"><label for="nomination">I have a nomination from a province or territory</label></div>
-    <p class="hint">Job offers no longer give CRS points since March 25, 2025.</p>
+    <p class="hint" id="offer-hint">Job offers give no CRS points until ${longDate(LMI.effective)}. From that day a job offer in a high-wage occupation is worth up to ${LMI.jobOffer.byLevel.x2} points.</p>
   </fieldset>
 
   <fieldset id="spouse-block" hidden><legend>Your partner</legend>
@@ -225,7 +240,7 @@ function home() {
 </form>
 
 <aside class="results" id="results" aria-label="Your CRS score">
-  <div class="total"><span><span class="score" id="total" aria-live="polite">0</span> <span class="of">/ 1,200</span></span><span class="small">Estimated CRS score</span></div>
+  <div class="total"><span><span class="score" id="total" aria-live="polite">0</span> <span class="of" id="of-max">/ 1,200</span></span><span class="small">Estimated CRS score</span></div>
   <div class="bars" id="bars"></div>
   <p class="callout small" id="tcf-note" hidden></p>
   <details class="breakdown"><summary>Every point, line by line</summary>
@@ -242,7 +257,7 @@ function home() {
 <h2>How the CRS score is built</h2>
 <p>Express Entry ranks every profile in the pool on a scale of 0 to 1,200. The score has four parts: core human capital (age, education, languages and Canadian work experience), your partner's factors if they come with you, skill transferability, and additional points such as a provincial nomination.</p>
 <p>Couples split their points. If your partner comes with you and is not a Canadian citizen or permanent resident, your core maximum drops from 500 to 460 and up to 40 points come from your partner instead. Skill transferability is capped at 100 points and additional points at 600.</p>
-<p class="callout">Job offers stopped adding CRS points on March 25, 2025. A job offer can still matter for eligibility in some programs.</p>
+<p class="callout">From ${longDate(LMI.effective)} IRCC replaces the Canadian work experience factor with a Labour Market Integration factor worth up to ${LMI.max[1]} points: work-length points plus up to ${LMI.highWageExperience.byLevel.x2} for work in a high-wage occupation, or up to ${LMI.jobOffer.byLevel.x2} for a job offer in one, whichever is higher. No LMIA is needed for a job offer from that date. Details in <a href="/high-wage-occupations/">high-wage occupations and the new CRS points</a>.</p>
 
 <h3>Age</h3>${ageTable()}
 <h3>Level of education</h3>${eduTable()}
@@ -275,11 +290,12 @@ ${langTable()}
 <h2>Sources</h2>
 <ul>
 <li><a href="${crs.source}" rel="noopener">Comprehensive Ranking System (CRS) criteria</a>, IRCC, modified ${longDate(crs.sourceModified)}</li>
+<li><a href="${LMI.source}" rel="noopener">What has changed in Express Entry</a> and <a href="${highWage.source}" rel="noopener">high-wage occupations</a>, IRCC, modified ${longDate(LMI.sourceModified)}</li>
 <li><a href="${lang.source}" rel="noopener">Language test results for Express Entry</a>, IRCC</li>
 <li><a href="${draws.page}" rel="noopener">Express Entry rounds of invitations</a>, IRCC</li>
 </ul>
 </article>`;
-  const scripts = `${jsonScript('crs-rules', crs)}${jsonScript('lang-rules', lang)}${jsonScript('recent-draws', { categories: recentCats.map((c) => ({ ...c, slug: CAT_PAGES[c.id] && catPagesList().some((x) => x.id === c.id) ? CAT_PAGES[c.id].slug : null })), rounds: recentRounds })}<script type="module" src="/js/calculator.js"></script>`;
+  const scripts = `${jsonScript('crs-rules', crs)}${jsonScript('lang-rules', lang)}${jsonScript('high-wage', hwMap())}${jsonScript('recent-draws', { categories: recentCats.map((c) => ({ ...c, slug: CAT_PAGES[c.id] && catPagesList().some((x) => x.id === c.id) ? CAT_PAGES[c.id].slug : null })), rounds: recentRounds })}<script type="module" src="/js/calculator.js"></script>`;
   const jsonld = [{
     '@context': 'https://schema.org', '@type': 'WebApplication', name: 'CRS Calculator', url: SITE.url + '/',
     applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any', isAccessibleForFree: true,
@@ -637,7 +653,7 @@ function categoriesPage() {
   const sections = C.map((c) => {
     const { all, recent } = catStats(c.drawId);
     const link = drawLink(c);
-    const occ = c.occupations ? `<div class="table-scroll"><table><thead><tr><th>Occupation</th><th class="n">NOC 2021</th><th class="n">TEER</th></tr></thead><tbody>${c.occupations.map((o) => `<tr><td>${esc(o.title)}</td><td class="n">${o.noc}</td><td class="n">${o.teer}</td></tr>`).join('')}</tbody></table></div>` : '';
+    const occ = c.occupations ? `<div class="table-scroll"><table><thead><tr><th>Occupation</th><th class="n">NOC 2021</th><th class="n">TEER</th><th>High-wage level from Nov 3</th></tr></thead><tbody>${c.occupations.map((o) => `<tr><td>${esc(o.title)}</td><td class="n">${o.noc}</td><td class="n">${o.teer}</td><td>${HW_SHORT[hwMap()[o.noc]] || 'Not on the list'}</td></tr>`).join('')}</tbody></table></div>` : '';
     const draw = all.length
       ? `<p>${recent.length ? `${recent.length} round${recent.length > 1 ? 's' : ''} in the last 12 months, ${recent.length > 1 ? `with cut-offs from ${Math.min(...recent.map((r) => r.crs))} to ${Math.max(...recent.map((r) => r.crs))}` : `with a cut-off of ${recent[0].crs}`}.` : 'No rounds in the last 12 months.'} The latest was on ${longDate(all[0].date)}: ${fmt(all[0].size)} invitations, cut-off ${fmt(all[0].crs)}.${link ? ` See every round on the <a href="${link}">${esc(CAT_PAGES[c.drawId].short)} draws page</a>.` : ''}</p>`
       : '<p>IRCC has not held a round for this category yet.</p>';
@@ -664,6 +680,7 @@ function categoriesPage() {
 <p>In a category round IRCC ranks only the candidates who meet that category's requirement and invites the highest CRS scores. Your score is the same in every round; what changes is who you compete with. That is why a category's cut-off can be far below the others.${contrast}</p>
 <p>Your occupation is matched by its NOC 2021 code. The 12 months of experience have to be in the last 3 years and in one listed occupation, but they do not need to be continuous. IRCC can also skip a category for a while if enough of its candidates are already being invited in general or program rounds.</p>
 <p>Compare your own score with each category's cut-offs on the <a href="/">CRS calculator</a>.</p>
+<p>From ${longDate(LMI.effective)} the occupation also matters for your score, not only for the category: IRCC gives extra CRS points for Canadian work in, or a job offer in, an occupation on its <a href="/high-wage-occupations/">high-wage occupations list</a>. The last column of each table shows the level of every category occupation on that list.</p>
 ${sections}
 ${isLive('/noc-code-finder/') ? '<p>Not sure which NOC code is yours? Search your job title in the <a href="/noc-code-finder/">NOC code finder</a>.</p>' : ''}
 ${retired.length ? `<h2>Categories no longer on the list</h2><p>${retired.map((c) => `<a href="/express-entry-draws/${CAT_PAGES[c.id].slug}/">${esc(CAT_PAGES[c.id].short)}</a>`).join(' and ')} had their own rounds in earlier years but are not among IRCC's current categories. Their history stays on our draws pages.</p>` : ''}
@@ -859,6 +876,7 @@ function increasePage() {
 <h2>3. Canadian work experience</h2>
 <div class="table-scroll"><table><thead><tr><th>Skilled work in Canada</th><th class="n">Core points, single</th><th class="n">With a partner who counts</th></tr></thead><tbody>${cwRows}</tbody></table></div>
 <p>Canadian experience also combines with education and with foreign work experience in skill transferability, up to the same caps of 50 per block and 100 in total. Only skilled work counts: TEER 0, 1, 2 or 3.</p>
+<p>Since ${longDate(LMI.effective)} these work-length points sit inside the Labour Market Integration factor, which adds ${LMI.highWageExperience.byLevel.x2}, ${LMI.highWageExperience.byLevel.x1_5} or ${LMI.highWageExperience.byLevel.x1_3} points when at least 12 months of that work were in a <a href="/high-wage-occupations/">high-wage occupation</a>. A valid job offer in a high-wage occupation is worth ${LMI.jobOffer.byLevel.x2}, ${LMI.jobOffer.byLevel.x1_5} or ${LMI.jobOffer.byLevel.x1_3} points instead, if that is higher. You get one or the other, up to ${LMI.max[1]} points single or ${LMI.max[0]} with a partner who counts.</p>
 
 <h2>4. Education</h2>
 <p>Each level of education has its own points. Two of the steps people miss: a second post-secondary credential, when one of them is a program of three years or more, scores ${ed.twoOrMore[1]} instead of ${ed.bachelor[1]} for a bachelor's alone (single applicant); and a credential from outside Canada only counts with an Educational Credential Assessment (ECA). A Canadian post-secondary credential adds ${crs.additional.canadianEducation.oneOrTwoYears} additional points for one or two years of study, or ${crs.additional.canadianEducation.threePlusYears} for three years or more.</p>
@@ -873,9 +891,9 @@ function increasePage() {
 <p>A brother or sister in Canada who is 18 or older and a citizen or permanent resident adds ${crs.additional.sibling} points. A certificate of qualification in a trade from a Canadian province or territory adds up to ${crs.transferability.certificate.max} in skill transferability, with CLB 5 or higher.</p>
 
 <h2>What no longer works</h2>
-<p>Job offers stopped adding CRS points on March 25, 2025. Age points cannot be raised and fall each year from age 30; see <a href="/crs-age-points/">CRS points by age</a>.</p>
+<p>Job offers gave no CRS points from March 25, 2025 to ${longDate(LMI.effective)}; now only offers in a high-wage occupation count, and an LMIA adds nothing. Age points cannot be raised and fall each year from age 30; see <a href="/crs-age-points/">CRS points by age</a>.</p>
 <h2>Sources</h2>
-<ul><li><a href="${crs.source}" rel="noopener">Comprehensive Ranking System (CRS) criteria</a>, IRCC, modified ${longDate(crs.sourceModified)}</li></ul>
+<ul><li><a href="${crs.source}" rel="noopener">Comprehensive Ranking System (CRS) criteria</a>, IRCC, modified ${longDate(crs.sourceModified)}</li><li><a href="${LMI.source}" rel="noopener">What has changed in Express Entry</a>, IRCC, modified ${longDate(LMI.sourceModified)}</li></ul>
 </article>`;
   return page({ path: '/how-to-increase-crs-score/', title: 'How to Increase Your CRS Score: Every Lever, in Points (2026)', description: 'Ways to raise your Express Entry CRS score with the exact points each adds: language, French, Canadian work, education, nomination, partner and more.', body, crumbs: [['Home', '/'], ['How to increase your CRS score', '/how-to-increase-crs-score/']] });
 }
@@ -2280,6 +2298,62 @@ function changelogPage() {
     `<p>Every change to the rules or data behind our tools, newest first.</p><div class="table-scroll"><table><thead><tr><th>Date</th><th>Change</th></tr></thead><tbody>${rows}</tbody></table></div>`);
 }
 
+// ---------- High-wage occupations and the Labour Market Integration factor (in force 2026-11-03) ----------
+function highWagePage() {
+  const H = highWage, L = LMI;
+  const n = Object.values(H.occupations).reduce((t, l) => t + l.length, 0);
+  const wl = L.workLength.byYears;
+  const wlRows = ['1', '2', '3', '4', '5'].map((y) => `<tr><td>${y === '5' ? '5 years or more' : `${y} year${y > '1' ? 's' : ''}`}</td><td class="n">${wl[y][1]}</td><td class="n">${wl[y][0]}</td></tr>`).join('');
+  const lists = ['x2', 'x1_5', 'x1_3'].map((lv) => `<h3 id="level-${lv.replace('_', '-')}">${esc(H.levels[lv])} (${H.occupations[lv].length} occupations)</h3>
+<div class="table-scroll"><table><thead><tr><th class="n">NOC 2021</th><th>Occupation</th></tr></thead><tbody>${H.occupations[lv].map((o) => `<tr><td class="n">${o.noc}</td><td>${esc(o.title)}</td></tr>`).join('')}</tbody></table></div>`).join('\n');
+  const body = `
+<section class="intro">
+  <h1>High-wage occupations and the new CRS points</h1>
+  <p class="lede">On ${longDate(L.effective)} IRCC changes how Express Entry scores Canadian work experience and job offers. A new Labour Market Integration factor, worth up to ${L.max[1]} points, rewards work in or a job offer for one of ${n} high-wage occupations. Here are the points, the full list by NOC code and what changes for job offers.</p>
+  <p class="meta"><span>IRCC pages modified ${longDate(H.sourceModified)}</span><span>Checked ${longDate(H.checked)}</span><span>In force ${longDate(L.effective)}</span></p>
+</section>
+<article class="prose">
+<p class="callout">${new Date().toISOString().slice(0, 10) < L.effective ? `Check your score under both sets of rules in the <a href="/">CRS calculator</a>: choose "Rules from ${longDate(L.effective)}" and enter your high-wage level.` : 'The <a href="/">CRS calculator</a> scores these points: enter your high-wage level or job offer under work experience.'} You can look up the level of any NOC code there too.</p>
+<h2>What changes on ${longDate(L.effective)}</h2>
+<ul>
+<li>The core Canadian work experience factor becomes the Labour Market Integration factor: up to ${L.max[1]} points single, ${L.max[0]} with a partner who counts.</li>
+<li>You get the higher of two options, never both: Canadian work experience points (length plus high-wage points) or job offer points.</li>
+<li>Job offer points come back, but only for offers in a high-wage occupation: ${L.jobOffer.byLevel.x2}, ${L.jobOffer.byLevel.x1_5} or ${L.jobOffer.byLevel.x1_3} points.</li>
+<li>A job offer no longer needs a Labour Market Impact Assessment (LMIA), for CRS points or for program eligibility, and an LMIA gives no extra points or priority.</li>
+<li>Skill transferability points do not change: they still use the length of your Canadian work experience.</li>
+<li>IRCC recalculates every profile in the pool, which can take up to two weeks, and pauses rounds of invitations until it is done.</li>
+</ul>
+<h2>Canadian work experience points</h2>
+<p>Work-length points are the same as today's Canadian work experience points, for skilled work (TEER 0 to 3) in Canada:</p>
+<div class="table-scroll"><table><thead><tr><th>Canadian work experience</th><th class="n">Single</th><th class="n">With partner</th></tr></thead><tbody>${wlRows}</tbody></table></div>
+<p>High-wage points are added on top when at least 12 months (1,560 hours) of that qualifying experience were in high-wage occupations. The months can be continuous or not, full time or the same amount part time, and spread across several high-wage jobs; with two jobs at once, only up to 30 hours a week count.</p>
+<div class="table-scroll"><table><thead><tr><th>At least 12 months in occupations paying</th><th class="n">High-wage points</th></tr></thead><tbody>
+<tr><td>2 times the average median wage or more</td><td class="n">${L.highWageExperience.byLevel.x2}</td></tr>
+<tr><td>1.5 times or more (if not eligible for ${L.highWageExperience.byLevel.x2})</td><td class="n">${L.highWageExperience.byLevel.x1_5}</td></tr>
+<tr><td>1.3 times or more (if not eligible for ${L.highWageExperience.byLevel.x1_5})</td><td class="n">${L.highWageExperience.byLevel.x1_3}</td></tr>
+<tr><td>Less than 12 months in high-wage occupations</td><td class="n">0</td></tr>
+</tbody></table></div>
+<p>So the most a single applicant can get from work experience is ${wl['5'][1]} + ${L.highWageExperience.byLevel.x2} = ${wl['5'][1] + L.highWageExperience.byLevel.x2} points, and ${wl['5'][0]} + ${L.highWageExperience.byLevel.x2} = ${wl['5'][0] + L.highWageExperience.byLevel.x2} with a partner who counts.</p>
+<h2>Job offer points</h2>
+<p>The offer must be valid under Express Entry and be for a job in a high-wage occupation. It can be for an existing or a new position, with an existing or a new employer. An officer checks that the offer is genuine when you apply for permanent residence.</p>
+<div class="table-scroll"><table><thead><tr><th>Job offer in an occupation paying</th><th class="n">Points</th></tr></thead><tbody>
+<tr><td>2 times the average median wage or more</td><td class="n">${L.jobOffer.byLevel.x2}</td></tr>
+<tr><td>1.5 to 2 times</td><td class="n">${L.jobOffer.byLevel.x1_5}</td></tr>
+<tr><td>1.3 to 1.5 times</td><td class="n">${L.jobOffer.byLevel.x1_3}</td></tr>
+<tr><td>Not a high-wage occupation</td><td class="n">0</td></tr>
+</tbody></table></div>
+<p>A job offer outside the list can still make you eligible for the Federal Skilled Worker or Federal Skilled Trades Program, in any TEER 0 to 3 job; it just adds no CRS points. IRCC says its online profile will not reflect the change at first: if you have an offer without an LMIA, you still answer that a positive LMIA was issued and enter the placeholder details IRCC publishes on its <a href="${L.source}" rel="noopener">changes page</a>.</p>
+<h2>How IRCC decides which jobs are high-wage</h2>
+<p>A job counts when the median wage of everyone in Canada working in that NOC code is at least 1.3 times the average median wage of the Canadian workforce. It depends on the occupation, not on your own salary. IRCC uses Job Bank, the Labour Force Survey and the Census over the last 3 years (the list in force from ${longDate(H.effective)} uses data from ${H.dataYears}), and each NOC takes the highest level it reached in those years. If the list changes after you are invited, IRCC keeps the level that applied on the date of your invitation.</p>
+${isLive('/noc-code-finder/') ? '<p>Find your NOC code from your job title with the <a href="/noc-code-finder/">NOC code finder</a>.</p>' : ''}
+<h2>The list: ${n} high-wage occupations</h2>
+${lists}
+<h2>Sources</h2>
+<ul><li><a href="${L.source}" rel="noopener">Express Entry: What has changed</a>, IRCC, modified ${longDate(L.sourceModified)}</li><li><a href="${H.source}" rel="noopener">High-wage occupations and how we assess them</a>, IRCC, modified ${longDate(H.sourceModified)}</li><li><a href="${crs.source}" rel="noopener">CRS criteria</a>, IRCC, modified ${longDate(crs.sourceModified)}</li></ul>
+</article>`;
+  return page({ path: '/high-wage-occupations/', title: 'High-Wage Occupations List for Express Entry (Nov 2026 CRS)', description: `The ${n} high-wage occupations IRCC uses from ${longDate(L.effective)}: NOC codes by level, the new CRS points for Canadian work (up to ${L.max[1]}) and job offers (up to ${L.jobOffer.byLevel.x2}), no LMIA needed.`, body, crumbs: [['Home', '/'], ['High-wage occupations', '/high-wage-occupations/']] });
+}
+
 // ---------- Write ----------
 rmSync(DIST, { recursive: true, force: true });
 const written = [];
@@ -2289,6 +2363,7 @@ out('clb-converter', clbPage());
 out('express-entry-draws', drawsPage(), latestDate);
 out('crs-score-distribution', distributionPage(), draws.distribution.asOfIso || latestDate);
 out('express-entry-categories', categoriesPage(), cats.checked);
+out('high-wage-occupations', highWagePage(), highWage.checked);
 for (const [slug, fn] of [['celpip-to-ielts', convertPage], ['next-express-entry-draw', nextDrawPage], ['how-to-increase-crs-score', increasePage], ['crs-age-points', agePage], ['physical-presence-calculator', presencePage], ['proof-of-funds-express-entry', fundsPage], ['pr-residency-obligation-calculator', residencyPage], ['oinp-points-calculator', oinpCalcPage], ['oinp-draws', oinpDrawsPage], ['mpnp-points-calculator', mpnpCalcPage], ['mpnp-draws', mpnpDrawsPage], ['sinp-points-calculator', sinpCalcPage], ['sinp-draws', sinpDrawsPage], ['aaip-points-calculator', aaipCalcPage], ['aaip-draws', aaipDrawsPage], ['fsw-67-points-calculator', fswPage], ['cec-eligibility-calculator', cecPage], ['super-visa-income-requirement', superVisaPage], ['parents-grandparents-sponsorship-income', pgpIncomePage], ['bc-pnp-points-calculator', bcCalcPage], ['bc-pnp-draws', bcDrawsPage], ['noc-code-finder', nocPage], ['spousal-open-work-permit', sowpPage], ['bridging-open-work-permit', bowpPage], ['pgwp-calculator', pgwpPage], ['express-entry-2026', eeYearPage], ['canada-pr-fees', feesPage], ['atlantic-immigration-program', aipPage], ['nova-scotia-nominee-program', nsnpPage], ['new-brunswick-pnp', nbpnpPage], ['pei-pnp', peiPage], ['rural-community-immigration-pilot', rcipPage], ['canadian-citizenship-test-practice', citizenshipTestPage]]) if (isLive(`/${slug}/`)) out(slug, fn(), slug === 'next-express-entry-draw' ? latestDate : (schedule.pages[`/${slug}/`] || SITE.checked));
 for (const id of Object.keys(CHART_PAGES)) if (isLive(`/${CHART_PAGES[id].slug}/`)) out(CHART_PAGES[id].slug, scoreChartPage(id), schedule.pages[`/${CHART_PAGES[id].slug}/`] || SITE.checked);
 for (const c of catPagesList()) out(`express-entry-draws/${CAT_PAGES[c.id].slug}`, categoryPage(c), draws.rounds.find((r) => r.category === c.id).date);

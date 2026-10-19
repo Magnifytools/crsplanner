@@ -1,10 +1,16 @@
-import { calculate, whatIf, clbForScore, SKILLS } from './crs.js';
+import { calculate, whatIf, clbForScore, lmiActive, SKILLS } from './crs.js';
 
 const $ = (sel, el = document) => el.querySelector(sel);
 const readJson = (id) => JSON.parse(document.getElementById(id).textContent);
 const rules = readJson('crs-rules');
 const lang = readJson('lang-rules');
 const recent = readJson('recent-draws');
+const highWage = readJson('high-wage');
+const LMI = rules.labourMarketIntegration;
+// Today's date in Toronto: IRCC's change applies from LMI.effective.
+const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+const lmiInForce = lmiActive(rules, today);
+const HW_TEXT = { x2: 'at least 2 times the average median wage', x1_5: '1.5 to 2 times the average median wage', x1_3: '1.3 to 1.5 times the average median wage' };
 const STORE = 'crsplanner.profile.v1';
 // IRCC's online calculator scores TCF Canada at NCLC 4 as 0; the published criteria give 6 per ability.
 const langIrccTool = JSON.parse(JSON.stringify(lang));
@@ -13,7 +19,7 @@ for (const s of SKILLS) langIrccTool.tests.tcf[s][0] = langIrccTool.tests.tcf[s]
 const EXAMPLE = {
   marital: 'single', spouseCitizen: 'no', spouseComing: 'yes', age: '29', education: 'master', canadianEducation: 'none',
   firstTest: 'ielts', first: { speaking: 7, listening: 8, reading: 7, writing: 7 },
-  secondTest: '', second: {}, canadianWorkYears: '0', foreignWorkYears: '3', certificate: false, nomination: false, sibling: false,
+  secondTest: '', second: {}, canadianWorkYears: '0', foreignWorkYears: '3', highWageLevel: 'none', jobOfferLevel: 'none', certificate: false, nomination: false, sibling: false,
   spouseEducation: 'none', spouseTest: '', spouseScores: {}, spouseCanadianWorkYears: '0',
 };
 
@@ -64,6 +70,7 @@ function getForm() {
     age: f.age.value, education: f.education.value, canadianEducation: f.canadianEducation.value,
     firstTest: f.firstTest.value, first: scores('first'), secondTest: f.secondTest.value, second: scores('second'),
     canadianWorkYears: f.canadianWorkYears.value, foreignWorkYears: f.foreignWorkYears.value,
+    highWageLevel: f.highWageLevel.value, jobOfferLevel: f.jobOfferLevel.value, regime: f.regime.value,
     certificate: f.certificate.checked, nomination: f.nomination.checked, sibling: f.sibling.checked,
     spouseEducation: f.spouseEducation.value, spouseTest: f.spouseTest.value, spouseScores: scores('spouse'),
     spouseCanadianWorkYears: f.spouseCanadianWorkYears.value,
@@ -81,6 +88,7 @@ function toProfile(v) {
     certificateOfQualification: v.certificate,
     spouse: spouseCounts ? { education: v.spouseEducation, language: entry(v.spouseTest, v.spouseScores), canadianWorkYears: Number(v.spouseCanadianWorkYears) } : null,
     sibling: v.sibling, canadianEducation: v.canadianEducation, provincialNomination: v.nomination,
+    highWageLevel: v.highWageLevel || 'none', jobOfferLevel: v.jobOfferLevel || 'none',
   };
 }
 
@@ -95,7 +103,11 @@ function syncLanguageSelects() {
   const partner = v.marital === 'married' || v.marital === 'commonlaw';
   $('#partner-questions').hidden = !partner;
   $('#spouse-block').hidden = !(partner && v.spouseCitizen === 'no' && v.spouseComing === 'yes');
+  const lmi = useLmi();
+  $('#lmi-fields').hidden = !lmi;
+  $('#offer-hint').hidden = lmi;
 }
+const useLmi = () => lmiInForce || form.elements.regime.value === 'lmi';
 function getFormLite() { const f = form.elements; return { marital: f.marital.value, spouseCitizen: f.spouseCitizen.value, spouseComing: f.spouseComing.value }; }
 
 function clbTags() {
@@ -116,9 +128,11 @@ function clbTags() {
 function render(result, profile) {
   $('#total').textContent = fmt(result.total);
   const mini = $('#total-mini'); if (mini) mini.textContent = fmt(result.total);
-  const coreMax = result.spouseCounts ? 460 : 500;
+  const c = result.spouseCounts ? 0 : 1;
+  const coreMax = (result.spouseCounts ? 460 : 500) - (result.lmi ? rules.core.canadianWork.max[c] : 0);
   const parts = [
     ['Core / human capital', result.sections.core, coreMax],
+    ...(result.lmi ? [['Labour Market Integration', result.sections.lmi, LMI.max[c]]] : []),
     ...(result.spouseCounts ? [['Spouse or partner', result.sections.spouse, 40]] : []),
     ['Skill transferability', result.sections.transferability, 100],
     ['Additional points', result.sections.additional, 600],
@@ -127,9 +141,9 @@ function render(result, profile) {
     <div class="bar"><span>${label}</span><span class="num">${v} / ${max}</span>
     <div class="track" aria-hidden="true"><div class="fill" style="width:${Math.min(100, (v / max) * 100)}%"></div></div></div>`).join('');
 
-  const names = { core: 'Core / human capital', spouse: 'Spouse or partner', transferability: 'Skill transferability (max 100)', additional: 'Additional points (max 600)' };
+  const names = { core: 'Core / human capital', lmi: `Labour Market Integration (max ${LMI.max[c]}, the higher of work or job offer)`, spouse: 'Spouse or partner', transferability: 'Skill transferability (max 100)', additional: 'Additional points (max 600)' };
   let rows = '';
-  for (const sec of ['core', 'spouse', 'transferability', 'additional']) {
+  for (const sec of ['core', 'lmi', 'spouse', 'transferability', 'additional']) {
     const items = result.items.filter((i) => i.section === sec);
     if (!items.length) continue;
     rows += `<tr class="section"><td>${names[sec]}</td><td class="n">${result.sections[sec]}</td></tr>`;
@@ -142,7 +156,7 @@ function render(result, profile) {
   if (result.items.filter((i) => i.key.startsWith('foreignWork')).reduce((s, i) => s + i.points, 0) > t.foreignWork) capNotes.push('Foreign work combinations are capped at 50.');
   $('#cap-notes').textContent = capNotes.join(' ');
 
-  const w = whatIf(rules, lang, profile).filter((x) => x.delta !== 0).sort((a, b) => b.delta - a.delta);
+  const w = whatIf(rules, lang, profile, { lmi: result.lmi }).filter((x) => x.delta !== 0).sort((a, b) => b.delta - a.delta);
   $('#whatif').innerHTML = w.length
     ? w.map((x) => `<li><span>${x.label}</span><span class="delta ${x.delta > 0 ? 'up' : ''}">${x.delta > 0 ? '+' : ''}${x.delta} → ${x.total}</span></li>`).join('')
     : '<li><span>No single change on this list moves your score.</span></li>';
@@ -189,9 +203,11 @@ function update(save = true) {
   clbTags();
   const v = getForm();
   const profile = toProfile(v);
-  const result = calculate(rules, lang, profile);
+  const opts = { lmi: useLmi() };
+  const result = calculate(rules, lang, profile, opts);
+  $('#of-max').hidden = result.lmi;
   render(result, profile);
-  const alt = calculate(rules, langIrccTool, profile).total;
+  const alt = calculate(rules, langIrccTool, profile, opts).total;
   const note = $('#tcf-note');
   note.hidden = alt === result.total;
   if (alt !== result.total) note.textContent = `IRCC's online calculator would show ${result.total - alt} points less for this profile: it gives 0 points to TCF Canada results at NCLC 4, while the published CRS criteria give 6 per ability. This score follows the published criteria.`;
@@ -210,6 +226,14 @@ function init() {
   form.addEventListener('input', () => { $('#example-note').hidden = true; update(); });
   form.addEventListener('change', () => { $('#example-note').hidden = true; update(); });
   form.addEventListener('submit', (e) => e.preventDefault());
+  if (lmiInForce) $('#regime-field').hidden = true;
+  const nocIn = $('#nocCheck'), nocOut = $('#nocCheck-out'), nocDefault = nocOut.textContent;
+  nocIn.addEventListener('input', () => {
+    const code = nocIn.value.replace(/\D/g, '');
+    if (code.length < 5) { nocOut.textContent = nocDefault; return; }
+    const lv = highWage[code];
+    nocOut.textContent = lv ? `NOC ${code} is a high-wage occupation: median wage ${HW_TEXT[lv]}.` : `NOC ${code} is not on IRCC's high-wage occupations list, so it adds no high-wage or job offer points.`;
+  });
   $('#clear-example').addEventListener('click', () => {
     form.reset();
     for (const s of SKILLS) for (const p of ['first', 'second', 'spouse']) { const el = $(`#${p}-${s}`); if (el) el.value = ''; }

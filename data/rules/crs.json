@@ -2,10 +2,10 @@
   "id": "crs",
   "version": "2026-06-22",
   "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/crs-criteria.html",
-  "sourceModified": "2026-06-22",
-  "checked": "2026-10-14",
+  "sourceModified": "2026-10-16",
+  "checked": "2026-10-19",
   "notes": [
-    "Job offer points removed from 2025-03-25 (official page banner).",
+    "Job offers give no CRS points until 2026-11-02. From 2026-11-03 the Labour Market Integration factor (labourMarketIntegration below) replaces the core Canadian work experience factor and brings back job offer points for high-wage occupations.",
     "Points are given as if single when the spouse or partner is not coming to Canada, or is a Canadian citizen or permanent resident.",
     "Columns: [withSpouse, single]."
   ],
@@ -129,5 +129,7 @@
     },
     "canadianEducation": { "oneOrTwoYears": 15, "threePlusYears": 30 },
     "provincialNomination": 600
-  }
+  },
+ "watchPages": [{"url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/changes.html", "modified": "2026-10-16"}, {"url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/check-score/high-wage.html", "modified": "2026-10-16"}],
+ "labourMarketIntegration": {"effective": "2026-11-03", "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/changes.html", "sourceModified": "2026-10-16", "note": "Replaces the core Canadian work experience factor. You get the higher of (a) work-length points plus high-wage experience points or (b) job offer points, never both. Columns: [withSpouse, single]. Skill transferability keeps using the length of Canadian work experience as before.", "max": [140, 150], "workLength": {"max": [70, 80], "byYears": {"0": [0, 0], "1": [35, 40], "2": [46, 53], "3": [56, 64], "4": [63, 72], "5": [70, 80]}}, "highWageExperience": {"note": "At least 12 months (1,560 hours) of qualifying Canadian work experience, combined, in high-wage occupations at that level or higher.", "byLevel": {"x2": 70, "x1_5": 40, "x1_3": 20, "none": 0}}, "jobOffer": {"note": "A job offer valid under Express Entry (no LMIA needed from 2026-11-03) in a high-wage occupation.", "byLevel": {"x2": 100, "x1_5": 70, "x1_3": 50, "none": 0}}}
 }

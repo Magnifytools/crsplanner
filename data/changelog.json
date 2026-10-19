@@ -1,5 +1,17 @@
 [
  {
+  "date": "2026-10-19",
+  "what": "CRS changes of November 3, 2026: the calculator can now score with IRCC's new Labour Market Integration factor (work-length points plus up to 70 for work in a high-wage occupation, or up to 100 for a job offer in one, maximum 150 single or 140 with a partner), and switches to it on that date. New page with the 186 high-wage occupations by NOC code and level. Sources: IRCC's \"What has changed\" and high-wage occupations pages, modified 2026-10-16. The category tables now show each occupation's high-wage level."
+ },
+ {
+  "date": "2026-10-19",
+  "what": "IRCC updated its CRS criteria, categories, CEC, FSW, language test, proof of funds and bridging permit pages on 2026-10-16. We checked every value we use: none changed. Our summary of the skilled military recruits category now also includes the Canadian Armed Forces job offer and the 2-year post-secondary credential that IRCC lists."
+ },
+ {
+  "date": "2026-10-19",
+  "what": "PEI PNP: draw of October 16, 2026 with 163 invitations (PEI page published 2026-10-16), 1,482 invitations in 2026 so far."
+ },
+ {
   "date": "2026-10-14",
   "what": "New look: new logo, new typefaces, human-readable dates, a \"Where you stand\" line in the CRS calculator, a grouped site map in the footer and rewritten page introductions. No rules or data changed."
  },

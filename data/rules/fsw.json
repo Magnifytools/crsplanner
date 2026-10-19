@@ -1,9 +1,9 @@
 {
  "id": "fsw-67",
  "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/who-can-apply/federal-skilled-workers.html",
- "sourceModified": "2026-09-24",
+ "sourceModified": "2026-10-16",
  "educationSource": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/education-assessment.html",
- "checked": "2026-10-14",
+ "checked": "2026-10-19",
  "passMark": 67,
  "max": 100,
  "language": { "firstPerAbility": [[9, 6], [8, 5], [7, 4]], "firstMinClb": 7, "secondAllClb5": 4, "max": 28 },

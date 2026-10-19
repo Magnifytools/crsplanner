@@ -1,8 +1,8 @@
 {
  "id": "proof-of-funds",
  "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/proof-funds.html",
- "sourceModified": "2026-06-22",
- "checked": "2026-10-14",
+ "sourceModified": "2026-10-16",
+ "checked": "2026-10-19",
  "tableUpdated": "2025-07-07",
  "basis": "50% of the low income cut-off totals, updated every year",
  "amounts": { "1": 15263, "2": 19001, "3": 23360, "4": 28362, "5": 32168, "6": 36280, "7": 40392 },

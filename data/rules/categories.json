@@ -1,7 +1,7 @@
 {
  "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations/category-based-selection.html",
- "sourceModified": "2026-06-22",
- "checked": "2026-10-14",
+ "sourceModified": "2026-10-16",
+ "checked": "2026-10-19",
  "general": "To be invited in a category round you must meet the minimum criteria of Express Entry, which means being eligible for one of its three programs (Federal Skilled Worker, Canadian Experience Class or Federal Skilled Trades), and meet every requirement in the instructions for that round.",
  "categories": [
   {
@@ -534,7 +534,7 @@
    "id": "military",
    "drawId": "military",
    "name": "Skilled military recruits",
-   "requirement": "Be a Foreign Skilled Military Applicant (FSMA): serving in a recognized foreign military, with at least 10 years of continuous service, and with work experience and training aligned with the main duties of one of the listed Canadian Armed Forces occupations.",
+   "requirement": "Be a Foreign Skilled Military Applicant (FSMA): serving in a recognized foreign military, with at least 10 years of continuous service, and with work experience and training aligned with the main duties of one of the listed Canadian Armed Forces occupations. You also need an offer of arranged employment with the Canadian Armed Forces, made by the Canadian Forces Recruiting Group, for continuous full-time work in Canada of at least 3 years in one of those occupations, and at least a 2-year post-secondary credential (with an educational credential assessment if you studied outside Canada).",
    "occupations": [
     {
      "noc": "40042",
