@@ -1,5 +1,13 @@
 [
  {
+  "date": "2026-10-21",
+  "what": "Three pages for January built on IRCC's own processing-time data, which a script now copies every 3 hours: IRCC processing times for every application (permanent residence and citizenship estimates of 2026-10-09, weekly times and times by country of 2026-10-14, extensions of 2026-10-17), PR card processing time (IRCC PR card pages, modified 2026-08-04) and work permit processing time by country (IRCC extension pages, modified 2026-10-14)."
+ },
+ {
+  "date": "2026-10-21",
+  "what": "Ontario updated its Ontario Workforce Priority stream page on 2026-10-20: self-employed physicians now have their own Ontario work experience scale (cumulative medical practice in Ontario: 18, 15, 12 or 0 points) and their region is taken from the practice address of their OHIP billing number. The OINP points calculator uses that scale when you tick the physician box."
+ },
+ {
   "date": "2026-10-19",
   "what": "CRS changes of November 3, 2026: the calculator can now score with IRCC's new Labour Market Integration factor (work-length points plus up to 70 for work in a high-wage occupation, or up to 100 for a job offer in one, maximum 150 single or 140 with a partner), and switches to it on that date. New page with the 186 high-wage occupations by NOC code and level. Sources: IRCC's \"What has changed\" and high-wage occupations pages, modified 2026-10-16. The category tables now show each occupation's high-wage level."
  },

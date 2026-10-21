@@ -49,6 +49,10 @@ const nbDraws = read('data/provinces/nbpnp-draws.json');
 const citTest = read('data/rules/citizenship-test.json');
 const citQ = read('data/citizenship/questions.json');
 const peiDraws = read('data/provinces/pei-draws.json');
+const ptimes = read('data/ptimes.json');
+const ptRules = read('data/rules/processing-times.json');
+const prCard = read('data/rules/pr-card.json');
+const wpTimes = read('data/rules/work-permit-times.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -66,6 +70,7 @@ const FOOT = [
   ['Express Entry', [['/', 'CRS calculator'], ['/express-entry-draws/', 'Latest draws'], ['/next-express-entry-draw/', 'Next draw'], ['/express-entry-categories/', 'Categories'], ['/high-wage-occupations/', 'High-wage occupations'], ['/crs-score-distribution/', 'Score distribution'], ['/how-to-increase-crs-score/', 'Raise your score'], ['/fsw-67-points-calculator/', 'FSW 67 points'], ['/cec-eligibility-calculator/', 'CEC eligibility'], ['/proof-of-funds-express-entry/', 'Proof of funds'], ['/canada-pr-fees/', 'PR fees'], ['/noc-code-finder/', 'NOC code finder']]],
   ['Language tests', [['/clb-converter/', 'CLB converter'], ['/ielts-score-chart/', 'IELTS chart'], ['/celpip-score-chart/', 'CELPIP chart'], ['/pte-core-score-chart/', 'PTE Core chart'], ['/tef-canada-score-chart/', 'TEF Canada chart'], ['/tcf-canada-score-chart/', 'TCF Canada chart'], ['/celpip-to-ielts/', 'CELPIP to IELTS']]],
   ['Provinces', [['/oinp-points-calculator/', 'Ontario points'], ['/oinp-draws/', 'Ontario draws'], ['/bc-pnp-points-calculator/', 'BC points'], ['/bc-pnp-draws/', 'BC draws'], ['/aaip-points-calculator/', 'Alberta points'], ['/aaip-draws/', 'Alberta draws'], ['/sinp-points-calculator/', 'Saskatchewan points'], ['/mpnp-points-calculator/', 'Manitoba points'], ['/nova-scotia-nominee-program/', 'Nova Scotia'], ['/new-brunswick-pnp/', 'New Brunswick'], ['/pei-pnp/', 'Prince Edward Island'], ['/atlantic-immigration-program/', 'Atlantic program'], ['/rural-community-immigration-pilot/', 'Rural pilot']]],
+  ['Processing times', [['/ircc-processing-times/', 'All IRCC processing times'], ['/pr-card-processing-time/', 'PR card'], ['/work-permit-processing-time/', 'Work permit']]],
   ['Work and study', [['/pgwp-calculator/', 'PGWP length'], ['/spousal-open-work-permit/', 'Spousal work permit'], ['/bridging-open-work-permit/', 'Bridging work permit']]],
   ['Citizenship and family', [['/physical-presence-calculator/', 'Physical presence'], ['/canadian-citizenship-test-practice/', 'Citizenship test'], ['/pr-residency-obligation-calculator/', 'PR residency obligation'], ['/super-visa-income-requirement/', 'Super visa income'], ['/parents-grandparents-sponsorship-income/', 'Parents sponsorship income']]],
 ];
@@ -1085,7 +1090,8 @@ function oinpCalcPage() {
   const max = r.factors.reduce((s, f) => s + Math.max(...f.options.map((o) => o[1])), 0);
   const groups = [...new Set(r.factors.map((f) => f.group))];
   const fields = groups.map((g) => `<fieldset><legend>${esc(g)}</legend>${r.factors.filter((f) => f.group === g).map((f) => `<div class="field"><label for="${f.id}">${esc(f.label)}</label><select id="${f.id}" name="${f.id}">${f.options.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('')}</select></div>`).join('')}</fieldset>`).join('');
-  const tables = r.factors.map((f) => `<h3>${esc(f.label)}</h3><div class="table-scroll"><table><tbody>${f.options.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('')}</tbody></table></div>`).join('');
+  const grid = (opts) => `<div class="table-scroll"><table><tbody>${opts.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('')}</tbody></table></div>`;
+  const tables = r.factors.map((f) => `<h3>${esc(f.label)}${f.physicianOptions ? ': job offer applicants' : ''}</h3>${grid(f.options)}${f.physicianOptions ? `<h3>${esc(f.label)}: self-employed physicians</h3>${grid(f.physicianOptions)}` : ''}${f.physicianNote ? `<p class="small">${esc(f.physicianNote)}</p>` : ''}`).join('');
   const owpRounds = oinpDraws.rounds.filter((x) => x.stream === 'owp');
   const body = `
 <section class="intro">
@@ -1097,7 +1103,7 @@ function oinpCalcPage() {
 <form id="oinp-form" novalidate>
   <fieldset><legend>Shortcut</legend>
     <div class="field"><label for="noc">NOC 2021 code of the job offer (optional)</label><input type="text" id="noc" name="noc" inputmode="numeric" maxlength="5" placeholder="e.g. 21231"><span class="hint" id="noc-hint">The first digit is the broad occupational category and the second the TEER category; we set both for you.</span></div>
-    <div class="field check"><input type="checkbox" id="physician" name="physician"><label for="physician">I am applying as a self-employed physician (no job offer; the hourly wage factor does not apply)</label></div>
+    <div class="field check"><input type="checkbox" id="physician" name="physician"><label for="physician">I'm a self-employed physician with no job offer</label></div><p class="hint">The hourly wage factor then gives no points, and Ontario work experience counts your medical practice in Ontario.</p>
   </fieldset>
   ${fields}
 </form>
@@ -1109,7 +1115,7 @@ function oinpCalcPage() {
 </div>
 <article class="prose">
 <h2>What changed in 2026</h2>
-<p>Ontario replaced its Employer Job Offer, Masters Graduate and PhD Graduate streams with a single Ontario Workforce Priority stream. Its webpages were published on July 20, 2026 and the expression of interest portal opened on August 4, 2026. On October 5, 2026 Ontario changed the earnings factor so that $80,000 or more in a single year gives 10 points; this calculator includes that change. Calculators built for the old streams use a different grid.</p>
+<p>Ontario replaced its Employer Job Offer, Masters Graduate and PhD Graduate streams with a single Ontario Workforce Priority stream. Its webpages were published on July 20, 2026 and the expression of interest portal opened on August 4, 2026. On October 5, 2026 Ontario changed the earnings factor so that $80,000 or more in a single year gives 10 points; this calculator includes that change. Ontario's page, updated October 20, 2026, gives self-employed physicians a separate Ontario work experience scale, based on cumulative medical practice in Ontario, and takes their region from the practice address registered with their OHIP billing number. Calculators built for the old streams use a different grid.</p>
 <h2>How the score works</h2>
 <p>You register an expression of interest after your employer submits a job offer in Ontario's Employer Portal (self-employed physicians contact the OINP instead). Ontario scores it on the factors below and invites candidates from the pool. The score is not the same as the stream requirements: you also need to meet the work experience, language and education criteria for your job offer's TEER category, and prove every factor you claimed if you are invited.</p>
 <p>Language points use the lowest of your four CLB levels, from your better test if you have both English and French; check your levels with the <a href="/clb-converter/">CLB converter</a>. A nomination that goes through Express Entry adds 600 CRS points; see the <a href="/">CRS calculator</a>.</p>
@@ -1280,7 +1286,8 @@ function sinpCalcPage() {
   const opt = (arr) => arr.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('');
   const fields = r.factors.map((f) => `<div class="field"><label for="${f.id}">${esc(f.label)}</label><select id="${f.id}" name="${f.id}">${opt(f.options)}</select></div>`).join('');
   const c = r.connection;
-  const tables = r.factors.map((f) => `<h3>${esc(f.label)}</h3><div class="table-scroll"><table><tbody>${f.options.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('')}</tbody></table></div>`).join('');
+  const grid = (opts) => `<div class="table-scroll"><table><tbody>${opts.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('')}</tbody></table></div>`;
+  const tables = r.factors.map((f) => `<h3>${esc(f.label)}${f.physicianOptions ? ': job offer applicants' : ''}</h3>${grid(f.options)}${f.physicianOptions ? `<h3>${esc(f.label)}: self-employed physicians</h3>${grid(f.physicianOptions)}` : ''}${f.physicianNote ? `<p class="small">${esc(f.physicianNote)}</p>` : ''}`).join('');
   const last = sinpDraws.selections[0];
   const body = `
 <section class="intro">
@@ -1362,7 +1369,8 @@ function aaipCalcPage() {
   const r = aaip;
   const groups = [...new Set(r.factors.map((f) => f.group))];
   const fields = groups.map((g) => `<fieldset><legend>${esc(g)}</legend>${r.factors.filter((f) => f.group === g).map((f) => `<div class="field"><label for="${f.id}">${esc(f.label)}</label><select id="${f.id}" name="${f.id}">${f.options.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('')}</select></div>`).join('')}${g.endsWith('language') ? `<p class="hint">${esc(r.languageRule)}</p><p class="callout small" id="lang-warn" hidden>${esc(r.minimumLanguage)}.</p>` : ''}</fieldset>`).join('');
-  const tables = r.factors.map((f) => `<h3>${esc(f.label)}</h3><div class="table-scroll"><table><tbody>${f.options.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('')}</tbody></table></div>`).join('');
+  const grid = (opts) => `<div class="table-scroll"><table><tbody>${opts.map(([l, p]) => `<tr><td>${esc(l)}</td><td class="n">${p}</td></tr>`).join('')}</tbody></table></div>`;
+  const tables = r.factors.map((f) => `<h3>${esc(f.label)}${f.physicianOptions ? ': job offer applicants' : ''}</h3>${grid(f.options)}${f.physicianOptions ? `<h3>${esc(f.label)}: self-employed physicians</h3>${grid(f.physicianOptions)}` : ''}${f.physicianNote ? `<p class="small">${esc(f.physicianNote)}</p>` : ''}`).join('');
   const d = aaipDraws.draws;
   const recent = AAIP_STREAMS && Object.keys(AAIP_STREAMS).filter((s) => d.some((x) => x.stream === s)).map((s) => { const x = d.find((y) => y.stream === s); return `${esc(AAIP_STREAMS[s])}: ${x.minScore} on ${shortDate(x.date)}`; });
   const body = `
@@ -2354,6 +2362,187 @@ ${lists}
   return page({ path: '/high-wage-occupations/', title: 'High-Wage Occupations List for Express Entry (Nov 2026 CRS)', description: `The ${n} high-wage occupations IRCC uses from ${longDate(L.effective)}: NOC codes by level, the new CRS points for Canadian work (up to ${L.max[1]}) and job offers (up to ${L.jobOffer.byLevel.x2}), no LMIA needed.`, body, crumbs: [['Home', '/'], ['High-wage occupations', '/high-wage-occupations/']] });
 }
 
+// ---------- IRCC processing times (data/ptimes.json, updated by scripts/ptimes.mjs) ----------
+const PT_GROUPS = [
+  ['Economic immigration', [['cec', 'Canadian Experience Class (Express Entry)'], ['fsw', 'Federal skilled workers'], ['pnp-ee', 'Provincial nominees through Express Entry'], ['pnp-base', 'Provincial nominees outside Express Entry'], ['aip', 'Atlantic Immigration Program'], ['qsw', 'Quebec skilled workers'], ['quebec-business', 'Quebec business class'], ['self-employed', 'Self-employed persons (federal)'], ['startup-visa', 'Start-up visa'], ['caregiver', 'Caregivers (all programs)']]],
+  ['Family sponsorship', [['spousal-canada-roc', 'Spouse or common-law partner living in Canada, outside Quebec'], ['spousal-canada-quebec', 'Spouse or common-law partner living in Canada, Quebec'], ['spousal-abroad-roc', 'Spouse or partner living outside Canada, outside Quebec'], ['spousal-abroad-quebec', 'Spouse or partner living outside Canada, Quebec'], ['pgp-roc', 'Parents or grandparents, outside Quebec'], ['pgp-quebec', 'Parents or grandparents, Quebec']]],
+  ['Refugees and humanitarian cases', [['protected-persons-in-canada-roc', 'Protected persons in Canada, outside Quebec'], ['protected-persons-in-canada-quebec', 'Protected persons in Canada, Quebec'], ['dependants-abroad-roc', 'Dependants of protected persons, outside Quebec'], ['dependants-abroad-quebec', 'Dependants of protected persons, Quebec'], ['humanitarian-roc', 'Humanitarian and compassionate cases, outside Quebec'], ['humanitarian-quebec', 'Humanitarian and compassionate cases, Quebec'], ['government-refugees-roc', 'Government-assisted refugees, outside Quebec'], ['government-refugees-quebec', 'Government-assisted refugees, Quebec'], ['private-refugees-roc', 'Privately sponsored refugees, outside Quebec'], ['private-refugees-quebec', 'Privately sponsored refugees, Quebec']]],
+  ['Citizenship', [['citizen-grants', 'Citizenship grant (becoming a citizen)'], ['citizen-proofs', 'Citizenship certificate (proof of citizenship)']]],
+];
+const PT_SINGLE = [
+  ['Permanent resident cards', [['new_pr', 'First PR card'], ['existing_pr', 'Renewing or replacing a PR card']]],
+  ['Visitors, workers and travel authorizations', [['visitor_inside_canada', 'Visitor visa, from inside Canada'], ['visitor_extension', 'Visitor extension (visitor record)'], ['iec', 'International Experience Canada, current season'], ['iec_past', 'International Experience Canada, last season'], ['sawp_current', 'Seasonal Agricultural Worker Program'], ['eta', 'Electronic Travel Authorization (eTA), IRCC commitment']]],
+  ['Other applications', [['skilled_trades_ee', 'Federal skilled trades (Express Entry)'], ['cit_search', 'Search of citizenship records'], ['cit_renunciation', 'Renunciation of citizenship'], ['cit_resumption', 'Resumption of citizenship'], ['vos', 'Verification of status'], ['replacement', 'Replacement of valid temporary resident documents'], ['amend_imm', 'Amendment of immigration documents'], ['amend_tr', 'Amendment of valid temporary resident documents']]],
+];
+const PT_COUNTRY = [['visitor', 'Visitor visa'], ['superVisa', 'Super visa'], ['study', 'Study permit'], ['work', 'Work permit']];
+const andList = (a) => (a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a.at(-1)}`);
+const ptMax = (...d) => d.filter(Boolean).sort().at(-1);
+const ptOut = (s) => (/^No processing time available$/i.test(s) ? 'No time posted' : String(s).replace(/^1 (day|week|month)s$/, '1 $1'));
+const ptCountries = () => Object.entries(ptimes.names).filter(([c]) => c !== 'CA' && ptimes.country.work[c] !== undefined).sort((a, b) => a[1].localeCompare(b[1], 'en'));
+const ptPosted = (id) => ptCountries().filter(([c]) => /\d/.test(ptimes.country[id][c] || ''));
+const ptSources = () => `<li><a href="${ptimes.tool}" rel="noopener">Check processing times</a>, IRCC (page modified ${longDate(ptRules.sourceModified)}; method notes checked ${longDate(ptRules.checked)})</li>
+<li>IRCC data files read by that tool: <a href="${ptimes.files.nonCountry}" rel="noopener">times not tied to a country</a> and <a href="${ptimes.files.country}" rel="noopener">times by country</a> (updated ${longDate(ptimes.updated.weekly)}), <a href="${ptimes.files.flpt}" rel="noopener">permanent residence and citizenship estimates</a> (${longDate(ptimes.updated.flpt)}), <a href="${ptimes.files.flptWeek}" rel="noopener">work and study permit extensions</a> (${longDate(ptimes.updated.flptWeek)})</li>`;
+const ptTool = (mode, extra = '') => `${jsonScript('pt-conf', { mode, groups: PT_GROUPS, single: PT_SINGLE, country: PT_COUNTRY, ...extra })}<script type="module" src="/js/ptimes.js"></script>`;
+
+function ptHubPage() {
+  const P = ptimes, R = ptRules.method;
+  const prRows = PT_GROUPS.map(([g, list]) => `<tr><th colspan="3">${esc(g)}</th></tr>${list.filter(([k]) => P.flpt[k]).map(([k, l]) => `<tr><td>${esc(l)}</td><td>${esc(P.flpt[k].today)}</td><td class="n">${P.flpt[k].waiting === null ? '' : fmt(P.flpt[k].waiting)}</td></tr>`).join('')}`).join('');
+  const singleRows = PT_SINGLE.map(([g, list]) => `<tr><th colspan="2">${esc(g)}</th></tr>${list.map(([k, l]) => `<tr><td>${esc(l)}</td><td>${esc(P.single[k])}</td></tr>`).join('')}`).join('');
+  const inCanada = [['Work permit in Canada', P.country.work.CA], ['Study permit in Canada', P.country.study.CA], ['Work permit extension in Canada, if IRCC receives it today', P.flptWeek['WP-EXT']?.today], ['Study permit extension in Canada, if IRCC receives it today', P.flptWeek['SP-EXT']?.today]].filter(([, v]) => v);
+  const countryRows = ptCountries().map(([c, n]) => `<tr><td>${esc(n)}</td>${PT_COUNTRY.map(([id]) => `<td>${esc(ptOut(P.country[id][c] || ''))}</td>`).join('')}</tr>`).join('');
+  const posted = Object.fromEntries(PT_COUNTRY.map(([id]) => [id, ptPosted(id).length]));
+  const nC = ptCountries().length;
+  const cec = P.flpt.cec, cit = P.flpt['citizen-grants'];
+  const body = `
+<section class="intro">
+  <h1>IRCC processing times</h1>
+  <p class="lede">Choose your application to see the time IRCC publishes for it today. Already applied for permanent residence or citizenship? Add the month IRCC received it to see how much time IRCC estimates is left and how many people are ahead of you.</p>
+  <p class="meta"><span>Weekly times updated ${longDate(P.updated.weekly)}</span><span>Permanent residence estimates updated ${longDate(P.updated.flpt)}</span><span>Source: <a href="${P.tool}" rel="noopener">IRCC processing times tool</a></span></p>
+</section>
+<div class="tool">
+<form id="pt-form" novalidate>
+  <fieldset><legend>Your application</legend>
+    <div class="field"><label for="pt-type">What did you apply for?</label><select id="pt-type" name="type"></select></div>
+    <div class="field" id="pt-country-field" hidden><label for="pt-country">Where are you applying from?</label><select id="pt-country" name="country"></select></div>
+    <div class="field" id="pt-month-field" hidden><label for="pt-month">Month IRCC received your application (optional)</label><input type="month" id="pt-month" name="month"><span class="hint">Leave it empty to see the time for an application received today.</span></div>
+    <div class="field" id="pt-date-field" hidden><label for="pt-date">Date IRCC received your application (optional)</label><input type="date" id="pt-date" name="date"></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Processing time" id="pt-out" aria-live="polite"><p>Loading IRCC's data…</p></aside>
+</div>
+<article class="prose">
+<h2>Permanent residence and citizenship</h2>
+<p>These are IRCC's estimates for an application it receives today, updated monthly. The Canadian Experience Class is at ${esc(cec.today.toLowerCase())} with about ${fmt(cec.waiting)} people waiting, and a citizenship grant at ${esc(cit.today.toLowerCase())} with about ${fmt(cit.waiting)}. For Express Entry programs the clock starts when IRCC receives your application for permanent residence, not when you enter the pool${isLive('/express-entry-draws/') ? '; to get that far, see the <a href="/express-entry-draws/">latest draws</a> and the <a href="/">CRS calculator</a>' : ''}.</p>
+<div class="table-scroll"><table><thead><tr><th>Application</th><th>If IRCC receives it today</th><th class="n">People waiting</th></tr></thead><tbody>${prRows}</tbody></table></div>
+<h2>PR cards, visitors in Canada and other applications</h2>
+<p>Most of these times show how long IRCC took to process most complete applications in the past. The eTA time is different: it is the time within which IRCC commits to processing most complete applications. IRCC updates them weekly.${isLive('/pr-card-processing-time/') ? ' For PR cards, the <a href="/pr-card-processing-time/">PR card processing time</a> page works out the date from the day IRCC received yours.' : ''}</p>
+<div class="table-scroll"><table><thead><tr><th>Application</th><th>Processing time</th></tr></thead><tbody>${singleRows}</tbody></table></div>
+<h2>Work and study permits from inside Canada</h2>
+<div class="table-scroll"><table><thead><tr><th>Application</th><th>Processing time</th></tr></thead><tbody>${inCanada.map(([l, v]) => `<tr><td>${esc(l)}</td><td>${esc(v)}</td></tr>`).join('')}</tbody></table></div>
+<p>The extension estimate covers new post-graduation work permits, bridging open work permits and changes of conditions too.${isLive('/work-permit-processing-time/') ? ' The <a href="/work-permit-processing-time/">work permit processing time</a> page shows how long is left for an extension already submitted, by week.' : ''}</p>
+<h2>Visitor visas, study and work permits by country</h2>
+<p>For applications from outside Canada, IRCC publishes times by the country you apply from (for a super visa, where your parents or grandparents live). Of the ${nC} countries and territories in its list, it shows a time for ${posted.visitor} for visitor visas, ${posted.superVisa} for super visas, ${posted.study} for study permits and ${posted.work} for work permits. "No time posted" means IRCC shows no processing time for that country.</p>
+<div class="table-scroll"><table><thead><tr><th>Applying from</th>${PT_COUNTRY.map(([, l]) => `<th>${l}</th>`).join('')}</tr></thead><tbody>${countryRows}</tbody></table></div>
+<h2>How IRCC calculates these times</h2>
+<ul>
+<li><strong>Estimates for an application received today</strong>: for permanent residence and citizenship, IRCC bases them on ${andList(R.forwardBasedOn)}. For work and study permit extensions, on ${andList(R.forwardBasedOnExtensions)}.</li>
+<li><strong>Historical times</strong> (most temporary residence applications, PR cards and other documents): IRCC measures how long it took to process ${R.historicalShare}% of that type of application in the past ${R.historicalWindowPr} for permanent residence applications, and in the past ${R.historicalWindowTr} for temporary residence applications.</li>
+<li>The time starts ${R.startsWhen}, and ends ${R.endsWhen}.</li>
+<li>For Express Entry, it does not include the ${R.expressEntryExcludes}.</li>
+<li>For citizenship applications: if you live outside Canada and the U.S. and apply through a Canadian embassy, high commission or consulate, IRCC says to add ${R.mailOutsideCanada} for mailing. For a minor living outside Canada and the U.S. whose application went straight to the Case Processing Centre in Sydney, Nova Scotia, add ${R.minorSydney}.</li>
+<li>IRCC's times are not a maximum or a guarantee. An application can take longer if it is incomplete, complex, needs extra security checks, or if the program has reached its cap for the year.</li>
+</ul>
+<p class="callout">We check IRCC's data files every 3 hours and show the date of each IRCC update. For your own file, IRCC's account and its status tracker are the official record.</p>
+${isLive('/physical-presence-calculator/') ? '<p>Planning a citizenship application? Count your days first with the <a href="/physical-presence-calculator/">physical presence calculator</a>.</p>' : ''}
+<h2>Sources</h2>
+<ul>${ptSources()}</ul>
+</article>`;
+  return page({ path: '/ircc-processing-times/', title: 'IRCC Processing Times for PR, Citizenship and Permits', description: `IRCC processing times for permanent residence, citizenship, PR cards, work and study permits and visitor visas, by country. IRCC data updated ${shortDate(P.updated.weekly)}.`, body, scripts: ptTool('hub'), crumbs: [['Home', '/'], ['IRCC processing times', '/ircc-processing-times/']] });
+}
+
+function prCardTimePage() {
+  const P = ptimes, C = prCard;
+  const body = `
+<section class="intro">
+  <h1>PR card processing time</h1>
+  <p class="lede">IRCC's current time is ${esc(P.single.existing_pr)} to renew or replace a permanent resident card and ${esc(P.single.new_pr)} for a first card. Enter the day IRCC received your application to see the expected decision date and when the card should reach you.</p>
+  <p class="meta"><span>IRCC time updated ${longDate(P.updated.weekly)}</span><span>Rules checked ${longDate(C.checked)}</span><span>Source: <a href="${C.source}" rel="noopener">IRCC's PR card page</a>, modified ${longDate(C.sourceModified)}</span></p>
+</section>
+<div class="tool">
+<form id="pt-form" novalidate>
+  <fieldset><legend>Your card</legend>
+    <div class="field"><label for="pc-kind">Which card?</label><select id="pc-kind" name="kind"><option value="existing_pr">Renewing or replacing my card</option><option value="new_pr">My first PR card</option></select></div>
+    <div class="field"><label for="pc-date">Date IRCC received your application</label><input type="date" id="pc-date" name="date"><span class="hint">A first card sent automatically has no application; the day you gave IRCC your address and photo is the closest date to use.</span></div>
+    <div class="field" id="pc-exp-field"><label for="pc-exp">Expiry date on your current card (optional)</label><input type="date" id="pc-exp" name="exp"><span class="hint">We tell you when you can apply to renew it.</span></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="PR card dates" id="pt-out" aria-live="polite"></aside>
+</div>
+<article class="prose">
+<h2>Current PR card processing times</h2>
+<div class="table-scroll"><table><thead><tr><th>Application</th><th>Processing time</th></tr></thead><tbody>
+<tr><td>Renewing or replacing a PR card</td><td>${esc(P.single.existing_pr)}</td></tr>
+<tr><td>First PR card</td><td>${esc(P.single.new_pr)}</td></tr>
+</tbody></table></div>
+<p>IRCC updates these times every week. They show how long it took to process most complete applications in the past, from the day IRCC received a complete application to its decision. They are not a guarantee: an incomplete application can be delayed or returned.</p>
+<h2>Getting the card after IRCC decides</h2>
+<ul>
+<li>IRCC mails PR cards only to addresses in Canada. It can take up to ${C.deliveryExtraWeeks} weeks beyond the processing time for the card to reach you.</li>
+<li>There is no way to track a first card that IRCC sends automatically. Renewals, replacements, changes to the card and first cards you applied for can be tracked once you get the acknowledgement of receipt.</li>
+<li>If the card has not arrived ${C.deliveryExtraWeeks} weeks after the processing time and less than ${C.pickupDays} days have passed, IRCC asks for a solemn declaration and reissues the card. If ${C.pickupDays} days or more have passed, you apply for a new card and explain what happened; if IRCC made the error, it refunds the fee.</li>
+<li>If IRCC asks you to pick the card up at an office and you don't do it within ${C.pickupDays} days, the card is destroyed and you have to apply and pay again.</li>
+</ul>
+<h2>Do you need to apply?</h2>
+<ul>
+<li><strong>First card</strong>: most people don't apply. IRCC sends it if you give it a Canadian mailing address and a photo within ${C.firstCardAutoDays} days of becoming a permanent resident. After ${C.firstCardAutoDays} days, you apply in the Permanent Residence Portal.</li>
+<li><strong>Renewal</strong>: a PR card is usually valid for ${C.validYears} years, sometimes only 1. You can renew it when it will expire in less than ${C.renewWhenMonthsLeft} months, or once it has expired.</li>
+<li><strong>Fee</strong>: CA$${C.fee} for the card, from <a href="${C.feeSource}" rel="noopener">IRCC's fee list</a> (modified ${longDate(C.feeSourceModified)}). Pay online and upload the receipt to the portal.</li>
+</ul>
+<p>When you renew, IRCC asks when you left Canada and for how long, for up to ${C.tripsYears} years.${isLive('/pr-residency-obligation-calculator/') ? ' Check your days first with the <a href="/pr-residency-obligation-calculator/">PR residency obligation calculator</a>.' : ''}</p>
+<h2>If you need the card urgently</h2>
+<p>Urgent processing exists, but the minimum is ${C.urgentMinWeeks} weeks and IRCC does not guarantee the date. You have to show you need to travel for a job opportunity, work for your current job, your own serious illness, the serious illness or death of a family member, the loss or theft of your card while you were abroad, or a crisis, emergency or vulnerable situation you are in. If you leave in less than ${C.urgentMinWeeks} weeks, IRCC points you to a permanent resident travel document (PRTD, CA$${C.prtdFee}) instead, which you request urgently once you are outside Canada and your flight back leaves within 5 days. Without a valid card or a PRTD, you can return to Canada only by land in a private vehicle.</p>
+<p>Other IRCC applications, from citizenship to work permits, are on the <a href="/ircc-processing-times/">IRCC processing times</a> page.${isLive('/physical-presence-calculator/') ? ' If you are thinking about citizenship instead of another card, see the <a href="/physical-presence-calculator/">physical presence calculator</a>.' : ''}</p>
+<h2>Sources</h2>
+<ul><li><a href="${C.source}" rel="noopener">Get, renew or replace a PR card</a>, IRCC, modified ${longDate(C.sourceModified)}</li><li><a href="${C.watchPages[0].url}" rel="noopener">Getting your PR card after you apply</a>, IRCC, modified ${longDate(C.watchPages[0].modified)}</li><li><a href="${C.watchPages[1].url}" rel="noopener">Apply urgently for a PR card or travel document</a>, IRCC, modified ${longDate(C.watchPages[1].modified)}</li>${ptSources()}</ul>
+</article>`;
+  const scripts = `${jsonScript('pc-data', { new_pr: P.single.new_pr, existing_pr: P.single.existing_pr, updated: P.updated.weekly, extraWeeks: C.deliveryExtraWeeks, renewMonths: C.renewWhenMonthsLeft })}<script type="module" src="/js/prcard.js"></script>`;
+  return page({ path: '/pr-card-processing-time/', title: 'PR Card Processing Time for Renewals and First Cards', description: `PR card processing time, IRCC data updated ${shortDate(P.updated.weekly)}: ${P.single.existing_pr} to renew, ${P.single.new_pr} for a first card. Get your expected date and when you can renew.`, body, scripts, crumbs: [['Home', '/'], ['IRCC processing times', '/ircc-processing-times/'], ['PR card processing time', '/pr-card-processing-time/']] });
+}
+
+function workPermitTimePage() {
+  const P = ptimes, W = wpTimes, X = P.flptWeek['WP-EXT'];
+  const rows = ptCountries().map(([c, n]) => `<tr><td>${esc(n)}</td><td>${esc(ptOut(P.country.work[c]))}</td></tr>`).join('');
+  const posted = ptPosted('work');
+  const weeksOf = (s) => Number((s.match(/^(\d+) weeks?$/) || [])[1]);
+  const withWeeks = posted.map(([c, n]) => [n, weeksOf(P.country.work[c])]).filter(([, w]) => w).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0], 'en'));
+  const body = `
+<section class="intro">
+  <h1>Work permit processing time</h1>
+  <p class="lede">Tell us what you are applying for, and from where, to see IRCC's current time. Already applied for an extension? Enter the date IRCC received it to see how many weeks IRCC estimates are left.</p>
+  <p class="meta"><span>Country times updated ${longDate(P.updated.country)}; extension times ${longDate(P.updated.flptWeek)}</span><span>Rules checked ${longDate(W.checked)}</span><span>Source: <a href="${P.tool}" rel="noopener">IRCC processing times</a></span></p>
+</section>
+<div class="tool">
+<form id="pt-form" novalidate>
+  <fieldset><legend>Your application</legend>
+    <div class="field"><label for="pt-type">What are you applying for?</label><select id="pt-type" name="type">
+      <option value="c:work">A work permit, from outside Canada</option>
+      <option value="s:work-ca">A work permit, from inside Canada</option>
+      <option value="w:WP-EXT">To extend or change my work permit, from inside Canada (including a PGWP or bridging permit)</option>
+      <option value="i:iec">International Experience Canada (current season)</option>
+      <option value="i:sawp_current">Seasonal Agricultural Worker Program</option>
+    </select></div>
+    <div class="field" id="pt-country-field"><label for="pt-country">Country you are applying from</label><select id="pt-country" name="country"></select></div>
+    <div class="field" id="pt-date-field" hidden><label for="pt-date">Date IRCC received your extension (optional)</label><input type="date" id="pt-date" name="date"><span class="hint">Leave it empty to see the time if you apply today.</span></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Work permit processing time" id="pt-out" aria-live="polite"><p>Loading IRCC's data…</p></aside>
+</div>
+<article class="prose">
+<h2>Inside Canada</h2>
+<div class="table-scroll"><table><thead><tr><th>Application</th><th>Processing time</th></tr></thead><tbody>
+<tr><td>Work permit in Canada</td><td>${esc(P.country.work.CA)}</td></tr>
+<tr><td>Extension or change of conditions, if IRCC receives it today</td><td>${esc(X.today)}</td></tr>
+${X.waiting ? `<tr><td>People waiting for an extension decision</td><td>About ${fmt(X.waiting)}</td></tr>` : ''}
+</tbody></table></div>
+<p>The extension estimate also covers ${andList(W.extensionIncludes)}.${isLive('/bridging-open-work-permit/') ? ' Check if you qualify with the <a href="/bridging-open-work-permit/">bridging open work permit</a> checker' : ''}${isLive('/pgwp-calculator/') ? `${isLive('/bridging-open-work-permit/') ? ' or the' : ' Check yours with the'} <a href="/pgwp-calculator/">PGWP length calculator</a>` : ''}${isLive('/bridging-open-work-permit/') || isLive('/pgwp-calculator/') ? '.' : ''}</p>
+<h2>Keep working while you wait</h2>
+<ul>
+<li>If IRCC receives your application to extend or change your work permit before the permit expires, you can stay in Canada while it decides. This is called maintained status.</li>
+<li>If you applied to extend and your permit expires in the meantime, you can keep working under the same conditions (same employer, job and location on an employer-specific permit) until IRCC decides, as long as you stay in Canada.</li>
+<li>If you applied to change employer or job, you keep working for the employer on your current permit. You can't start the new job until IRCC approves it, or authorizes you to work while it processes the application.</li>
+<li>Online applications must be submitted before midnight UTC on the day your permit expires. Applying online gets you a work permit extension letter that proves you can keep working, unless you hold a PGWP.</li>
+<li>IRCC recommends applying at least ${W.applyDaysBefore} days before your permit expires. You can't get a permit past your passport's expiry date.</li>
+</ul>
+<h2>Work permits from outside Canada, by country</h2>
+<p>IRCC shows a time for ${posted.length} of the ${ptCountries().length} countries and territories in its list${withWeeks.length ? `, from ${withWeeks[0][1]} week${withWeeks[0][1] > 1 ? 's' : ''} (${esc(withWeeks[0][0])}) to ${withWeeks.at(-1)[1]} weeks (${esc(withWeeks.at(-1)[0])})` : ''}. The time does not include ${W.outsideExcludes.join(' or ')}. IRCC says it prioritizes applications for essential occupations in agriculture and agri-food and in health care, so other jobs may take longer than shown.</p>
+<div class="table-scroll"><table><thead><tr><th>Applying from</th><th>Work permit</th></tr></thead><tbody>${rows}</tbody></table></div>
+<p>Times for visitor visas, study permits and permanent residence are on the <a href="/ircc-processing-times/">IRCC processing times</a> page. If you plan to stay for good, see where your profile stands with the <a href="/">CRS calculator</a>.</p>
+<h2>Sources</h2>
+<ul><li><a href="${W.source}" rel="noopener">How to extend your work permit</a>, IRCC, modified ${longDate(W.sourceModified)}</li><li><a href="${W.watchPages[1].url}" rel="noopener">What to do if your work permit expired</a>, IRCC, modified ${longDate(W.watchPages[1].modified)}</li><li><a href="${W.watchPages[0].url}" rel="noopener">Extend or change the conditions on your work permit</a>, IRCC, modified ${longDate(W.watchPages[0].modified)}</li>${ptSources()}</ul>
+</article>`;
+  return page({ path: '/work-permit-processing-time/', title: 'Canada Work Permit Processing Time by Country (Weekly)', description: `Work permit processing time from IRCC: ${P.country.work.CA} inside Canada, ${X.today} for an extension, and the time for each country. Updated ${shortDate(P.updated.country)}.`, body, scripts: ptTool('work'), crumbs: [['Home', '/'], ['IRCC processing times', '/ircc-processing-times/'], ['Work permit processing time', '/work-permit-processing-time/']] });
+}
+
 // ---------- Write ----------
 rmSync(DIST, { recursive: true, force: true });
 const written = [];
@@ -2371,10 +2560,15 @@ for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, 
 out('about', simple('/about/', 'About CRS Planner and How We Check the Rules', 'Who runs CRS Planner, where the rules come from and how the calculators are tested against IRCC.', 'About CRS Planner', aboutHtml));
 out('privacy', simple('/privacy/', 'Privacy | CRS Planner', 'What CRS Planner stores in your browser, what it does not collect, and who processes connection data. Contact for data requests.', 'Privacy', privacyHtml));
 out('terms', simple('/terms/', 'Terms of Use | CRS Planner', 'Terms of use and disclaimer for CRS Planner: estimates based on IRCC rules, not immigration or legal advice.', 'Terms of use', termsHtml));
+for (const [slug, fn, d] of [['ircc-processing-times', ptHubPage, ptMax(ptimes.updated.weekly, ptimes.updated.flpt)], ['pr-card-processing-time', prCardTimePage, ptimes.updated.weekly], ['work-permit-processing-time', workPermitTimePage, ptMax(ptimes.updated.country, ptimes.updated.flptWeek)]]) if (isLive(`/${slug}/`)) out(slug, fn(), ptMax(schedule.pages[`/${slug}/`], d));
 out('changelog', changelogPage());
 writeFileSync(join(DIST, 'favicon.svg'), LOGO_SVG);
 cpSync(join(ROOT, 'src/css'), join(DIST, 'css'), { recursive: true });
 cpSync(join(ROOT, 'src/js'), join(DIST, 'js'), { recursive: true });
+if (['/ircc-processing-times/', '/work-permit-processing-time/'].some(isLive)) {
+  mkdirSync(join(DIST, 'data'), { recursive: true });
+  writeFileSync(join(DIST, 'data/ptimes.json'), JSON.stringify(ptimes));
+}
 if (isLive('/noc-code-finder/')) {
   mkdirSync(join(DIST, 'data'), { recursive: true });
   writeFileSync(join(DIST, 'data/noc-index.json'), JSON.stringify(noc.units.map((u) => [u.c, u.t, u.ex.join('|')])));

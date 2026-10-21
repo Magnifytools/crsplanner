@@ -1,0 +1,29 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/application/check-processing-times.html",
+ "sourceModified": "2026-10-20",
+ "checked": "2026-10-21",
+ "note": "The tool page is republished often, so the watcher compares the text of its method notes (contentHash) instead of the date. The times themselves come from IRCC's JSON files through scripts/ptimes.mjs (data/ptimes.json).",
+ "hashStart": "How we calculate historical",
+ "hashEnd": "the cap for your program has been reached",
+ "contentHash": "0f17226c3bc2eaa21fdd276784ad8df240cc6faef9b7a9c3b21731e3cce95434",
+ "watchPages": [
+  { "url": "https://www.canada.ca/content/canadasite/en/immigration-refugees-citizenship/services/application/check-processing-times/result-canadian-experience-class-eng.html", "modified": "2025-10-09" },
+  { "url": "https://www.canada.ca/content/canadasite/en/immigration-refugees-citizenship/services/application/check-processing-times/result-skilled-worker-eng.html", "modified": "2025-10-09" },
+  { "url": "https://www.canada.ca/content/canadasite/en/immigration-refugees-citizenship/services/application/check-processing-times/result-pnp-ee-eng.html", "modified": "2025-10-09" },
+  { "url": "https://www.canada.ca/content/canadasite/en/immigration-refugees-citizenship/services/application/check-processing-times/result-citizenship-grants-eng.html", "modified": "2025-10-22" },
+  { "url": "https://www.canada.ca/content/canadasite/en/immigration-refugees-citizenship/services/application/check-processing-times/result-wp-ext-eng.html", "modified": "2026-09-17" }
+ ],
+ "method": {
+  "historicalShare": 80,
+  "historicalWindowPr": "6 months",
+  "historicalWindowTr": "8 to 16 weeks",
+  "forwardBasedOn": ["how many applications IRCC has in its inventory", "how many people IRCC has processing that type of application", "how many applications IRCC expects to get"],
+  "forwardBasedOnExtensions": ["how many applications IRCC has in its inventory", "how many people IRCC has processing that type of application"],
+  "startsWhen": "the day IRCC receives a complete application (online: when you submit it; by mail: when it arrives in IRCC's mailroom)",
+  "endsWhen": "when IRCC makes a decision; for a citizenship grant, when you take the oath (or, under 14, when the certificate is mailed)",
+  "expressEntryExcludes": "time in the Express Entry pool before the invitation to apply",
+  "mailOutsideCanada": "3 to 4 months",
+  "minorSydney": "6 to 8 months",
+  "updates": { "weekly": "most temporary residence, PR card and citizenship records times", "monthly": "permanent residence and citizenship grant estimates" }
+ }
+}

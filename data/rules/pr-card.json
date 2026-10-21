@@ -1,0 +1,25 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/permanent-residents/card/apply.html",
+ "sourceModified": "2026-08-04",
+ "checked": "2026-10-21",
+ "watchPages": [
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/permanent-residents/card/after-next-steps.html", "modified": "2026-08-04" },
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/permanent-residents/card/urgent.html", "modified": "2025-10-17" }
+ ],
+ "hashPages": [
+  { "url": "https://www.canada.ca/content/canadasite/en/immigration-refugees-citizenship/services/application/check-processing-times/ajax-pr-card-new/jcr:content/par.html", "start": "New permanent resident card", "end": "Already applied", "sha256": "0430104d9cc443649cf98e608cba7cadb9bab375e20d5ec7993d33823855b3e1" },
+  { "url": "https://www.canada.ca/content/canadasite/en/immigration-refugees-citizenship/services/application/check-processing-times/ajax-pr-card-renew/jcr:content/par.html", "start": "Renewing or replacing", "end": "Already applied", "sha256": "1cc0929b9de1f604e438855a00843f0ca03fb27a959dc335b2abdaf55e114470" }
+ ],
+ "fee": 50,
+ "prtdFee": 50,
+ "feeSource": "https://ircc.canada.ca/english/information/fees/fees.asp",
+ "feeSourceModified": "2026-09-21",
+ "validYears": 5,
+ "renewWhenMonthsLeft": 9,
+ "firstCardAutoDays": 180,
+ "firstCardExtraWeeks": 6,
+ "deliveryExtraWeeks": 6,
+ "urgentMinWeeks": 3,
+ "pickupDays": 180,
+ "tripsYears": 5
+}

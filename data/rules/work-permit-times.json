@@ -1,0 +1,16 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/extend/apply.html",
+ "sourceModified": "2026-10-14",
+ "checked": "2026-10-21",
+ "watchPages": [
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/extend.html", "modified": "2026-09-17" },
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/extend/expired-permit.html", "modified": "2026-07-17" }
+ ],
+ "hashPages": [
+  { "url": "https://www.canada.ca/content/canadasite/en/immigration-refugees-citizenship/services/application/check-processing-times/ajax-work-permit/jcr:content/par.html", "start": "prioritizing applications for essential occupations", "end": "How we calculated", "sha256": "9da675cbc199d9b1a3fb59ff3f6fd4ed0061e64816071f305eee98b4b721c0e2" }
+ ],
+ "applyDaysBefore": 30,
+ "extensionIncludes": ["new post-graduation work permits (PGWPs)", "bridging open work permits", "changes of conditions to a work permit"],
+ "outsideExcludes": ["the time it takes to send an application between a visa application centre and IRCC's office", "the time you need to give your biometrics"],
+ "inCanadaExcludes": ["the time you need to give your biometrics"]
+}
