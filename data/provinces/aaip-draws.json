@@ -1,7 +1,47 @@
 {
  "source": "https://www.alberta.ca/aaip-processing-information",
- "pageUpdated": "2026-10-07",
+ "pageUpdated": "2026-10-21",
  "draws": [
+  {
+   "date": "2026-10-20",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (General)",
+   "stream": "aee",
+   "minScore": 60,
+   "invitations": 386,
+   "invitationsText": "386"
+  },
+  {
+   "date": "2026-10-16",
+   "focus": "Alberta Express Entry Stream – Law Enforcement Pathway",
+   "stream": "aee",
+   "minScore": 49,
+   "invitations": null,
+   "invitationsText": "Less than 10"
+  },
+  {
+   "date": "2026-10-14",
+   "focus": "Tourism and Hospitality Stream",
+   "stream": "ths",
+   "minScore": 73,
+   "invitations": 25,
+   "invitationsText": "25"
+  },
+  {
+   "date": "2026-10-13",
+   "focus": "Dedicated Health Care Pathway – Express Entry",
+   "stream": "dhcp",
+   "minScore": 57,
+   "invitations": 53,
+   "invitationsText": "53"
+  },
+  {
+   "date": "2026-10-09",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Health care)",
+   "stream": "aee",
+   "minScore": 60,
+   "invitations": 97,
+   "invitationsText": "97"
+  },
   {
    "date": "2026-10-07",
    "focus": "Alberta Express Entry Stream – Priority Sectors (Aviation)",
@@ -278,9 +318,9 @@
    "date": "2026-06-15",
    "focus": "Alberta Express Entry Stream – Priority Sectors (Manufacturing)",
    "stream": "aee",
-   "minScore": 50,
-   "invitations": 56,
-   "invitationsText": "56"
+   "minScore": 56,
+   "invitations": 50,
+   "invitationsText": "50"
   },
   {
    "date": "2026-06-12",
@@ -385,6 +425,14 @@
    "minScore": 61,
    "invitations": 50,
    "invitationsText": "50"
+  },
+  {
+   "date": "2026-05-19",
+   "focus": "Alberta Express Entry Stream – Priority Sectors (Aviation)",
+   "stream": "aee",
+   "minScore": 46,
+   "invitations": 38,
+   "invitationsText": "38"
   },
   {
    "date": "2026-05-13",
@@ -676,13 +724,13 @@
   }
  ],
  "pool": {
-  "Alberta Opportunity Stream": 21667,
-  "Dedicated Health Care Pathways (Express Entry and Non-Express Entry)": 1179,
-  "Rural Renewal Stream": 1570,
-  "Tourism and Hospitality Stream": 3138,
-  "Accelerated Tech Pathway": 1964,
-  "Law Enforcement Pathway": 48,
-  "Priority sector draws and other initiatives": 4912,
-  "Total": 34478
+  "Alberta Opportunity Stream": 21150,
+  "Dedicated Health Care Pathways (Express Entry and Non-Express Entry)": 1069,
+  "Rural Renewal Stream": 1527,
+  "Tourism and Hospitality Stream": 2991,
+  "Accelerated Tech Pathway": 1945,
+  "Law Enforcement Pathway": 43,
+  "Priority sector draws and other initiatives": 4566,
+  "Total": 33291
  }
 }
