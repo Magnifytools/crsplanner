@@ -4,8 +4,8 @@
  "draws": [
   {
    "n": 282,
-   "date": "2026-10-08",
-   "url": "https://immigratemanitoba.com/2026/10/expression-of-interest-draw-281/",
+   "date": "2026-10-22",
+   "url": "https://immigratemanitoba.com/2026/10/expression-of-interest-draw-282/",
    "laas": 1304,
    "expressEntry": 353,
    "minScores": [
@@ -29,6 +29,34 @@
      "group": "Skilled Worker Stream",
      "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
      "laas": 57,
+     "minScore": null
+    }
+   ]
+  },
+  {
+   "n": 281,
+   "date": "2026-10-08",
+   "url": "https://immigratemanitoba.com/2026/10/expression-of-interest-draw-281/",
+   "laas": 340,
+   "expressEntry": 103,
+   "minScores": [],
+   "segments": [
+    {
+     "group": "Occupation-specific selections",
+     "criteria": "Profiles declaring current employment in Manitoba in the broad occupational category listed below",
+     "laas": 46,
+     "minScore": null
+    },
+    {
+     "group": "Occupation-specific selections",
+     "criteria": "Profiles declaring current employment in Manitoba in the unit groups listed below",
+     "laas": 211,
+     "minScore": null
+    },
+    {
+     "group": "Skilled Worker Stream",
+     "criteria": "Profiles submitted under the Skilled Worker in Manitoba pathway or the Skilled Worker Overseas pathway that declared being directly invited by the MPNP under a strategic recruitment initiative.",
+     "laas": 83,
      "minScore": null
     }
    ]
