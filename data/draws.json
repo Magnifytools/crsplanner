@@ -1,105 +1,105 @@
 {
  "source": "https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json",
  "page": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations.html",
- "fetchedAt": "2026-10-16T16:45:24.018Z",
+ "fetchedAt": "2026-10-26T20:35:13.794Z",
  "latestRound": {
-  "n": "450",
-  "date": "2026-10-16",
-  "name": "French-Language proficiency 2026-Version 2",
-  "category": "french",
-  "size": 5000,
-  "crs": 435,
-  "tieBreak": "October 06, 2026 at 21:31:22 UTC",
-  "time": "October 16, 2026 at 10:25:13 UTC"
+  "n": "451",
+  "date": "2026-10-26",
+  "name": "Provincial Nominee Program",
+  "category": "pnp",
+  "size": 792,
+  "crs": 761,
+  "tieBreak": "April 03, 2026 at 18:00:26 UTC",
+  "time": "October 26, 2026 at 10:38:23 UTC"
  },
  "distribution": {
-  "asOf": "October 12, 2026",
-  "asOfIso": "2026-10-12",
-  "total": 229456,
+  "asOf": "October 25, 2026",
+  "asOfIso": "2026-10-25",
+  "total": 228724,
   "buckets": [
    {
     "range": "601-1200",
-    "count": 749,
+    "count": 787,
     "sub": false
    },
    {
     "range": "501-600",
-    "count": 21638,
+    "count": 20535,
     "sub": false
    },
    {
     "range": "451-500",
-    "count": 71612,
+    "count": 71112,
     "sub": false
    },
    {
     "range": "491-500",
-    "count": 12136,
+    "count": 12162,
     "sub": true
    },
    {
     "range": "481-490",
-    "count": 12184,
+    "count": 12342,
     "sub": true
    },
    {
     "range": "471-480",
-    "count": 16220,
+    "count": 16330,
     "sub": true
    },
    {
     "range": "461-470",
-    "count": 16221,
+    "count": 15803,
     "sub": true
    },
    {
     "range": "451-460",
-    "count": 14851,
+    "count": 14475,
     "sub": true
    },
    {
     "range": "401-450",
-    "count": 63528,
+    "count": 63505,
     "sub": false
    },
    {
     "range": "441-450",
-    "count": 13749,
+    "count": 13159,
     "sub": true
    },
    {
     "range": "431-440",
-    "count": 13474,
+    "count": 13155,
     "sub": true
    },
    {
     "range": "421-430",
-    "count": 12467,
+    "count": 12768,
     "sub": true
    },
    {
     "range": "411-420",
-    "count": 12201,
+    "count": 12543,
     "sub": true
    },
    {
     "range": "401-410",
-    "count": 11637,
+    "count": 11880,
     "sub": true
    },
    {
     "range": "351-400",
-    "count": 47167,
+    "count": 47911,
     "sub": false
    },
    {
     "range": "301-350",
-    "count": 17123,
+    "count": 17247,
     "sub": false
    },
    {
     "range": "0-300",
-    "count": 7639,
+    "count": 7627,
     "sub": false
    }
   ]
@@ -1765,6 +1765,19 @@
      17123,
      7639
     ]
+   },
+   {
+    "asOf": "2026-10-25",
+    "total": 228724,
+    "counts": [
+     787,
+     20535,
+     71112,
+     63505,
+     47911,
+     17247,
+     7627
+    ]
    }
   ]
  },
@@ -1831,6 +1844,16 @@
   }
  ],
  "rounds": [
+  {
+   "n": "451",
+   "date": "2026-10-26",
+   "name": "Provincial Nominee Program",
+   "category": "pnp",
+   "size": 792,
+   "crs": 761,
+   "tieBreak": "April 03, 2026 at 18:00:26 UTC",
+   "time": "October 26, 2026 at 10:38:23 UTC"
+  },
   {
    "n": "450",
    "date": "2026-10-16",

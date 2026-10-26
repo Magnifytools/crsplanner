@@ -1,6 +1,6 @@
 {
  "source": "https://liveinnovascotia.com/eoi-selection",
- "pageUpdated": "2026-08-17",
+ "pageUpdated": "2026-10-23",
  "months": [
   {
    "month": "2026-01",
@@ -32,11 +32,11 @@
   },
   {
    "month": "2026-08",
-   "selected": null
+   "selected": 1212
   },
   {
    "month": "2026-09",
-   "selected": null
+   "selected": 946
   },
   {
    "month": "2026-10",
