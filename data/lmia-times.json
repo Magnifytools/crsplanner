@@ -1,0 +1,23 @@
+{
+ "source": "https://www.canada.ca/en/employment-social-development/services/foreign-workers/labour-market-impact-assessment-processing-times.html",
+ "streams": {
+  "gts": "Global Talent Stream",
+  "agri": "Agricultural stream",
+  "sawp": "Seasonal Agricultural Worker Program",
+  "high": "High-wage stream",
+  "low": "Low-wage stream",
+  "pr": "Permanent resident stream"
+ },
+ "latest": "2026-09",
+ "pageModified": "2026-10-07",
+ "months": {
+  "2026-09": {
+   "gts": 9,
+   "agri": 22,
+   "sawp": 7,
+   "high": 98,
+   "low": 82,
+   "pr": 79
+  }
+ }
+}

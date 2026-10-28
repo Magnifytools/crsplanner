@@ -1,5 +1,9 @@
 [
  {
+  "date": "2026-10-28",
+  "what": "Three pages for late January: Canadian citizenship processing time (IRCC estimates of 2026-10-09 by month received, plus IRCC's after-you-apply page, modified 2026-04-21), Quebec's skilled worker program PSTQ with a stream checker and every invitation round since July 2025 (Québec.ca requirements page updated 2026-06-25; rounds read every 3 hours from Québec.ca), and LMIA processing time by stream (ESDC table for September 2026, published 2026-10-07, read every 3 hours; wage thresholds from 2026-07-17)."
+ },
+ {
   "date": "2026-10-21",
   "what": "Three pages for January built on IRCC's own processing-time data, which a script now copies every 3 hours: IRCC processing times for every application (permanent residence and citizenship estimates of 2026-10-09, weekly times and times by country of 2026-10-14, extensions of 2026-10-17), PR card processing time (IRCC PR card pages, modified 2026-08-04) and work permit processing time by country (IRCC extension pages, modified 2026-10-14)."
  },

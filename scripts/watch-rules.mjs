@@ -11,7 +11,9 @@ function pageDate(html) {
   if (m) return m[1];
   m = html.match(/property="dateModified"[^>]*>\s*(\d{4}-\d{2}-\d{2})/);
   if (m) return m[1];
-  const u = html.match(/(?:Updated|Last Updated):\s*([A-Za-z]+) (\d{1,2}), (\d{4})/);
+  // Québec.ca: <p class="dateMiseAJour">Last update: … October 22, 2026</p>, with line breaks inside.
+  const q = html.match(/class="dateMiseAJour">([\s\S]*?)<\/p>/);
+  const u = html.match(/(?:Updated|Last Updated):\s*([A-Za-z]+) (\d{1,2}), (\d{4})/) || (q && q[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').match(/Last update: ([A-Za-z]+) (\d{1,2}), (\d{4})/));
   const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
   return u ? `${u[3]}-${String(MONTHS.indexOf(u[1].toLowerCase()) + 1).padStart(2, '0')}-${u[2].padStart(2, '0')}` : null;
 }

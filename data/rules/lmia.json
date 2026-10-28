@@ -1,0 +1,42 @@
+{
+ "source": "https://www.canada.ca/en/employment-social-development/services/foreign-workers/median-wage/high/requirements.html",
+ "sourceModified": "2026-09-18",
+ "checked": "2026-10-28",
+ "note": "LMIA rules used next to ESDC's monthly processing times (scripts/lmia.mjs, data/lmia-times.json). The processing-times page changes date every month, so only its advice section is watched by hash.",
+ "watchPages": [
+  { "url": "https://www.canada.ca/en/employment-social-development/services/foreign-workers/median-wage/low/requirements.html", "modified": "2026-09-22" },
+  { "url": "https://www.canada.ca/en/employment-social-development/services/foreign-workers/median-wage.html", "modified": "2026-10-07" },
+  { "url": "https://www.canada.ca/en/employment-social-development/services/foreign-workers/global-talent.html", "modified": "2026-10-05" },
+  { "url": "https://www.canada.ca/en/employment-social-development/services/foreign-workers/permanent.html", "modified": "2026-06-09" }
+ ],
+ "hashPages": [
+  { "url": "https://www.canada.ca/en/employment-social-development/services/foreign-workers/labour-market-impact-assessment-processing-times.html", "start": "What to consider when submitting", "end": "Contact us", "sha256": "bb9b09998c4b3687b58175ae9444c92f0def3a0de689d6a14fb452eedeb430f7" }
+ ],
+ "fee": 1000,
+ "advertiseWeeks": { "high": 4, "low": 8 },
+ "advertiseWithinMonths": 3,
+ "applyMonthsBeforeStart": 6,
+ "workPermitWithinWeeksOfExpiry": 2,
+ "gtsServiceStandardDays": 10,
+ "gtsServiceStandardShare": 80,
+ "minHoursPerWeek": 30,
+ "thresholdSource": "https://www.canada.ca/en/employment-social-development/services/foreign-workers/median-wage.html",
+ "thresholdFrom": "2026-07-17",
+ "thresholdPrevious": "2025-06-27",
+ "thresholds": {
+  "AB": ["Alberta", 36.00, 37.50],
+  "BC": ["British Columbia", 36.60, 38.40],
+  "MB": ["Manitoba", 30.16, 31.33],
+  "NB": ["New Brunswick", 30.00, 31.73],
+  "NL": ["Newfoundland and Labrador", 32.40, 33.60],
+  "NT": ["Northwest Territories", 48.00, 48.00],
+  "NS": ["Nova Scotia", 30.00, 31.96],
+  "NU": ["Nunavut", 42.00, 45.00],
+  "ON": ["Ontario", 36.00, 36.92],
+  "PE": ["Prince Edward Island", 30.00, 31.20],
+  "QC": ["Quebec", 34.62, 36.00],
+  "SK": ["Saskatchewan", 33.60, 34.62],
+  "YT": ["Yukon", 44.40, 45.60]
+ },
+ "lowWageRefusalCmaUnemployment": 6
+}

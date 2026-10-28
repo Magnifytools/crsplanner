@@ -1,0 +1,22 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/become-canadian-citizen/after-apply-next-steps.html",
+ "sourceModified": "2026-04-21",
+ "checked": "2026-10-28",
+ "note": "Steps after applying for a citizenship grant. The times themselves come from IRCC's JSON files through scripts/ptimes.mjs (data/ptimes.json: flpt citizen-grants and citizen-proofs, single cit_search, cit_renunciation, cit_resumption).",
+ "watchPages": [
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/test/how-it-works.html", "modified": "2026-03-31" },
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/become-canadian-citizen/citizenship-ceremony.html", "modified": "2025-09-11" }
+ ],
+ "replyDays": 30,
+ "tellIfAbroadWeeks": 2,
+ "testAges": [18, 54],
+ "testOnlineDays": 30,
+ "testChances": 3,
+ "steps": [
+  "IRCC checks that your application is complete. A confirmation email only means it was received; it is not the acknowledgement of receipt (AOR).",
+  "If it is complete, IRCC sends the AOR, with your application number and unique client identifier (UCI). From then you can check your status online. An incomplete application is returned, the fee is not processed, and the time restarts when you resubmit.",
+  "If you are 18 to 54 on the day you sign, IRCC emails a test invitation within a few weeks or months of the day you apply. Most people take it online, with 30 days to do it and 3 chances to pass.",
+  "IRCC reviews the results and lets you know within a few weeks or months. Depending on them, it may invite you to a ceremony, an interview, a re-test or a hearing.",
+  "Most applicants take the oath at a citizenship ceremony, the last step. IRCC's processing time for a grant ends there."
+ ]
+}

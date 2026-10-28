@@ -1,0 +1,658 @@
+{
+ "source": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/invitation",
+ "pages": {
+  "2025": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/invitation/2025",
+  "2026": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/invitation/2026"
+ },
+ "updated": {
+  "2025": "2026-10-26",
+  "2026": "2026-09-24"
+ },
+ "streams": {
+  "1": "Highly qualified and specialized skills",
+  "2": "Intermediate and manual skills",
+  "3": "Regulated professions",
+  "4": "Exceptional talent"
+ },
+ "rounds": [
+  {
+   "date": "2026-09-24",
+   "label": "September 24, 2026",
+   "stream": 1,
+   "total": 86,
+   "exercises": [
+    37,
+    8,
+    41
+   ],
+   "minScores": [
+    634,
+    706,
+    696
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "label": "September 24, 2026",
+   "stream": 2,
+   "total": 316,
+   "exercises": [
+    48,
+    "from 10 to 15",
+    "less than 5",
+    254
+   ],
+   "minScores": [
+    631,
+    706,
+    698,
+    611
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "label": "September 24, 2026",
+   "stream": 3,
+   "total": 110,
+   "exercises": [
+    69,
+    37,
+    "less than 5",
+    "less than 5"
+   ],
+   "minScores": [
+    631,
+    697,
+    696,
+    380
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "label": "September 24, 2026",
+   "stream": 4,
+   "total": 7,
+   "exercises": [
+    "less than 5",
+    "less than 5"
+   ],
+   "minScores": []
+  },
+  {
+   "date": "2026-08-27",
+   "label": "August 27, 2026",
+   "stream": 1,
+   "total": 87,
+   "exercises": [
+    26,
+    11,
+    50
+   ],
+   "minScores": [
+    639,
+    710,
+    694
+   ]
+  },
+  {
+   "date": "2026-08-27",
+   "label": "August 27, 2026",
+   "stream": 2,
+   "total": null,
+   "exercises": [
+    314,
+    "from 10 to 15",
+    "less than 5",
+    249
+   ],
+   "minScores": [
+    638,
+    706,
+    695,
+    616
+   ]
+  },
+  {
+   "date": "2026-08-27",
+   "label": "August 27, 2026",
+   "stream": 3,
+   "total": 109,
+   "exercises": [
+    77,
+    "from 25 to 30",
+    "less than 5"
+   ],
+   "minScores": [
+    639,
+    694,
+    393
+   ]
+  },
+  {
+   "date": "2026-08-27",
+   "label": "August 27, 2026",
+   "stream": 4,
+   "total": 21,
+   "exercises": [
+    15,
+    6
+   ],
+   "minScores": []
+  },
+  {
+   "date": "2026-07-30",
+   "label": "July 30, 2026",
+   "stream": 1,
+   "total": 105,
+   "exercises": [
+    44,
+    12,
+    49
+   ],
+   "minScores": [
+    651,
+    702,
+    701
+   ]
+  },
+  {
+   "date": "2026-07-30",
+   "label": "July 30, 2026",
+   "stream": 2,
+   "total": 296,
+   "exercises": [
+    37,
+    10,
+    249
+   ],
+   "minScores": [
+    656,
+    702,
+    621
+   ]
+  },
+  {
+   "date": "2026-07-30",
+   "label": "July 30, 2026",
+   "stream": 3,
+   "total": 110,
+   "exercises": [
+    72,
+    33,
+    5
+   ],
+   "minScores": [
+    649,
+    700,
+    376
+   ]
+  },
+  {
+   "date": "2026-07-30",
+   "label": "July 30, 2026",
+   "stream": 4,
+   "total": 12,
+   "exercises": [
+    "less than 15",
+    "less than 5"
+   ],
+   "minScores": []
+  },
+  {
+   "date": "2026-07-03",
+   "label": "July 3, 2026",
+   "stream": 1,
+   "total": 74,
+   "exercises": [
+    31,
+    5,
+    38
+   ],
+   "minScores": [
+    628,
+    726,
+    656
+   ]
+  },
+  {
+   "date": "2026-07-03",
+   "label": "July 3, 2026",
+   "stream": 2,
+   "total": 289,
+   "exercises": [
+    35,
+    14,
+    240
+   ],
+   "minScores": [
+    628,
+    726,
+    628
+   ]
+  },
+  {
+   "date": "2026-07-03",
+   "label": "July 3, 2026",
+   "stream": 3,
+   "total": 131,
+   "exercises": [
+    84,
+    41,
+    "less than 5",
+    "less than 5"
+   ],
+   "minScores": [
+    628,
+    656,
+    656,
+    475
+   ]
+  },
+  {
+   "date": "2026-07-03",
+   "label": "July 3, 2026",
+   "stream": 4,
+   "total": 7,
+   "exercises": [
+    7
+   ],
+   "minScores": []
+  },
+  {
+   "date": "2026-06-04",
+   "label": "June 4, 2026",
+   "stream": 1,
+   "total": 1094,
+   "exercises": [
+    459,
+    239,
+    165,
+    231
+   ],
+   "minScores": [
+    677,
+    666,
+    692
+   ]
+  },
+  {
+   "date": "2026-06-04",
+   "label": "June 4, 2026",
+   "stream": 2,
+   "total": 756,
+   "exercises": [
+    229,
+    256,
+    90,
+    181
+   ],
+   "minScores": [
+    624,
+    653,
+    652
+   ]
+  },
+  {
+   "date": "2026-06-04",
+   "label": "June 4, 2026",
+   "stream": 3,
+   "total": 677,
+   "exercises": [
+    73,
+    393,
+    118,
+    71,
+    22
+   ],
+   "minScores": [
+    562,
+    556,
+    580,
+    637
+   ]
+  },
+  {
+   "date": "2026-06-04",
+   "label": "June 4, 2026",
+   "stream": 4,
+   "total": 22,
+   "exercises": [
+    17,
+    5
+   ],
+   "minScores": []
+  },
+  {
+   "date": "2026-04-30",
+   "label": "April 30, 2026",
+   "stream": 1,
+   "total": 983,
+   "exercises": [
+    379,
+    354,
+    250
+   ],
+   "minScores": [
+    716,
+    571,
+    704
+   ]
+  },
+  {
+   "date": "2026-04-30",
+   "label": "April 30, 2026",
+   "stream": 2,
+   "total": 506,
+   "exercises": [
+    153,
+    163,
+    190
+   ],
+   "minScores": [
+    660,
+    494,
+    660
+   ]
+  },
+  {
+   "date": "2026-04-30",
+   "label": "April 30, 2026",
+   "stream": 3,
+   "total": 1058,
+   "exercises": [
+    226,
+    723,
+    17,
+    10,
+    70,
+    12
+   ],
+   "minScores": [
+    632,
+    495,
+    382,
+    625,
+    728
+   ]
+  },
+  {
+   "date": "2026-04-30",
+   "label": "April 30, 2026",
+   "stream": 4,
+   "total": 8,
+   "exercises": [
+    2,
+    6
+   ],
+   "minScores": []
+  },
+  {
+   "date": "2026-03-19",
+   "label": "March 19 and 20, 2026",
+   "stream": 1,
+   "total": 893,
+   "exercises": [
+    258,
+    412,
+    223
+   ],
+   "minScores": [
+    718,
+    588,
+    709
+   ]
+  },
+  {
+   "date": "2026-03-19",
+   "label": "March 19 and 20, 2026",
+   "stream": 2,
+   "total": 509,
+   "exercises": [
+    109,
+    193,
+    207
+   ],
+   "minScores": [
+    679,
+    505,
+    662
+   ]
+  },
+  {
+   "date": "2026-03-19",
+   "label": "March 19 and 20, 2026",
+   "stream": 3,
+   "total": 1118,
+   "exercises": [
+    151,
+    855,
+    17,
+    13,
+    72,
+    10
+   ],
+   "minScores": [
+    672,
+    563,
+    397,
+    650,
+    740
+   ]
+  },
+  {
+   "date": "2026-03-19",
+   "label": "March 19 and 20, 2026",
+   "stream": 4,
+   "total": 2,
+   "exercises": [],
+   "minScores": []
+  },
+  {
+   "date": "2026-02-26",
+   "label": "February 26, 2026",
+   "stream": 1,
+   "total": 907,
+   "exercises": [
+    254,
+    419,
+    234
+   ],
+   "minScores": [
+    741,
+    627,
+    722
+   ]
+  },
+  {
+   "date": "2026-02-26",
+   "label": "February 26, 2026",
+   "stream": 2,
+   "total": 495,
+   "exercises": [
+    104,
+    194,
+    197
+   ],
+   "minScores": [
+    756,
+    562,
+    688
+   ]
+  },
+  {
+   "date": "2026-02-26",
+   "label": "February 26, 2026",
+   "stream": 3,
+   "total": 1141,
+   "exercises": [
+    151,
+    841,
+    39,
+    30,
+    70,
+    10
+   ],
+   "minScores": [
+    730,
+    632,
+    452,
+    693,
+    774
+   ]
+  },
+  {
+   "date": "2026-02-26",
+   "label": "February 26, 2026",
+   "stream": 4,
+   "total": 6,
+   "exercises": [
+    3,
+    3
+   ],
+   "minScores": []
+  },
+  {
+   "date": "2026-01-29",
+   "label": "January 29, 2026",
+   "stream": 1,
+   "total": 1094,
+   "exercises": [],
+   "minScores": [
+    782,
+    674,
+    737
+   ]
+  },
+  {
+   "date": "2026-01-29",
+   "label": "January 29, 2026",
+   "stream": 2,
+   "total": 683,
+   "exercises": [],
+   "minScores": [
+    800,
+    609,
+    657
+   ]
+  },
+  {
+   "date": "2026-01-29",
+   "label": "January 29, 2026",
+   "stream": 3,
+   "total": 750,
+   "exercises": [],
+   "minScores": [
+    781,
+    694,
+    546,
+    722,
+    855
+   ]
+  },
+  {
+   "date": "2026-01-29",
+   "label": "January 29, 2026",
+   "stream": 4,
+   "total": 20,
+   "exercises": [],
+   "minScores": []
+  },
+  {
+   "date": "2025-12-04",
+   "label": "December 4, 2025",
+   "stream": 1,
+   "total": 605,
+   "exercises": [],
+   "minScores": [
+    781,
+    644
+   ]
+  },
+  {
+   "date": "2025-12-04",
+   "label": "December 4, 2025",
+   "stream": 2,
+   "total": 604,
+   "exercises": [],
+   "minScores": [
+    573,
+    612
+   ]
+  },
+  {
+   "date": "2025-12-04",
+   "label": "December 4, 2025",
+   "stream": 3,
+   "total": 649,
+   "exercises": [],
+   "minScores": [
+    717,
+    535
+   ]
+  },
+  {
+   "date": "2025-12-04",
+   "label": "December 4, 2025",
+   "stream": 4,
+   "total": 12,
+   "exercises": [],
+   "minScores": []
+  },
+  {
+   "date": "2025-08-28",
+   "label": "August 28, 2025",
+   "stream": 1,
+   "total": 227,
+   "exercises": [],
+   "minScores": [
+    760
+   ]
+  },
+  {
+   "date": "2025-08-28",
+   "label": "August 28, 2025",
+   "stream": 4,
+   "total": 21,
+   "exercises": [],
+   "minScores": []
+  },
+  {
+   "date": "2025-08-14",
+   "label": "August 14, 2025",
+   "stream": 3,
+   "total": 275,
+   "exercises": [],
+   "minScores": [
+    766
+   ]
+  },
+  {
+   "date": "2025-07-31",
+   "label": "July 31, 2025",
+   "stream": 2,
+   "total": 273,
+   "exercises": [],
+   "minScores": [
+    661
+   ]
+  },
+  {
+   "date": "2025-07-17",
+   "label": "July 17, 2025",
+   "stream": 1,
+   "total": 216,
+   "exercises": [],
+   "minScores": [
+    768
+   ]
+  },
+  {
+   "date": "2025-07-17",
+   "label": "July 17, 2025",
+   "stream": 4,
+   "total": 22,
+   "exercises": [],
+   "minScores": []
+  }
+ ]
+}

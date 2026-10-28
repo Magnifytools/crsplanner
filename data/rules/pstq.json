@@ -1,0 +1,37 @@
+{
+ "source": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/requirements",
+ "sourceModified": "2026-06-25",
+ "checked": "2026-10-28",
+ "note": "Québec's Skilled Worker Selection Program (PSTQ), in force since November 29, 2024. Invitation rounds come from scripts/pstq.mjs (data/provinces/pstq-invitations.json). Québec.ca pages show 'Last update' instead of dcterms.modified; the applying page keeps an old date while its processing-time paragraph changes, so that part is watched by hash.",
+ "watchPages": [
+  { "url": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/invitation", "modified": "2026-10-22" },
+  { "url": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/expression-of-interest", "modified": "2026-10-22" },
+  { "url": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/examination", "modified": "2026-06-30" }
+ ],
+ "hashPages": [
+  { "url": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/applying", "start": "Processing Time", "end": "Providing the requested information", "sha256": "35a4822601d184b471d6e0a6f03d4b25cac857b4e8813f389d0f17c55b9abd0d" },
+  { "url": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/applying", "start": "Paying the fees for examining an application", "end": "Payment method", "sha256": "aeb0c244d4978b938d89578da5d0681942e999af9d8cf8c73766476f8ab17176" }
+ ],
+ "since": "2024-11-29",
+ "minAge": 18,
+ "streams": {
+  "1": { "name": "Highly qualified and specialized skills", "teer": [0, 1, 2], "regulated": false, "experienceMonths": 12, "quebecMonths": 0, "education": "post", "frenchOral": 7, "frenchWritten": 5 },
+  "2": { "name": "Intermediate and manual skills", "teer": [3, 4, 5], "regulated": false, "experienceMonths": 24, "quebecMonths": 12, "education": "secondary", "frenchOral": 5, "frenchWritten": null },
+  "3": { "name": "Regulated professions", "teer": [0, 1, 2, 3, 4, 5], "regulated": true, "experienceMonths": 0, "quebecMonths": 0, "education": null, "frenchOral": "7 for TEER 0 to 2, 5 for TEER 3 to 5", "frenchWritten": "5 for TEER 0 to 2" },
+  "4": { "name": "Exceptional talent", "teer": [0, 1, 2, 3, 4, 5], "regulated": null, "experienceMonths": 36, "quebecMonths": 0, "education": null, "frenchOral": null, "frenchWritten": null }
+ },
+ "spouseFrenchOral": 4,
+ "experienceWindowYears": 5,
+ "internshipMaxMonths": 3,
+ "stream2OutsideQuebecMaxMonths": 12,
+ "eoiValidMonths": 12,
+ "eoiCompleteDays": 90,
+ "acceptDays": 30,
+ "applyDays": 60,
+ "applyStream3NoRecognitionYears": 1,
+ "attestationDays": 60,
+ "fees": { "asOf": "2026-01-01", "main": 940, "spouse": 201, "child": 201 },
+ "processing": { "asOf": "2026-10-13", "text": "Quebec is reviewing permanent selection applications received in February and March 2026. Some older applications that were incomplete or need more checks are still pending." },
+ "priorityFrom": "2026-05-13",
+ "selfSufficiencyMonths": 3
+}

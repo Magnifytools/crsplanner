@@ -53,6 +53,11 @@ const ptimes = read('data/ptimes.json');
 const ptRules = read('data/rules/processing-times.json');
 const prCard = read('data/rules/pr-card.json');
 const wpTimes = read('data/rules/work-permit-times.json');
+const citTimes = read('data/rules/citizenship-times.json');
+const pstq = read('data/rules/pstq.json');
+const pstqInv = read('data/provinces/pstq-invitations.json');
+const lmia = read('data/rules/lmia.json');
+const lmiaTimes = read('data/lmia-times.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -69,8 +74,8 @@ const LOGO_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><r
 const FOOT = [
   ['Express Entry', [['/', 'CRS calculator'], ['/express-entry-draws/', 'Latest draws'], ['/next-express-entry-draw/', 'Next draw'], ['/express-entry-categories/', 'Categories'], ['/high-wage-occupations/', 'High-wage occupations'], ['/crs-score-distribution/', 'Score distribution'], ['/how-to-increase-crs-score/', 'Raise your score'], ['/fsw-67-points-calculator/', 'FSW 67 points'], ['/cec-eligibility-calculator/', 'CEC eligibility'], ['/proof-of-funds-express-entry/', 'Proof of funds'], ['/canada-pr-fees/', 'PR fees'], ['/noc-code-finder/', 'NOC code finder']]],
   ['Language tests', [['/clb-converter/', 'CLB converter'], ['/ielts-score-chart/', 'IELTS chart'], ['/celpip-score-chart/', 'CELPIP chart'], ['/pte-core-score-chart/', 'PTE Core chart'], ['/tef-canada-score-chart/', 'TEF Canada chart'], ['/tcf-canada-score-chart/', 'TCF Canada chart'], ['/celpip-to-ielts/', 'CELPIP to IELTS']]],
-  ['Provinces', [['/oinp-points-calculator/', 'Ontario points'], ['/oinp-draws/', 'Ontario draws'], ['/bc-pnp-points-calculator/', 'BC points'], ['/bc-pnp-draws/', 'BC draws'], ['/aaip-points-calculator/', 'Alberta points'], ['/aaip-draws/', 'Alberta draws'], ['/sinp-points-calculator/', 'Saskatchewan points'], ['/mpnp-points-calculator/', 'Manitoba points'], ['/nova-scotia-nominee-program/', 'Nova Scotia'], ['/new-brunswick-pnp/', 'New Brunswick'], ['/pei-pnp/', 'Prince Edward Island'], ['/atlantic-immigration-program/', 'Atlantic program'], ['/rural-community-immigration-pilot/', 'Rural pilot']]],
-  ['Processing times', [['/ircc-processing-times/', 'All IRCC processing times'], ['/pr-card-processing-time/', 'PR card'], ['/work-permit-processing-time/', 'Work permit']]],
+  ['Provinces', [['/oinp-points-calculator/', 'Ontario points'], ['/oinp-draws/', 'Ontario draws'], ['/bc-pnp-points-calculator/', 'BC points'], ['/bc-pnp-draws/', 'BC draws'], ['/aaip-points-calculator/', 'Alberta points'], ['/aaip-draws/', 'Alberta draws'], ['/sinp-points-calculator/', 'Saskatchewan points'], ['/mpnp-points-calculator/', 'Manitoba points'], ['/nova-scotia-nominee-program/', 'Nova Scotia'], ['/new-brunswick-pnp/', 'New Brunswick'], ['/pei-pnp/', 'Prince Edward Island'], ['/pstq-quebec/', 'Quebec (PSTQ)'], ['/atlantic-immigration-program/', 'Atlantic program'], ['/rural-community-immigration-pilot/', 'Rural pilot']]],
+  ['Processing times', [['/ircc-processing-times/', 'All IRCC processing times'], ['/pr-card-processing-time/', 'PR card'], ['/work-permit-processing-time/', 'Work permit'], ['/citizenship-processing-time/', 'Citizenship'], ['/lmia-processing-time/', 'LMIA']]],
   ['Work and study', [['/pgwp-calculator/', 'PGWP length'], ['/spousal-open-work-permit/', 'Spousal work permit'], ['/bridging-open-work-permit/', 'Bridging work permit']]],
   ['Citizenship and family', [['/physical-presence-calculator/', 'Physical presence'], ['/canadian-citizenship-test-practice/', 'Citizenship test'], ['/pr-residency-obligation-calculator/', 'PR residency obligation'], ['/super-visa-income-requirement/', 'Super visa income'], ['/parents-grandparents-sponsorship-income/', 'Parents sponsorship income']]],
 ];
@@ -2543,6 +2548,182 @@ ${X.waiting ? `<tr><td>People waiting for an extension decision</td><td>About ${
   return page({ path: '/work-permit-processing-time/', title: 'Canada Work Permit Processing Time by Country (Weekly)', description: `Work permit processing time from IRCC: ${P.country.work.CA} inside Canada, ${X.today} for an extension, and the time for each country. Updated ${shortDate(P.updated.country)}.`, body, scripts: ptTool('work'), crumbs: [['Home', '/'], ['IRCC processing times', '/ircc-processing-times/'], ['Work permit processing time', '/work-permit-processing-time/']] });
 }
 
+// ---------- Citizenship processing time (data/ptimes.json + data/rules/citizenship-times.json) ----------
+const ptLeftMonths = (s) => { const m = String(s).match(/^(?:About )?(\d+) months? left$/i); return m ? Number(m[1]) : /^About 1 month left$/i.test(s) ? 1 : null; };
+const addMonthsLabel = (iso, n) => { const d = new Date(Date.UTC(Number(iso.slice(0, 4)), Number(iso.slice(5, 7)) - 1 + n, 1)); return `${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`; };
+const monthLabel = (ym) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.slice(0, 4)}`;
+function citizenshipTimePage() {
+  const P = ptimes, T = citTimes, G = P.flpt['citizen-grants'], Pr = P.flpt['citizen-proofs'];
+  const rows = (p) => p.months.slice(0, 24).map(([m, left, ahead]) => `<tr><td>${monthLabel(m)}</td><td>${esc(left)}</td><td class="n">${ahead ? esc(ahead.replace(/^About /, '').replace(/ people ahead of you$/, '')) : ''}</td></tr>`).join('');
+  const firstLate = (p) => { const m = p.months.find(([, l]) => /more time/i.test(l)); return m ? monthLabel(m[0]) : null; };
+  const lateG = firstLate(G), lateP = firstLate(Pr);
+  const body = `
+<section class="intro">
+  <h1>Canadian citizenship processing time</h1>
+  <p class="lede">IRCC's estimate for a citizenship application it receives today is ${esc(G.today.toLowerCase())}, with about ${fmt(G.waiting)} people waiting. Already applied? Pick the month IRCC received your application to see how much time it estimates is left and how many people are ahead of you.</p>
+  <p class="meta"><span>IRCC estimates updated ${longDate(P.updated.flpt)}</span><span>Steps checked ${longDate(T.checked)}</span><span>Source: <a href="${P.tool}" rel="noopener">IRCC processing times</a></span></p>
+</section>
+<div class="tool">
+<form id="ct-form" novalidate>
+  <fieldset><legend>Your application</legend>
+    <div class="field"><label for="ct-kind">What did you apply for?</label><select id="ct-kind" name="kind"><option value="grant">Citizenship grant (becoming a citizen)</option><option value="proof">Citizenship certificate (proof of citizenship)</option></select></div>
+    <div class="field"><label for="ct-month">Month IRCC received your application</label><select id="ct-month" name="month"></select><span class="hint">The date on your acknowledgement of receipt, or the day you submitted online.</span></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Citizenship processing time" id="ct-out" aria-live="polite"></aside>
+</div>
+<article class="prose">
+<h2>Current citizenship processing times</h2>
+<div class="table-scroll"><table><thead><tr><th>Application</th><th>If IRCC receives it today</th><th class="n">People waiting</th></tr></thead><tbody>
+<tr><td>Citizenship grant (becoming a citizen)</td><td>${esc(G.today)}</td><td class="n">${fmt(G.waiting)}</td></tr>
+<tr><td>Citizenship certificate (proof of citizenship)</td><td>${esc(Pr.today)}</td><td class="n">${fmt(Pr.waiting)}</td></tr>
+<tr><td>Search of citizenship records</td><td>${esc(P.single.cit_search)}</td><td class="n"></td></tr>
+<tr><td>Renunciation of citizenship</td><td>${esc(P.single.cit_renunciation)}</td><td class="n"></td></tr>
+<tr><td>Resumption of citizenship</td><td>${esc(P.single.cit_resumption)}</td><td class="n"></td></tr>
+</tbody></table></div>
+<p>The grant and certificate times are IRCC's estimates for an application received today, based on how many applications it has, how many people work on them and how many it expects; IRCC updates them monthly. The other three show how long most applications took in the past and are updated weekly. For a grant, the time ends when you take the oath, or when the certificate is mailed for a child under 14.</p>
+<h2>Time left by month received</h2>
+<p>This is what IRCC's tool answers for an application received in each month, from its update of ${longDate(P.updated.flpt)}.${lateG || lateP ? ` For ${[lateG && `grants received in ${lateG} or earlier`, lateP && `certificates received in ${lateP} or earlier`].filter(Boolean).join(' and ')}, IRCC says it needs more time: it has passed its own estimate for them.` : ''}</p>
+<h3>Citizenship grant</h3>
+<div class="table-scroll"><table><thead><tr><th>Received in</th><th>IRCC estimate</th><th class="n">People ahead</th></tr></thead><tbody>${rows(G)}</tbody></table></div>
+<h3>Citizenship certificate</h3>
+<div class="table-scroll"><table><thead><tr><th>Received in</th><th>IRCC estimate</th><th class="n">People ahead</th></tr></thead><tbody>${rows(Pr)}</tbody></table></div>
+<h2>What happens after you apply</h2>
+<ol>${T.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>
+<p>While you wait, IRCC expects you to answer its letters and emails within the time it gives, usually ${T.replyDays} days, and to tell it if you plan to leave Canada for more than ${T.tellIfAbroadWeeks} weeks in a row. You can travel, but you must keep your permanent resident status and be in Canada in person for the test (if you are ${T.testAges[0]} to ${T.testAges[1]}), an interview and the ceremony. Applications can take longer when your file is picked for IRCC's random quality checks, when IRCC needs more documents, or when you are slow to reply.</p>
+<p>If you live outside Canada and the U.S. and apply through a Canadian embassy, high commission or consulate, IRCC says to add ${ptRules.method.mailOutsideCanada} for mailing.</p>
+<h2>Before you apply</h2>
+<p>Adults need ${fmt(citz.requiredDays)} days in Canada in the ${citz.periodYears} years before applying.${isLive('/physical-presence-calculator/') ? ' Count yours with the <a href="/physical-presence-calculator/">physical presence calculator</a>.' : ''}${isLive('/canadian-citizenship-test-practice/') ? ' Practise for the test with our <a href="/canadian-citizenship-test-practice/">citizenship test questions</a>.' : ''} The fee is CA$${fmt(prFees.citizenshipAdult)} per adult and CA$${fmt(prFees.citizenshipMinor)} per minor (<a href="${prFees.source}" rel="noopener">IRCC fee list</a>, modified ${longDate(prFees.sourceModified)}).</p>
+<p>Times for permanent residence, PR cards and permits are on the <a href="/ircc-processing-times/">IRCC processing times</a> page.${isLive('/pr-card-processing-time/') ? ' Renewing your card while you wait? See the <a href="/pr-card-processing-time/">PR card processing time</a>.' : ''} Still working toward permanent residence? Start with the <a href="/">CRS calculator</a>.</p>
+<p class="callout">We copy IRCC's data files every 3 hours, so this page changes the day IRCC updates them. Your own file's status is in IRCC's application status tracker.</p>
+<h2>Sources</h2>
+<ul><li><a href="${T.source}" rel="noopener">Canadian citizenship: after you apply</a>, IRCC, modified ${longDate(T.sourceModified)}</li><li><a href="${T.watchPages[0].url}" rel="noopener">Citizenship test: how it works</a>, IRCC, modified ${longDate(T.watchPages[0].modified)}</li>${ptSources()}</ul>
+</article>`;
+  const scripts = `${jsonScript('ct-data', { grant: { today: G.today, waiting: G.waiting, months: G.months }, proof: { today: Pr.today, waiting: Pr.waiting, months: Pr.months }, updated: P.updated.flpt })}<script type="module" src="/js/citime.js"></script>`;
+  return page({ path: '/citizenship-processing-time/', title: 'Canadian Citizenship Processing Time, Updated Monthly', description: `Canadian citizenship processing time from IRCC (updated ${shortDate(P.updated.flpt)}): ${G.today.toLowerCase()} for a grant, ${Pr.today.toLowerCase()} for a certificate. See the time left for your month.`, body, scripts, crumbs: [['Home', '/'], ['IRCC processing times', '/ircc-processing-times/'], ['Citizenship processing time', '/citizenship-processing-time/']] });
+}
+
+// ---------- Quebec PSTQ (data/rules/pstq.json + data/provinces/pstq-invitations.json from scripts/pstq.mjs) ----------
+function pstqPage() {
+  const R = pstq, D = pstqInv, S = R.streams;
+  const ex = (r) => (r.exercises.length > 1 ? `${r.exercises.length} groups` : '');
+  const rows = D.rounds.map((r) => `<tr><td>${shortDate(r.date)}${r.label.includes(' and ') ? ` (${esc(r.label.replace(/, \d{4}$/, ''))})` : ''}</td><td>${r.stream}. ${esc(D.streams[r.stream])}</td><td class="n">${r.total === null ? 'Not stated' : fmt(r.total)}</td><td>${r.minScores.length ? r.minScores.join(', ') : 'No score used'}${ex(r) ? ` <span class="small">(${ex(r)})</span>` : ''}</td></tr>`).join('');
+  const years = [...new Set(D.rounds.map((r) => r.date.slice(0, 4)))].sort().reverse();
+  const yearTotals = years.map((y) => { const rs = D.rounds.filter((r) => r.date.startsWith(y)); const known = rs.filter((r) => r.total !== null); return [y, known.reduce((a, r) => a + r.total, 0), rs.length - known.length, [...new Set(rs.map((r) => r.date))].length]; });
+  const last = D.rounds[0];
+  const lastRounds = D.rounds.filter((r) => r.date === last.date);
+  const qsw = ptimes.flpt.qsw;
+  const body = `
+<section class="intro">
+  <h1>Quebec skilled worker program (PSTQ)</h1>
+  <p class="lede">The PSTQ is how Quebec picks skilled workers for permanent residence, through four streams set by your main occupation. Answer a few questions to see which stream fits you and what you still need, then check how many people Quebec invited in each round.</p>
+  <p class="meta"><span>Rules checked ${longDate(R.checked)}</span><span>Latest round ${longDate(last.date)}</span><span>Source: <a href="${R.source}" rel="noopener">Québec.ca, PSTQ requirements</a>, updated ${longDate(R.sourceModified)}</span></p>
+</section>
+<div class="tool">
+<form id="pstq-form" novalidate>
+  <fieldset><legend>Your main occupation</legend>
+    <div class="field"><label for="noc">NOC code of your main occupation (optional)</label><input type="text" id="noc" name="noc" inputmode="numeric" maxlength="5" placeholder="21231"><span class="hint">The second digit is the TEER category. ${isLive('/noc-code-finder/') ? 'Find yours with the <a href="/noc-code-finder/">NOC code finder</a>.' : ''}</span></div>
+    <div class="field"><label for="teer">TEER category</label><select id="teer" name="teer">${[0, 1, 2, 3, 4, 5].map((t) => `<option value="${t}">TEER ${t}</option>`).join('')}</select></div>
+    <div class="field"><label for="reg">Is the job you will do in Quebec on Quebec's list of regulated professions?</label><select id="reg" name="reg"><option value="no">No</option><option value="yes">Yes</option></select><span class="hint">Check the <a href="https://cdn-contenu.quebec.ca/cdn-contenu/immigration/formulaires/fr/PSTQ/LIS_PSTQ_PTA_Professions_reglementees.pdf" rel="noopener">Liste des professions réglementées</a> (PDF, in French).</span></div>
+  </fieldset>
+  <fieldset><legend>Paid experience in that occupation, last ${R.experienceWindowYears} years</legend>
+    <div class="row"><div class="field"><label for="exp">Months in total, full time or equivalent</label><input type="number" id="exp" name="exp" min="0" max="60" inputmode="numeric"></div>
+    <div class="field"><label for="expq">Of those, months in Quebec</label><input type="number" id="expq" name="expq" min="0" max="60" inputmode="numeric"></div></div>
+  </fieldset>
+  <fieldset><legend>Education and French</legend>
+    <div class="field"><label for="edu">Highest diploma</label><select id="edu" name="edu"><option value="none">No diploma</option><option value="des">Secondary school diploma (DES or equivalent)</option><option value="voc">Vocational or college program of 1 year or more (DEP, ASP, AEC or equivalent)</option><option value="dec">Technical college diploma (DEC or equivalent)</option><option value="uni">University certificate or degree</option></select></div>
+    <div class="row"><div class="field"><label for="oral">Spoken French level</label><select id="oral" name="oral">${Array.from({ length: 13 }, (_, i) => `<option value="${i}">${i === 0 ? 'None or below 1' : `Level ${i}`}</option>`).join('')}</select></div>
+    <div class="field"><label for="written">Written French level</label><select id="written" name="written">${Array.from({ length: 13 }, (_, i) => `<option value="${i}">${i === 0 ? 'None or below 1' : `Level ${i}`}</option>`).join('')}</select></div></div>
+    <div class="field"><label for="spouse">Accompanying spouse's spoken French</label><select id="spouse" name="spouse"><option value="none">No accompanying spouse</option>${Array.from({ length: 13 }, (_, i) => `<option value="${i}">${i === 0 ? 'None or below 1' : `Level ${i}`}</option>`).join('')}</select><span class="hint">Levels on the Échelle québécoise des niveaux de compétence en français.</span></div>
+    <div class="field check"><input type="checkbox" id="talent" name="talent"><label for="talent">I have an achievement on Quebec's list of exceptional achievements, or a positive opinion from one of its partners</label></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="PSTQ stream check">
+  <div class="total"><span class="panel-h" style="margin:0" id="pstq-stream">PSTQ</span><span id="status" class="tag"></span></div>
+  <div class="cmp" id="checks"></div>
+  <p class="small" id="pstq-note"></p>
+</aside>
+</div>
+<article class="prose">
+<h2>The four streams</h2>
+<div class="table-scroll"><table><thead><tr><th></th><th>1. ${esc(S[1].name)}</th><th>2. ${esc(S[2].name)}</th><th>3. ${esc(S[3].name)}</th><th>4. ${esc(S[4].name)}</th></tr></thead><tbody>
+<tr><td>Main occupation</td><td>TEER 0, 1 or 2, not regulated</td><td>TEER 3, 4 or 5, not regulated</td><td>On Quebec's list of regulated professions</td><td>Any</td></tr>
+<tr><td>Experience in the last ${R.experienceWindowYears} years</td><td>${S[1].experienceMonths} months paid, in or outside Quebec</td><td>${S[2].experienceMonths} months paid, at least ${S[2].quebecMonths} in Quebec</td><td>None set</td><td>${S[4].experienceMonths} months</td></tr>
+<tr><td>Diploma</td><td>A program of 1 year or more: DEP or ASP, AEC or technical DEC, or university</td><td>At least a secondary school diploma (DES), or a DEP, ASP or AEC of 1 year or more</td><td>Recognition from the regulatory body</td><td>Achievement on Quebec's list, or a partner's opinion</td></tr>
+<tr><td>Spoken French</td><td>Level ${S[1].frenchOral}</td><td>Level ${S[2].frenchOral}</td><td>Level 7 (TEER 0 to 2) or 5 (TEER 3 to 5)</td><td>None set</td></tr>
+<tr><td>Written French</td><td>Level ${S[1].frenchWritten}</td><td>None set</td><td>Level 5 (TEER 0 to 2)</td><td>None set</td></tr>
+</tbody></table></div>
+<p>In streams 1 to 3 an accompanying spouse needs spoken French at level ${R.spouseFrenchOral}. Quebec diplomas must be at least 900 hours (secondary vocational or college) or 30 university credits; in Stream 2 a secondary diploma from Quebec needs 600 hours. Compulsory internships in a degree program count for up to ${R.internshipMaxMonths} months of experience, paid or not. In Stream 2, experience outside Quebec counts for up to ${R.stream2OutsideQuebecMaxMonths} months and can be in any occupation with the same first NOC digit.</p>
+<p>Everyone must be ${R.minAge} or older, intend to work in Quebec for a company they do not control and outside the ineligible sectors, sign a financial self-sufficiency contract covering the first ${R.selfSufficiencyMonths} months, and get the Attestation d'apprentissage des valeurs démocratiques et des valeurs québécoises (as must accompanying family members aged 18 or over).</p>
+<h2>How invitations work</h2>
+<ol>
+<li><strong>Expression of interest.</strong> Free, in Quebec's Arrima portal. You have ${R.eoiCompleteDays} days to finish it once started, and it stays in the pool for ${R.eoiValidMonths} months. It cannot be renewed, but you can file a new one.</li>
+<li><strong>Invitation.</strong> Quebec invites by stream, can target profiles (a Quebec diploma, a list of occupations, living outside Montreal), then takes the highest scores. You have ${R.acceptDays} days to accept.</li>
+<li><strong>Application for selection.</strong> ${R.applyDays} days after accepting, or ${R.applyStream3NoRecognitionYears} year in Stream 3 if you still need the regulatory body's recognition. Fees from ${longDate(R.fees.asOf)}: CA$${fmt(R.fees.main)} for you, CA$${fmt(R.fees.spouse)} for a spouse and CA$${fmt(R.fees.child)} per child, not refundable. After you apply, Quebec asks anyone who doesn't have the values attestation yet to get it within ${R.attestationDays} days of its message.</li>
+<li><strong>Quebec selection certificate (CSQ).</strong> Quebec's note of ${longDate(R.processing.asOf)}: ${esc(R.processing.text)} Since ${longDate(R.priorityFrom)}, Quebec processes first the applications of temporary workers whose work permits have expired or are about to.</li>
+<li><strong>Permanent residence with IRCC.</strong> With the CSQ you apply to IRCC. Its estimate for Quebec skilled workers is ${esc(qsw.today.toLowerCase())} (updated ${longDate(ptimes.updated.flpt)}); see the <a href="/ircc-processing-times/">IRCC processing times</a>.</li>
+</ol>
+<p>Quebec ranks profiles with points for French, age, experience, education, Quebec experience and diplomas, time outside the Montreal area, a validated job offer, family in Quebec and the spouse's profile. It publishes a self-evaluation form, but warns that a score above a past minimum does not guarantee an invitation, because each round also has its own criteria.</p>
+<h2>PSTQ invitation rounds</h2>
+<p>The latest round, on ${longDate(last.date)}, invited ${andList(lastRounds.map((r) => `${r.total === null ? 'an unstated number of people' : fmt(r.total)} in Stream ${r.stream}`))}. ${yearTotals.map(([y, n, unknown, days]) => `In ${y}, ${fmt(n)} invitations over ${days} rounds${unknown ? ` (not counting ${unknown} stream${unknown > 1 ? 's' : ''} where Quebec did not state a total)` : ''}`).join('. ')}.</p>
+<p>Each round can have several groups with different criteria and their own minimum score, listed in the order Quebec publishes them; some groups have no minimum score, so a round can show fewer scores than groups. Quebec says comparing minimum scores between streams is not useful, because the criteria behind them differ.</p>
+<div class="table-scroll"><table><thead><tr><th>Date</th><th>Stream</th><th class="n">Invited</th><th>Minimum scores</th></tr></thead><tbody>${rows}</tbody></table></div>
+<p>We read Quebec's invitation pages every 3 hours. ${isLive('/express-entry-draws/') ? 'Quebec does not take part in Express Entry; for the federal rounds see the <a href="/express-entry-draws/">Express Entry draws</a>' : 'Quebec does not take part in Express Entry'}, and to compare with other provinces, the <a href="/">CRS calculator</a> is the place to start.</p>
+<h2>Sources</h2>
+<ul><li><a href="${R.source}" rel="noopener">PSTQ requirements</a>, Québec.ca, updated ${longDate(R.sourceModified)}</li><li><a href="${R.watchPages[0].url}" rel="noopener">Invitation to apply for permanent selection</a>, Québec.ca, updated ${longDate(R.watchPages[0].modified)}</li><li><a href="${R.watchPages[1].url}" rel="noopener">Expression of interest</a>, Québec.ca, updated ${longDate(R.watchPages[1].modified)}</li><li><a href="${R.hashPages[0].url}" rel="noopener">Submitting an application for permanent selection</a>, Québec.ca (processing note of ${longDate(R.processing.asOf)}, fees from ${longDate(R.fees.asOf)}; checked ${longDate(R.checked)})</li>${Object.entries(D.pages).reverse().map(([y, u]) => `<li><a href="${u}" rel="noopener">PSTQ invitations in ${y}</a>, Québec.ca${D.updated[y] ? `, updated ${longDate(D.updated[y])}` : ''}</li>`).join('')}</ul>
+</article>`;
+  const scripts = `${jsonScript('pstq-rules', { streams: S, spouse: R.spouseFrenchOral, minAge: R.minAge })}<script type="module" src="/js/pstq.js"></script>`;
+  return page({ path: '/pstq-quebec/', title: 'Quebec PSTQ Requirements and Invitation Rounds', description: `Check which PSTQ stream fits your occupation, experience and French level, and see every Quebec invitation round, the latest on ${shortDate(last.date)}.`, body, scripts, crumbs: [['Home', '/'], ['PSTQ Quebec', '/pstq-quebec/']] });
+}
+
+// ---------- LMIA processing time (data/lmia-times.json from scripts/lmia.mjs + data/rules/lmia.json) ----------
+function lmiaPage() {
+  const L = lmiaTimes, R = lmia, M = L.months[L.latest], months = Object.keys(L.months);
+  const order = ['high', 'low', 'pr', 'gts', 'agri', 'sawp'];
+  const hist = months.length > 1 ? `<h2>Month by month</h2><div class="table-scroll"><table><thead><tr><th>Stream</th>${months.slice(0, 12).map((m) => `<th class="n">${MONTHS[Number(m.slice(5, 7)) - 1].slice(0, 3)} ${m.slice(0, 4)}</th>`).join('')}</tr></thead><tbody>${order.map((k) => `<tr><td>${esc(L.streams[k])}</td>${months.slice(0, 12).map((m) => `<td class="n">${L.months[m][k] ?? ''}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : `<p class="small">ESDC replaces this table every month. We keep each month from ${monthLabel(months.at(-1))} onwards, so a month-by-month comparison will appear here.</p>`;
+  const thr = Object.entries(R.thresholds).sort((a, b) => a[1][0].localeCompare(b[1][0]));
+  const body = `
+<section class="intro">
+  <h1>LMIA processing time</h1>
+  <p class="lede">Service Canada took an average of ${M.high} business days to decide a high-wage LMIA in ${monthLabel(L.latest)} and ${M.low} for a low-wage one. Choose your stream and the day you submitted a complete application to see roughly when to expect the decision.</p>
+  <p class="meta"><span>ESDC data for ${monthLabel(L.latest)}, published ${longDate(L.pageModified)}</span><span>Rules checked ${longDate(R.checked)}</span><span>Source: <a href="${L.source}" rel="noopener">ESDC LMIA processing times</a></span></p>
+</section>
+<div class="tool">
+<form id="lm-form" novalidate>
+  <fieldset><legend>Your LMIA</legend>
+    <div class="field"><label for="lm-stream">Stream</label><select id="lm-stream" name="stream">${order.map((k) => `<option value="${k}">${esc(L.streams[k])}</option>`).join('')}</select></div>
+    <div class="row"><div class="field"><label for="lm-prov">Province or territory of the job</label><select id="lm-prov" name="prov"><option value="">Not sure of the stream? Choose</option>${thr.map(([c, [n]]) => `<option value="${c}">${esc(n)}</option>`).join('')}</select></div>
+    <div class="field"><label for="lm-wage">Hourly wage offered (CA$)</label><input type="number" id="lm-wage" name="wage" min="0" step="0.01" inputmode="decimal"></div></div>
+    <div class="field"><label for="lm-date">Date you submitted a complete application</label><input type="date" id="lm-date" name="date"><span class="hint">Leave it empty to count from today.</span></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="LMIA processing time" id="lm-out" aria-live="polite"></aside>
+</div>
+<article class="prose">
+<h2>Average LMIA processing times, ${monthLabel(L.latest)}</h2>
+<div class="table-scroll"><table><thead><tr><th>Stream</th><th class="n">Business days</th><th class="n">About this many weeks</th></tr></thead><tbody>${order.map((k) => `<tr><td>${esc(L.streams[k])}</td><td class="n">${M[k]}</td><td class="n">${Math.round(M[k] / 5)}</td></tr>`).join('')}</tbody></table></div>
+<p>These are averages of the LMIAs Service Canada decided in ${monthLabel(L.latest)}, counted in business days (Monday to Friday) from the day it has a complete application to the decision letter. ESDC updates the table monthly and warns that it can vary a lot from month to month with the number of applications. Weeks are business days divided by 5, ignoring public holidays.</p>
+${hist}
+<h2>High-wage or low-wage?</h2>
+<p>The stream depends on the hourly wage you offer compared with the threshold for the province or territory of the job, which is the median hourly wage there plus 20%. At or above it, you apply as high-wage; below it, as low-wage. ESDC warns that adjusting the wage to fit a stream can lead to a negative LMIA.</p>
+<div class="table-scroll"><table><thead><tr><th>Province or territory</th><th class="n">LMIAs received from ${shortDate(R.thresholdFrom)}</th><th class="n">${shortDate(R.thresholdPrevious)} to ${shortDate(new Date(Date.parse(R.thresholdFrom) - 864e5).toISOString().slice(0, 10))}</th></tr></thead><tbody>${thr.map(([, [n, before, now]]) => `<tr><td>${esc(n)}</td><td class="n">$${now.toFixed(2)}</td><td class="n">$${before.toFixed(2)}</td></tr>`).join('')}</tbody></table></div>
+<h2>Time to add before and after</h2>
+<ul>
+<li><strong>Advertising first.</strong> The job must be advertised in the ${R.advertiseWithinMonths} months before you apply: at least ${R.advertiseWeeks.high} consecutive weeks for a high-wage position and ${R.advertiseWeeks.low} consecutive weeks for a low-wage one. That time is not part of the processing time.</li>
+<li><strong>Apply early.</strong> ESDC suggests applying as soon as possible and up to ${R.applyMonthsBeforeStart} months before the job starts.</li>
+<li><strong>Complete applications only.</strong> The clock starts once every document is in, the employer has signed them and the fee is paid. Incomplete applications are not processed. The fee is CA$${fmt(R.fee)} per position for high-wage and low-wage LMIAs, and is not refunded if the LMIA is negative.</li>
+<li><strong>Global Talent Stream.</strong> Its service standard is ${R.gtsServiceStandardDays} business days, met ${R.gtsServiceStandardShare}% of the time.</li>
+<li><strong>Low-wage jobs in some cities.</strong> Since September 26, 2024, ESDC does not process most low-wage LMIAs for jobs in a census metropolitan area with an unemployment rate of ${R.lowWageRefusalCmaUnemployment}% or more.</li>
+<li><strong>Then the work permit.</strong> The worker applies to IRCC after the employer gets a positive LMIA; see the <a href="/work-permit-processing-time/">work permit processing time</a> by country.</li>
+</ul>
+<p>${new Date().toISOString().slice(0, 10) >= LMI.effective ? `Since ${longDate(LMI.effective)}, a job offer no longer needs an LMIA to earn Express Entry points, and only jobs in high-wage occupations earn them` : `From ${longDate(LMI.effective)}, a job offer will no longer need an LMIA to earn Express Entry points, and only jobs in high-wage occupations will earn them`}; see how it counts in the <a href="/">CRS calculator</a>${isLive('/high-wage-occupations/') ? ' and the list of <a href="/high-wage-occupations/">high-wage occupations</a>' : ''}. Other IRCC times are on the <a href="/ircc-processing-times/">IRCC processing times</a> page.</p>
+<h2>Sources</h2>
+<ul><li><a href="${L.source}" rel="noopener">LMIA application processing times</a>, ESDC, data for ${monthLabel(L.latest)}, page modified ${longDate(L.pageModified)}</li><li><a href="${R.thresholdSource}" rel="noopener">High-wage and low-wage positions, hourly wage thresholds</a>, ESDC, modified ${longDate(R.watchPages[1].modified)}</li><li><a href="${R.source}" rel="noopener">Program requirements for high-wage positions</a>, ESDC, modified ${longDate(R.sourceModified)}</li><li><a href="${R.watchPages[0].url}" rel="noopener">Program requirements for low-wage positions</a>, ESDC, modified ${longDate(R.watchPages[0].modified)}</li><li><a href="${R.watchPages[2].url}" rel="noopener">Global Talent Stream</a>, ESDC, modified ${longDate(R.watchPages[2].modified)}</li></ul>
+</article>`;
+  const scripts = `${jsonScript('lm-data', { streams: L.streams, latest: L.latest, times: M, thresholds: Object.fromEntries(thr.map(([c, [n, , now]]) => [c, [n, now]])) })}<script type="module" src="/js/lmia.js"></script>`;
+  return page({ path: '/lmia-processing-time/', title: 'LMIA Processing Time by Stream, Updated Monthly', description: `LMIA processing time for ${monthLabel(L.latest)}: ${M.high} business days for high-wage, ${M.low} for low-wage, ${M.gts} for the Global Talent Stream. Estimate your decision date.`, body, scripts, crumbs: [['Home', '/'], ['LMIA processing time', '/lmia-processing-time/']] });
+}
+
 // ---------- Write ----------
 rmSync(DIST, { recursive: true, force: true });
 const written = [];
@@ -2560,7 +2741,9 @@ for (const l of LEVELS) { out(`clb-${l}`, levelPage('en', l)); out(`nclc-${l}`, 
 out('about', simple('/about/', 'About CRS Planner and How We Check the Rules', 'Who runs CRS Planner, where the rules come from and how the calculators are tested against IRCC.', 'About CRS Planner', aboutHtml));
 out('privacy', simple('/privacy/', 'Privacy | CRS Planner', 'What CRS Planner stores in your browser, what it does not collect, and who processes connection data. Contact for data requests.', 'Privacy', privacyHtml));
 out('terms', simple('/terms/', 'Terms of Use | CRS Planner', 'Terms of use and disclaimer for CRS Planner: estimates based on IRCC rules, not immigration or legal advice.', 'Terms of use', termsHtml));
-for (const [slug, fn, d] of [['ircc-processing-times', ptHubPage, ptMax(ptimes.updated.weekly, ptimes.updated.flpt)], ['pr-card-processing-time', prCardTimePage, ptimes.updated.weekly], ['work-permit-processing-time', workPermitTimePage, ptMax(ptimes.updated.country, ptimes.updated.flptWeek)]]) if (isLive(`/${slug}/`)) out(slug, fn(), ptMax(schedule.pages[`/${slug}/`], d));
+for (const [slug, fn, d] of [['ircc-processing-times', ptHubPage, ptMax(ptimes.updated.weekly, ptimes.updated.flpt)], ['pr-card-processing-time', prCardTimePage, ptimes.updated.weekly], ['work-permit-processing-time', workPermitTimePage, ptMax(ptimes.updated.country, ptimes.updated.flptWeek)], ['citizenship-processing-time', citizenshipTimePage, ptimes.updated.flpt]]) if (isLive(`/${slug}/`)) out(slug, fn(), ptMax(schedule.pages[`/${slug}/`], d));
+if (isLive('/pstq-quebec/')) out('pstq-quebec', pstqPage(), ptMax(schedule.pages['/pstq-quebec/'], pstqInv.rounds[0].date));
+if (isLive('/lmia-processing-time/')) out('lmia-processing-time', lmiaPage(), ptMax(schedule.pages['/lmia-processing-time/'], lmiaTimes.pageModified));
 out('changelog', changelogPage());
 writeFileSync(join(DIST, 'favicon.svg'), LOGO_SVG);
 cpSync(join(ROOT, 'src/css'), join(DIST, 'css'), { recursive: true });
