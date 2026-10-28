@@ -1,16 +1,16 @@
 {
  "source": "https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json",
  "page": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/rounds-invitations.html",
- "fetchedAt": "2026-10-27T15:25:17.080Z",
+ "fetchedAt": "2026-10-28T20:21:20.028Z",
  "latestRound": {
-  "n": "452",
-  "date": "2026-10-27",
-  "name": "French-Language proficiency 2026-Version 2",
-  "category": "french",
-  "size": 5000,
-  "crs": 407,
-  "tieBreak": "July 13, 2026 at 19:22:00 UTC",
-  "time": "October 27, 2026 at 10:17:26 UTC"
+  "n": "453",
+  "date": "2026-10-28",
+  "name": "Transport Occupations, 2026-Version 2",
+  "category": "transport",
+  "size": 150,
+  "crs": 477,
+  "tieBreak": "June 4, 2026 at 21:48:22 UTC",
+  "time": "October 28, 2026 at 10:34:14 UTC"
  },
  "distribution": {
   "asOf": "October 25, 2026",
@@ -1844,6 +1844,16 @@
   }
  ],
  "rounds": [
+  {
+   "n": "453",
+   "date": "2026-10-28",
+   "name": "Transport Occupations, 2026-Version 2",
+   "category": "transport",
+   "size": 150,
+   "crs": 477,
+   "tieBreak": "June 4, 2026 at 21:48:22 UTC",
+   "time": "October 28, 2026 at 10:34:14 UTC"
+  },
   {
    "n": "452",
    "date": "2026-10-27",
