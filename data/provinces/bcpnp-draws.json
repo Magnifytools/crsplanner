@@ -4,6 +4,22 @@
  "pageUpdated": "2026-10-20",
  "draws": [
   {
+   "date": "2026-10-29",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Minimum wage of $49/hour and $99,000/year, and NOC 0, 1, 2, or 3",
+   "minScore": null,
+   "invitations": 524,
+   "invitationsText": "524"
+  },
+  {
+   "date": "2026-10-29",
+   "type": "Innovate: High Economic Impact",
+   "factors": "Points",
+   "minScore": 131,
+   "invitations": 248,
+   "invitationsText": "248"
+  },
+  {
    "date": "2026-10-15",
    "type": "Temporary Rural/Remote Health Support Initiative",
    "factors": "Points",
