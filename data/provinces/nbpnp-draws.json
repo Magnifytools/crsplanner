@@ -1,7 +1,17 @@
 {
  "source": "https://www.gnb.ca/en/topic/family-home-community/immigration/invitation-selection-rounds.html",
- "pageUpdated": "2026-10-20",
+ "pageUpdated": "2026-10-30",
  "rounds": [
+  {
+   "dateText": "October 2, 9 and 29, 2026",
+   "date": "2026-10-02",
+   "stream": "Atlantic Immigration Program",
+   "pathways": "",
+   "categories": "Construction; Education, social and community services; Health care; Manufacturing; Other trades; Professional and IT; Sales and services; Transportation",
+   "note": null,
+   "count": 203,
+   "partial": false
+  },
   {
    "dateText": "September 25 and October 2, 2026",
    "date": "2026-09-25",
