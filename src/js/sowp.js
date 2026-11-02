@@ -15,7 +15,9 @@ function update() {
   $('#noc-hint').innerHTML = valid ? `TEER ${teer}${teer >= 2 && teer <= 3 ? (R.select.includes(code) ? ', on the eligible TEER 2–3 list' : ', not on the eligible TEER 2–3 list') : ''}` : $('#noc-hint').dataset.t;
   let ok = false, verdict = '', checks = [];
   const row = (l, v, n = '') => checks.push([l, v, n]);
-  if (['student', 'pgwp', 'sowp'].includes(sp)) {
+  if (sp === 'pgwp') {
+    verdict = 'Your family member can apply once you have submitted your PGWP application, but their permit can only be approved after your PGWP is approved. If there is still no decision on yours when theirs is decided, it may be refused.';
+  } else if (['student', 'sowp'].includes(sp)) {
     verdict = 'Your family member is not eligible under this measure in your current situation.';
   } else if (f.pr.value !== 'no' && f.permitPr.checked) {
     const rural = f.pr.value === 'rural';

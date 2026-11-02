@@ -1835,13 +1835,13 @@ function sowpPage() {
 </ul>
 <p>Workers in TEER 4 or 5 jobs who are not on a pathway to permanent residence can no longer bring family on this measure, although family members already in Canada can extend a permit that is shorter than yours. Since ${longDate(r.healthQuebec.since)} the ${r.validityHighSkilled}-month rule does not apply to spouses of nurses (NOC 31301), respiratory therapists (32103) and medical laboratory technologists (32120) recruited by Quebec.</p>
 <h3>Not eligible</h3>
-<p>Family members do not qualify if you made a refugee claim referred to the IRB, are subject to an unenforceable removal order, are a student (including co-op or off-campus work without a work permit), are waiting for a decision on your PGWP, or hold a spousal open work permit yourself.</p>
+<p>Family members do not qualify if you made a refugee claim referred to the IRB, are subject to an unenforceable removal order, are a student (including co-op or off-campus work without a work permit), or hold a spousal open work permit yourself. If you applied for a PGWP, your family member can apply once you have submitted it, even while you wait, but your PGWP must be approved before theirs is processed: if there is still no decision on yours when their application is decided, it may be refused.</p>
 <h2>Eligible TEER 2 occupations (${n2})</h2>
 <div class="noc-list"><ul>${list(2)}</ul></div>
 <h2>Eligible TEER 3 occupations (${n3})</h2>
 <div class="noc-list"><ul>${list(3)}</ul></div>
 <h2>Sources</h2>
-<ul><li><a href="${r.source}" rel="noopener">Open work permits for family members of foreign workers: who can apply</a>, IRCC, modified ${longDate(r.sourceModified)}</li><li><a href="${r.watchPages[0].url}" rel="noopener">Fees and overview</a>, IRCC, modified ${longDate(r.watchPages[0].modified)}</li></ul>
+<ul><li><a href="${r.source}" rel="noopener">Open work permits for family members of foreign workers: who can apply</a>, IRCC, modified ${longDate(r.sourceModified)}</li><li><a href="${r.watchPages[0].url}" rel="noopener">Fees and overview</a>, IRCC, modified ${longDate(r.watchPages[0].modified)}</li><li><a href="${r.watchPages[1].url}" rel="noopener">When family members can apply</a>, IRCC, modified ${longDate(r.watchPages[1].modified)}</li></ul>
 </article>`;
   const scripts = `${jsonScript('sowp-rules', { select: r.selectNoc, high: r.validityHighSkilled, path: r.validityPathway })}<script type="module" src="/js/sowp.js"></script>`;
   return page({ path: '/spousal-open-work-permit/', title: 'Spousal Open Work Permit 2026: Eligibility Checker and TEER List', description: `Can your spouse get an open work permit? Check it by your NOC and TEER, with the ${r.selectNoc.length} eligible TEER 2 and 3 occupations and the 16-month rule, from IRCC.`, body, scripts, crumbs: [['Home', '/'], ['Spousal open work permit', '/spousal-open-work-permit/']] });
