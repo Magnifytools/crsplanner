@@ -189,7 +189,7 @@ function home() {
   <p class="example-note" id="example-note"><span>Showing an example profile. Change any answer to get your own score.</span><button type="button" id="clear-example">Start from blank</button></p>
   <div class="field" id="regime-field"><label for="regime">Rules to apply</label>
     <select id="regime" name="regime"><option value="current">Current rules</option><option value="lmi">Rules from ${longDate(LMI.effective)} (high-wage work and job offers)</option></select>
-    <span class="hint">IRCC changes how Canadian work experience and job offers are scored on ${longDate(LMI.effective)}. See <a href="/high-wage-occupations/">what changes and the high-wage occupations list</a>.</span></div>
+    <span class="hint">IRCC ${new Date().toISOString().slice(0, 10) >= LMI.effective ? 'changed' : 'changes'} how Canadian work experience and job offers are scored on ${longDate(LMI.effective)}. See <a href="/high-wage-occupations/">what changes and the high-wage occupations list</a>.</span></div>
 
   <fieldset><legend>You and your partner</legend>
     <div class="field"><label for="marital">Marital status</label>
@@ -238,7 +238,7 @@ function home() {
     <div class="field check"><input type="checkbox" id="certificate" name="certificate"><label for="certificate">I have a certificate of qualification in a trade from a Canadian province or territory</label></div>
     <div class="field check"><input type="checkbox" id="sibling" name="sibling"><label for="sibling">I or my partner have a brother or sister in Canada who is 18 or older and a citizen or permanent resident</label></div>
     <div class="field check"><input type="checkbox" id="nomination" name="nomination"><label for="nomination">I have a nomination from a province or territory</label></div>
-    <p class="hint" id="offer-hint">Job offers give no CRS points until ${longDate(LMI.effective)}. From that day a job offer in a high-wage occupation is worth up to ${LMI.jobOffer.byLevel.x2} points.</p>
+    <p class="hint" id="offer-hint">${new Date().toISOString().slice(0, 10) >= LMI.effective ? `Since ${longDate(LMI.effective)} only a job offer in a high-wage occupation gives CRS points, up to ${LMI.jobOffer.byLevel.x2}.` : `Job offers give no CRS points until ${longDate(LMI.effective)}. From that day a job offer in a high-wage occupation is worth up to ${LMI.jobOffer.byLevel.x2} points.`}</p>
   </fieldset>
 
   <fieldset id="spouse-block" hidden><legend>Your partner</legend>
@@ -267,7 +267,7 @@ function home() {
 <h2>How the CRS score is built</h2>
 <p>Express Entry ranks every profile in the pool on a scale of 0 to 1,200. The score has four parts: core human capital (age, education, languages and Canadian work experience), your partner's factors if they come with you, skill transferability, and additional points such as a provincial nomination.</p>
 <p>Couples split their points. If your partner comes with you and is not a Canadian citizen or permanent resident, your core maximum drops from 500 to 460 and up to 40 points come from your partner instead. Skill transferability is capped at 100 points and additional points at 600.</p>
-<p class="callout">From ${longDate(LMI.effective)} IRCC replaces the Canadian work experience factor with a Labour Market Integration factor worth up to ${LMI.max[1]} points: work-length points plus up to ${LMI.highWageExperience.byLevel.x2} for work in a high-wage occupation, or up to ${LMI.jobOffer.byLevel.x2} for a job offer in one, whichever is higher. No LMIA is needed for a job offer from that date. Details in <a href="/high-wage-occupations/">high-wage occupations and the new CRS points</a>.</p>
+<p class="callout">${new Date().toISOString().slice(0, 10) >= LMI.effective ? `Since ${longDate(LMI.effective)} IRCC has replaced` : `From ${longDate(LMI.effective)} IRCC replaces`} the Canadian work experience factor with a Labour Market Integration factor worth up to ${LMI.max[1]} points: work-length points plus up to ${LMI.highWageExperience.byLevel.x2} for work in a high-wage occupation, or up to ${LMI.jobOffer.byLevel.x2} for a job offer in one, whichever is higher. No LMIA is needed for a job offer ${new Date().toISOString().slice(0, 10) >= LMI.effective ? 'any more' : 'from that date'}. Details in <a href="/high-wage-occupations/">high-wage occupations and the new CRS points</a>.</p>
 
 <h3>Age</h3>${ageTable()}
 <h3>Level of education</h3>${eduTable()}
