@@ -1,11 +1,11 @@
 {
  "source": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/requirements",
  "sourceModified": "2026-06-25",
- "checked": "2026-10-28",
+ "checked": "2026-11-04",
  "note": "Québec's Skilled Worker Selection Program (PSTQ), in force since November 29, 2024. Invitation rounds come from scripts/pstq.mjs (data/provinces/pstq-invitations.json). Québec.ca pages show 'Last update' instead of dcterms.modified; the applying page keeps an old date while its processing-time paragraph changes, so that part is watched by hash.",
  "watchPages": [
-  { "url": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/invitation", "modified": "2026-10-22" },
-  { "url": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/expression-of-interest", "modified": "2026-10-22" },
+  { "url": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/invitation", "modified": "2026-11-03" },
+  { "url": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/expression-of-interest", "modified": "2026-11-03" },
   { "url": "https://www.quebec.ca/en/immigration/permanent/skilled-workers/skilled-worker-selection-program/examination", "modified": "2026-06-30" }
  ],
  "hashPages": [

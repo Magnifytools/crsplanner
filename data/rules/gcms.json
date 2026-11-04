@@ -1,0 +1,35 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/officer-decision-notes.html",
+ "sourceModified": "2026-08-27",
+ "checked": "2026-11-04",
+ "note": "GCMS notes page: officer decision notes sent with refusals, and how to ask IRCC for a copy of a file under the Privacy Act or the Access to Information Act. Help Centre answers have no real modified date (it shows the current day), so they are watched by hash.",
+ "watchPages": [
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/access-information-privacy/request-privacy-act.html", "modified": "2018-04-24" },
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/access-information-privacy/requests-information-act.html", "modified": "2023-05-19" },
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/access-information-privacy.html", "modified": "2023-12-08" },
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/access-information-privacy/timeframe.html", "modified": "2012-10-23" },
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/digital-transparency-advanced-data-analytics/processing-aids.html", "modified": "2024-11-18" }
+ ],
+ "hashPages": [
+  { "url": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=464&top=1", "start": "What do you need help with?", "end": "Page details", "sha256": "71e9898fd639bca6670bdd479a1743cfaf4599da1d97b75b18ee51616a6c453e" },
+  { "url": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=461&top=1", "start": "What do you need help with?", "end": "Page details", "sha256": "4690ac4934c55342737c6b7f1d492cc545066587e1e8fa1e14b7e96e53ccad71" },
+  { "url": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=470&top=1", "start": "What do you need help with?", "end": "Page details", "sha256": "dbda582d151bbf64aab8b448396d8b8cf358f6853546f85531299872161ab8ec" }
+ ],
+ "links": {
+  "privacyAct": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/access-information-privacy/request-privacy-act.html",
+  "accessAct": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/access-information-privacy/requests-information-act.html",
+  "timeframe": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=464&top=1",
+  "fee": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=461&top=1",
+  "sponsor": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=470&top=1",
+  "gcms": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/digital-transparency-advanced-data-analytics/processing-aids.html",
+  "online": "https://atip-aiprp.apps.gc.ca/atip/",
+  "consentForm": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/access-information-privacy/forms/request-5744.html"
+ },
+ "decisionNotes": {
+  "temporary": { "from": "2025-07-29", "covers": ["Visitor visas, super visas and transit visas", "Visitor records", "Study permits and extensions", "Work permits and extensions"], "excludes": "eTAs and temporary resident permits" },
+  "permanent": { "from": "2026-05-26", "covers": ["Permanent residence applications, from inside or outside Canada"], "excludes": "humanitarian and compassionate (H&C) applications" }
+ },
+ "privacyAct": { "fee": 0, "who": "Canadian citizens, permanent residents and foreign nationals, wherever they are", "consentAge": "16 years of age or older", "responseDays": 30, "maxExtensionDays": 30 },
+ "accessAct": { "fee": 5, "who": "Canadian citizens, permanent residents, and individuals or corporations currently in Canada", "consentAge": "over the age of 18", "responseDays": 30 },
+ "statusEmail": "ATIP-AIPRP@cic.gc.ca"
+}

@@ -58,6 +58,10 @@ const pstq = read('data/rules/pstq.json');
 const pstqInv = read('data/provinces/pstq-invitations.json');
 const lmia = read('data/rules/lmia.json');
 const lmiaTimes = read('data/lmia-times.json');
+const gcms = read('data/rules/gcms.json');
+const eeProfile = read('data/rules/ee-profile.json');
+const iecRules = read('data/rules/iec.json');
+const iecData = read('data/iec.json');
 // Scheduled pages go live when scripts/release.mjs adds them to data/released.json (daily GitHub Action).
 // PREVIEW=1 builds every scheduled page.
 const schedule = read('data/schedule.json');
@@ -72,11 +76,11 @@ const longDate = (iso) => `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${Number(iso.s
 const jsonScript = (id, obj) => `<script type="application/json" id="${id}">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
 const LOGO_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#12352E"/><rect x="6" y="18" width="20" height="3" rx="1.5" fill="#fff"/><rect x="6" y="12" width="4" height="9" rx="1.5" fill="#fff" opacity=".55"/><rect x="12" y="9" width="4" height="12" rx="1.5" fill="#fff" opacity=".55"/><rect x="19" y="5" width="3.6" height="22" rx="1.8" fill="#E5484D"/></svg>';
 const FOOT = [
-  ['Express Entry', [['/', 'CRS calculator'], ['/express-entry-draws/', 'Latest draws'], ['/next-express-entry-draw/', 'Next draw'], ['/express-entry-categories/', 'Categories'], ['/high-wage-occupations/', 'High-wage occupations'], ['/crs-score-distribution/', 'Score distribution'], ['/how-to-increase-crs-score/', 'Raise your score'], ['/fsw-67-points-calculator/', 'FSW 67 points'], ['/cec-eligibility-calculator/', 'CEC eligibility'], ['/proof-of-funds-express-entry/', 'Proof of funds'], ['/canada-pr-fees/', 'PR fees'], ['/noc-code-finder/', 'NOC code finder']]],
+  ['Express Entry', [['/', 'CRS calculator'], ['/express-entry-draws/', 'Latest draws'], ['/next-express-entry-draw/', 'Next draw'], ['/express-entry-categories/', 'Categories'], ['/high-wage-occupations/', 'High-wage occupations'], ['/crs-score-distribution/', 'Score distribution'], ['/how-to-increase-crs-score/', 'Raise your score'], ['/fsw-67-points-calculator/', 'FSW 67 points'], ['/cec-eligibility-calculator/', 'CEC eligibility'], ['/proof-of-funds-express-entry/', 'Proof of funds'], ['/canada-pr-fees/', 'PR fees'], ['/noc-code-finder/', 'NOC code finder'], ['/express-entry-profile/', 'Profile expiry'], ['/gcms-notes/', 'GCMS notes']]],
   ['Language tests', [['/clb-converter/', 'CLB converter'], ['/ielts-score-chart/', 'IELTS chart'], ['/celpip-score-chart/', 'CELPIP chart'], ['/pte-core-score-chart/', 'PTE Core chart'], ['/tef-canada-score-chart/', 'TEF Canada chart'], ['/tcf-canada-score-chart/', 'TCF Canada chart'], ['/celpip-to-ielts/', 'CELPIP to IELTS']]],
   ['Provinces', [['/oinp-points-calculator/', 'Ontario points'], ['/oinp-draws/', 'Ontario draws'], ['/bc-pnp-points-calculator/', 'BC points'], ['/bc-pnp-draws/', 'BC draws'], ['/aaip-points-calculator/', 'Alberta points'], ['/aaip-draws/', 'Alberta draws'], ['/sinp-points-calculator/', 'Saskatchewan points'], ['/mpnp-points-calculator/', 'Manitoba points'], ['/nova-scotia-nominee-program/', 'Nova Scotia'], ['/new-brunswick-pnp/', 'New Brunswick'], ['/pei-pnp/', 'Prince Edward Island'], ['/pstq-quebec/', 'Quebec (PSTQ)'], ['/atlantic-immigration-program/', 'Atlantic program'], ['/rural-community-immigration-pilot/', 'Rural pilot']]],
   ['Processing times', [['/ircc-processing-times/', 'All IRCC processing times'], ['/pr-card-processing-time/', 'PR card'], ['/work-permit-processing-time/', 'Work permit'], ['/citizenship-processing-time/', 'Citizenship'], ['/lmia-processing-time/', 'LMIA']]],
-  ['Work and study', [['/pgwp-calculator/', 'PGWP length'], ['/spousal-open-work-permit/', 'Spousal work permit'], ['/bridging-open-work-permit/', 'Bridging work permit']]],
+  ['Work and study', [['/pgwp-calculator/', 'PGWP length'], ['/spousal-open-work-permit/', 'Spousal work permit'], ['/bridging-open-work-permit/', 'Bridging work permit'], ['/iec-canada/', 'IEC Working Holiday']]],
   ['Citizenship and family', [['/physical-presence-calculator/', 'Physical presence'], ['/canadian-citizenship-test-practice/', 'Citizenship test'], ['/pr-residency-obligation-calculator/', 'PR residency obligation'], ['/super-visa-income-requirement/', 'Super visa income'], ['/parents-grandparents-sponsorship-income/', 'Parents sponsorship income']]],
 ];
 const NAV = [['/', 'CRS calculator'], ['/clb-converter/', 'CLB converter'], ['/express-entry-draws/', 'Draws'], ['/express-entry-categories/', 'Categories'], ['/crs-score-distribution/', 'Score distribution']];
@@ -265,8 +269,8 @@ function home() {
 
 <article class="prose">
 <h2>How the CRS score is built</h2>
-<p>Express Entry ranks every profile in the pool on a scale of 0 to 1,200. The score has four parts: core human capital (age, education, languages and Canadian work experience), your partner's factors if they come with you, skill transferability, and additional points such as a provincial nomination.</p>
-<p>Couples split their points. If your partner comes with you and is not a Canadian citizen or permanent resident, your core maximum drops from 500 to 460 and up to 40 points come from your partner instead. Skill transferability is capped at 100 points and additional points at 600.</p>
+<p>Express Entry ranks every profile in the pool on a scale of 0 to 1,200. The score has four parts: core human capital (age, education, official languages and, since ${longDate(LMI.effective)}, the Labour Market Integration factor), your partner's factors if they come with you, skill transferability, and additional points such as a provincial nomination.</p>
+<p>Couples split their points. If your partner comes with you and is not a Canadian citizen or permanent resident, your core maximum is ${['age', 'education', 'firstLanguage', 'secondLanguage'].reduce((t, k) => t + crs.core[k].max[0], LMI.max[0])} instead of ${['age', 'education', 'firstLanguage', 'secondLanguage'].reduce((t, k) => t + crs.core[k].max[1], LMI.max[1])} and up to 40 points come from your partner instead. Skill transferability is capped at 100 points and additional points at 600.</p>
 <p class="callout">${new Date().toISOString().slice(0, 10) >= LMI.effective ? `Since ${longDate(LMI.effective)} IRCC has replaced` : `From ${longDate(LMI.effective)} IRCC replaces`} the Canadian work experience factor with a Labour Market Integration factor worth up to ${LMI.max[1]} points: work-length points plus up to ${LMI.highWageExperience.byLevel.x2} for work in a high-wage occupation, or up to ${LMI.jobOffer.byLevel.x2} for a job offer in one, whichever is higher. No LMIA is needed for a job offer ${new Date().toISOString().slice(0, 10) >= LMI.effective ? 'any more' : 'from that date'}. Details in <a href="/high-wage-occupations/">high-wage occupations and the new CRS points</a>.</p>
 
 <h3>Age</h3>${ageTable()}
@@ -274,7 +278,7 @@ function home() {
 <h3>First official language</h3>
 <p>Points are given for each of the four abilities (speaking, listening, reading and writing), based on your Canadian Language Benchmark (CLB) level. Use the <a href="/clb-converter/">CLB converter</a> to turn IELTS, CELPIP, PTE Core, TEF or TCF results into CLB levels.</p>
 ${langTable()}
-<h3>Canadian work experience</h3>${cwTable()}
+<h3>Length of Canadian work experience</h3>${cwTable()}
 
 <h3>Skill transferability</h3>
 <p>These points reward combinations. Education and foreign work experience each earn up to 50 points when paired with strong language results (CLB 7 or higher, with the top rate from CLB 9 in all four abilities) or with Canadian work experience. A trade certificate of qualification adds up to 50 with CLB 5 or higher. The total for this part never goes above 100.</p>
@@ -383,6 +387,7 @@ function drawsPage() {
   <p class="lede">${fmt(draws.rounds.length)} rounds of invitations since January 2015, newest first. Filter by program or category to see how cut-offs have moved, and check the latest round before anything else.</p>
   <p class="meta"><span>Updated daily from IRCC data</span><span>Latest round: #${esc(L.n)} on ${longDate(L.date)}</span><span>Source: <a href="${draws.page}" rel="noopener">IRCC rounds of invitations</a></span></p>
 </section>
+${L.date < LMI.effective ? `<p class="callout">IRCC says that since ${longDate(LMI.effective)} its system has been recalculating the points of profiles already in the pool for the new <a href="/high-wage-occupations/">Labour Market Integration factor</a>, which could take up to 2 weeks, and that invitation rounds are paused until it is done. This page adds the next round as soon as IRCC publishes it. Source: <a href="${crs.source}" rel="noopener">IRCC CRS criteria</a>, modified ${longDate(crs.sourceModified)}.</p>` : ''}
 
 <div class="cards">
   <div class="card"><div class="k">Latest round</div><div class="v">#${esc(L.n)}</div><div class="small">${longDate(L.date)}</div></div>
@@ -1471,7 +1476,7 @@ function fswPage() {
     <div class="field"><label for="edu">Education (Canadian credential or ECA result)</label><select id="edu" name="edu">${r.education.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('')}</select></div>
     <div class="row"><div class="field"><label for="exp">Years of skilled work experience</label><select id="exp" name="exp">${r.experience.map(([l, p], i) => `<option value="${i}">${esc(l)} (${p})</option>`).join('')}</select></div>
     <div class="field"><label for="age">Age on the day IRCC gets your application</label><select id="age" name="age">${ages}</select></div></div>
-    <div class="field check"><input type="checkbox" id="offer" name="offer"><label for="offer">Valid job offer of at least 1 year from a Canadian employer that meets one of IRCC's four situations (+${r.arrangedEmployment})</label></div>
+    <div class="field check"><input type="checkbox" id="offer" name="offer"><label for="offer">Job offer from one Canadian employer for at least 1 year of continuous, paid, full-time (30 hours a week or more), non-seasonal work in a TEER 0, 1, 2 or 3 job. No LMIA needed since November 3, 2026 (+${r.arrangedEmployment})</label></div>
   </fieldset>
   <fieldset><legend>Adaptability (maximum ${r.adaptabilityMax})</legend>
     ${r.adaptability.filter(([id]) => id !== 'arranged').map(([id, l, p]) => `<div class="field check"><input type="checkbox" id="${id}" name="${id}"><label for="${id}">${esc(l)} (+${p})</label></div>`).join('')}
@@ -2279,6 +2284,204 @@ function peiPage() {
 }
 
 // ---------- Simple pages ----------
+// ---------- GCMS notes (Privacy Act and Access to Information Act requests to IRCC) ----------
+function gcmsPage() {
+  const r = gcms, L = r.links, D = r.decisionNotes, PA = r.privacyAct, AT = r.accessAct;
+  const body = `
+<section class="intro">
+  <h1>How to get your GCMS notes from IRCC</h1>
+  <p class="lede">Your GCMS notes are IRCC's copy of your file, officer notes included. Tell us whose file it is and when you send the request, and you will see which law to use, what it costs, who has to sign a consent form and the date IRCC has to answer by.</p>
+  <p class="meta"><span>IRCC pages checked ${longDate(r.checked)}</span><span>Source: <a href="${L.privacyAct}" rel="noopener">IRCC, requests under the Privacy Act</a></span></p>
+</section>
+<div class="tool">
+<form id="gcms-form" novalidate>
+  <fieldset><legend>Your request</legend>
+    <div class="field"><label for="whose">Whose file do you want?</label><select id="whose" name="whose"><option value="own">My own file</option><option value="rep">A client's or relative's file, asking on their behalf</option><option value="sponsor">The file of a family member I sponsored, who applied from outside Canada</option></select></div>
+    <div class="field" id="status-field"><label for="status">You are</label><select id="status" name="status"><option value="citizen">A Canadian citizen</option><option value="pr">A permanent resident of Canada</option><option value="in">Not a citizen or PR, but in Canada right now</option><option value="out">Not a citizen or PR, and outside Canada</option></select></div>
+    <div class="field"><label for="sent">Date IRCC receives your request</label><input type="date" id="sent" name="sent"><span class="hint">Use the date on IRCC's acknowledgement of your request if you have it.</span></div>
+  </fieldset>
+  <fieldset><legend>If the application was refused</legend>
+    <div class="field"><label for="app">Type of application</label><select id="app" name="app"><option value="none">It was not refused</option><option value="tr">Visitor visa, super visa, transit visa, visitor record, study or work permit (or an extension)</option><option value="pr">Permanent residence (not H&amp;C)</option><option value="other">Something else (eTA, TRP, H&amp;C, citizenship and others)</option></select></div>
+    <div class="field"><label for="refused">Date of the refusal letter</label><input type="date" id="refused" name="refused"></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Your request" id="gcms-out" aria-live="polite"></aside>
+</div>
+<article class="prose">
+<h2>What GCMS notes are</h2>
+<p>GCMS, the Global Case Management System, is the system IRCC officers use to process citizenship and immigration applications (temporary and permanent residents, including refugees) and some passport services (<a href="${L.gcms}" rel="noopener">IRCC</a>). Your application, the documents you sent and the officer's notes are recorded there. "GCMS notes" is the name applicants and representatives give to the copy of that file you get by asking IRCC for it under Canada's access and privacy laws.</p>
+<p>People usually ask for them after a refusal, to read the officer's reasons in full before applying again or going to court, or when an application is taking much longer than the posted processing time and they want to see where it stands.</p>
+<h2>Check your refusal letter first</h2>
+<p>IRCC now sends an officer decision note with most refusal letters, so you may already have the reasons:</p>
+<ul>
+<li>Since ${longDate(D.temporary.from)}: ${D.temporary.covers.map((x) => x.charAt(0).toLowerCase() + x.slice(1)).join('; ')}. Not ${D.temporary.excludes}.</li>
+<li>Since ${longDate(D.permanent.from)}: permanent residence applications made from inside or outside Canada. Not ${D.permanent.excludes}.</li>
+</ul>
+<p>IRCC may remove parts of the note to protect secure, private or other sensitive information, and it plans to add more application types over time. If you apply to the Federal Court for leave and judicial review, IRCC says to state in your application that you have not received the reasons for the refusal, even if you got a decision note, so the Court can ask for the complete reasons. A full file request is still the way to see the rest of what is in GCMS.</p>
+<h2>Privacy Act or Access to Information Act</h2>
+<div class="table-scroll"><table><thead><tr><th></th><th>Privacy Act</th><th>Access to Information Act</th></tr></thead><tbody>
+<tr><td>Use it for</td><td>Your own personal information, or someone else's when you ask on their behalf with their consent</td><td>Records about someone else, with their written consent, such as a family member you sponsored</td></tr>
+<tr><td>Who can ask</td><td>${esc(PA.who)}</td><td>${esc(AT.who)}</td></tr>
+<tr><td>Fee</td><td>None</td><td>CA$${AT.fee}</td></tr>
+<tr><td>Consent form IMM 5744</td><td>When asking for someone else, for each person on the file ${esc(PA.consentAge)}</td><td>For each person on the file ${esc(AT.consentAge)}</td></tr>
+<tr><td>Time to answer</td><td>${PA.responseDays} days, extendable by up to ${PA.maxExtensionDays} more (longer only for translation or another format)</td><td>${AT.responseDays} days, extendable for a reasonable period</td></tr>
+</tbody></table></div>
+<p>IRCC's Access to Information page also lists requests made by a representative for a client who is not a citizen or permanent resident and is not in Canada, so some representatives use that route instead.</p>
+<p>IRCC's own example: if you sponsored a family member who applied for permanent residence at a visa office abroad, you ask for their file under the Access to Information Act, with written consent from them and anyone else over 18 on the file, and pay the CA$${AT.fee} fee. Your own sponsorship file is a free Privacy Act request.</p>
+<h2>How to send the request</h2>
+<ol>
+<li>Use the <a href="${L.online}" rel="noopener">ATIP Online Request Service</a>. It is the only way to pay the CA$${AT.fee} fee by card.</li>
+<li>Be specific about which file and which application you want, so IRCC can find the records.</li>
+<li>If you are asking for someone else, attach the <a href="${L.consentForm}" rel="noopener">Consent for an Access to Information and Personal Information Request (IMM 5744)</a> for each person who has to sign.</li>
+<li>By mail, use form IMM 5563, the Treasury Board form or a letter that names the Act, and send it to the Access to Information and Privacy Division, Immigration, Refugees and Citizenship Canada, Ottawa, Ontario K1A 1L1. Access to Information requests by mail need a CA$${AT.fee} cheque or money order payable to the Receiver General for Canada.</li>
+</ol>
+<h2>How long IRCC has to answer</h2>
+<p>IRCC has ${PA.responseDays} days from the day it receives the request. If it needs more time, it has to tell you within those ${PA.responseDays} days how long the extension is and that you can complain about it to the Privacy Commissioner (Privacy Act) or the Information Commissioner (Access to Information Act). If you hear nothing after ${PA.responseDays} days, you can ask about your request at ${esc(r.statusEmail)}. The ${PA.responseDays} days is the legal deadline, not a promise: IRCC's request pages warn that a large rise in requests may affect its ability to answer within the timelines.</p>
+<p class="callout">This page explains IRCC's published process. It is not legal advice; for a refusal you may challenge, talk to a lawyer or a licensed consultant (RCIC) about deadlines.</p>
+<p>Planning to apply again through Express Entry? Check where your profile stands with the <a href="/">CRS calculator</a>${isLive('/express-entry-profile/') ? ' and see how long a new profile lasts with the <a href="/express-entry-profile/">Express Entry profile calculator</a>' : ''}. Waiting on an application instead? See ${isLive('/ircc-processing-times/') ? 'the <a href="/ircc-processing-times/">IRCC processing times</a>' : 'IRCC processing times'}.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="${r.source}" rel="noopener">Explaining application refusals: Officer decision note</a>, IRCC, modified ${longDate(r.sourceModified)}</li>
+<li><a href="${L.privacyAct}" rel="noopener">How to make a request under the Privacy Act</a>, IRCC, modified ${longDate(r.watchPages[0].modified)}</li>
+<li><a href="${L.accessAct}" rel="noopener">How to make a request under the Access to Information Act</a>, IRCC, modified ${longDate(r.watchPages[1].modified)}</li>
+<li><a href="${L.timeframe}" rel="noopener">How long does the Department have to respond?</a>, <a href="${L.fee}" rel="noopener">What is the fee for an Access request?</a> and <a href="${L.sponsor}" rel="noopener">information on a sponsored family member's file</a>, IRCC Help Centre, checked ${longDate(r.checked)}</li>
+<li><a href="${L.gcms}" rel="noopener">Processing aids</a> (what GCMS is), IRCC, modified ${longDate(r.watchPages[4].modified)}</li>
+</ul>
+</article>`;
+  const scripts = `${jsonScript('gcms-rules', { D, PA, AT })}<script type="module" src="/js/gcms.js"></script>`;
+  return page({ path: '/gcms-notes/', title: 'How to Request Your GCMS Notes From IRCC', description: 'GCMS notes are IRCC’s copy of your file, officer notes included. See which request to make, the fee, who signs consent and the date IRCC must answer by.', body, scripts, crumbs: [['Home', '/'], ['GCMS notes', '/gcms-notes/']] });
+}
+
+// ---------- Express Entry profile: how long it lasts ----------
+function eeProfilePage() {
+  const r = eeProfile, L = r.links;
+  const body = `
+<section class="intro">
+  <h1>Express Entry profile expiry calculator</h1>
+  <p class="lede">Your profile stays in the pool for ${r.profileMonths} months, but your test results and ECA can run out sooner and take you out of the running. Enter your dates to see which one ends first and what to renew.</p>
+  <p class="meta"><span>IRCC page modified ${longDate(r.sourceModified)}</span><span>Checked ${longDate(r.checked)}</span><span>Source: <a href="${r.source}" rel="noopener">IRCC, apply for permanent residence through Express Entry</a></span></p>
+</section>
+<div class="tool">
+<form id="eep-form" novalidate>
+  <fieldset><legend>Your profile</legend>
+    <div class="field"><label for="submitted">Date you submitted your profile</label><input type="date" id="submitted" name="submitted"></div>
+    <div class="field"><label for="ita">Date of your invitation to apply (if you got one)</label><input type="date" id="ita" name="ita"></div>
+  </fieldset>
+  <fieldset><legend>Your documents</legend>
+    <div class="field"><label for="lang1">Date of your language test results</label><span class="hint">If your results show a test date and a later issue date, the earlier one is the safe choice.</span><input type="date" id="lang1" name="lang1"></div>
+    <div class="field"><label for="lang2">Second language test results (optional)</label><input type="date" id="lang2" name="lang2"></div>
+    <div class="field"><label for="eca">Date your ECA report was issued (skip if you studied in Canada only)</label><input type="date" id="eca" name="eca"></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Your dates" id="eep-out" aria-live="polite"></aside>
+</div>
+<article class="prose">
+<h2>How long the profile lasts</h2>
+<p>Once you submit it, your profile stays in the pool for ${r.profileMonths} months. If you are not invited in that time it expires and is removed; your account shows the exact date. You can then create a new one, but IRCC does not keep your answers, so take screenshots before it expires to make retyping easier. Do not create the new profile until the old one has expired, or withdraw the old one first: you can only have one profile at a time.</p>
+<p>While you are still filling it in, you have ${r.draftDays} days to complete and submit the profile; after that you have to start again.</p>
+<h2>Test results and ECA</h2>
+<p>Language test results must be less than ${r.languageYears} years old, and an educational credential assessment less than ${r.ecaYears} years old, both when you complete your profile and when you submit your application for permanent residence. A profile that was fine when you entered the pool can become ineligible while you wait. IRCC lists the usual reasons:</p>
+<ul>${r.ineligibleWhen.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+<p>If something will expire before you could apply, retake the test or ask the organization that issued your ECA whether it can re-issue it. If you apply with an expired test result or ECA, IRCC refuses the application.</p>
+<h2>After an invitation</h2>
+<p>An invitation to apply is valid for ${r.itaDays} days. If you neither apply nor decline in that time it expires, your profile leaves the pool and you have to submit a new one. Declining puts you back in the pool if you are still eligible, with no guarantee of another invitation. The profile on its own, even with an invitation, does not count as applying.</p>
+<h2>Creating the profile</h2>
+<ol>
+<li>Get your documents ready: passport, language test results, ECA if you studied abroad, and proof of funds if your program needs it (see ${isLive('/proof-of-funds-express-entry/') ? '<a href="/proof-of-funds-express-entry/">proof of funds by family size</a>' : 'proof of funds'}).</li>
+<li>Sign in to your IRCC secure account and enter your personal reference code if you used the Come to Canada tool.</li>
+<li>Fill in the profile. You can leave and come back; it is saved in your account. Information about dependent children is only asked for if you are invited.</li>
+<li>Submit it. IRCC works out which programs you qualify for and gives you a CRS score.</li>
+</ol>
+<p>If you qualify for more than one program, you are invited to the first one in this order: ${r.programOrder.map(esc).join(', then ')}. You cannot choose. Check your own score with the <a href="/">CRS calculator</a>, and the minimums with the ${isLive('/fsw-67-points-calculator/') ? '<a href="/fsw-67-points-calculator/">FSW 67-point calculator</a>' : 'FSW 67-point grid'} and ${isLive('/cec-eligibility-calculator/') ? '<a href="/cec-eligibility-calculator/">CEC eligibility checker</a>' : 'the CEC requirements'}. Test scores can be turned into CLB levels with the <a href="/clb-converter/">CLB converter</a>.</p>
+<h2>Keeping it up to date</h2>
+<p>You must update the profile when your situation changes, for example if you ${r.updateWhen.slice(0, -1).join(', ')} or ${r.updateWhen.at(-1)}. Updating does not change the date and time IRCC received your profile, so you keep your place if there is a tie at the cut-off score. See the <a href="/express-entry-draws/">latest Express Entry draws</a> for current cut-offs.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="${r.source}" rel="noopener">Apply for permanent residence through Express Entry</a>, IRCC, modified ${longDate(r.sourceModified)}</li>
+<li><a href="${L.create}" rel="noopener">Express Entry: Create your profile and enter the pool</a>, IRCC, modified ${longDate(r.watchPages[0].modified)}</li>
+<li><a href="${L.language}" rel="noopener">Language test results</a> and <a href="${L.eca}" rel="noopener">Educational credential assessment</a>, IRCC, modified ${longDate(r.watchPages[1].modified)}</li>
+<li><a href="${L.expired}" rel="noopener">If my Express Entry profile expires, will the system keep my information?</a> and <a href="${L.oneProfile}" rel="noopener">Can I have more than one Express Entry profile?</a>, IRCC Help Centre, checked ${longDate(r.checked)}</li>
+</ul>
+</article>`;
+  const scripts = `${jsonScript('eep-rules', { profileMonths: r.profileMonths, itaDays: r.itaDays, languageYears: r.languageYears, ecaYears: r.ecaYears })}<script type="module" src="/js/eeprofile.js"></script>`;
+  return page({ path: '/express-entry-profile/', title: 'Express Entry Profile Expiry Date Calculator', description: `An Express Entry profile lasts ${r.profileMonths} months, but test results and your ECA can expire first. Check every date, plus the ${r.itaDays}-day deadline after an invitation.`, body, scripts, crumbs: [['Home', '/'], ['Express Entry profile', '/express-entry-profile/']] });
+}
+
+// ---------- International Experience Canada (IEC) ----------
+const IEC_CAT = { wh: 'Working Holiday', yp: 'Young Professionals', coop: 'International Co-op (Internship)' };
+function iecPage() {
+  const r = iecRules, season = iecData.latest, S = iecData.seasons[season];
+  const prevKey = Object.keys(iecData.seasons).filter((k) => k < season).sort().at(-1);
+  const prev = prevKey ? iecData.seasons[prevKey] : null;
+  const label = (x) => `${IEC_CAT[x.category]}${x.sub ? ` (${x.sub})` : ''}`;
+  const n = (v) => (v === null ? 'n/a' : fmt(v));
+  const RT = { 1: 'Excellent', 2: 'Very good', 3: 'Fair', 4: 'Low', 5: 'Very low' };
+  const wh = S.rows.filter((x) => x.category === 'wh' && !x.sub);
+  const whQuota = wh.reduce((t, x) => t + x.quota, 0), whInv = wh.reduce((t, x) => t + x.invitations, 0);
+  const rows = S.rows.map((x) => `<tr data-c="${esc(x.code)}"><td>${esc(x.country)}</td><td>${esc(label(x))}</td><td class="n">${fmt(x.quota)}</td><td class="n">${fmt(x.invitations)}</td><td class="n">${n(x.candidates)}</td><td class="n">${n(x.spots)}</td><td>${S.closed ? 'Closed' : esc(RT[x.rating] || 'Not rated')}</td>${prev ? `<td class="n">${fmt((prev.rows.find((p) => p.code === x.code && p.category === x.category && p.sub === x.sub) || {}).quota ?? '')}</td>` : ''}</tr>`).join('');
+  const countries = [...new Map(S.rows.map((x) => [x.code, x.country])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
+  const top = [...wh].sort((a, b) => b.quota - a.quota).slice(0, 5);
+  const body = `
+<section class="intro">
+  <h1>IEC Canada ${season} quotas and chances by country</h1>
+  <p class="lede">${S.closed ? `The ${season} season is closed; these are its final numbers. Pick your country to see how many places it had, how many people were invited and how many were still waiting in the pool.` : `Pick your country to see its ${season} quota, how many people have been invited, how many are waiting in the pool and IRCC's rating of your chances in the next round.`}${S.closed ? ' When the next season opens, use the deadline tool below if you get an invitation.' : ' Got an invitation? Work out your deadlines below.'}</p>
+  <p class="meta"><span>IRCC numbers as of ${longDate(S.asOf)}</span><span>Updated automatically from IRCC</span><span>Source: <a href="${r.links.rounds}" rel="noopener">IRCC, IEC rounds of invitations</a></span></p>
+</section>
+<div class="tool">
+<form id="iec-form" novalidate>
+  <fieldset><legend>Your country</legend>
+    <div class="field"><label for="country">Country or territory of citizenship</label><select id="country" name="country">${countries.map(([c, name]) => `<option value="${esc(c)}">${esc(name)}</option>`).join('')}</select></div>
+  </fieldset>
+  <fieldset><legend>Your invitation</legend>
+    <div class="field"><label for="ita">Date you got an invitation to apply</label><input type="date" id="ita" name="ita"></div>
+    <div class="field"><label for="accepted">Date you accepted it</label><input type="date" id="accepted" name="accepted"><span class="hint">Your invitation shows the exact deadline; if it differs, go by that.</span></div>
+  </fieldset>
+</form>
+<aside class="results" aria-label="Your country" id="iec-out" aria-live="polite"></aside>
+</div>
+<article class="prose">
+<h2>All countries, ${season} season</h2>
+<p>${wh.length} countries and territories take part in Working Holiday, with ${fmt(whQuota)} places between them${S.closed ? ` and ${fmt(whInv)} invitations sent over the season` : ` and ${fmt(whInv)} invitations sent so far`}. The largest Working Holiday quotas are ${top.map((x) => `${esc(x.country)} (${fmt(x.quota)})`).join(', ')}.</p>
+<div class="table-scroll"><table id="iec-table"><thead><tr><th>Country</th><th>Category</th><th class="n">Quota</th><th class="n">Invitations</th><th class="n">In the pool</th><th class="n">Spots left</th><th>Chances</th>${prev ? `<th class="n">Quota ${prevKey}</th>` : ''}</tr></thead><tbody>${rows}</tbody></table></div>
+<p class="small">Numbers as published by IRCC on ${longDate(S.asOf)}. "n/a" means IRCC gives no figure.</p>
+<h2>Reading the numbers</h2>
+<ul>
+<li><strong>Quota</strong>: how many work permits IRCC can issue in that country and category this season, agreed each year with the partner country and announced before its first round.</li>
+<li><strong>Invitations</strong>: invitations sent so far. It can end up above the quota, because some people decline, withdraw or are refused.</li>
+<li><strong>In the pool</strong>: eligible candidates waiting. It leaves out people who have not answered an invitation, have started an application or already have an approved permit.</li>
+<li><strong>Spots left</strong>: how many letters of introduction IRCC can still issue before reaching the quota. It moves slowly at the start of a season, while applications are processed.</li>
+</ul>
+<p>When a season is open, IRCC rates each pool every week by your chance of an invitation in the next round: ${Object.entries(r.ratings).map(([k, v]) => `${k} ${v}`).join(', ')}.</p>
+<h2>How the invitations work</h2>
+<p>There is one pool per country and category, and you can put your profile in every pool you are eligible for. Invitations go out in this order: ${r.inviteOrder.join(', then ')}. If you are in a Co-op pool and the Working Holiday pool, you get the Co-op invitation; Working Holiday only comes if the Co-op category has no spots left. Young Professionals and Co-op pools often have more spots than candidates. Working Holiday is drawn at random, every candidate in the pool has the same chance, and some people are never invited before the season ends.</p>
+<p>You can submit a profile at any time while the season is open, as long as it is before your country's final round. You have ${r.profileDays} days to finish a profile you have started, and you can only have one IEC profile at a time.</p>
+<h2>Deadlines after an invitation</h2>
+<ul>
+<li>${r.acceptDays} days to accept the invitation. If it expires, you need a new profile and a new invitation.</li>
+<li>${r.applyDays} days from the moment you accept to send the work permit application with all the documents, so gather police certificates and the rest while you wait.</li>
+<li>Declining keeps you in the pool if you are still eligible, with no effect on future invitations.</li>
+</ul>
+<h2>Fees and money</h2>
+<div class="table-scroll"><table><tbody>
+<tr><td>IEC participation fee (everyone)</td><td class="n">CA$${r.fees.iec.toFixed(2)}</td></tr>
+<tr><td>Open work permit holder fee (Working Holiday)</td><td class="n">CA$${r.fees.openHolder}</td></tr>
+<tr><td>Employer compliance fee (Young Professionals and Co-op, paid by the employer)</td><td class="n">CA$${r.fees.employerCompliance}</td></tr>
+<tr><td>Biometrics, if you need to give them</td><td class="n">CA$${r.fees.biometrics}</td></tr>
+</tbody></table></div>
+<p>You also need a bank statement showing at least CA$${fmt(r.funds)}, for your first 3 months, plus money for your flight home. The statement must be issued no more than 1 week before you leave for Canada. Fees from IRCC's fee list, modified ${longDate(r.watchPages[3].modified)}.</p>
+<p>Thinking of staying after IEC? Canadian work experience can count toward Express Entry: estimate your score with the <a href="/">CRS calculator</a>${isLive('/cec-eligibility-calculator/') ? ' and check the <a href="/cec-eligibility-calculator/">Canadian Experience Class requirements</a>' : ''}. Waiting on the permit? See ${isLive('/work-permit-processing-time/') ? 'the <a href="/work-permit-processing-time/">work permit processing time by country</a>' : 'IRCC work permit processing times'}.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="${r.links.rounds}" rel="noopener">International Experience Canada: Rounds of invitations</a>, IRCC, numbers as of ${longDate(S.asOf)}</li>
+<li><a href="${r.source}" rel="noopener">Create your IEC profile and get your invitation to apply</a>, IRCC, modified ${longDate(r.sourceModified)}</li>
+<li><a href="${r.links.chances}" rel="noopener">Understand the ratings and numbers</a>, IRCC, modified ${longDate(r.watchPages[0].modified)}</li>
+<li><a href="${r.links.apply}" rel="noopener">Submit your work permit application</a>, IRCC, modified ${longDate(r.watchPages[1].modified)}, and the <a href="${r.links.fees}" rel="noopener">IRCC fee list</a>, modified ${longDate(r.watchPages[3].modified)}</li>
+</ul>
+</article>`;
+  const scripts = `${jsonScript('iec-data', { season, closed: S.closed, asOf: S.asOf, rows: S.rows, prev: prev ? { season: prevKey, rows: prev.rows } : null, acceptDays: r.acceptDays, applyDays: r.applyDays })}<script type="module" src="/js/iec.js"></script>`;
+  return page({ path: '/iec-canada/', title: `IEC Canada ${season} Quotas and Chances by Country`, description: `International Experience Canada ${season} by country: Working Holiday, Young Professionals and Co-op quotas, invitations, pool size and your chances, from IRCC.`, body, scripts, crumbs: [['Home', '/'], ['IEC Canada', '/iec-canada/']] });
+}
+
 function simple(path, title, description, h1, html) {
   return page({ path, title, description, body: `<section class="intro"><h1>${h1}</h1></section><article class="prose">${html}</article>`, crumbs: [['Home', '/'], [h1, path]] });
 }
@@ -2743,6 +2946,8 @@ out('privacy', simple('/privacy/', 'Privacy | CRS Planner', 'What CRS Planner st
 out('terms', simple('/terms/', 'Terms of Use | CRS Planner', 'Terms of use and disclaimer for CRS Planner: estimates based on IRCC rules, not immigration or legal advice.', 'Terms of use', termsHtml));
 for (const [slug, fn, d] of [['ircc-processing-times', ptHubPage, ptMax(ptimes.updated.weekly, ptimes.updated.flpt)], ['pr-card-processing-time', prCardTimePage, ptimes.updated.weekly], ['work-permit-processing-time', workPermitTimePage, ptMax(ptimes.updated.country, ptimes.updated.flptWeek)], ['citizenship-processing-time', citizenshipTimePage, ptimes.updated.flpt]]) if (isLive(`/${slug}/`)) out(slug, fn(), ptMax(schedule.pages[`/${slug}/`], d));
 if (isLive('/pstq-quebec/')) out('pstq-quebec', pstqPage(), ptMax(schedule.pages['/pstq-quebec/'], pstqInv.rounds[0].date));
+for (const [slug, fn] of [['gcms-notes', gcmsPage], ['express-entry-profile', eeProfilePage]]) if (isLive(`/${slug}/`)) out(slug, fn(), schedule.pages[`/${slug}/`] || SITE.checked);
+if (isLive('/iec-canada/')) out('iec-canada', iecPage(), ptMax(schedule.pages['/iec-canada/'], iecData.seasons[iecData.latest].asOf));
 if (isLive('/lmia-processing-time/')) out('lmia-processing-time', lmiaPage(), ptMax(schedule.pages['/lmia-processing-time/'], lmiaTimes.pageModified));
 out('changelog', changelogPage());
 writeFileSync(join(DIST, 'favicon.svg'), LOGO_SVG);

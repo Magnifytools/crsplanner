@@ -1,5 +1,13 @@
 [
  {
+  "date": "2026-11-04",
+  "what": "IRCC switched its CRS criteria and Federal Skilled Worker pages to the November 3, 2026 rules (pages modified 2026-11-03). Every number we use still matches. The home page now gives the new core maximums (570 single, 530 with a partner), the FSW calculator describes a qualifying job offer without the old LMIA situations, and the draws page notes that IRCC paused invitation rounds while it recalculates profiles (up to 2 weeks)."
+ },
+ {
+  "date": "2026-11-04",
+  "what": "New pages prepared: GCMS notes (IRCC officer decision notes page modified 2026-08-27, Privacy Act and Access to Information Act request rules), Express Entry profile expiry calculator (IRCC pages modified 2026-10-16) and IEC quotas and chances by country (IRCC rounds of invitations data, updated automatically by scripts/iec.mjs; fees from IRCC's fee list modified 2026-09-21)."
+ },
+ {
   "date": "2026-11-02",
   "what": "IRCC updated its page on when family members of foreign workers can apply for an open work permit on 2026-10-30. It now spells out that a spouse can apply as soon as you have submitted your PGWP application, but their permit is only processed after your PGWP is approved. The spousal open work permit checker now says this for PGWP applicants instead of marking them as not eligible, and the page cites the IRCC page."
  },

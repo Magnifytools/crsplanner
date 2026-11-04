@@ -1,0 +1,31 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/apply-permanent-residence.html",
+ "sourceModified": "2026-10-16",
+ "checked": "2026-11-04",
+ "note": "Express Entry profile page: profile and invitation validity, test and ECA validity, program order. Help Centre answers are watched by hash because their date is always today's.",
+ "watchPages": [
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/create-profile.html", "modified": "2026-10-16" },
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/language-requirements.html", "modified": "2026-10-16" },
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/education-assessment.html", "modified": "2026-10-16" }
+ ],
+ "hashPages": [
+  { "url": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=1164&top=29", "start": "What do you need help with?", "end": "Page details", "sha256": "aa0e9c02db3b05de7afd382e0bd0b12df828682dbcc949237010c0ffdcf3bc22" },
+  { "url": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=864&top=29", "start": "What do you need help with?", "end": "Page details", "sha256": "1235f3008b63a5de46f1b3b130fb938bd76c7136f2815a51d5136fcff099722c" },
+  { "url": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=867&top=29", "start": "What do you need help with?", "end": "Page details", "sha256": "a776b09829ac0bbfb59418576c0ec2d527445225a0e4dcf2a0d36b71cec17b07" }
+ ],
+ "links": {
+  "create": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/create-profile.html",
+  "language": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/language-requirements.html",
+  "eca": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/education-assessment.html",
+  "expired": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=1164&top=29",
+  "oneProfile": "https://ircc.canada.ca/english/helpcentre/answer.asp?qnum=864&top=29"
+ },
+ "draftDays": 60,
+ "profileMonths": 12,
+ "itaDays": 60,
+ "languageYears": 2,
+ "ecaYears": 5,
+ "programOrder": ["Canadian Experience Class (CEC)", "Federal Skilled Worker Program (FSWP)", "Federal Skilled Trades Program (FSTP)"],
+ "updateWhen": ["start a new career", "gain or lose a job offer", "get a new language test", "get married or divorced", "have or adopt a new child"],
+ "ineligibleWhen": ["Your work experience no longer meets the program requirements, for example because it is no longer within the 3 years before you apply", "Your language test results expired", "Your educational credential assessment (ECA) expired", "You no longer have enough funds", "You changed your primary occupation"]
+}

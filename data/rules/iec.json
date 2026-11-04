@@ -1,0 +1,26 @@
+{
+ "source": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/iec/become-candidate.html",
+ "sourceModified": "2026-10-19",
+ "checked": "2026-11-04",
+ "note": "IEC rules: profile, invitation and application deadlines, ratings, fees and funds. The numbers by country come from IRCC's selections.xml through scripts/iec.mjs (data/iec.json).",
+ "watchPages": [
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/iec/become-candidate/chances.html", "modified": "2025-12-18" },
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/iec/apply-work-permit.html", "modified": "2026-05-28" },
+  { "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/iec/eligibility.html", "modified": "2026-08-07" },
+  { "url": "https://ircc.canada.ca/english/information/fees/fees.asp", "modified": "2026-09-21" }
+ ],
+ "links": {
+  "chances": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/iec/become-candidate/chances.html",
+  "apply": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/iec/apply-work-permit.html",
+  "eligibility": "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada/iec/eligibility.html",
+  "fees": "https://ircc.canada.ca/english/information/fees/fees.asp",
+  "rounds": "https://ircc.canada.ca/english/work/iec/selections.asp"
+ },
+ "profileDays": 60,
+ "acceptDays": 10,
+ "applyDays": 20,
+ "ratings": { "Excellent": "80% to 99%", "Very good": "60% to 79%", "Fair": "40% to 59%", "Low": "20% to 39%", "Very low": "1% to 19%" },
+ "inviteOrder": ["International Co-op (Internship)", "Young Professionals", "Working Holiday"],
+ "fees": { "iec": 184.75, "openHolder": 100, "employerCompliance": 230, "biometrics": 85 },
+ "funds": 2500
+}
