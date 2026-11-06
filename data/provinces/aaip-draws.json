@@ -1,7 +1,47 @@
 {
  "source": "https://www.alberta.ca/aaip-processing-information",
- "pageUpdated": "2026-10-21",
+ "pageUpdated": "2026-11-04",
  "draws": [
+  {
+   "date": "2026-11-02",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 51,
+   "invitations": 173,
+   "invitationsText": "173"
+  },
+  {
+   "date": "2026-10-30",
+   "focus": "Alberta Opportunity Stream",
+   "stream": "aos",
+   "minScore": 59,
+   "invitations": 132,
+   "invitationsText": "132"
+  },
+  {
+   "date": "2026-10-29",
+   "focus": "Dedicated Health Care Pathway – non-Express Entry",
+   "stream": "dhcp",
+   "minScore": 50,
+   "invitations": 64,
+   "invitationsText": "64"
+  },
+  {
+   "date": "2026-10-27",
+   "focus": "Dedicated Health Care Pathway – Express Entry",
+   "stream": "dhcp",
+   "minScore": 60,
+   "invitations": 19,
+   "invitationsText": "19"
+  },
+  {
+   "date": "2026-10-23",
+   "focus": "Rural Renewal Stream",
+   "stream": "rrs",
+   "minScore": 51,
+   "invitations": 37,
+   "invitationsText": "37"
+  },
   {
    "date": "2026-10-20",
    "focus": "Alberta Express Entry Stream – Priority Sectors (General)",
@@ -724,13 +764,13 @@
   }
  ],
  "pool": {
-  "Alberta Opportunity Stream": 21150,
-  "Dedicated Health Care Pathways (Express Entry and Non-Express Entry)": 1069,
-  "Rural Renewal Stream": 1527,
-  "Tourism and Hospitality Stream": 2991,
-  "Accelerated Tech Pathway": 1945,
-  "Law Enforcement Pathway": 43,
-  "Priority sector draws and other initiatives": 4566,
-  "Total": 33291
+  "Alberta Opportunity Stream": 20603,
+  "Dedicated Health Care Pathways (Express Entry and Non-Express Entry)": 976,
+  "Rural Renewal Stream": 1283,
+  "Tourism and Hospitality Stream": 2846,
+  "Accelerated Tech Pathway": 1883,
+  "Law Enforcement Pathway": 39,
+  "Priority sector draws and other initiatives": 4581,
+  "Total": 32211
  }
 }
